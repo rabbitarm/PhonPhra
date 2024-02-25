@@ -1,17 +1,9 @@
 # PhonPhra Project
 
-## Start
-
-Insert gif or link to demo
-## Documentation
-
-[Documentation](https://linktodocumentation)
-
-
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file
-
-`API_KEY`
-
-`ANOTHER_API_KEY`
+## Create front-end by React.JS
+- [Vite](https://vitejs.dev)
+`npm create vite@latest` > Enter name project 'react' > Select type > React > JavaScript
+`cd react` goto my project name
+`npm install`
+`npm run dev` for start react
+and open (http://localhost:5173/) on Browser
