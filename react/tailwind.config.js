@@ -6,8 +6,8 @@ export default {
   ],
   theme: {
     fontFamily: {
-      sans: ['Kanit', 'ui-sans-serif', 'system-ui', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
-      display: ['Sarabun', 'ui-sans-serif', 'system-ui', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+      sans: 'Kanit, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+      display: 'Sarabun, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
     },
     colors: {
       transparent: 'transparent',
@@ -16,6 +16,7 @@ export default {
       black: '#333333',
       primary: {
         DEFAULT: '#c6ab8b',
+        active: '#b0875f',
         '50': '#f9f7f3',
         '100': '#f1ece3',
         '200': '#e3d8c5',
@@ -29,6 +30,8 @@ export default {
         '950': '#30211a',
       },
       secondary: {
+        DEFAULT: '#93c190',
+        active: '#66a364',
         '50': '#f2f8f1',
         '100': '#e0eedd',
         '200': '#c2dcbe',
@@ -42,6 +45,8 @@ export default {
         '950': '#0f1f10',
       },
       tertiary: {
+        DEFAULT: '#c7a1a1',
+        active: '#b18282',
         '50': '#faf6f6',
         '100': '#f4ecec',
         '200': '#ebdddd',
@@ -55,6 +60,8 @@ export default {
         '950': '#301f1f',
       },
       error: {
+        DEFAULT: '#a80027',
+        active: '#560014',
         '50': '#ffeef2',
         '100': '#ffdae3',
         '200': '#ffbbcb',
@@ -68,6 +75,8 @@ export default {
         '950': '#560014',
       },
       warning: {
+        DEFAULT: '#fc7a1e',
+        active: '#ed5809',
         '50': '#fff7ed',
         '100': '#ffedd4',
         '200': '#ffd7a9',
@@ -81,6 +90,8 @@ export default {
         '950': '#441406',
       },
       success: {
+        DEFAULT: '#389d42',
+        active: '#2d8c36',
         '50': '#f2fbf3',
         '100': '#e1f7e3',
         '200': '#c5edc8',
@@ -94,6 +105,8 @@ export default {
         '950': '#0c2710',
       },
       info: {
+        DEFAULT: '#485696',
+        active: '#39446f',
         '50': '#f3f7fb',
         '100': '#e4eaf5',
         '200': '#cfdbee',
@@ -107,6 +120,8 @@ export default {
         '950': '#262b45',
       },
       grey: {
+        DEFAULT: '#e7e7e7',
+        active: '#dfdfdf',
         '50': '#f7f7f7',
         '100': '#e7e7e7', // Key - Mercury (Grey)
         '200': '#dfdfdf',
@@ -120,6 +135,8 @@ export default {
         '950': '#363636',
       },
       slate: {
+        DEFAULT: '#64748b',
+        active: '#526077',
         '50': '#f6f7f9',
         '100': '#eceef2',
         '200': '#d5d9e2',
