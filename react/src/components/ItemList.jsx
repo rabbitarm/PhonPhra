@@ -2,7 +2,7 @@ import React from 'react'
 
 function ItemList() {
   return (
-    <div>ItemList</div>
+    <div className="">ItemList</div>
   )
 }
 

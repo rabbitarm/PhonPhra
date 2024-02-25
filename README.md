@@ -23,6 +23,7 @@
 - Go to main CSS file (/src/App.css) and add `@tailwind base;` `@tailwind components;` `@tailwind utilities;`
 
 ### UUID (https://npmjs.com/package/uuid)
+### NanoID
 
 
 
