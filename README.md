@@ -17,9 +17,9 @@
 - Open http://localhost:5173/ on Browser.
 
 ### TailwindCSS (https://tailwindcss.com)
-- `npm install -D tailwindcss`
-- `npx tailwindcss init`
-- Go to tailwind.config.js file and add config `content: ["./src/**/*.{html,js}"],`
+- `npm install -D tailwindcss postcss autoprefixer` [Installation](https://tailwindcss.com/docs/guides/vite)
+- `npx tailwindcss init -p`
+- Go to tailwind.config.js file and add config `content: ["./index.html","./src/**/*.{js,ts,jsx,tsx}",],`
 - Go to main CSS file (/src/App.css) and add `@tailwind base;` `@tailwind components;` `@tailwind utilities;`
 
 ### UUID (https://npmjs.com/package/uuid)
