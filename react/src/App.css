@@ -6,13 +6,123 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-slate-50;
-  }
+  body {@apply text-base text-slate-500 bg-slate-50;}
+  h1, h2, h3, h4, h5, h6 {@apply text-slate-600;}
+  h1 {@apply text-5xl;}
+  h2 {@apply text-4xl;}
+  h3 {@apply text-3xl;}
+  h4 {@apply text-2xl;}
+  h5 {@apply text-xl;}
+  h6 {@apply text-lg;}
+  svg {@apply size-6;}
+  table thead tr {@apply text-sm border-b border-slate-300;}
+  table thead th ,
+  table thead td {@apply font-medium text-nowrap text-left align-bottom pr-8 pb-8;}
+  table tbody tr {@apply border-b border-slate-200;}
+  table tbody tr:hover {@apply bg-slate-100;}
+  table tbody th ,
+  table tbody td {@apply align-top pr-8 py-4;}
+  table th:first-child ,
+  table td:first-child {@apply w-0 pl-8;}
+  table th:last-child ,
+  table td:last-child {@apply w-0 pr-8;}
+  table a:hover {@apply underline underline-offset-4 decoration-primary-active;}
+  a ,
+  button , .btn ,
+  input , select , textarea ,
+  .tooltip:before , .tooltip:after {@apply transition-all;}
 };
 
 @layer components {
+  .btn[class*="-primary"]         {@apply text-primary          fill-primary          border-primary          bg-primary         ;}
+  .btn[class*="-secondary"]       {@apply text-secondary        fill-secondary        border-secondary        bg-secondary       ;}
+  .btn[class*="-tertiary"]        {@apply text-tertiary         fill-tertiary         border-tertiary         bg-tertiary        ;}
+  .btn[class*="-error"]           {@apply text-error            fill-error            border-error            bg-error           ;}
+  .btn[class*="-warning"]         {@apply text-warning          fill-warning          border-warning          bg-warning         ;}
+  .btn[class*="-success"]         {@apply text-success          fill-success          border-success          bg-success         ;}
+  .btn[class*="-info"]            {@apply text-info             fill-info             border-info             bg-info            ;}
+  .btn[class*="-grey"]            {@apply text-grey             fill-grey             border-grey             bg-grey            ;}
+  .btn[class*="-slate"]           {@apply text-slate            fill-slate            border-slate            bg-slate           ;}
+  .btn[class*="-primary"]:hover   {@apply text-primary-active   fill-primary-active   border-primary-active   bg-primary-active  ;}
+  .btn[class*="-secondary"]:hover {@apply text-secondary-active fill-secondary-active border-secondary-active bg-secondary-active;}
+  .btn[class*="-tertiary"]:hover  {@apply text-tertiary-active  fill-tertiary-active  border-tertiary-active  bg-tertiary-active ;}
+  .btn[class*="-error"]:hover     {@apply text-error-active     fill-error-active     border-error-active     bg-error-active    ;}
+  .btn[class*="-warning"]:hover   {@apply text-warning-active   fill-warning-active   border-warning-active   bg-warning-active  ;}
+  .btn[class*="-success"]:hover   {@apply text-success-active   fill-success-active   border-success-active   bg-success-active  ;}
+  .btn[class*="-info"]:hover      {@apply text-info-active      fill-info-active      border-info-active      bg-info-active     ;}
+  .btn[class*="-grey"]:hover      {@apply text-grey-active      fill-grey-active      border-grey-active      bg-grey-active     ;}
+  .btn[class*="-slate"]:hover     {@apply text-slate-active     fill-slate-active     border-slate-active     bg-slate-active    ;}
+  .btn {@apply flex justify-center items-center h-10 rounded-lg px-4 py-2 gap-2 border;}
+    .btn.btn-xs  {@apply h-8 text-xs font-medium px-2.5 py-1 rounded;}
+    .btn.btn-sm  {@apply h-9 text-sm font-medium px-3 py-1.5 rounded-md;}
+  /*.btn.btn-md  {@apply h-10 text-base px-4 py-2;}*/
+    .btn.btn-lg  {@apply h-11 text-lg px-5 py-2.5;}
+    .btn.btn-xl  {@apply h-12 text-xl px-6 py-3;}
+    .btn.btn-2xl {@apply h-14 text-2xl px-7 py-3.5;}
+    .btn.btn-xs  svg {@apply size-4;}
+    .btn.btn-sm  svg {@apply size-5;}
+  /*.btn.btn-md  svg {@apply size-6;}*/
+    .btn.btn-lg  svg {@apply size-7;}
+    .btn.btn-xl  svg {@apply size-8;}
+    .btn.btn-2xl svg {@apply size-9;}
+  .btn-icon {@apply size-10 !p-0;}
+    .btn-icon.btn-xs  {@apply size-8;}
+    .btn-icon.btn-sm  {@apply size-9;}
+  /*.btn-icon.btn-md  {@apply size-10;}*/
+    .btn-icon.btn-lg  {@apply size-11;}
+    .btn-icon.btn-xl  {@apply size-12;}
+    .btn-icon.btn-2xl {@apply size-14;}
+  /**/
+  .btn ,
+  .btn[class*="btn-mix"] ,
+    .btn[class*="btn-ghost-mix-"] {@apply text-slate-400 fill-slate-400 border-slate-100 bg-slate-100;}
+    .btn:hover ,
+    .btn.btn-ghost:hover {@apply text-slate-500 fill-slate-500 border-slate-200 bg-slate-200;}
+    .btn:disabled {@apply text-slate-300 fill-slate-300 border-slate-100 bg-slate-100;}
+  .btn[class*="btn-ghost"] {@apply border-transparent bg-transparent;}
+  .btn[class*="btn-mix"]:hover ,
+  .btn[class*="btn-ghost-"]:hover ,
+  .btn[class*="btn-color-"] ,
+  .btn[class*="btn-color-"]:hover {@apply text-white fill-white;}
+  .btn-outline ,
+  .btn[class*="btn-outline-mix"] {@apply text-slate-400 fill-slate-400 border-slate-400;}
+  .btn-outline:hover {@apply border-slate-500;}
+  .btn[class*="btn-outline"] ,
+  .btn[class*="btn-outline"]:hover {@apply border-2 bg-transparent;}
+  .btn-reverse ,
+  .btn[class*="btn-reverse-mix"] {@apply text-slate-400 fill-slate-400;}
+  .btn[class*="btn-reverse"] ,
+  .btn[class*="btn-reverse"]:hover {@apply border-white bg-white;}
+  
+  .table-action tbody th ,
+  .table-action tbody td {@apply py-2;}
+  .table-action th:first-child ,
+  .table-action td:first-child {@apply w-0 font-medium text-right text-info;}
+  .table-action tbody th:first-child ,
+  .table-action tbody td:first-child {@apply py-4;}
+  .table-action th:last-child ,
+  .table-action td:last-child {@apply w-0 whitespace-nowrap pr-2;}
+  .table-action a:hover {@apply no-underline;}
+  .table-action .btn:not(.btn-icon) {@apply w-fit;}
+
+  .frame {@apply overflow-hidden space rounded-lg bg-white shadow-xl;}
+  table.frame thead th ,
+  table.frame thead td {@apply pt-8}
+  table.frame thead tr {@apply border-slate-200;}
+  table.frame tbody tr {@apply border-slate-100;}
+  table.frame tbody tr:hover {@apply bg-slate-50;}
+
+  .tooltip {@apply relative inline-block;}
+  .tooltip:before {@apply content-[attr(data-tip)] -translate-y-2 min-w-10 text-xs text-center text-white px-2 py-1 rounded bg-slate-600;}
+  .tooltip:after {@apply content-[''] -translate-y-1 w-0 h-0 border-t-4 border-x-4 border-transparent border-t-slate-600;}
+  .tooltip:before ,
+  .tooltip:after {@apply delay-150 pointer-events-none invisible opacity-0 absolute left-1/2 bottom-full -translate-x-1/2;}
+  .tooltip:hover:before ,
+  .tooltip:hover:after {@apply visible opacity-100;}
 };
 
 @layer utilities {
+  .gap {@apply gap-4 sm:gap-8;}
+  .space {@apply p-4 sm:p-8;}
+  .container {@apply flex flex-col max-w-screen-xl gap space mx-auto;}
 };

@@ -12,8 +12,8 @@ export default {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      white: '#f5f5f5',
-      black: '#333333',
+      white: '#ffffff',
+      black: '#23272e',
       primary: {
         DEFAULT: '#c6ab8b',
         active: '#b0875f',
@@ -120,8 +120,8 @@ export default {
         '950': '#262b45',
       },
       grey: {
-        DEFAULT: '#e7e7e7',
-        active: '#dfdfdf',
+        DEFAULT: '#999999',
+        active: '#888888',
         '50': '#f7f7f7',
         '100': '#e7e7e7', // Key - Mercury (Grey)
         '200': '#dfdfdf',
@@ -163,5 +163,9 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [{
+    'postcss-import': {},
+    tailwindcss: {},
+    autoprefixer: {},
+  }],
 }
