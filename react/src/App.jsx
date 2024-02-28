@@ -10,8 +10,8 @@ function App() {
 
   return (
     <>
-      <Layer />
       <ItemList />
+      <Layer />
       <section className='hidden'>
         <div>
           <a href="https://vitejs.dev" target="_blank">

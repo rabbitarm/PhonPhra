@@ -59,9 +59,9 @@ export default {
         '900': '#5c4040',
         '950': '#301f1f',
       },
-      error: {
-        DEFAULT: '#a80027',
-        active: '#560014',
+      /*error: {
+        DEFAULT: '#ff1148',
+        active: '#be002c',
         '50': '#ffeef2',
         '100': '#ffdae3',
         '200': '#ffbbcb',
@@ -69,11 +69,26 @@ export default {
         '400': '#ff4973',
         '500': '#ff1148',
         '600': '#ff003b',
-        '700': '#e70036',
+        '700': '#e70036', // Select
         '800': '#be002c',
         '900': '#a80027', // Key - Shiraz (Red)
         '950': '#560014',
-      },
+      },*/
+      'error': {
+        DEFAULT: '#de2048',
+        active: '#c1153d',
+        '50': '#fff1f2',
+        '100': '#ffe4e6',
+        '200': '#fdced3',
+        '300': '#fca5af',
+        '400': '#f97384',
+        '500': '#f1425e',
+        '600': '#de2048', // Select
+        '700': '#c1153d', // Key - Cardinal (Red)
+        '800': '#9d1438',
+        '900': '#861537',
+        '950': '#4b0618',
+      },    
       warning: {
         DEFAULT: '#fc7a1e',
         active: '#ed5809',
