@@ -176,6 +176,10 @@ export default {
         '80': '80',
         '90': '90',
       },
+      borderWidth: {
+        '16': '16px',
+        '32': '32px',
+      }
     },
   },
   plugins: [{

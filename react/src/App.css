@@ -17,27 +17,49 @@
   h6 {@apply text-lg;}
   p , dialog {@apply text-slate-500;}
   svg {@apply size-6;}
+  form {@apply flex flex-col w-full gap-4;}
+  fieldset {@apply relative flex flex-col flex-wrap gap-2;}
+  label {@apply w-full;}
+  input ,
+  select ,
+  textarea {@apply w-full px-4 py-2 border border-slate-200 rounded-lg bg-white;}
+  textarea {@apply min-h-40;}
+  input[type="checkbox"] ,
+  label[for="checkbox"] ,
+  input[type="radio"] ,
+  label[for="radio"] {@apply w-fit;}
+  input[type="checkbox"] ,
+  input[type="radio"] {@apply size-6 rounded;}
+  input:hover    , select:hover    , textarea:hover    {@apply border-slate-300;}
+  input:focus    , select:hover    , textarea:hover    {@apply border-primary;}
+  input:disabled , select:disabled , textarea:disabled {@apply border-slate-200 bg-slate-100;}
+  form * , input , select , textarea {@apply outline-none;}
+
+  .fieldset-inline {@apply flex-row items-center gap-2;}
+  .fieldset-button {@apply flex-row pt-4 gap-4;}
+  .label-field {@apply absolute top-0.5 left-4 text-sm;}
+  .label-border {@apply absolute -top-2.5 left-3 inline-block w-fit text-sm px-1 py-0 rounded bg-white;}
+
   table thead tr {@apply text-sm border-b border-slate-300;}
   table thead th ,
-  table thead td {@apply font-medium text-nowrap text-left align-bottom pr-8 pb-8;}
-  table tbody tr {@apply border-b border-slate-200;}
+  table thead td {@apply font-medium text-nowrap text-left align-bottom pt-0;}
+  table tbody tr {@apply border-b border-slate-100;}
   table tbody tr:hover {@apply bg-slate-100;}
-  table tbody th ,
-  table tbody td {@apply align-top pr-8 py-4;}
+  table th ,
+  table td {@apply align-top pr-4 sm:pr-8 py-2 sm:py-4;}
   table th:first-child ,
-  table td:first-child {@apply w-0 pl-8;}
+  table td:first-child {@apply w-0 pl-4 sm:pl-8;}
   table th:last-child ,
-  table td:last-child {@apply w-0 pr-8;}
-  table a:hover {@apply underline underline-offset-4 decoration-primary-active;}
+  table td:last-child {@apply w-0 pr-4 sm:pr-8;}
+  table a:not(.btn):hover {@apply underline underline-offset-4 decoration-primary-active;}
   a ,
   button , .btn ,
   input , select , textarea ,
-  .tooltip:before , .tooltip:after {@apply transition-all;}
+  .tooltip:before , .tooltip:after ,
+  dialog {@apply transition-all;}
 };
 
 @layer components {
-  .form-control {@apply flex gap-sm;}
-  .form-control-button {@apply flex gap-sm;}
 
   .btn[class*="-primary"]         {@apply text-primary          fill-primary          border-primary          bg-primary         ;}
   .btn[class*="-secondary"]       {@apply text-secondary        fill-secondary        border-secondary        bg-secondary       ;}
@@ -57,7 +79,7 @@
   .btn[class*="-info"]:hover      {@apply text-info-active      fill-info-active      border-info-active      bg-info-active     ;}
   .btn[class*="-grey"]:hover      {@apply text-grey-active      fill-grey-active      border-grey-active      bg-grey-active     ;}
   .btn[class*="-slate"]:hover     {@apply text-slate-active     fill-slate-active     border-slate-active     bg-slate-active    ;}
-  .btn {@apply flex justify-center items-center h-10 rounded-lg px-4 py-2 gap-2 border;}
+  .btn {@apply flex justify-center items-center w-full xs:w-fit h-10 rounded-lg px-4 py-2 gap-2 border;}
     .btn.btn-2xs {@apply h-6 text-xs font-medium px-1.5 py-1 rounded;}
     .btn.btn-xs  {@apply h-8 text-xs font-medium px-2.5 py-1 rounded;}
     .btn.btn-sm  {@apply h-9 text-sm font-medium px-3 py-1.5 rounded-md;}
@@ -111,13 +133,13 @@
   .btn[class*="btn-mix"]:hover {@apply border-white bg-white;}
   
   .table-action tbody th ,
-  .table-action tbody td {@apply py-2;}
+  .table-action tbody td {@apply py-4;}
   .table-action th:first-child ,
   .table-action td:first-child {@apply w-0 font-medium text-right text-info;}
-  .table-action tbody th:first-child ,
-  .table-action tbody td:first-child {@apply py-4;}
+  .table-action thead th:first-child ,
+  .table-action thead td:first-child {@apply pl-0 sm:pl-4}
   .table-action th:last-child ,
-  .table-action td:last-child {@apply w-0 whitespace-nowrap pr-2;}
+  .table-action td:last-child {@apply w-0 whitespace-nowrap py-2 pr-2;}
   .table-action a:hover {@apply no-underline;}
   .table-action .btn:not(.btn-icon) {@apply w-fit;}
 
@@ -136,38 +158,32 @@
   .tooltip:hover:before ,
   .tooltip:hover:after {@apply visible opacity-100 -translate-y-1;}
 
-  .modal {@apply !overflow-visible relative z-10 flex m-0 bg-transparent;}
-  .modal .modal-content {@apply flex flex-col gap-sm padding
+  .modal {@apply relative z-10 flex flex-col justify-center items-center m-0 bg-transparent;}
+  .modal .modal-content {@apply relative flex flex-col padding
     sm:max-w-[calc(640px-64px)]
   ;}
   .modal-content .tooltip {@apply absolute top-0 right-0;}
-  .modal-content .form-control-button {@apply justify-end mt-2 sm:mt-4;}
+  .modal-content .fieldset-button {@apply gap-sm padding-t-sm;}
   .modal[class*="modal-"] .modal-content .tooltip ,
   .modal[class*="modal-"] .modal-close {@apply hidden;}
 
   .modal-state {@apply border rounded-lg shadow-none;}
-  .modal-tooltip {@apply frame p-0;}
-  .modal-tooltip .modal-content {@apply text-sm gap-xs padding-x padding-y-sm;}
-  .modal-tooltip .modal-content .form-control-button {@apply gap-2 mt-0;}
+  .modal-tooltip {@apply visible opacity-100 absolute left-auto right-0 bottom-full -translate-y-2;}
+  .modal-tooltip .modal-content {@apply frame text-sm padding-sm;}
+  .modal-tooltip .modal-content .fieldset-button {@apply flex-nowrap gap-2 padding-t-xs;}
+  .modal-tooltip-right .modal-content .fieldset-button {@apply justify-end;}
+  .modal-tooltip-left:after  ,
+  .modal-tooltip-right:after {@apply content-[''] absolute -bottom-1 w-0 h-0 border-t-4 border-x-4 border-transparent border-t-white;}
+  .modal-tooltip-left:after  {@apply left-[16px];}
+  .modal-tooltip-right:after {@apply right-[16px];}
   /**/
-  .modal:not([class*="modal-"]) {@apply fixed top-0 left-0 w-[100vw] h-[100vh];}
-  .modal:not([class*="modal-"]).active {@apply hidden;}
-  .modal:not([class*="modal-"]) .modal-content {
-    @apply
-    frame fixed left-1/2 top-1/2
-    -translate-x-[calc(50%+16px)] sm:-translate-x-[calc(50%+32px)]
-    -translate-y-[calc(50%+16px)] sm:-translate-y-[calc(50%+32px)]
-    w-[calc(100%-32px)] sm:w-[calc(100%-64px)]
-    margin
-  ;}
+  .modal:not([class*="modal-"]) {@apply fixed top-0 left-0 w-full h-full padding;}
+  .modal:not([class*="modal-"]) .modal-content {@apply frame;}
   .modal:not([class*="modal-"]) .modal-close {@apply transition-opacity opacity-95 fixed -z-10 top-0 left-0 w-[100vw] h-[100vh] bg-slate-600;}
   .modal:not([class*="modal-"]) .modal-close:hover {@apply opacity-90;}
-
-
   /* Preview */
-  .btn + .modal-tooltip {@apply invisible absolute left-auto right-0 bottom-full -translate-y-1;}
-  .btn + .modal-tooltip:after {@apply content-[''] absolute right-[16px] -bottom-1 w-0 h-0 border-t-4 border-x-4 border-transparent border-t-white;}
-  .btn:hover + .modal-tooltip {@apply visible;}
+  /*.modal:not([class*="modal-"]) {@apply hidden;}*/
+  .modal.onState {@apply !relative;}
 };
 
 @layer utilities {
@@ -187,10 +203,10 @@
   .padding    , .padding-x    , .padding-r    {@apply pr-4 sm:pr-8 ;}
   .padding    , .padding-y    , .padding-b    {@apply pb-4 sm:pb-8 ;}
   .padding    , .padding-x    , .padding-l    {@apply pl-4 sm:pl-8 ;}
-  .padding-lg , .padding-y-lg , .padding-t-lg {@apply pt-8 sm:pt-18;}
-  .padding-lg , .padding-x-lg , .padding-r-lg {@apply pr-8 sm:pr-18;}
-  .padding-lg , .padding-y-lg , .padding-b-lg {@apply pb-8 sm:pb-18;}
-  .padding-lg , .padding-x-lg , .padding-l-lg {@apply pl-8 sm:pl-18;}
+  .padding-lg , .padding-y-lg , .padding-t-lg {@apply pt-8 sm:pt-16;}
+  .padding-lg , .padding-x-lg , .padding-r-lg {@apply pr-8 sm:pr-16;}
+  .padding-lg , .padding-y-lg , .padding-b-lg {@apply pb-8 sm:pb-16;}
+  .padding-lg , .padding-x-lg , .padding-l-lg {@apply pl-8 sm:pl-16;}
   .margin-xs  , .margin-y-xs  , .margin-t-xs  {@apply pt-1 sm:pt-2 ;}
   .margin-xs  , .margin-x-xs  , .margin-r-xs  {@apply pr-1 sm:pr-2 ;}
   .margin-xs  , .margin-y-xs  , .margin-b-xs  {@apply pb-1 sm:pb-2 ;}
@@ -203,10 +219,10 @@
   .margin     , .margin-x     , .margin-r     {@apply pr-4 sm:pr-8 ;}
   .margin     , .margin-y     , .margin-b     {@apply pb-4 sm:pb-8 ;}
   .margin     , .margin-x     , .margin-l     {@apply pl-4 sm:pl-8 ;}
-  .margin-lg  , .margin-y-lg  , .margin-t-lg  {@apply pt-8 sm:pt-18;}
-  .margin-lg  , .margin-x-lg  , .margin-r-lg  {@apply pr-8 sm:pr-18;}
-  .margin-lg  , .margin-y-lg  , .margin-b-lg  {@apply pb-8 sm:pb-18;}
-  .margin-lg  , .margin-x-lg  , .margin-l-lg  {@apply pl-8 sm:pl-18;}
+  .margin-lg  , .margin-y-lg  , .margin-t-lg  {@apply pt-8 sm:pt-16;}
+  .margin-lg  , .margin-x-lg  , .margin-r-lg  {@apply pr-8 sm:pr-16;}
+  .margin-lg  , .margin-y-lg  , .margin-b-lg  {@apply pb-8 sm:pb-16;}
+  .margin-lg  , .margin-x-lg  , .margin-l-lg  {@apply pl-8 sm:pl-16;}
   .container {@apply flex flex-col max-w-screen-xl gap padding mx-auto my-4 sm:my-8;}
   .container + .container {@apply mt-0;}
 };
