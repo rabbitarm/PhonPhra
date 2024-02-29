@@ -2,12 +2,6 @@ import React, { useState } from 'react';
 
 function LayerModal() {
 
-  const [modalToggle, setModalToggle] = useState(false);
-  const handleModal = () => {
-    setModalToggle((toggle) => !toggle);
-    console.log(modalToggle);
-  };
-
   return (
     <>
       <section className="container frame !gap-4">
