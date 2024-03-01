@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function LayerModal() {
 
@@ -17,12 +17,17 @@ function LayerModal() {
               <input type="email" placeholder="name@mail.com" />
             </fieldset>
             <fieldset>
-              <label className="label-border">ตัวเลข</label>
-              <input type="number" placeholder="1234567890" />
+              <div className="field">
+                <label className="label-border">ตัวเลข</label>
+                <input type="number" placeholder="1234567890" />
+                <label className="label-field-end">Option</label>
+              </div>
             </fieldset>
             <fieldset>
-              <label className="label-field">เบอร์ติดต่อ</label>
-              <input type="tel" placeholder="081-234-5678" />
+              <div className="field">
+                <label className="label-field-on">เบอร์ติดต่อ</label>
+                <input type="tel" placeholder="081-234-5678" />
+              </div>
             </fieldset>
             <fieldset>
               <label>Disabled</label>
@@ -39,14 +44,21 @@ function LayerModal() {
             </fieldset>
             <fieldset>
               <label>ข้อความ</label>
-              <textarea placeholder="ข้อความ"></textarea>
+              <div className="field">
+                <textarea placeholder="ข้อความ"></textarea>
+                <label className="label-field-end">Option</label>
+              </div>
             </fieldset>
             <fieldset className="fieldset-inline">
               <label>เบอร์ติดต่อ</label>
-              <input type="checkbox" id="checkbox" />
-              <label for="checkbox">Checkbox</label>
-              <input type="radio" id="radio" />
-              <label for="radio">Radio</label>
+              <div className="field">
+                <input type="checkbox" id="checkbox" />
+                <label htmlFor="checkbox">Checkbox</label>
+              </div>
+              <div className="field">
+                <input type="radio" id="radio" />
+                <label htmlFor="radio">Radio</label>
+              </div>
             </fieldset>
             <fieldset className="fieldset-button">
               <button className="btn btn-color-primary w-full 2xs:w-fit">

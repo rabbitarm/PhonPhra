@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ItemCreate from './ItemCreate';
+import ItemEdit from './ItemEdit';
 
 function ItemList() {
   /* Item */
@@ -8,13 +10,16 @@ function ItemList() {
   const [error, setError] = useState('');
 
   /* Item Nav */
+  const [itemCreateToggle, setItemCreateToggle] = useState(false);
+  const handleItemCreate = () => setItemCreateToggle((toggle) => !toggle);
+
   const [itemAddNavId, setItemAddNavId] = useState('');
   const handleItemAdd = () => setItemAddNavId('');
   const handleItemAddCancel = () => setItemAddNavId('');
   const handleItemAddComfirm = () => setItemAddNavId('');
 
   const [itemEditNavId, setItemEditNavId] = useState('');
-  const handleItemEdit = () => setItemEditNavId('');
+  const handleItemEdit = (_id) => setItemEditNavId(_id);
   const handleItemEditCancel = () => setItemEditNavId('');
   const handleItemEditComfirm = () => setItemEditNavId('');
 
@@ -51,12 +56,36 @@ function ItemList() {
     <>
       <section id="itemList" className="container">
         <h3>บทสวดมนต์</h3>
-        <table className="table-action">
+        <table className="frame table-action">
           <thead>
             <tr>
               <th>เลขที่</th>
               <th>ชื่อบทสวดมนต์</th>
-              <th></th>
+              <th>
+                <button className="btn btn-alternate-primary ml-auto mr-[6px]" onClick={handleItemCreate}>
+                  <svg viewBox="0 -960 960 960">
+                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                  </svg>
+                  <span>สร้าง</span>
+                </button>
+                {itemCreateToggle
+                ? <dialog className="modal">
+                    <div className="modal-content">
+                      <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                        <button className="btn btn-icon btn-ghost" onClick={handleItemCreate}>
+                          <svg viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                          </svg>
+                          <span className="hidden">ยกเลิก</span>
+                        </button>
+                      </div>
+                      <ItemCreate />
+                    </div>
+                    <button className="modal-close" onClick={handleItemCreate}></button>
+                  </dialog>
+                : null
+                }
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -81,18 +110,19 @@ function ItemList() {
                       <span className="hidden">แก้ไข</span>
                     </button>
                     {itemItemList?._id === itemEditNavId
-                    ? <dialog className="modal modal-tooltip modal-tooltip-right">
+                    ? <dialog className="modal">
                         <div className="modal-content">
-                          <p>ลบรายการนี้?</p>
-                          <fieldset className="fieldset-button">
-                            <button className="btn btn-2xs btn-alternate-success" onClick={handleItemEditCancel}>
-                              <span>ยกเลิก</span>
+                          <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                            <button className="btn btn-icon btn-ghost" onClick={handleItemEdit}>
+                              <svg viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                              </svg>
+                              <span className="hidden">ยกเลิก</span>
                             </button>
-                            <button className="btn btn-2xs btn-color-error" onClick={handleItemEditComfirm}>
-                              <span>ลบ</span>
-                            </button>
-                          </fieldset>
+                          </div>
+                          <ItemEdit />
                         </div>
+                        <button className="modal-close" onClick={handleItemEdit}></button>
                       </dialog>
                     : null
                     }
