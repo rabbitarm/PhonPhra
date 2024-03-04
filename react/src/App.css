@@ -17,12 +17,12 @@
   h5 {@apply text-xl;}
   h6 {@apply text-lg;}
   svg {@apply size-6;}
-  form {@apply flex flex-col w-full gap-4;}
+  form {@apply relative flex flex-col w-full gap-4;}
   fieldset {@apply relative flex flex-col flex-wrap gap-1;}
   label {@apply w-full;}
   input ,
   select ,
-  textarea {@apply w-full px-4 py-2 border border-slate-200 rounded-lg bg-white;}
+  textarea {@apply w-full h-10 px-4 py-2 border border-slate-200 rounded-lg bg-white;}
   textarea {@apply min-h-40 md:min-h-60 py-4;}
   input[type="checkbox"] ,
   label[for="checkbox"] ,
@@ -35,10 +35,12 @@
   input:disabled , select:disabled , textarea:disabled {@apply border-slate-200 bg-slate-100;}
   form * , input , select , textarea {@apply outline-none;}
 
+  .form-inline {@apply flex-row gap-2;}
   .fieldset-border {@apply pt-[10px];}
   .fieldset-inline {@apply flex-row items-center gap-2 gap-x-8;}
   .fieldset-inline .field {@apply flex-row items-center gap-2;}
   .fieldset-button {@apply flex-row pt-4 gap-4;}
+  .form-inline .fieldset-button {@apply /*absolute bottom-0 right-0*/ p-0;}
   .field {@apply relative flex;}
   .field label {@apply w-fit;}
   .label-border {@apply absolute -top-2.5 left-3 inline-block text-sm px-1 py-0 rounded mt-[1px] bg-white;}
@@ -62,6 +64,8 @@
   input , select , textarea ,
   .tooltip:before , .tooltip:after ,
   dialog {@apply transition-all;}
+
+  #root {@apply padding;}
 };
 
 @layer components {
@@ -138,11 +142,11 @@
   .btn[class*="btn-mix"]:hover {@apply border-white bg-white;}
 
   .frame {@apply padding rounded-lg bg-white shadow-lg;}
-  table.frame thead th ,
-  table.frame thead td {@apply align-middle py-6;}
-  table.frame thead tr {@apply border-slate-200;}
-  table.frame tbody tr {@apply border-slate-100;}
-  table.frame tbody tr:hover {@apply bg-slate-50;}
+  .frame table thead th , table.frame thead th ,
+  .frame table thead td , table.frame thead td {@apply align-middle py-6;}
+  .frame table thead tr , table.frame thead tr {@apply border-slate-200;}
+  .frame table tbody tr , table.frame tbody tr {@apply border-slate-100;}
+  .frame table tbody tr:hover , table.frame tbody tr:hover {@apply bg-slate-50;}
   
   .table-action tbody th ,
   .table-action tbody td {@apply py-4;}
@@ -231,6 +235,6 @@
   .margin-lg  , .margin-x-lg  , .margin-r-lg  {@apply mr-8 sm:mr-16;}
   .margin-lg  , .margin-y-lg  , .margin-b-lg  {@apply mb-8 sm:mb-16;}
   .margin-lg  , .margin-x-lg  , .margin-l-lg  {@apply ml-8 sm:ml-16;}
-  .container {@apply relative flex flex-col max-w-screen-xl gap padding mx-auto my-4 sm:my-8;}
+  .container {@apply relative flex flex-col max-w-screen-xl frame gap padding mx-auto my-4 sm:my-8;}
   .container + .container {@apply mt-0;}
 };

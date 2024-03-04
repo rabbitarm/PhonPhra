@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function ItemEdit() {
+function ItemEdit({ item }) {
 
-  const abortController = new AbortController()
-  const itemEditPrev = { item_name: '', item_desc: '' }
-  const [itemEditContent, setItemEditContent] = useState(itemEditPrev)
-  const itemEditChange = (event) => setItemEditContent({ ...itemEditContent, [event.target.name]: event.target.value })
+  const abortController = new AbortController();
+  const itemEditPrev = {
+    _id: item._id,
+    item_number: item.item_number,
+    item_name: item.item_name,
+    item_desc: item.item_desc,
+    item_created_at: item.item_created_at,
+    item_updated_at: item.item_updated_at,
+  };
+  const [itemEditContent, setItemEditContent] = useState(itemEditPrev);
+  const itemEditChange = (event) => setItemEditContent({ ...itemEditContent, [event.target.name]: event.target.value });
   const itemEditSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -24,13 +31,13 @@ function ItemEdit() {
       console.error('Error editing item:', error);
     }
   }
-  const itemEditReset = () => setItemEditContent(itemEditPrev)
+  const itemEditReset = () => setItemEditContent(itemEditPrev);
 
   return (
     <>
       <h4>แก้ไขบทสวดมนต์</h4>
-      <mark className="inline-block text-white px-3 py-1 rounded-lg bg-info">เลขที่: {itemEditContent?.item_number}</mark>
-      <form onSubmit={itemEditSubmit}>
+      <mark className="inline-block text-white px-3 py-1 rounded-lg bg-info">เลขที่: {itemEditContent.item_number}</mark>
+      <form key={itemEditChange._id} onSubmit={itemEditSubmit}>
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">ชื่อบทสวดมนต์</label>
@@ -61,6 +68,6 @@ function ItemEdit() {
     </>
   );
 
-}
+};
 
-export default ItemEdit
+export default ItemEdit;

@@ -176,10 +176,26 @@ export default {
         '80': '80',
         '90': '90',
       },
+      fontSize: {
+        /* grtcalculator.com */
+        'xs'  : ['0.75rem', '1.25rem'],
+        'sm'  : ['0.875rem', '1.5rem'],
+        'base': ['1rem', '1.75rem'],
+        'lg'  : ['1.125rem', '1.875rem'],
+        'xl'  : ['1.25rem', '2.125rem'],
+        '2xl' : ['1.5rem', '2.5rem'],
+        '3xl' : ['1.875rem', '3.125rem'],
+        '4xl' : ['2.25rem', '3.75rem'],
+        '5xl' : ['3rem', '5rem'],
+        '6xl' : ['3.75rem', '6.25rem'],
+        '7xl' : ['4.5rem', '7.5rem'],
+        '8xl' : ['6rem', '10rem'],
+        '9xl' : ['8rem', '13.5rem'],
+      },
       borderWidth: {
         '16': '16px',
         '32': '32px',
-      }
+      },
     },
   },
   plugins: [{

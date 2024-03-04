@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react';
+import axios from 'axios';
 
 function ItemCreate() {
 
-  const abortController = new AbortController()
-  const itemCreateNewInitial = { item_name: '', item_desc: '' }
-  const [itemCreateNew, setItemCreateNew] = useState(itemCreateNewInitial)
-  const itemCreateChange = (event) => setItemCreateNew({ ...itemCreateNew, [event.target.name]: event.target.value })
+  const abortController = new AbortController();
+  const itemCreateNewInitial = { item_name: '', item_desc: '' };
+  const [itemCreateNew, setItemCreateNew] = useState(itemCreateNewInitial);
+  const itemCreateChange = (event) => setItemCreateNew({ ...itemCreateNew, [event.target.name]: event.target.value });
   const itemCreateSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -23,8 +23,8 @@ function ItemCreate() {
     } catch (error) {
       console.error('Error creating item:', error);
     }
-  }
-  const itemCreateReset = () => setItemCreateNew(itemCreateNewInitial)
+  };
+  const itemCreateReset = () => setItemCreateNew(itemCreateNewInitial);
 
   return (
     <>
@@ -60,6 +60,6 @@ function ItemCreate() {
     </>
   );
 
-}
+};
 
-export default ItemCreate
+export default ItemCreate;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ItemCreate from './ItemCreate';
 import ItemEdit from './ItemEdit';
+import ItemContent from './ItemContent';
 
 function ItemList() {
   /* Item */
@@ -18,8 +19,8 @@ function ItemList() {
   const handleItemAddCancel = () => setItemAddNavId('');
   const handleItemAddComfirm = () => setItemAddNavId('');
 
-  const [itemEditNavId, setItemEditNavId] = useState('');
-  const handleItemEdit = (_id) => setItemEditNavId(_id);
+  const [itemEditNavContent, setItemEditNavContent] = useState([]);
+  const handleItemEdit = (itemItemListd) => setItemEditNavContent(itemItemListd);
   const handleItemEditCancel = () => setItemEditNavId('');
   const handleItemEditComfirm = () => setItemEditNavId('');
 
@@ -30,7 +31,6 @@ function ItemList() {
 
   /* Item List - Get */
   useEffect(() => {
-//    document.querySelectorAll('svg').forEach(svg => svg.setAttribute('viewBox', '0 -960 960 960'));
     const abortController = new AbortController();
     const itemListGet = async () => {
       try {
@@ -41,7 +41,6 @@ function ItemList() {
           signal: abortController.signal
         });
         setItemList(response.data);
-        document.querySelectorAll('svg').forEach(svg => svg.setAttribute('viewBox', '0 -960 960 960'));
       } catch (error) {
         setError('Error getting item list: ' + error.message);
       } finally {
@@ -56,7 +55,7 @@ function ItemList() {
     <>
       <section id="itemList" className="container">
         <h3>บทสวดมนต์</h3>
-        <table className="frame table-action">
+        <table className="table-action">
           <thead>
             <tr>
               <th>เลขที่</th>
@@ -103,13 +102,13 @@ function ItemList() {
                     </button>
                   </div>
                   <div className="tooltip" data-tip="แก้ไข">
-                    <button className="btn btn-icon btn-mix-alternate" onClick={() => handleItemEdit(itemItemList._id)}>
+                    <button className="btn btn-icon btn-mix-alternate" onClick={() => handleItemEdit(itemItemList)}>
                       <svg viewBox="0 -960 960 960">
                         <path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
                       </svg>
                       <span className="hidden">แก้ไข</span>
                     </button>
-                    {itemItemList?._id === itemEditNavId
+                    {itemItemList?._id === itemEditNavContent?._id
                     ? <dialog className="modal">
                         <div className="modal-content">
                           <div className="tooltip tooltip-left" data-tip="ยกเลิก">
@@ -120,7 +119,7 @@ function ItemList() {
                               <span className="hidden">ยกเลิก</span>
                             </button>
                           </div>
-                          <ItemEdit />
+                          <ItemEdit item={itemItemList} />
                         </div>
                         <button className="modal-close" onClick={handleItemEdit}></button>
                       </dialog>
@@ -158,6 +157,7 @@ function ItemList() {
         </table>
         <mark className="w-fit block text-sm text-slate-400 text-center px-3 py-2 rounded-lg mx-auto bg-slate-100">{itemList.length} บทสวดมนต์</mark>
       </section>
+      <ItemContent />
     </>
   );
 
