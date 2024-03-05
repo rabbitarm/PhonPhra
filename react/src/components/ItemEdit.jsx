@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function ItemEdit({ item }) {
+function ItemEdit({ data }) {
 
   const abortController = new AbortController();
   const itemEditPrev = {
-    _id: item._id,
-    item_number: item.item_number,
-    item_name: item.item_name,
-    item_desc: item.item_desc,
-    item_created_at: item.item_created_at,
-    item_updated_at: item.item_updated_at,
+    _id: data._id,
+    item_number: data.item_number,
+    item_name: data.item_name,
+    item_desc: data.item_desc,
+    item_created_at: data.item_created_at,
+    item_updated_at: data.item_updated_at,
   };
   const [itemEditContent, setItemEditContent] = useState(itemEditPrev);
   const itemEditChange = (event) => setItemEditContent({ ...itemEditContent, [event.target.name]: event.target.value });
@@ -36,7 +36,7 @@ function ItemEdit({ item }) {
   return (
     <>
       <h4>แก้ไขบทสวดมนต์</h4>
-      <mark className="inline-block text-white px-3 py-1 rounded-lg bg-info">เลขที่: {itemEditContent.item_number}</mark>
+      <span className="badge badge-lg badge-color-info">เลขที่: {itemEditContent?.item_number}</span>
       <form key={itemEditChange._id} onSubmit={itemEditSubmit}>
         <fieldset className="fieldset-border">
           <div className="field">
@@ -61,7 +61,7 @@ function ItemEdit({ item }) {
             <svg viewBox="0 -960 960 960">
               <path d="M280-200v-80h284q63 0 109.5-40T720-420q0-60-46.5-100T564-560H312l104 104-56 56-200-200 200-200 56 56-104 104h252q97 0 166.5 63T800-420q0 94-69.5 157T564-200H280Z" />
             </svg>
-            <span>รีเซ็ตข้อความ</span>
+            <span>รีเซ็ต</span>
           </button>
         </fieldset>
       </form>

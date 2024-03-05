@@ -20,7 +20,7 @@ function ItemList() {
   const handleItemAddComfirm = () => setItemAddNavId('');
   /**/
   const [itemEditNavContent, setItemEditNavContent] = useState([]);
-  const handleItemEdit = (itemItemListd) => setItemEditNavContent(itemItemListd);
+  const handleItemEdit = (itemItemList) => setItemEditNavContent(itemItemList);
   const handleItemEditCancel = () => setItemEditNavId('');
   const handleItemEditComfirm = () => setItemEditNavId('');
   /**/
@@ -28,6 +28,9 @@ function ItemList() {
   const handleItemDelete = (_id) => setItemDeleteNavId(_id);
   const handleItemDeleteCancel = () => setItemDeleteNavId('');
   const handleItemDeleteComfirm = () => setItemDeleteNavId('');
+  /**/
+  const [itemOpenContent, setItemOpenContent] = useState(1);
+  const handleItemOpen = (item_number) => setItemOpenContent(item_number);
 
   /* Item List - Get */
   useEffect(() => {
@@ -91,10 +94,10 @@ function ItemList() {
             {itemList.map(itemItemList => (
               <tr key={itemItemList?._id}>
                 <td>{itemItemList?.item_number}</td>
-                <td><a href="#test">{itemItemList?.item_name}</a></td>
+                <td><a href="#content" onClick={() => handleItemOpen(itemItemList?.item_number)}>{itemItemList?.item_name}</a></td>
                 <td>
                   <div className="tooltip" data-tip="เพิ่ม">
-                    <button className="btn btn-icon btn-mix-alternate" onClick={() => handleItemAdd(itemItemList._id)}>
+                    <button className="btn btn-icon btn-mix-alternate" onClick={() => handleItemAdd(itemItemList?._id)}>
                       <svg viewBox="0 -960 960 960">
                         <path d="M200-120v-640q0-33 23.5-56.5T280-840h240v80H280v518l200-86 200 86v-278h80v400L480-240 200-120Zm80-640h240-240Zm400 160v-80h-80v-80h80v-80h80v80h80v80h-80v80h-80Z" />
                       </svg>
@@ -119,7 +122,7 @@ function ItemList() {
                               <span className="hidden">ยกเลิก</span>
                             </button>
                           </div>
-                          <ItemEdit item={itemItemList} />
+                          <ItemEdit data={itemEditNavContent} />
                         </div>
                         <button className="modal-close" onClick={handleItemEdit}></button>
                       </dialog>
@@ -127,7 +130,7 @@ function ItemList() {
                     }
                   </div>
                   <div className="tooltip" data-tip="ลบ">
-                    <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleItemDelete(itemItemList._id)}>
+                    <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleItemDelete(itemItemList?._id)}>
                       <svg viewBox="0 -960 960 960">
                         <path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
                       </svg>
@@ -157,7 +160,7 @@ function ItemList() {
         </table>
         <span className="badge badge-sm mx-auto">{itemList?.length} บทสวดมนต์</span>
       </section>
-      <ItemContent />
+      <ItemContent data={itemOpenContent} />
     </>
   );
 

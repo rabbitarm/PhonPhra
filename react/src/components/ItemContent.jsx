@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function ItemContent() {
+function ItemContent({ data }) {
 
   const [itemContent, setItemContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   /* Content number nav */
-  const [contentNumber, setContentNumber] = useState(1);
+  const contentNumberInitial = parseInt(data ? data : 1);
+  const [contentNumber, setContentNumber] = useState(contentNumberInitial);
+  console.log('data', data, 'contentNumberInitial', contentNumberInitial, 'contentNumber', contentNumber);
   const contentNumberLast = 999;
   const [contentNumberJump, setContentNumberJump] = useState('');
   const handleContentNumberPrev = () => setContentNumber(contentNumber > 1 ? contentNumber - 1 : contentNumber);
@@ -53,7 +55,7 @@ function ItemContent() {
     };
     itemContentGet();
     return () => abortController.abort();
-  }, [contentNumber]);
+  }, [contentNumber, data]);
 
   return (
     <article id="itemContent" className="container">
@@ -110,7 +112,7 @@ function ItemContent() {
                   </button>
                 </section>
               </section>
-            : ''
+            : null
             }
           </div>
         </div>

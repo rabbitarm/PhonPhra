@@ -39,10 +39,10 @@
   .fieldset-border {@apply pt-[10px];}
   .fieldset-inline {@apply flex-row items-center gap-2 gap-x-8;}
   .fieldset-inline .field {@apply flex-row items-center gap-2;}
-  .fieldset-button {@apply flex-row w-fit pt-4 gap-4;}
+  .fieldset-button {@apply flex-row pt-4 gap-4;}
   .form-inline input[type="number"]::-webkit-outer-spin-button ,
   .form-inline input[type="number"]::-webkit-inner-spin-button {@apply appearance-none;}
-  .form-inline .fieldset-button {@apply absolute bottom-0 right-0 p-0;}
+  .form-inline .fieldset-button {@apply absolute bottom-0 right-0 w-fit p-0;}
   .field {@apply relative flex;}
   .field label {@apply w-fit;}
   .label-border {@apply absolute -top-2.5 left-3 inline-block text-sm px-1 py-0 rounded mt-[1px] bg-white;}
