@@ -13,17 +13,17 @@ function ItemList() {
   /* Item Nav */
   const [itemCreateToggle, setItemCreateToggle] = useState(false);
   const handleItemCreate = () => setItemCreateToggle((toggle) => !toggle);
-
+  /**/
   const [itemAddNavId, setItemAddNavId] = useState('');
   const handleItemAdd = () => setItemAddNavId('');
   const handleItemAddCancel = () => setItemAddNavId('');
   const handleItemAddComfirm = () => setItemAddNavId('');
-
+  /**/
   const [itemEditNavContent, setItemEditNavContent] = useState([]);
   const handleItemEdit = (itemItemListd) => setItemEditNavContent(itemItemListd);
   const handleItemEditCancel = () => setItemEditNavId('');
   const handleItemEditComfirm = () => setItemEditNavId('');
-
+  /**/
   const [itemDeleteNavId, setItemDeleteNavId] = useState('');
   const handleItemDelete = (_id) => setItemDeleteNavId(_id);
   const handleItemDeleteCancel = () => setItemDeleteNavId('');
@@ -155,7 +155,7 @@ function ItemList() {
             ))}
           </tbody>
         </table>
-        <mark className="w-fit block text-sm text-slate-400 text-center px-3 py-2 rounded-lg mx-auto bg-slate-100">{itemList.length} บทสวดมนต์</mark>
+        <span className="badge badge-sm mx-auto">{itemList?.length} บทสวดมนต์</span>
       </section>
       <ItemContent />
     </>
