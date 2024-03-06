@@ -3,12 +3,15 @@ import axios from 'axios';
 import ItemCreate from './ItemCreate';
 import ItemEdit from './ItemEdit';
 import ItemContent from './ItemContent';
+import Bookmark from './Bookmark';
 
 function ItemList() {
-  /* Item */
-  const [itemList, setItemList] = useState([]);
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  /* Item */
+  const [itemList, setItemList] = useState([]);
 
   /* Item Nav */
   const [itemCreateToggle, setItemCreateToggle] = useState(false);
@@ -29,8 +32,8 @@ function ItemList() {
   const handleItemDeleteCancel = () => setItemDeleteNavId('');
   const handleItemDeleteComfirm = () => setItemDeleteNavId('');
   /**/
-  const [itemOpenContent, setItemOpenContent] = useState(1);
-  const handleItemOpen = (item_number) => setItemOpenContent(item_number);
+  const [itemContentOpen, setItemContentOpen] = useState(1);
+  const handleItemOpen = (item_number) => setItemContentOpen(item_number);
 
   /* Item List - Get */
   useEffect(() => {
@@ -64,7 +67,7 @@ function ItemList() {
               <th>เลขที่</th>
               <th>ชื่อบทสวดมนต์</th>
               <th>
-                <button className="btn btn-alternate-primary ml-auto mr-[6px]" onClick={handleItemCreate}>
+                <button className="btn btn-alternate-primary ml-auto" onClick={handleItemCreate}>
                   <svg viewBox="0 -960 960 960">
                     <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
                   </svg>
@@ -91,8 +94,8 @@ function ItemList() {
             </tr>
           </thead>
           <tbody>
-            {itemList.map(itemItemList => (
-              <tr key={itemItemList?._id}>
+            {itemList?.map(itemItemList => (
+              <tr key={itemItemList?._id} index={itemItemList?._id}>
                 <td>{itemItemList?.item_number}</td>
                 <td><a href="#content" onClick={() => handleItemOpen(itemItemList?.item_number)}>{itemItemList?.item_name}</a></td>
                 <td>
@@ -160,7 +163,8 @@ function ItemList() {
         </table>
         <span className="badge badge-sm mx-auto">{itemList?.length} บทสวดมนต์</span>
       </section>
-      <ItemContent data={itemOpenContent} />
+      <ItemContent data={itemContentOpen} />
+      <Bookmark data={itemList} />
     </>
   );
 

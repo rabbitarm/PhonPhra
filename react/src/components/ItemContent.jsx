@@ -7,10 +7,12 @@ function ItemContent({ data }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  /* Content number nav */
+  /* Content number nav from props */
   const contentNumberInitial = parseInt(data ? data : 1);
-  const [contentNumber, setContentNumber] = useState(contentNumberInitial);
-  console.log('data', data, 'contentNumberInitial', contentNumberInitial, 'contentNumber', contentNumber);
+  const [contentNumber, setContentNumber] = useState(1);
+  useEffect(() => {
+    setContentNumber(contentNumberInitial);
+  }, [contentNumberInitial]);
   const contentNumberLast = 999;
   const [contentNumberJump, setContentNumberJump] = useState('');
   const handleContentNumberPrev = () => setContentNumber(contentNumber > 1 ? contentNumber - 1 : contentNumber);
@@ -55,7 +57,7 @@ function ItemContent({ data }) {
     };
     itemContentGet();
     return () => abortController.abort();
-  }, [contentNumber, data]);
+  }, [contentNumber]);
 
   return (
     <article id="itemContent" className="container">
@@ -75,7 +77,7 @@ function ItemContent({ data }) {
             {contentCustomize
             ? <section className="absolute top-full right-0 translate-y-2 flex flex-wrap justify-between items-center gap-2">
                 <section id="itemContentFontSize" className="flex justify-between items-center frame w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
-                  <button className="btn btn-icon btn-alternate-info" disabled={fontSize === fontSizeName.length - 1 ? 'disabled' : ''} onClick={handleFontSizeIncrease}>
+                  <button className="btn btn-icon btn-alternate-info" disabled={fontSize >= fontSizeName.length - 1 ? 'disabled' : ''} onClick={handleFontSizeIncrease}>
                     <svg viewBox="0 -960 960 960">
                       <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
                     </svg>
@@ -89,7 +91,7 @@ function ItemContent({ data }) {
                       <span className="block w-4 text-2xl leading-none text-center">{fontSize + 1}</span>
                     </span>
                   </span>
-                  <button className="btn btn-icon btn-alternate-info" disabled={fontSize === 0 ? 'disabled' : ''} onClick={handleFontSizeDecrease}>
+                  <button className="btn btn-icon btn-alternate-info" disabled={fontSize <= 0 ? 'disabled' : ''} onClick={handleFontSizeDecrease}>
                     <svg viewBox="0 -960 960 960">
                       <path d="M200-440v-80h560v80H200Z" />
                     </svg>
@@ -97,14 +99,14 @@ function ItemContent({ data }) {
                   </button>
                 </section>
                 <section id="itemContentCount" className="flex justify-between items-center frame w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
-                  <button className="btn btn-icon btn-alternate-info" disabled={countNumber === countInitial ? 'disabled' : ''} onClick={handleCountReset}>
+                  <button className="btn btn-icon btn-alternate-info" disabled={countNumber <= countInitial ? 'disabled' : null} onClick={handleCountReset}>
                     <svg viewBox="0 -960 960 960">
                       <path d="M440-122q-121-15-200.5-105.5T160-440q0-66 26-126.5T260-672l57 57q-38 34-57.5 79T240-440q0 88 56 155.5T440-202v80Zm80 0v-80q87-16 143.5-83T720-440q0-100-70-170t-170-70h-3l44 44-56 56-140-140 140-140 56 56-44 44h3q134 0 227 93t93 227q0 121-79.5 211.5T520-122Z" />
                     </svg>
                     <span className="hidden">เริ่มใหม่</span>
                   </button>
                   <span className="block w-16 text-4xl leading-none text-center text-info">{countNumber}</span>
-                  <button className="btn btn-icon btn-alternate-info" disabled={countNumber === countMaximum ? 'disabled' : ''} onClick={handleCountIncrease}>
+                  <button className="btn btn-icon btn-alternate-info" disabled={countNumber >= countMaximum ? 'disabled' : null} onClick={handleCountIncrease}>
                     <svg viewBox="0 -960 960 960">
                       <path d="M240-280v-120H120v-80h120v-120h80v120h120v80H320v120h-80Zm390 80v-438l-92 66-46-70 164-118h64v560h-90Z" />
                     </svg>
@@ -119,26 +121,26 @@ function ItemContent({ data }) {
         <p className={'font-display whitespace-pre-wrap ' + fontSizeName[fontSize]}>{itemContent?.item_desc}</p>
       </main>
       <section id="itemContentNev" className="flex flex-wrap justify-between items-end gap">
-        <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" onClick={handleContentNumberPrev}>
+        <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" disabled={countNumber === countMaximum ? 'disabled' : ''} onClick={handleContentNumberPrev}>
            <svg viewBox="0 -960 960 960">
             <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />
           </svg>
           <span className="hidden 2xs:flex">บทก่อนหน้า</span>
         </button>
-        <button className="order-2 md:order-3 w-fit xs:w-40 btn btn-color-primary" onClick={handleContentNumberPext}>
+        <button className="order-2 md:order-3 flex-1 md:max-w-40 btn btn-color-primary" onClick={handleContentNumberPext}>
           <span>บทต่อไป</span>
            <svg viewBox="0 -960 960 960">
             <path d="m600-200-57-56 184-184H80v-80h647L544-704l56-56 280 280-280 280Z" />
           </svg>
         </button>
-        <form className="form-inline md:flex-1 md:max-w-80 order-3 md:order-2" onSubmit={handleContentNumberSubmit}>
-          <fieldset className="fieldset-border md:pt-0">
+        <form className="form-inner md:flex-1 md:max-w-80 order-3 md:order-2" onSubmit={handleContentNumberSubmit}>
+          <fieldset className="fieldset-border pt-0">
             <div className="field">
               <label className="label-border">ไปเลขที่อื่น</label>
               <input type="number" pattern="[0-9]*" step="1" min="1" inputMode="numeric" name="number" value={contentNumberJump} onChange={handleContentNumberChange} placeholder="9" />
             </div>
           </fieldset>
-          <fieldset className="fieldset-button">
+          <fieldset className="fieldset-button-field-end">
             <button className="btn btn-icon btn-ghost-alternate-primary" type="submit">
               <svg viewBox="0 -960 960 960">
               <path d="M160-160q-33 0-56.5-23.5T80-240v-120h80v120h640v-480H160v120H80v-120q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm300-140-56-58 83-82H80v-80h407l-83-82 56-58 180 180-180 180Z" />

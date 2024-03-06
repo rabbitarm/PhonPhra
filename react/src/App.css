@@ -9,13 +9,13 @@
   * {@apply border-slate-100;}
   body {@apply bg-slate-50;}
   body , p , dialog , button , input , optgroup , select , textarea {@apply text-base text-slate-500;}
-  h1 , h2 , h3 , h4 , h5 , h6 {@apply text-slate-600 font-normal;}
-  h1 {@apply text-5xl;}
-  h2 {@apply text-4xl;}
-  h3 {@apply text-3xl;}
-  h4 {@apply text-2xl;}
-  h5 {@apply text-xl;}
-  h6 {@apply text-lg;}
+  h1 , h2 , h3 , h4 , h5 , h6 , .h1 , .h2 , .h3 , .h4 , .h5 , .h6 {@apply text-slate-600 font-normal;}
+  h1 , .h1 {@apply text-5xl;}
+  h2 , .h2 {@apply text-4xl;}
+  h3 , .h3 {@apply text-3xl;}
+  h4 , .h4 {@apply text-2xl;}
+  h5 , .h5 {@apply text-xl;}
+  h6 , .h6 {@apply text-lg;}
   svg {@apply size-6;}
   form {@apply relative flex flex-col w-full gap-4;}
   fieldset {@apply relative flex flex-col flex-wrap w-full gap-1;}
@@ -35,14 +35,16 @@
   input:disabled , select:disabled , textarea:disabled {@apply border-slate-200 bg-slate-100;}
   form * , input , select , textarea {@apply outline-none;}
 
-  .form-inline {@apply flex-row items-end gap-0;}
+  .form-inline {@apply flex-row justify-between items-end gap-4;}
+  .form-inner {@apply flex-row justify-between items-end gap-0;}
   .fieldset-border {@apply pt-[10px];}
   .fieldset-inline {@apply flex-row items-center gap-2 gap-x-8;}
   .fieldset-inline .field {@apply flex-row items-center gap-2;}
   .fieldset-button {@apply flex-row pt-4 gap-4;}
-  .form-inline input[type="number"]::-webkit-outer-spin-button ,
-  .form-inline input[type="number"]::-webkit-inner-spin-button {@apply appearance-none;}
-  .form-inline .fieldset-button {@apply absolute bottom-0 right-0 w-fit p-0;}
+  .form-inner input[type="number"]::-webkit-outer-spin-button ,
+  .form-inner input[type="number"]::-webkit-inner-spin-button {@apply appearance-none;}
+  .form-inline .fieldset-button {@apply w-fit p-0;}
+  .form-inner .fieldset-button-field-end {@apply absolute bottom-0 right-0 w-fit p-0;}
   .field {@apply relative flex;}
   .field label {@apply w-fit;}
   .label-border {@apply absolute -top-2.5 left-3 inline-block text-sm px-1 py-0 rounded mt-[1px] bg-white;}
@@ -101,13 +103,13 @@
     .btn.btn-lg  {@apply h-11 text-lg px-5 py-2.5 rounded-lg;}
     .btn.btn-xl  {@apply h-12 text-xl px-6 py-3 rounded-lg;}
     .btn.btn-2xl {@apply h-14 text-2xl px-7 py-3.5 rounded-lg;}
-    .btn.btn-2xs svg {@apply size-4;}
-    .btn.btn-xs  svg {@apply size-5;}
-    .btn.btn-sm  svg {@apply size-5;}
-    .btn         svg {@apply size-6;}
-    .btn.btn-lg  svg {@apply size-7;}
-    .btn.btn-xl  svg {@apply size-8;}
-    .btn.btn-2xl svg {@apply size-9;}
+    .btn.btn-2xs svg , .icon-2xs  {@apply size-4;}
+    .btn.btn-xs  svg , .icon-xs   {@apply size-5;}
+    .btn.btn-sm  svg , .icon-sm   {@apply size-5;}
+    .btn         svg , .icon-base {@apply size-6;}
+    .btn.btn-lg  svg , .icon-lg   {@apply size-7;}
+    .btn.btn-xl  svg , .icon-xl   {@apply size-8;}
+    .btn.btn-2xl svg , .icon-2xl  {@apply size-9;}
   .btn-icon {@apply !p-0;}
     .btn-icon.btn-2xs {@apply size-6;}
     .btn-icon.btn-xs  {@apply size-8;}
@@ -150,7 +152,7 @@
   .btn[class*="btn-mix"]:hover {@apply border-white bg-white;}
 
   /* Badge */
-  .badge {@apply flex justify-center items-center w-fit gap-0.5 rounded-md;}
+  .badge {@apply flex justify-center items-center w-fit whitespace-nowrap gap-0.5 rounded-md;}
   .badge-pill {@apply rounded-full;}
     .badge.badge-xs {@apply min-w-5 h-5 text-xs font-medium px-1.5 rounded;}
     .badge.badge-sm {@apply min-w-6 h-6 text-xs font-medium px-1.5 rounded;}
@@ -175,11 +177,9 @@
 
   /* Layout */
   .frame {@apply padding rounded-lg bg-white shadow-lg;}
-  .frame table thead th , table.frame thead th ,
-  .frame table thead td , table.frame thead td {@apply align-middle py-6;}
-  .frame table thead tr , table.frame thead tr {@apply border-slate-200;}
-  .frame table tbody tr , table.frame tbody tr {@apply border-slate-100;}
-  .frame table tbody tr:hover , table.frame tbody tr:hover {@apply bg-slate-50;}
+  
+  table.frame thead th ,
+  table.frame thead td {@apply align-middle py-6;}
   /**/
   .table-action tbody th ,
   .table-action tbody td {@apply py-4;}
@@ -190,7 +190,12 @@
   .table-action th:last-child ,
   .table-action td:last-child {@apply w-0 whitespace-nowrap py-2 pr-2;}
   .table-action a:hover {@apply no-underline;}
-  /*.table-action .btn:not(.btn-icon) {@apply w-fit;}*/
+  /**/
+  .frame table thead th ,
+  .frame table thead td {@apply align-middle pt-0;}
+  .frame table thead tr , table.frame thead tr {@apply border-slate-200;}
+  .frame table tbody tr , table.frame tbody tr {@apply border-slate-100;}
+  .frame table tbody tr:hover , table.frame tbody tr:hover {@apply bg-slate-50;}
 
   .tooltip {@apply relative whitespace-nowrap inline-block w-fit;}
   .tooltip:before {@apply content-[attr(data-tip)] min-w-10 text-xs text-center text-white px-2 py-1 rounded mb-1 bg-slate-600;}
@@ -232,42 +237,66 @@
 };
 
 @layer utilities {
-  .gap-xs      {@apply gap-1 sm:gap-2 ;}
-  .gap-sm      {@apply gap-2 sm:gap-4 ;}
-  .gap         {@apply gap-4 sm:gap-8 ;}
-  .gap-lg      {@apply gap-8 sm:gap-16;}
-  .padding-xs , .padding-y-xs , .padding-t-xs {@apply pt-1 sm:pt-2 ;}
-  .padding-xs , .padding-x-xs , .padding-r-xs {@apply pr-1 sm:pr-2 ;}
-  .padding-xs , .padding-y-xs , .padding-b-xs {@apply pb-1 sm:pb-2 ;}
-  .padding-xs , .padding-x-xs , .padding-l-xs {@apply pl-1 sm:pl-2 ;}
-  .padding-sm , .padding-y-sm , .padding-t-sm {@apply pt-2 sm:pt-4 ;}
-  .padding-sm , .padding-x-sm , .padding-r-sm {@apply pr-2 sm:pr-4 ;}
-  .padding-sm , .padding-y-sm , .padding-b-sm {@apply pb-2 sm:pb-4 ;}
-  .padding-sm , .padding-x-sm , .padding-l-sm {@apply pl-2 sm:pl-4 ;}
-  .padding    , .padding-y    , .padding-t    {@apply pt-4 sm:pt-8 ;}
-  .padding    , .padding-x    , .padding-r    {@apply pr-4 sm:pr-8 ;}
-  .padding    , .padding-y    , .padding-b    {@apply pb-4 sm:pb-8 ;}
-  .padding    , .padding-x    , .padding-l    {@apply pl-4 sm:pl-8 ;}
-  .padding-lg , .padding-y-lg , .padding-t-lg {@apply pt-8 sm:pt-16;}
-  .padding-lg , .padding-x-lg , .padding-r-lg {@apply pr-8 sm:pr-16;}
-  .padding-lg , .padding-y-lg , .padding-b-lg {@apply pb-8 sm:pb-16;}
-  .padding-lg , .padding-x-lg , .padding-l-lg {@apply pl-8 sm:pl-16;}
-  .margin-xs  , .margin-y-xs  , .margin-t-xs  {@apply mt-1 sm:mt-2 ;}
-  .margin-xs  , .margin-x-xs  , .margin-r-xs  {@apply mr-1 sm:mr-2 ;}
-  .margin-xs  , .margin-y-xs  , .margin-b-xs  {@apply mb-1 sm:mb-2 ;}
-  .margin-xs  , .margin-x-xs  , .margin-l-xs  {@apply ml-1 sm:ml-2 ;}
-  .margin-sm  , .margin-y-sm  , .margin-t-sm  {@apply mt-2 sm:mt-4 ;}
-  .margin-sm  , .margin-x-sm  , .margin-r-sm  {@apply mr-2 sm:mr-4 ;}
-  .margin-sm  , .margin-y-sm  , .margin-b-sm  {@apply mb-2 sm:mb-4 ;}
-  .margin-sm  , .margin-x-sm  , .margin-l-sm  {@apply ml-2 sm:ml-4 ;}
-  .margin     , .margin-y     , .margin-t     {@apply mt-4 sm:mt-8 ;}
-  .margin     , .margin-x     , .margin-r     {@apply mr-4 sm:mr-8 ;}
-  .margin     , .margin-y     , .margin-b     {@apply mb-4 sm:mb-8 ;}
-  .margin     , .margin-x     , .margin-l     {@apply ml-4 sm:ml-8 ;}
-  .margin-lg  , .margin-y-lg  , .margin-t-lg  {@apply mt-8 sm:mt-16;}
-  .margin-lg  , .margin-x-lg  , .margin-r-lg  {@apply mr-8 sm:mr-16;}
-  .margin-lg  , .margin-y-lg  , .margin-b-lg  {@apply mb-8 sm:mb-16;}
-  .margin-lg  , .margin-x-lg  , .margin-l-lg  {@apply ml-8 sm:ml-16;}
-  .container {@apply relative flex flex-col max-w-screen-xl frame gap padding mx-auto my-4 sm:my-8;}
-  .container + .container {@apply mt-0;}
+  .gap-xs       {@apply gap-1 sm:gap-2 ;}
+  .gap-sm       {@apply gap-2 sm:gap-4 ;}
+  .gap          {@apply gap-4 sm:gap-8 ;}
+  .gap-lg       {@apply gap-8 sm:gap-16;}
+  .padding-xs   {@apply p-1  sm:p-2  ;}
+  .padding-x-xs {@apply px-1 sm:px-2 ;}
+  .padding-y-xs {@apply py-1 sm:py-2 ;}
+  .padding-t-xs {@apply pt-1 sm:pt-2 ;}
+  .padding-l-xs {@apply pl-1 sm:pl-2 ;}
+  .padding-r-xs {@apply pr-1 sm:pr-2 ;}
+  .padding-b-xs {@apply pb-1 sm:pb-2 ;}
+  .padding-sm   {@apply p-2  sm:p-4  ;}
+  .padding-x-sm {@apply px-2 sm:px-4 ;}
+  .padding-y-sm {@apply py-2 sm:py-4 ;}
+  .padding-t-sm {@apply pt-2 sm:pt-4 ;}
+  .padding-l-sm {@apply pl-2 sm:pl-4 ;}
+  .padding-r-sm {@apply pr-2 sm:pr-4 ;}
+  .padding-b-sm {@apply pb-2 sm:pb-4 ;}
+  .padding      {@apply p-4  sm:p-8  ;}
+  .padding-x    {@apply px-4 sm:px-8 ;}
+  .padding-y    {@apply py-4 sm:py-8 ;}
+  .padding-t    {@apply pt-4 sm:pt-8 ;}
+  .padding-l    {@apply pl-4 sm:pl-8 ;}
+  .padding-r    {@apply pr-4 sm:pr-8 ;}
+  .padding-b    {@apply pb-4 sm:pb-8 ;}
+  .padding-lg   {@apply p-8  sm:p-16 ;}
+  .padding-x-lg {@apply px-8 sm:px-16;}
+  .padding-y-lg {@apply py-8 sm:py-16;}
+  .padding-t-lg {@apply pt-8 sm:pt-16;}
+  .padding-l-lg {@apply pl-8 sm:pl-16;}
+  .padding-r-lg {@apply pr-8 sm:pr-16;}
+  .padding-b-lg {@apply pb-8 sm:pb-16;}
+  .margin-xs    {@apply m-1  sm:m-2  ;}
+  .margin-x-xs  {@apply mx-1 sm:mx-2 ;}
+  .margin-y-xs  {@apply my-1 sm:my-2 ;}
+  .margin-t-xs  {@apply mt-1 sm:mt-2 ;}
+  .margin-l-xs  {@apply ml-1 sm:ml-2 ;}
+  .margin-r-xs  {@apply mr-1 sm:mr-2 ;}
+  .margin-b-xs  {@apply mb-1 sm:mb-2 ;}
+  .margin-sm    {@apply m-2  sm:m-4  ;}
+  .margin-x-sm  {@apply mx-2 sm:mx-4 ;}
+  .margin-y-sm  {@apply my-2 sm:my-4 ;}
+  .margin-t-sm  {@apply mt-2 sm:mt-4 ;}
+  .margin-l-sm  {@apply ml-2 sm:ml-4 ;}
+  .margin-r-sm  {@apply mr-2 sm:mr-4 ;}
+  .margin-b-sm  {@apply mb-2 sm:mb-4 ;}
+  .margin       {@apply m-4  sm:m-8  ;}
+  .margin-x     {@apply mx-4 sm:mx-8 ;}
+  .margin-y     {@apply my-4 sm:my-8 ;}
+  .margin-t     {@apply mt-4 sm:mt-8 ;}
+  .margin-l     {@apply ml-4 sm:ml-8 ;}
+  .margin-r     {@apply mr-4 sm:mr-8 ;}
+  .margin-b     {@apply mb-4 sm:mb-8 ;}
+  .margin-lg    {@apply m-8  sm:m-16 ;}
+  .margin-x-lg  {@apply mx-8 sm:mx-16;}
+  .margin-y-lg  {@apply my-8 sm:my-16;}
+  .margin-t-lg  {@apply mt-8 sm:mt-16;}
+  .margin-l-lg  {@apply ml-8 sm:ml-16;}
+  .margin-r-lg  {@apply mr-8 sm:mr-16;}
+  .margin-b-lg  {@apply mb-8 sm:mb-16;}
+  .container {@apply relative flex flex-col max-w-screen-xl frame gap padding mx-auto sm:my-8;}
+  .container + .container {@apply mt-4;}
 };
