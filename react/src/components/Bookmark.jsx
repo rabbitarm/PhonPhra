@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
 
-function Bookmark({ data }) {
-  
-  /* Item Content from props */
-  const ItemDataInitial = data ? data : 1;
-  const [itemData, setItemData] = useState([]);
-  useEffect(() => {
-    setItemData(ItemDataInitial);
-  }, [ItemDataInitial]);
+function Bookmark({ itemList, itemAddNavSelect }) {
 
   /* Bookmark - List */
   const bookmarkListInitial = [
@@ -50,14 +44,14 @@ function Bookmark({ data }) {
   const [bookmarkList, setBookmarkList] = useState(bookmarkListInitial);
 
   /* Bookmark - Create */
-/*  const [bookmarkTitle, setBookmarkTitle] = useState('');
+  const [bookmarkCreateTitle, setBookmarkCreateTitle] = useState('');
   const bookmarkCreateId = nanoid();
-  const bookmarkCreateChange = (event) => setBookmarkTitle(event.target.value);
-  const bookmarkCreateSubmit = (event) => {
+  const bookmarkCreateChange = (event) => setBookmarkCreateTitle(event.target.value);
+  const handleBookmarkCreateSubmit = (event) => {
     event.preventDefault();
-    setBookmarkList(bookmarkListPrev => [...bookmarkListPrev, { id: bookmarkCreateId, title: bookmarkTitle, item: [] }]);
-    setBookmarkTitle('');
-  };*/
+    setBookmarkList(bookmarkListPrev => [...bookmarkListPrev, { bookmark_id: bookmarkCreateId, bookmark_title: bookmarkCreateTitle, bookmark_item_list: [] }]);
+    setBookmarkCreateTitle('');
+  };
 
   /* Bookmark - Delete */
   const bookmarkSelectInitial = bookmarkList[0]?.bookmark_id;
@@ -77,105 +71,177 @@ function Bookmark({ data }) {
   },[handleBookmarkSelectDelete]);
 
   /* Item in bookmark - Add */
-/*  const bookmarkItemAdd = (id, _id, number, name) => {
-  };
+/*  const bookmarkItemAdd = (bookmark_id, _id, item_number) => {
+    setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmark_id
+      ? [...list?.bookmark_item_list, { _id: _id, item_number: item_number }]
+      : null
+    ));
+  };*/
 
   /* Item in bookmark - Remove */
-  const handleBookmarkItemRemove = (bookmarkSelectId, _id) => setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmarkSelectId ? { ...list, bookmark_item_list: list?.bookmark_item_list?.filter(item => item?._id !== _id) } : list));
+  const handleBookmarkItemRemove = (bookmarkSelectId, _id) => {
+    setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmarkSelectId
+      ? { ...list, bookmark_item_list: list?.bookmark_item_list?.filter(item => item?._id !== _id)}
+      : list
+    ));
+  };
 
   /* Item in bookmark - Toggle checkbox */
-/*  const bookmarkItemSelect = (id, _id, number, name) => {
-    setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.id === id  // Check list.id
-      ? { ...list, item: list?.item.some(item => item?._id === _id)                       // If have list.id && Check item._id
-//      ? list?.item
-        ? list?.item.filter(item => item?._id !== _id)                                    // If have to remove item
-        : [...list?.item, { _id: _id, number: number, name: name }] }                     // If not to add item
-      : list                                                                              // If not list.id
+  const bookmarkItemSelect = (bookmark_id, _id, item_number) => {
+    setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmark_id
+      ? { ...list, bookmark_item_list: list?.bookmark_item_list?.some(item => item?._id === _id)
+        ? list?.bookmark_item_list?.filter(item => item?._id !== _id)
+        : [...list?.bookmark_item_list, { _id: _id, item_number: item_number }]
+      }
+      : list
     ));
   };
   /* Item in bookmark - Checked checkbox */
-/*  const bookmarkItemChecked = (id, _id) => bookmarkList.find(list => list?.id === id)?.item.some(item => item?._id === _id) ? 'checked' : '';*/
+  const bookmarkItemChecked = (bookmark_id, _id) => bookmarkList.find(list => list?.bookmark_id === bookmark_id)?.bookmark_item_list.some(item => item?._id === _id) ? 'checked' : '';
+
+  useEffect(() => {
+    console.log('Bookmark List', bookmarkList);
+  }, [bookmarkList]);
 
   return (
-    <>
-      <section id="bookmark" className="container">
-        <section id="bookmarkList" className="flex flex-col gap">
-          <h3>รายการโปรด</h3>
-          {bookmarkList.length === 0
-          ? <section className="flex justify-center items-center gap-sm">
-              <svg className="size-10 fill-slate-300" viewBox="0 -960 960 960">
-                <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
-              </svg>
-              <p className="h5 text-slate-400">ไม่มีรายการโปรด</p>
-            </section>
-          : <>
-              <form className="form-inline" onSubmit={handleBookmarkSelectDelete}>
-                <fieldset className="fieldset-border md:max-w-80">
-                  <div className="field">
-                    <label className="label-border">เลือกรายการโปรด</label>
-                    <select onChange={() => handleBookmarkSelect(event.target.selectedIndex)}>
-                  {bookmarkList.map(itemBookmarkList => (
-                    <option key={itemBookmarkList?.bookmark_id} value={itemBookmarkList?.bookmark_title}>{itemBookmarkList?.bookmark_title}</option>
-                  ))}
-                </select>
-                  </div>
-                </fieldset>
-                <fieldset className="fieldset-button">
-                  <div className="tooltip" data-tip="ลบ">
-                    <button className="btn btn-icon btn-alternate-error" type="submit">
-                      <svg viewBox="0 -960 960 960">
-                      <path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
-                      </svg>
-                      <span className="hidden">ลบ</span>
-                    </button>
-                  </div>
-                </fieldset>
-              </form>
-              {bookmarkSelectItemList?.length === 0
-              ? <>
-                  <p className="h5 text-slate-400">ไม่มีบทสวดมนต์</p>
-                </>
-              : <>
-                  <table className="table-action">
-                    <thead>
-                      <tr>
-                        <th>เลขที่</th>
-                        <th>ชื่อบทสวดมนต์</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {itemData?.filter(itemItemData => bookmarkSelectItemList?.some(bookmarkItemList => bookmarkItemList?._id === itemItemData?._id))
-                               ?.sort((a, b) => bookmarkSelectItemList.findIndex(item => item?._id === a?._id) - bookmarkSelectItemList.findIndex(item => item?._id === b?._id))
-                               ?.map(itemItemData => (
-                        <tr key={itemItemData?._id} index={itemItemData?._id}>
-                          <td>{itemItemData?.item_number}</td>
-                          <td><a href="#content">{itemItemData?.item_name}</a></td>
-                          <td>
-                            <div className="tooltip" data-tip="ลบ">
-                              <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleBookmarkItemRemove(bookmarkSelectId, itemItemData?._id)}>
-                                <svg viewBox="0 -960 960 960">
-                                  <path d="M840-680H600v-80h240v80ZM200-120v-640q0-33 23.5-56.5T280-840h240v80H280v518l200-86 200 86v-278h80v400L480-240 200-120Zm80-640h240-240Z" />
-                                </svg>
-                                <span className="hidden">ลบ</span>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <span className="badge badge-sm mx-auto">{bookmarkSelectItemList?.length} บทสวดมนต์</span>
-                </>
-              }
-            </>
-          }
-        </section>
-        <section id="bookmarkCreate">
-          bookmarkCreate
-        </section>
+    <section id="bookmark" className="container">
+      <section id="bookmarkCheckbox" className="flex flex-col gap">
+        <h3>รายการโปรด (Chock Box)</h3>
+        {bookmarkList.length === 0
+        ? <section className="flex justify-center items-center gap-sm">
+            <svg className="size-10 fill-slate-300" viewBox="0 -960 960 960">
+              <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
+            </svg>
+            <p className="h5 text-slate-400">ไม่มีรายการโปรด</p>
+          </section>
+        : <table className="table-action">
+            <thead>
+              <tr>
+                <th className="!w-full !p-0"></th>
+                <th className="!p-0"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookmarkList.map(itemBookmarkList => (
+                <tr key={itemBookmarkList?.bookmark_id}>
+                  <td>
+                    <form>
+                      <fieldset className="fieldset-inline">
+                        <div className="field">
+                          <input type="checkbox" id={itemBookmarkList?.bookmark_id} checked={bookmarkItemChecked(itemBookmarkList?.bookmark_id, itemAddNavSelect?._id) === 'checked'} onChange={() => bookmarkItemSelect(itemBookmarkList?.bookmark_id, itemAddNavSelect?._id, itemAddNavSelect?.item_number)} />
+                          <label htmlFor={itemBookmarkList?.bookmark_id}>{itemBookmarkList?.bookmark_title}</label>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </td>
+                  <td>
+                    <div className="tooltip" data-tip="ลบ">
+                      <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => bookmarkDelete(itemBookmarkList?.bookmark_id)}>
+                        <svg viewBox="0 -960 960 960">
+                          <path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
+                        </svg>
+                        <span className="hidden">ลบ</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        }
       </section>
-    </>
+      <section id="bookmarkList" className="flex flex-col gap">
+        <h3>รายการโปรด</h3>
+        {bookmarkList.length === 0
+        ? <section className="flex justify-center items-center gap-sm">
+            <svg className="size-10 fill-slate-300" viewBox="0 -960 960 960">
+              <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
+            </svg>
+            <p className="h5 text-slate-400">ไม่มีรายการโปรด</p>
+          </section>
+        : <>
+            <form className="form-inline" onSubmit={handleBookmarkSelectDelete}>
+              <fieldset className="fieldset-border md:max-w-80">
+                <div className="field">
+                  <label className="label-border">เลือกรายการโปรด</label>
+                  <select onChange={() => handleBookmarkSelect(event.target.selectedIndex)}>
+                    {bookmarkList.map(itemBookmarkList => (
+                      <option key={itemBookmarkList?.bookmark_id} value={itemBookmarkList?.bookmark_title}>{itemBookmarkList?.bookmark_title}</option>
+                    ))}
+                  </select>
+                </div>
+              </fieldset>
+              <fieldset className="fieldset-button">
+                <div className="tooltip" data-tip="ลบ">
+                  <button className="btn btn-icon btn-alternate-error" type="submit">
+                    <svg viewBox="0 -960 960 960">
+                    <path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
+                    </svg>
+                    <span className="hidden">ลบ</span>
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+            {bookmarkSelectItemList?.length === 0
+            ? <>
+                <p className="h5 text-slate-400">ไม่มีบทสวดมนต์</p>
+              </>
+            : <>
+                <table className="table-action">
+                  <thead>
+                    <tr>
+                      <th>เลขที่</th>
+                      <th>ชื่อบทสวดมนต์</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {itemList?.filter(itemItemList => bookmarkSelectItemList?.some(bookmarkItemList => bookmarkItemList?._id === itemItemList?._id))
+                            ?.sort((a, b) => bookmarkSelectItemList.findIndex(item => item?._id === a?._id) - bookmarkSelectItemList.findIndex(item => item?._id === b?._id))
+                            ?.map(itemItemList => (
+                      <tr key={itemItemList?._id}>
+                        <td>{itemItemList?.item_number}</td>
+                        <td><a href="#content">{itemItemList?.item_name}</a></td>
+                        <td>
+                          <div className="tooltip" data-tip="ลบ">
+                            <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleBookmarkItemRemove(bookmarkSelectId, itemItemList?._id)}>
+                              <svg viewBox="0 -960 960 960">
+                                <path d="M840-680H600v-80h240v80ZM200-120v-640q0-33 23.5-56.5T280-840h240v80H280v518l200-86 200 86v-278h80v400L480-240 200-120Zm80-640h240-240Z" />
+                              </svg>
+                              <span className="hidden">ลบ</span>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <span className="badge badge-sm mx-auto">{bookmarkSelectItemList?.length} บทสวดมนต์</span>
+              </>
+            }
+          </>
+        }
+      </section>
+      <hr />
+      <section id="bookmarkCreate">
+        <form className="form-inner" onSubmit={handleBookmarkCreateSubmit}>
+          <fieldset className="fieldset-border pt-0">
+            <div className="field">
+              <label className="label-border">สร้างรายการโปรด</label>
+              <input type="text" name="title" value={bookmarkCreateTitle} onChange={bookmarkCreateChange} placeholder="บทสวดมนต์ประจำวัน" />
+            </div>
+          </fieldset>
+          <fieldset className="fieldset-button-field-end">
+            <button className="btn btn-ghost-alternate-primary" type="submit">
+              <svg viewBox="0 -960 960 960">
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+              </svg>
+              <span>สร้าง</span>
+            </button>
+          </fieldset>
+        </form>
+      </section>
+    </section>
   );
 
 };

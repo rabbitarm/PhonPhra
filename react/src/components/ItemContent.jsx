@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function ItemContent({ data }) {
+function ItemContent({ itemContentOpen }) {
 
   const [itemContent, setItemContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   /* Content number nav from props */
-  const contentNumberInitial = parseInt(data ? data : 1);
+  const contentNumberInitial = parseInt(itemContentOpen ? itemContentOpen : 1);
   const [contentNumber, setContentNumber] = useState(1);
   useEffect(() => {
     setContentNumber(contentNumberInitial);
@@ -17,7 +17,7 @@ function ItemContent({ data }) {
   const [contentNumberJump, setContentNumberJump] = useState('');
   const handleContentNumberPrev = () => setContentNumber(contentNumber > 1 ? contentNumber - 1 : contentNumber);
   const handleContentNumberPext = () => setContentNumber(contentNumber <= contentNumberLast ? contentNumber + 1 : contentNumber);
-  const handleContentNumberChange = (event) => setContentNumberJump(parseInt(event.target.value) || 0);
+  const contentNumberChange = (event) => setContentNumberJump(parseInt(event.target.value) || 0);
   const handleContentNumberSubmit = (event) => {
     event.preventDefault();
     setContentNumber(contentNumberJump);
@@ -64,7 +64,7 @@ function ItemContent({ data }) {
       <main key={itemContent?._id} className="flex flex-col gap">
         <div className="flex justify-between items-start gap">
           <section>
-            <span className="badge badge-lg badge-color-info">เลขที่: {itemContent?.item_number}</span>
+            <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
             <h1 className="text-2xl">{itemContent?.item_name}</h1>
           </section>
           <div className="tooltip" data-tip="ปรับแต่ง">
@@ -120,6 +120,7 @@ function ItemContent({ data }) {
         </div>
         <p className={'font-display whitespace-pre-wrap ' + fontSizeName[fontSize]}>{itemContent?.item_desc}</p>
       </main>
+      <hr />
       <section id="itemContentNev" className="flex flex-wrap justify-between items-end gap">
         <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" disabled={countNumber === countMaximum ? 'disabled' : ''} onClick={handleContentNumberPrev}>
            <svg viewBox="0 -960 960 960">
@@ -137,13 +138,13 @@ function ItemContent({ data }) {
           <fieldset className="fieldset-border pt-0">
             <div className="field">
               <label className="label-border">ไปเลขที่อื่น</label>
-              <input type="number" pattern="[0-9]*" step="1" min="1" inputMode="numeric" name="number" value={contentNumberJump} onChange={handleContentNumberChange} placeholder="9" />
+              <input type="number" pattern="[0-9]*" step="1" min="1" inputMode="numeric" name="number" value={contentNumberJump} onChange={contentNumberChange} placeholder="9" />
             </div>
           </fieldset>
           <fieldset className="fieldset-button-field-end">
             <button className="btn btn-icon btn-ghost-alternate-primary" type="submit">
               <svg viewBox="0 -960 960 960">
-              <path d="M160-160q-33 0-56.5-23.5T80-240v-120h80v120h640v-480H160v120H80v-120q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm300-140-56-58 83-82H80v-80h407l-83-82 56-58 180 180-180 180Z" />
+                <path d="M160-160q-33 0-56.5-23.5T80-240v-120h80v120h640v-480H160v120H80v-120q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm300-140-56-58 83-82H80v-80h407l-83-82 56-58 180 180-180 180Z" />
               </svg>
               <span className="hidden">ค้นหา</span>
             </button>

@@ -17,10 +17,9 @@ function ItemList() {
   const [itemCreateToggle, setItemCreateToggle] = useState(false);
   const handleItemCreate = () => setItemCreateToggle((toggle) => !toggle);
   /**/
-  const [itemAddNavId, setItemAddNavId] = useState('');
-  const handleItemAdd = () => setItemAddNavId('');
-  const handleItemAddCancel = () => setItemAddNavId('');
-  const handleItemAddComfirm = () => setItemAddNavId('');
+  const [itemAddNavSelect, setItemAddNavSelect] = useState([]);
+  const handleItemAdd = (_id, item_number) => setItemAddNavSelect({ _id: _id, item_number: item_number });
+  const handleItemAddCancel = () => setItemAddNavSelect('');
   /**/
   const [itemEditNavContent, setItemEditNavContent] = useState([]);
   const handleItemEdit = (itemItemList) => setItemEditNavContent(itemItemList);
@@ -28,7 +27,7 @@ function ItemList() {
   const handleItemEditComfirm = () => setItemEditNavId('');
   /**/
   const [itemDeleteNavId, setItemDeleteNavId] = useState('');
-  const handleItemDelete = (_id) => setItemDeleteNavId(_id);
+  const handleItemDelete = (_id,) => setItemDeleteNavId(_id,);
   const handleItemDeleteCancel = () => setItemDeleteNavId('');
   const handleItemDeleteComfirm = () => setItemDeleteNavId('');
   /**/
@@ -67,7 +66,7 @@ function ItemList() {
               <th>เลขที่</th>
               <th>ชื่อบทสวดมนต์</th>
               <th>
-                <button className="btn btn-alternate-primary ml-auto" onClick={handleItemCreate}>
+                <button className="btn btn-alternate-primary w-full" onClick={handleItemCreate}>
                   <svg viewBox="0 -960 960 960">
                     <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
                   </svg>
@@ -100,12 +99,29 @@ function ItemList() {
                 <td><a href="#content" onClick={() => handleItemOpen(itemItemList?.item_number)}>{itemItemList?.item_name}</a></td>
                 <td>
                   <div className="tooltip" data-tip="เพิ่ม">
-                    <button className="btn btn-icon btn-mix-alternate" onClick={() => handleItemAdd(itemItemList?._id)}>
+                    <button className="btn btn-icon btn-mix-alternate" onClick={() => handleItemAdd(itemItemList?._id, itemItemList?.item_number)}>
                       <svg viewBox="0 -960 960 960">
                         <path d="M200-120v-640q0-33 23.5-56.5T280-840h240v80H280v518l200-86 200 86v-278h80v400L480-240 200-120Zm80-640h240-240Zm400 160v-80h-80v-80h80v-80h80v80h80v80h-80v80h-80Z" />
                       </svg>
                       <span className="hidden">เพิ่ม</span>
                     </button>
+                    {itemItemList?._id === itemAddNavSelect?._id
+                    ? <dialog className="modal">
+                        <div className="modal-content">
+                          <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                            <button className="btn btn-icon btn-ghost" onClick={handleItemAddCancel}>
+                              <svg viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                              </svg>
+                              <span className="hidden">ยกเลิก</span>
+                            </button>
+                          </div>
+                          <Bookmark itemAddNavSelect={itemAddNavSelect} />
+                        </div>
+                        <button className="modal-close" onClick={handleItemAddCancel}></button>
+                      </dialog>
+                    : null
+                    }
                   </div>
                   <div className="tooltip" data-tip="แก้ไข">
                     <button className="btn btn-icon btn-mix-alternate" onClick={() => handleItemEdit(itemItemList)}>
@@ -163,8 +179,9 @@ function ItemList() {
         </table>
         <span className="badge badge-sm mx-auto">{itemList?.length} บทสวดมนต์</span>
       </section>
-      <ItemContent data={itemContentOpen} />
-      <Bookmark data={itemList} />
+      <Bookmark itemList={itemList} />
+      <Bookmark itemList={itemList} />
+      <ItemContent itemContentOpen={itemContentOpen} />
     </>
   );
 
