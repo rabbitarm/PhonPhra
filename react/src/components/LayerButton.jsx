@@ -316,7 +316,7 @@ function LayerButton() {
             </svg>
             <span>btn-color-primary</span>
           </button>
-          <hr className="clear-both w-full border-none" />
+          <hr />
           <button className="btn btn-icon btn-reverse">
             <svg>
               <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />
@@ -350,7 +350,7 @@ function LayerButton() {
             </svg>
             <span>btn-reverse-primary</span>
           </button>
-          <hr className="clear-both w-full border-none" />
+          <hr />
           <button className="btn btn-icon btn-outline">
             <svg>
               <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />
@@ -384,7 +384,7 @@ function LayerButton() {
             </svg>
             <span>btn-outline-primary</span>
           </button>
-          <hr className="clear-both w-full border-none" />
+          <hr />
           <button className="btn btn-icon btn-ghost">
             <svg>
               <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />
@@ -418,7 +418,7 @@ function LayerButton() {
             </svg>
             <span>btn-ghost-primary</span>
           </button>
-          <hr className="clear-both w-full border-none" />
+          <hr />
           <button className="btn btn-icon btn-mix">
             <svg>
               <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />
@@ -452,7 +452,7 @@ function LayerButton() {
             </svg>
             <span>btn-mix-primary</span>
           </button>
-          <hr className="clear-both w-full border-none" />
+          <hr />
           <button className="btn btn-icon btn-text">
             <svg>
               <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />

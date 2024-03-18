@@ -31,6 +31,15 @@
 - [Get Started](https://axios-http.com/docs/intro)
 - `npm install axios`
 
+### Redux Toolkit
+- [Get Started](https://redux-toolkit.js.org/introduction/getting-started)
+- `npm install @reduxjs/toolkit`
+- `npm install react-redux`
+
+### React Router
+- [Get Started](https://reactrouter.com/en/main/start/tutorial)
+- `npm install react-router-dom`
+
 
 
 # Create Back-End

@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import itemApi from '../api/itemApi';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../store/Reducer';
+
 import axios from 'axios';
 import ItemCreate from './ItemCreate';
 import ItemEdit from './ItemEdit';
@@ -6,6 +10,8 @@ import ItemContent from './ItemContent';
 import Bookmark from './Bookmark';
 
 function ItemList() {
+
+//  const dispatch = useDispatch();
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -41,11 +47,14 @@ function ItemList() {
       try {
         setLoading(true);
         setError('');
-        const response = await axios.get(`http://localhost:3001/item/list`, {
+        const response = await itemApi.get(`item/list`, {
           crossdomain: true,
           signal: abortController.signal
         });
         setItemList(response.data);
+        setTimeout(() => {
+          dispatchEvent(addItem());
+        }, 500);
       } catch (error) {
         setError('Error getting item list: ' + error.message);
       } finally {

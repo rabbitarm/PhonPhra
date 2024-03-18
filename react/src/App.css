@@ -310,5 +310,5 @@
   .margin-b-lg  {@apply mb-8 sm:mb-16;}
   .container {@apply relative flex flex-col max-w-screen-xl frame gap padding mx-auto sm:my-8;}
   .container + .container {@apply mt-4;}
-  .container hr {@apply -mx-4 sm:-mx-8;}
+  .container hr {@apply clear-both w-full border-none /*-mx-4 sm:-mx-8*/;}
 };
