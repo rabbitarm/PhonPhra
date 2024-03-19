@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSlice';
+import { countIncrease, countDecrease, countReset } from '../store/countSlice';
 import axios from 'axios';
 
 function ItemContent({ itemContentOpen }) {
+
+  const dispatch = useDispatch();
 
   const [itemContent, setItemContent] = useState('');
   const [loading, setLoading] = useState(false);
@@ -23,20 +28,18 @@ function ItemContent({ itemContentOpen }) {
     setContentNumber(contentNumberJump);
   };
 
-  /* Customize */
+  /* Customize Tool */
   const [contentCustomize, setContentCustomize] = useState(false);
   const handleContentCustomize = () => setContentCustomize(!contentCustomize);
   /* Font Size */
-  const fontSizeName = ['text-base', 'text-lg', 'text-xl', 'text-2xl', 'text-3xl', 'text-4xl', 'text-5xl'];
-  const [fontSize, setFontSize] = useState(0);
-  const handleFontSizeIncrease = () => setFontSize(fontSize < fontSizeName?.length - 1 ? fontSize + 1 : fontSize);
-  const handleFontSizeDecrease = () => setFontSize(fontSize > 0 ? fontSize - 1 : fontSize);
+  const { fontSizes, fontSizeIndex } = useSelector((state) => state.fontSize);
+  const handleFontSizeIncrease = () => dispatch(fontSizeIncrease());
+  const handleFontSizeDecrease = () => dispatch(fontSizeDecrease());
   /* Count */
-  const countInitial = 0
-  const countMaximum = 999
-  const [countNumber, setCountNumber] = useState(countInitial);
-  const handleCountIncrease = () => setCountNumber(countNumber < countMaximum ? countNumber + 1 : countNumber);
-  const handleCountReset = () => setCountNumber(countInitial);
+  const { countInitial, countMaximum, countIndex } = useSelector((state) => state.countNumber);
+  const handleCountIncrease = () => dispatch(countIncrease());
+  const handleCountDecrease = () => dispatch(countDecrease());
+  const handleCountReset = () => dispatch(countReset());
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -77,7 +80,7 @@ function ItemContent({ itemContentOpen }) {
             {contentCustomize
             ? <section className="absolute top-full right-0 translate-y-2 flex flex-wrap justify-between items-center gap-2">
                 <section id="itemContentFontSize" className="flex justify-between items-center frame w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
-                  <button className="btn btn-icon btn-alternate-info" disabled={fontSize >= fontSizeName.length - 1 ? 'disabled' : ''} onClick={handleFontSizeIncrease}>
+                  <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex >= fontSizes.length - 1 ? 'disabled' : ''} onClick={handleFontSizeIncrease}>
                     <svg viewBox="0 -960 960 960">
                       <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
                     </svg>
@@ -88,10 +91,10 @@ function ItemContent({ itemContentOpen }) {
                       <path d="M560-160v-520H360v-120h520v120H680v520H560Zm-360 0v-320H80v-120h360v120H320v320H200Z" />
                     </svg>
                     <span className="flex justify-center items-center gap-1">ขนาดอักษร:
-                      <span className="block w-4 text-2xl leading-none text-center">{fontSize + 1}</span>
+                      <span className="block w-4 text-2xl leading-none text-center">{fontSizeIndex + 1}</span>
                     </span>
                   </span>
-                  <button className="btn btn-icon btn-alternate-info" disabled={fontSize <= 0 ? 'disabled' : ''} onClick={handleFontSizeDecrease}>
+                  <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex <= 0 ? 'disabled' : ''} onClick={handleFontSizeDecrease}>
                     <svg viewBox="0 -960 960 960">
                       <path d="M200-440v-80h560v80H200Z" />
                     </svg>
@@ -99,18 +102,24 @@ function ItemContent({ itemContentOpen }) {
                   </button>
                 </section>
                 <section id="itemContentCount" className="flex justify-between items-center frame w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
-                  <button className="btn btn-icon btn-alternate-info" disabled={countNumber <= countInitial ? 'disabled' : null} onClick={handleCountReset}>
-                    <svg viewBox="0 -960 960 960">
-                      <path d="M440-122q-121-15-200.5-105.5T160-440q0-66 26-126.5T260-672l57 57q-38 34-57.5 79T240-440q0 88 56 155.5T440-202v80Zm80 0v-80q87-16 143.5-83T720-440q0-100-70-170t-170-70h-3l44 44-56 56-140-140 140-140 56 56-44 44h3q134 0 227 93t93 227q0 121-79.5 211.5T520-122Z" />
-                    </svg>
-                    <span className="hidden">เริ่มใหม่</span>
-                  </button>
-                  <span className="block w-16 text-4xl leading-none text-center text-info">{countNumber}</span>
-                  <button className="btn btn-icon btn-alternate-info" disabled={countNumber >= countMaximum ? 'disabled' : null} onClick={handleCountIncrease}>
+                  <button className="btn btn-icon btn-alternate-info" disabled={countIndex >= countMaximum ? 'disabled' : null} onClick={handleCountIncrease}>
                     <svg viewBox="0 -960 960 960">
                       <path d="M240-280v-120H120v-80h120v-120h80v120h120v80H320v120h-80Zm390 80v-438l-92 66-46-70 164-118h64v560h-90Z" />
                     </svg>
                     <span className="hidden">เพิ่ม</span>
+                  </button>
+                  <span className="block w-16 text-4xl leading-none text-center text-info">{countIndex}</span>
+                  <button className="btn btn-icon btn-alternate-info" disabled={countIndex <= countInitial ? 'disabled' : null} onClick={handleCountDecrease}>
+                    <svg viewBox="0 -960 960 960">
+                      <path d="M400-400H120v-80h280v80Zm230 200v-438l-92 66-46-70 164-118h64v560h-90Z" />
+                    </svg>
+                    <span className="hidden">ลด</span>
+                  </button>
+                  <button className="btn btn-icon btn-alternate-warning" disabled={countIndex <= countInitial ? 'disabled' : null} onClick={handleCountReset}>
+                    <svg viewBox="0 -960 960 960">
+                      <path d="M440-122q-121-15-200.5-105.5T160-440q0-66 26-126.5T260-672l57 57q-38 34-57.5 79T240-440q0 88 56 155.5T440-202v80Zm80 0v-80q87-16 143.5-83T720-440q0-100-70-170t-170-70h-3l44 44-56 56-140-140 140-140 56 56-44 44h3q134 0 227 93t93 227q0 121-79.5 211.5T520-122Z" />
+                    </svg>
+                    <span className="hidden">เริ่มใหม่</span>
                   </button>
                 </section>
               </section>
@@ -118,11 +127,11 @@ function ItemContent({ itemContentOpen }) {
             }
           </div>
         </div>
-        <p className={'font-display whitespace-pre-wrap ' + fontSizeName[fontSize]}>{itemContent?.item_desc}</p>
+        <p className={'font-display whitespace-pre-wrap ' + fontSizes[fontSizeIndex]}>{itemContent?.item_desc}</p>
       </main>
       <hr />
       <section id="itemContentNev" className="flex flex-wrap justify-between items-end gap">
-        <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" disabled={countNumber === countMaximum ? 'disabled' : ''} onClick={handleContentNumberPrev}>
+        <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" disabled={countIndex === countMaximum ? 'disabled' : ''} onClick={handleContentNumberPrev}>
            <svg viewBox="0 -960 960 960">
             <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />
           </svg>

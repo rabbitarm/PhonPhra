@@ -1,8 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import itemSlice from './Reducer';
+import itemSlice from './itemSlice';
+import fontSlice from './fontSlice';
+import countSlice from './countSlice';
 
-export default configureStore({
+const store = configureStore({
   reducer: {
-    itemList: itemSlice
+    itemList: itemSlice,
+    fontSize: fontSlice,
+    countNumber: countSlice
   }
 });
+
+export default store;

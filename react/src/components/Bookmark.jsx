@@ -98,10 +98,10 @@ function Bookmark({ itemList, itemAddNavSelect }) {
   };
   /* Item in bookmark - Checked checkbox */
   const bookmarkItemChecked = (bookmark_id, _id) => bookmarkList.find(list => list?.bookmark_id === bookmark_id)?.bookmark_item_list.some(item => item?._id === _id) ? 'checked' : '';
-
+/*
   useEffect(() => {
     console.log('Bookmark List', bookmarkList);
-  }, [bookmarkList]);
+  }, [bookmarkList]);*/
 
   return (
     <section id="bookmark" className="container">

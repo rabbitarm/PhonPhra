@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import itemApi from '../api/itemApi';
-import { useDispatch } from 'react-redux';
-import { addItem } from '../store/Reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { itemFetch } from '../store/itemSlice';
 
 import axios from 'axios';
 import ItemCreate from './ItemCreate';
@@ -11,13 +10,8 @@ import Bookmark from './Bookmark';
 
 function ItemList() {
 
-//  const dispatch = useDispatch();
-  
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  /* Item */
-  const [itemList, setItemList] = useState([]);
+  const dispatch = useDispatch();
+  const { itemList, loading, error } = useSelector((state) => state.itemList);
 
   /* Item Nav */
   const [itemCreateToggle, setItemCreateToggle] = useState(false);
@@ -40,30 +34,10 @@ function ItemList() {
   const [itemContentOpen, setItemContentOpen] = useState(1);
   const handleItemOpen = (item_number) => setItemContentOpen(item_number);
 
-  /* Item List - Get */
+  /* Item List - Fetch */
   useEffect(() => {
-    const abortController = new AbortController();
-    const itemListGet = async () => {
-      try {
-        setLoading(true);
-        setError('');
-        const response = await itemApi.get(`item/list`, {
-          crossdomain: true,
-          signal: abortController.signal
-        });
-        setItemList(response.data);
-        setTimeout(() => {
-          dispatchEvent(addItem());
-        }, 500);
-      } catch (error) {
-        setError('Error getting item list: ' + error.message);
-      } finally {
-        setLoading(false);
-      };
-    };
-    itemListGet();
-    return () => abortController.abort();
-  }, []);
+    dispatch(itemFetch());
+  }, [dispatch]);
 
   return (
     <>
@@ -103,7 +77,7 @@ function ItemList() {
           </thead>
           <tbody>
             {itemList?.map(itemItemList => (
-              <tr key={itemItemList?._id} index={itemItemList?._id}>
+              <tr key={itemItemList?._id}>
                 <td>{itemItemList?.item_number}</td>
                 <td><a href="#content" onClick={() => handleItemOpen(itemItemList?.item_number)}>{itemItemList?.item_name}</a></td>
                 <td>
@@ -188,9 +162,8 @@ function ItemList() {
         </table>
         <span className="badge badge-sm mx-auto">{itemList?.length} บทสวดมนต์</span>
       </section>
-      <Bookmark itemList={itemList} />
-      <Bookmark itemList={itemList} />
       <ItemContent itemContentOpen={itemContentOpen} />
+      <Bookmark itemList={itemList} />
     </>
   );
 
