@@ -16,7 +16,7 @@ function LayerModal() {
               <label>อีเมล</label>
               <input type="email" placeholder="name@mail.com" />
             </fieldset>
-            <fieldset>
+            <fieldset className="fieldset-border">
               <div className="field">
                 <label className="label-border">ตัวเลข</label>
                 <input type="number" placeholder="1234567890" />

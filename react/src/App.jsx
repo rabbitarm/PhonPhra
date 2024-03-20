@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import ItemList from './components/ItemList';
 import ContactUs from './components/ContactUs';
 import Layer from './components/Layer';
+import ItemContent from './components/ItemContent';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='*' element={<ItemList />} />
           <Route path='/ติดต่อเรา' element={<ContactUs />} />
           <Route path='/Layer' element={<Layer />} />
+          <Route path='/บทสวดมนต์/:item_number' element={<ItemContent />} />
         </Routes>
         <Footer />
       </BrowserRouter>

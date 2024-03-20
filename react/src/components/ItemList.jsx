@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemFetch } from '../store/itemSlice';
 
@@ -12,6 +13,11 @@ function ItemList() {
 
   const dispatch = useDispatch();
   const { itemList, loading, error } = useSelector((state) => state.itemList);
+
+  /* Item List - Fetch */
+  useEffect(() => {
+    dispatch(itemFetch());
+  }, [dispatch]);
 
   /* Item Nav */
   const [itemCreateToggle, setItemCreateToggle] = useState(false);
@@ -30,14 +36,6 @@ function ItemList() {
   const handleItemDelete = (_id,) => setItemDeleteNavId(_id,);
   const handleItemDeleteCancel = () => setItemDeleteNavId('');
   const handleItemDeleteComfirm = () => setItemDeleteNavId('');
-  /**/
-  const [itemContentOpen, setItemContentOpen] = useState(1);
-  const handleItemOpen = (item_number) => setItemContentOpen(item_number);
-
-  /* Item List - Fetch */
-  useEffect(() => {
-    dispatch(itemFetch());
-  }, [dispatch]);
 
   return (
     <>
@@ -79,7 +77,7 @@ function ItemList() {
             {itemList?.map(itemItemList => (
               <tr key={itemItemList?._id}>
                 <td>{itemItemList?.item_number}</td>
-                <td><a href="#content" onClick={() => handleItemOpen(itemItemList?.item_number)}>{itemItemList?.item_name}</a></td>
+                <td><Link to={'/บทสวดมนต์/' + itemItemList?.item_number} onClick={() => handleItemOpen(itemItemList?.item_number)}>{itemItemList?.item_name}</Link></td>
                 <td>
                   <div className="tooltip" data-tip="เพิ่ม">
                     <button className="btn btn-icon btn-mix-alternate" onClick={() => handleItemAdd(itemItemList?._id, itemItemList?.item_number)}>
@@ -162,7 +160,6 @@ function ItemList() {
         </table>
         <span className="badge badge-sm mx-auto">{itemList?.length} บทสวดมนต์</span>
       </section>
-      <ItemContent itemContentOpen={itemContentOpen} />
       <Bookmark itemList={itemList} />
     </>
   );

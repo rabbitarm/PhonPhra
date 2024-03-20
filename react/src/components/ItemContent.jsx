@@ -1,32 +1,55 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { itemNumberPrev, itemNumberNext, itemNumberJumpChange, itemNumberJump } from '../store/itemNumberSlice';
 import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSlice';
 import { countIncrease, countDecrease, countReset } from '../store/countSlice';
 import axios from 'axios';
 
-function ItemContent({ itemContentOpen }) {
+function ItemContent() {
 
   const dispatch = useDispatch();
+  const { itemNumberLast, itemNumberIndex, itemNumberJumpIndex } = useSelector((state) => state.itemNumber);
 
   const [itemContent, setItemContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  /* Content number nav from props */
-  const contentNumberInitial = parseInt(itemContentOpen ? itemContentOpen : 1);
-  const [contentNumber, setContentNumber] = useState(1);
   useEffect(() => {
-    setContentNumber(contentNumberInitial);
-  }, [contentNumberInitial]);
-  const contentNumberLast = 999;
-  const [contentNumberJump, setContentNumberJump] = useState('');
-  const handleContentNumberPrev = () => setContentNumber(contentNumber > 1 ? contentNumber - 1 : contentNumber);
-  const handleContentNumberPext = () => setContentNumber(contentNumber <= contentNumberLast ? contentNumber + 1 : contentNumber);
-  const contentNumberChange = (event) => setContentNumberJump(parseInt(event.target.value) || 0);
-  const handleContentNumberSubmit = (event) => {
+    const abortController = new AbortController();
+    const itemContentGet = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        const response = await axios.get(`http://localhost:3001/item/no/${itemNumberIndex}`, {
+          crossdomain: true,
+          signal: abortController.signal
+        });
+        setItemContent(response.data);
+      } catch (error) {
+        setError('Error getting item content: ' + error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    itemContentGet();
+    return () => abortController.abort();
+  }, [itemNumberIndex]);
+
+  /* Content Number */
+  const { item_number } = useParams();
+  useEffect(() => {
+    dispatch(itemNumberJump(item_number));
+  }, [item_number]);
+
+  /* */
+  const handleItemNumberPrev   = () => dispatch(itemNumberPrev());
+  const handleItemNumberNext   = () => dispatch(itemNumberNext());
+  const itemNumberChange       = (event) => dispatch(itemNumberJumpChange(event.target.value));
+  const handleItemNumberSubmit = (event) => {
     event.preventDefault();
-    setContentNumber(contentNumberJump);
-  };
+    dispatch(itemNumberJump(itemNumberJumpIndex));
+  }
 
   /* Customize Tool */
   const [contentCustomize, setContentCustomize] = useState(false);
@@ -35,119 +58,101 @@ function ItemContent({ itemContentOpen }) {
   const { fontSizes, fontSizeIndex } = useSelector((state) => state.fontSize);
   const handleFontSizeIncrease = () => dispatch(fontSizeIncrease());
   const handleFontSizeDecrease = () => dispatch(fontSizeDecrease());
-  /* Count */
+  /* Count Number */
   const { countInitial, countMaximum, countIndex } = useSelector((state) => state.countNumber);
   const handleCountIncrease = () => dispatch(countIncrease());
   const handleCountDecrease = () => dispatch(countDecrease());
-  const handleCountReset = () => dispatch(countReset());
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    const itemContentGet = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(`http://localhost:3001/item/no/${contentNumber}`, {
-          crossdomain: true,
-          signal: abortController.signal
-        });
-        setItemContent(response.data);
-        setError('');
-      } catch (error) {
-        setError('Error getting contetn: ' + error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    itemContentGet();
-    return () => abortController.abort();
-  }, [contentNumber]);
+  const handleCountReset    = () => dispatch(countReset());
 
   return (
     <article id="itemContent" className="container">
-      <main key={itemContent?._id} className="flex flex-col gap">
-        <div className="flex justify-between items-start gap">
-          <section>
-            <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
-            <h1 className="text-2xl">{itemContent?.item_name}</h1>
-          </section>
-          <div className="tooltip" data-tip="ปรับแต่ง">
-            <button className={'btn btn-icon' + (contentCustomize ? ' btn-color-info' : '')} onClick={handleContentCustomize}>
-              <svg viewBox="0 -960 960 960">
-                <path d="M710-150q-63 0-106.5-43.5T560-300q0-63 43.5-106.5T710-450q63 0 106.5 43.5T860-300q0 63-43.5 106.5T710-150Zm0-80q29 0 49.5-20.5T780-300q0-29-20.5-49.5T710-370q-29 0-49.5 20.5T640-300q0 29 20.5 49.5T710-230Zm-550-30v-80h320v80H160Zm90-250q-63 0-106.5-43.5T100-660q0-63 43.5-106.5T250-810q63 0 106.5 43.5T400-660q0 63-43.5 106.5T250-510Zm0-80q29 0 49.5-20.5T320-660q0-29-20.5-49.5T250-730q-29 0-49.5 20.5T180-660q0 29 20.5 49.5T250-590Zm230-30v-80h320v80H480Zm230 320ZM250-660Z" />
-              </svg>
-              <span className="hidden">ปรับแต่ง</span>
-            </button>
-            {contentCustomize
-            ? <section className="absolute top-full right-0 translate-y-2 flex flex-wrap justify-between items-center gap-2">
-                <section id="itemContentFontSize" className="flex justify-between items-center frame w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
-                  <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex >= fontSizes.length - 1 ? 'disabled' : ''} onClick={handleFontSizeIncrease}>
-                    <svg viewBox="0 -960 960 960">
-                      <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                    </svg>
-                    <span className="hidden">เพิ่มขนาด</span>
-                  </button>
-                  <span className="flex justify-between items-center gap-1 text-info fill-info">
-                    <svg viewBox="0 -960 960 960">
-                      <path d="M560-160v-520H360v-120h520v120H680v520H560Zm-360 0v-320H80v-120h360v120H320v320H200Z" />
-                    </svg>
-                    <span className="flex justify-center items-center gap-1">ขนาดอักษร:
-                      <span className="block w-4 text-2xl leading-none text-center">{fontSizeIndex + 1}</span>
+      {itemContent
+      ? <main key={itemContent?._id} className="flex flex-col gap">
+          <div className="flex justify-between items-start gap">
+            <section>
+              <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
+              <h1 className="text-2xl">{itemContent?.item_name}</h1>
+            </section>
+            <div className="tooltip" data-tip="ปรับแต่ง">
+              <button className={'btn btn-icon' + (contentCustomize ? ' btn-color-info' : '')} onClick={handleContentCustomize}>
+                <svg viewBox="0 -960 960 960">
+                  <path d="M710-150q-63 0-106.5-43.5T560-300q0-63 43.5-106.5T710-450q63 0 106.5 43.5T860-300q0 63-43.5 106.5T710-150Zm0-80q29 0 49.5-20.5T780-300q0-29-20.5-49.5T710-370q-29 0-49.5 20.5T640-300q0 29 20.5 49.5T710-230Zm-550-30v-80h320v80H160Zm90-250q-63 0-106.5-43.5T100-660q0-63 43.5-106.5T250-810q63 0 106.5 43.5T400-660q0 63-43.5 106.5T250-510Zm0-80q29 0 49.5-20.5T320-660q0-29-20.5-49.5T250-730q-29 0-49.5 20.5T180-660q0 29 20.5 49.5T250-590Zm230-30v-80h320v80H480Zm230 320ZM250-660Z" />
+                </svg>
+                <span className="hidden">ปรับแต่ง</span>
+              </button>
+              {contentCustomize
+              ? <section className="absolute top-full right-0 translate-y-2 flex flex-wrap justify-between items-center gap-2">
+                  <section id="itemContentFontSize" className="frame flex justify-between items-center w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
+                    <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex >= fontSizes.length - 1 ? 'disabled' : null} onClick={handleFontSizeIncrease}>
+                      <svg viewBox="0 -960 960 960">
+                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                      </svg>
+                      <span className="hidden">เพิ่มขนาด</span>
+                    </button>
+                    <span className="flex justify-between items-center gap-1 text-info fill-info">
+                      <svg viewBox="0 -960 960 960">
+                        <path d="M560-160v-520H360v-120h520v120H680v520H560Zm-360 0v-320H80v-120h360v120H320v320H200Z" />
+                      </svg>
+                      <span className="flex justify-center items-center gap-1">ขนาดอักษร:
+                        <span className="block w-4 text-2xl leading-none text-center">{fontSizeIndex + 1}</span>
+                      </span>
                     </span>
-                  </span>
-                  <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex <= 0 ? 'disabled' : ''} onClick={handleFontSizeDecrease}>
-                    <svg viewBox="0 -960 960 960">
-                      <path d="M200-440v-80h560v80H200Z" />
-                    </svg>
-                    <span className="hidden">ลดขนาด</span>
-                  </button>
+                    <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex <= 0 ? 'disabled' : null} onClick={handleFontSizeDecrease}>
+                      <svg viewBox="0 -960 960 960">
+                        <path d="M200-440v-80h560v80H200Z" />
+                      </svg>
+                      <span className="hidden">ลดขนาด</span>
+                    </button>
+                  </section>
+                  <section id="itemContentCount" className="frame flex justify-between items-center w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
+                    <button className="btn btn-icon btn-alternate-info" disabled={countIndex >= countMaximum ? 'disabled' : null} onClick={handleCountIncrease}>
+                      <svg viewBox="0 -960 960 960">
+                        <path d="M240-280v-120H120v-80h120v-120h80v120h120v80H320v120h-80Zm390 80v-438l-92 66-46-70 164-118h64v560h-90Z" />
+                      </svg>
+                      <span className="hidden">เพิ่ม</span>
+                    </button>
+                    <span className="block w-16 text-4xl leading-none text-center text-info">{countIndex}</span>
+                    <button className="btn btn-icon btn-alternate-info" disabled={countIndex <= countInitial ? 'disabled' : null} onClick={handleCountDecrease}>
+                      <svg viewBox="0 -960 960 960">
+                        <path d="M400-400H120v-80h280v80Zm230 200v-438l-92 66-46-70 164-118h64v560h-90Z" />
+                      </svg>
+                      <span className="hidden">ลด</span>
+                    </button>
+                    <button className="btn btn-icon btn-alternate-warning" disabled={countIndex <= countInitial ? 'disabled' : null} onClick={handleCountReset}>
+                      <svg viewBox="0 -960 960 960">
+                        <path d="M440-122q-121-15-200.5-105.5T160-440q0-66 26-126.5T260-672l57 57q-38 34-57.5 79T240-440q0 88 56 155.5T440-202v80Zm80 0v-80q87-16 143.5-83T720-440q0-100-70-170t-170-70h-3l44 44-56 56-140-140 140-140 56 56-44 44h3q134 0 227 93t93 227q0 121-79.5 211.5T520-122Z" />
+                      </svg>
+                      <span className="hidden">เริ่มใหม่</span>
+                    </button>
+                  </section>
                 </section>
-                <section id="itemContentCount" className="flex justify-between items-center frame w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
-                  <button className="btn btn-icon btn-alternate-info" disabled={countIndex >= countMaximum ? 'disabled' : null} onClick={handleCountIncrease}>
-                    <svg viewBox="0 -960 960 960">
-                      <path d="M240-280v-120H120v-80h120v-120h80v120h120v80H320v120h-80Zm390 80v-438l-92 66-46-70 164-118h64v560h-90Z" />
-                    </svg>
-                    <span className="hidden">เพิ่ม</span>
-                  </button>
-                  <span className="block w-16 text-4xl leading-none text-center text-info">{countIndex}</span>
-                  <button className="btn btn-icon btn-alternate-info" disabled={countIndex <= countInitial ? 'disabled' : null} onClick={handleCountDecrease}>
-                    <svg viewBox="0 -960 960 960">
-                      <path d="M400-400H120v-80h280v80Zm230 200v-438l-92 66-46-70 164-118h64v560h-90Z" />
-                    </svg>
-                    <span className="hidden">ลด</span>
-                  </button>
-                  <button className="btn btn-icon btn-alternate-warning" disabled={countIndex <= countInitial ? 'disabled' : null} onClick={handleCountReset}>
-                    <svg viewBox="0 -960 960 960">
-                      <path d="M440-122q-121-15-200.5-105.5T160-440q0-66 26-126.5T260-672l57 57q-38 34-57.5 79T240-440q0 88 56 155.5T440-202v80Zm80 0v-80q87-16 143.5-83T720-440q0-100-70-170t-170-70h-3l44 44-56 56-140-140 140-140 56 56-44 44h3q134 0 227 93t93 227q0 121-79.5 211.5T520-122Z" />
-                    </svg>
-                    <span className="hidden">เริ่มใหม่</span>
-                  </button>
-                </section>
-              </section>
-            : null
-            }
+              : null
+              }
+            </div>
           </div>
-        </div>
-        <p className={'font-display whitespace-pre-wrap ' + fontSizes[fontSizeIndex]}>{itemContent?.item_desc}</p>
-      </main>
+          <p className={'font-display whitespace-pre-wrap ' + fontSizes[fontSizeIndex]}>{itemContent?.item_desc}</p>
+        </main>
+      : 'ไม่พบบทสวดมนต์นี้'
+      }
       <hr />
-      <section id="itemContentNev" className="flex flex-wrap justify-between items-end gap">
-        <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" disabled={countIndex === countMaximum ? 'disabled' : ''} onClick={handleContentNumberPrev}>
+      <section id="itemContentNav" className="flex flex-wrap justify-between items-end gap">
+        <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" disabled={itemNumberIndex <= 1 ? 'disabled' : null} onClick={handleItemNumberPrev}>
            <svg viewBox="0 -960 960 960">
             <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />
           </svg>
           <span className="hidden 2xs:flex">บทก่อนหน้า</span>
         </button>
-        <button className="order-2 md:order-3 flex-1 md:max-w-40 btn btn-color-primary" onClick={handleContentNumberPext}>
+        <button className="order-2 md:order-3 flex-1 md:max-w-40 btn btn-color-primary" disabled={itemNumberIndex >= itemNumberLast ? 'disabled' : null} onClick={handleItemNumberNext}>
           <span>บทต่อไป</span>
            <svg viewBox="0 -960 960 960">
             <path d="m600-200-57-56 184-184H80v-80h647L544-704l56-56 280 280-280 280Z" />
           </svg>
         </button>
-        <form className="form-inner md:flex-1 md:max-w-80 order-3 md:order-2" onSubmit={handleContentNumberSubmit}>
+        <form className="form-inner md:flex-1 md:max-w-80 order-3 md:order-2" onSubmit={handleItemNumberSubmit}>
           <fieldset className="fieldset-border pt-0">
             <div className="field">
               <label className="label-border">ไปเลขที่อื่น</label>
-              <input type="number" pattern="[0-9]*" step="1" min="1" inputMode="numeric" name="number" value={contentNumberJump} onChange={contentNumberChange} placeholder="9" />
+              <input type="number" pattern="[0-9]*" step="1" min="1" inputMode="numeric" name="number" value={itemNumberJumpIndex} onChange={itemNumberChange} placeholder="9" />
             </div>
           </fieldset>
           <fieldset className="fieldset-button-field-end">
