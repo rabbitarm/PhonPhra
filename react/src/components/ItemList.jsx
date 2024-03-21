@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { itemFetch } from '../store/itemSlice';
+import { itemFetch } from '../store/itemListSlice';
 
-import axios from 'axios';
 import ItemCreate from './ItemCreate';
 import ItemEdit from './ItemEdit';
-import ItemContent from './ItemContent';
 import Bookmark from './Bookmark';
 
 function ItemList() {
 
   const dispatch = useDispatch();
   const { itemList, loading, error } = useSelector((state) => state.itemList);
-
-  /* Item List - Fetch */
-  useEffect(() => {
-    dispatch(itemFetch());
-  }, [dispatch]);
 
   /* Item Nav */
   const [itemCreateToggle, setItemCreateToggle] = useState(false);

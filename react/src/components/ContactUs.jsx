@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function ContactUs() {
+  
+  const dispatch = useDispatch();
 
-  const abortController = new AbortController();
   const contactFormContentInitial = { contact_name: '', contact_email: '', contact_other: '', contact_subject: '', contact_message: '' };
   const [contactFormContent, setContactFormContent] = useState(contactFormContentInitial);
   const contactFormChange = (event) => setContactFormNew({ ...contactFormeContent, [event.target.name]: event.target.value });

@@ -167,7 +167,8 @@
     .btn:hover ,
     .btn.btn-ghost:hover {@apply text-slate-500 fill-slate-500 border-slate-200 bg-slate-200;}
     button:disabled ,
-    .btn:disabled {@apply !text-slate-200 !fill-slate-200 !border-slate-100 !bg-slate-100;}
+    .btn:disabled ,
+    .btn.btn-disabled {@apply pointer-events-none !text-slate-200 !fill-slate-200 !border-slate-100 !bg-slate-100;}
   .btn[class*="btn-ghost"] ,
   .btn[class*="btn-mix"] ,
   .btn[class*="btn-text"] ,
