@@ -12,12 +12,12 @@ export const itemFetch = createAsyncThunk('itemList/itemFetch', async () => {
   const response = await axios.get(`${itemApi}/list`);
   return response.data;
 });
-export const itemCreate = createAsyncThunk('itemList/itemCreate', async (itemData) => {
-  const response = await axios.post(`${itemApi}/create`, itemData);
+export const itemCreate = createAsyncThunk('itemList/itemCreate', async (itemCreateContent) => {
+  const response = await axios.post(`${itemApi}/create`, itemCreateContent);
   return response.data;
 });
 export const itemEdit = createAsyncThunk('itemList/itemEdit', async (itemData) => {
-  const response = await axios.put(`${itemApi}/edit/${itemData._id}`, itemData);
+  const response = await axios.put(`${itemApi}/edit/${itemData?._id}`, itemData);
   return response.data;
 });
 export const itemDelete = createAsyncThunk('itemList/itemDelete', async (itemId) => {

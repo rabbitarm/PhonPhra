@@ -1,7 +1,7 @@
 # Tech Stack
-**Client:** React, TailwindCSS, NanoID and Axios
+**Client:** React, TailwindCSS, NanoID, Axios, Redux Toolkit and React Router
 
-**Server:** Express, Mongoose, NodeMon and MongoDB
+**Server:** Express, Mongoose, MongoDB and NodeMon
 
 
 
@@ -49,13 +49,9 @@
 - `npx express-generator`
 - `npm install`
 - Can change port to other number in /bin/www file `var port = normalizePort(process.env.PORT || '3001');`
-
-### NodeMon (https://www.npmjs.com/package/nodemon)
-- `npm install nodemon`
-- Open package.json file
-- Change "start": "`node ./bin/www`" to "`nodemon ./bin/www`"
-- Run by `npm start`
-- Open http://localhost:3001/ on Browser for check working
+## Cors
+- [Installation](https://expressjs.com/en/resources/middleware/cors.html)
+- `npm install cors`
 
 ### Mongoose (https://mongoosejs.com/)
 - `npm install mongoose --save`
@@ -69,3 +65,10 @@
 - Go to Connect > Drives > Copy string into your application code to my project
 - Paste code in app.js file `mongoose.connect('string into your application code').then(() => console.log('Connection Successfully!')).catch((err) => console.error(err));`
 - Change <password> in string code to my password
+
+### NodeMon (https://www.npmjs.com/package/nodemon)
+- `npm install nodemon`
+- Open package.json file
+- Change "start": "`node ./bin/www`" to "`nodemon ./bin/www`"
+- Run by `npm start`
+- Open http://localhost:3001/ on Browser for check working

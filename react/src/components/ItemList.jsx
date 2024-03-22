@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { itemFetch } from '../store/itemListSlice';
+import { useSelector } from 'react-redux';
 
 import ItemCreate from './ItemCreate';
 import ItemEdit from './ItemEdit';
@@ -9,7 +8,6 @@ import Bookmark from './Bookmark';
 
 function ItemList() {
 
-  const dispatch = useDispatch();
   const { itemList, loading, error } = useSelector((state) => state.itemList);
 
   /* Item Nav */
@@ -29,6 +27,16 @@ function ItemList() {
   const handleItemDelete = (_id,) => setItemDeleteNavId(_id,);
   const handleItemDeleteCancel = () => setItemDeleteNavId('');
   const handleItemDeleteComfirm = () => setItemDeleteNavId('');
+
+  const itemWithHighestNumber = itemList.reduce((prevItem, currentItem) => {
+    return (prevItem.item_number > currentItem.item_number) ? prevItem : currentItem;
+  }, {});
+  console.log('itemWithHighestNumber', itemWithHighestNumber.item_number);
+
+  const highestNumber = itemList.reduce((max, item) => {
+    return item.item_number > max ? item.item_number : max;
+  }, 0);
+  console.log(highestNumber);
 
   return (
     <>
@@ -70,7 +78,7 @@ function ItemList() {
             {itemList?.map(itemItemList => (
               <tr key={itemItemList?._id}>
                 <td>{itemItemList?.item_number}</td>
-                <td><Link to={'/บทสวดมนต์/' + itemItemList?.item_number} onClick={() => handleItemOpen(itemItemList?.item_number)}>{itemItemList?.item_name}</Link></td>
+                <td><Link to={'/บทสวดมนต์/' + itemItemList?.item_number}>{itemItemList?.item_name}</Link></td>
                 <td>
                   <div className="tooltip" data-tip="เพิ่ม">
                     <button className="btn btn-icon btn-mix-alternate" onClick={() => handleItemAdd(itemItemList?._id, itemItemList?.item_number)}>
@@ -80,7 +88,7 @@ function ItemList() {
                       <span className="hidden">เพิ่ม</span>
                     </button>
                     {itemItemList?._id === itemAddNavSelect?._id
-                    ? <dialog className="modal">
+                    ? <dialog className="hidden modal">
                         <div className="modal-content">
                           <div className="tooltip tooltip-left" data-tip="ยกเลิก">
                             <button className="btn btn-icon btn-ghost" onClick={handleItemAddCancel}>
@@ -105,7 +113,7 @@ function ItemList() {
                       <span className="hidden">แก้ไข</span>
                     </button>
                     {itemItemList?._id === itemEditNavContent?._id
-                    ? <dialog className="modal">
+                    ? <dialog className="hidden modal">
                         <div className="modal-content">
                           <div className="tooltip tooltip-left" data-tip="ยกเลิก">
                             <button className="btn btn-icon btn-ghost" onClick={handleItemEdit}>
@@ -130,7 +138,7 @@ function ItemList() {
                       <span className="hidden">ลบ</span>
                     </button>
                     {itemItemList?._id === itemDeleteNavId
-                    ? <dialog className="modal modal-tooltip modal-tooltip-right">
+                    ? <dialog className="hidden modal modal-tooltip modal-tooltip-right">
                         <div className="modal-content">
                           <p>ลบรายการนี้?</p>
                           <fieldset className="fieldset-button">

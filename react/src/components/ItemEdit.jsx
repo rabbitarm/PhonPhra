@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { itemEdit } from '../store/itemListSlice';
 
 function ItemEdit({ data }) {
 
-  const abortController = new AbortController();
+  const dispatch = useDispatch();
+
   const itemEditPrev = {
     _id: data._id,
     item_number: data.item_number,
@@ -14,22 +16,9 @@ function ItemEdit({ data }) {
   };
   const [itemEditContent, setItemEditContent] = useState(itemEditPrev);
   const itemEditChange = (event) => setItemEditContent({ ...itemEditContent, [event.target.name]: event.target.value });
-  const itemEditSubmit = async (event) => {
+  const itemEditSubmit = (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.put(`http://localhost:3001/item/edit/:id`, itemEditContent, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        crossdomain: true,
-        signal: abortController.signal
-      });
-      setItemEditContent(response.data);
-      console.log('Item edited successfully:', response.data);
-      setItemEditContent(itemEditPrevInitial);
-    } catch (error) {
-      console.error('Error editing item:', error);
-    }
+    dispatch(itemEdit(itemEditContent));
   }
   const itemEditReset = () => setItemEditContent(itemEditPrev);
 
@@ -37,7 +26,7 @@ function ItemEdit({ data }) {
     <>
       <h4>แก้ไขบทสวดมนต์</h4>
       <span className="badge badge-lg badge-color-info">เลขที่: {itemEditContent?.item_number}</span>
-      <form key={itemEditChange._id} onSubmit={itemEditSubmit}>
+      <form key={itemEditContent._id} onSubmit={itemEditSubmit}>
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">ชื่อบทสวดมนต์</label>

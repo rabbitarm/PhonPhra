@@ -1,15 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import itemListSlice from './itemListSlice';
-import itemNumberSlice from './itemNumberSlice';
-import fontSlice from './fontSlice';
-import countSlice from './countSlice';
+import fontSizeSlice from './fontSizeSlice';
+import countNumberSlice from './countNumberSlice';
 
 const store = configureStore({
   reducer: {
     itemList: itemListSlice,
-    itemNumber: itemNumberSlice,
-    fontSize: fontSlice,
-    countNumber: countSlice
+    fontSize: fontSizeSlice,
+    countNumber: countNumberSlice
   }
 });
 

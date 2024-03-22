@@ -1,30 +1,22 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { itemCreate } from '../store/itemListSlice';
 
 function ItemCreate() {
 
-  const abortController = new AbortController();
-  const itemCreateNewInitial = { item_name: '', item_desc: '' };
-  const [itemCreateNew, setItemCreateNew] = useState(itemCreateNewInitial);
-  const itemCreateChange = (event) => setItemCreateNew({ ...itemCreateNew, [event.target.name]: event.target.value });
-  const itemCreateSubmit = async (event) => {
+  const dispatch = useDispatch();
+
+  const itemCreateInitial = { item_name: '', item_desc: '' };
+  const [itemCreateContent, setItemCreateContent] = useState(itemCreateInitial);
+  const itemCreateChange = (event) => setItemCreateContent({ ...itemCreateContent, [event.target.name]: event.target.value });
+  const itemCreateSubmit = (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(`http://localhost:3001/item/create`, itemCreateNew, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        crossdomain: true,
-        signal: abortController.signal
-      });
-      setItemCreateNew(response.data);
-      console.log('Item created successfully:', response.data);
-      setItemCreateNew(itemCreateNewInitial);
-    } catch (error) {
-      console.error('Error creating item:', error);
-    }
+    dispatch(itemCreate(itemCreateContent));
+    setItemCreateContent(itemCreateInitial);
+    console.log('itemCreateInitial', itemCreateInitial);
+    console.log('itemCreateContent', itemCreateContent);
   };
-  const itemCreateReset = () => setItemCreateNew(itemCreateNewInitial);
+  const itemCreateReset = () => setItemCreateContent(itemCreateInitial);
 
   return (
     <>
@@ -33,13 +25,13 @@ function ItemCreate() {
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">ชื่อบทสวดมนต์</label>
-            <input type="text" name="item_name" value={itemCreateNew.item_name} onChange={itemCreateChange} placeholder="คําบูชาพระรัตนตรัย" />
+            <input type="text" name="item_name" value={itemCreateContent.item_name} onChange={itemCreateChange} placeholder="คําบูชาพระรัตนตรัย" />
           </div>
         </fieldset>
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">บทสวดมนต์</label>
-            <textarea name="item_desc" value={itemCreateNew.item_desc} onChange={itemCreateChange} placeholder="อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ&#10;สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ&#10;สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ"></textarea>
+            <textarea name="item_desc" value={itemCreateContent.item_desc} onChange={itemCreateChange} placeholder="อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ&#10;สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ&#10;สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ"></textarea>
           </div>
         </fieldset>
         <fieldset className="fieldset-button">

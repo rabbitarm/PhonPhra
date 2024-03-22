@@ -33,16 +33,16 @@ function NavBar() {
             ? 'absolute md:static top-[calc(100%+0px)] right-0 flex flex-col md:flex-row p-2 md:p-0 rounded-lg md:rounded-none bg-white md:bg-none shadow-lg md:shadow-none'
             : 'hidden'
           )}>
-          <li className="home">
-            <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/">หน้าแรก</Link>
+          <li className="nav-itemList">
+            <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/">บทสวดมนต์</Link>
           </li>
-          <li className="prayer">
-            <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/บทสวดมนต์">บทสวดมนต์</Link>
+          <li className="nav-bookmark">
+            <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/รายการโปรด">รายการโปรด</Link>
           </li>
-          <li className="contact">
+          <li className="nav-contact">
             <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/ติดต่อเรา">ติดต่อเรา</Link>
           </li>
-          <li className="Layer">
+          <li className="nav-layer">
             <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/Layer">Layer</Link>
           </li>
         </ul>

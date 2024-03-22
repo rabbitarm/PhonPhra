@@ -133,7 +133,7 @@
   :is(.btn)[class*="-slate"]:hover             {@apply text-slate-active     fill-slate-active     border-slate-active     bg-slate-active    ;}
 
   /* Button */
-  .btn {@apply flex justify-center items-center w-full xs:w-fit gap-2 border;}
+  .btn {@apply select-none flex justify-center items-center w-full xs:w-fit gap-2 border;}
     .btn.btn-2xs {@apply h-6 text-xs font-medium px-1.5 py-1 rounded;}
     .btn.btn-xs  {@apply h-8 text-xs font-medium px-2.5 py-1 rounded;}
     .btn.btn-sm  {@apply h-9 text-sm font-medium px-3 py-1.5 rounded-md;}
