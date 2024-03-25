@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { itemEdit } from '../store/itemListSlice';
 
-function ItemEdit({ data }) {
+function ItemEdit({ itemEditNavContent }) {
 
   const dispatch = useDispatch();
 
   const itemEditPrev = {
-    _id: data._id,
-    item_number: data.item_number,
-    item_name: data.item_name,
-    item_desc: data.item_desc,
-    item_created_at: data.item_created_at,
-    item_updated_at: data.item_updated_at,
+    _id: itemEditNavContent._id,
+    item_number: itemEditNavContent.item_number,
+    item_name: itemEditNavContent.item_name,
+    item_desc: itemEditNavContent.item_desc,
+    item_time_created: itemEditNavContent.item_time_created,
+    item_time_updated: itemEditNavContent.item_time_updated,
   };
   const [itemEditContent, setItemEditContent] = useState(itemEditPrev);
   const itemEditChange = (event) => setItemEditContent({ ...itemEditContent, [event.target.name]: event.target.value });

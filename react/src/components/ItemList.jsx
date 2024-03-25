@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { itemDelete } from '../store/itemListSlice';
 
 import ItemCreate from './ItemCreate';
 import ItemEdit from './ItemEdit';
@@ -8,35 +9,41 @@ import Bookmark from './Bookmark';
 
 function ItemList() {
 
+  const dispatch = useDispatch();
   const { itemList, loading, error } = useSelector((state) => state.itemList);
 
   /* Item Nav */
   const [itemCreateToggle, setItemCreateToggle] = useState(false);
-  const handleItemCreate = () => setItemCreateToggle((toggle) => !toggle);
-  /**/
   const [itemAddNavSelect, setItemAddNavSelect] = useState([]);
-  const handleItemAdd = (_id, item_number) => setItemAddNavSelect({ _id: _id, item_number: item_number });
-  const handleItemAddCancel = () => setItemAddNavSelect('');
-  /**/
   const [itemEditNavContent, setItemEditNavContent] = useState([]);
-  const handleItemEdit = (itemItemList) => setItemEditNavContent(itemItemList);
-  const handleItemEditCancel = () => setItemEditNavId('');
-  const handleItemEditComfirm = () => setItemEditNavId('');
-  /**/
   const [itemDeleteNavId, setItemDeleteNavId] = useState('');
-  const handleItemDelete = (_id,) => setItemDeleteNavId(_id,);
+
+  const itemNavInactive = () => {
+    setItemCreateToggle(false);
+    setItemAddNavSelect([]);
+    setItemEditNavContent([]);
+    setItemDeleteNavId('');
+  }
+  const handleItemCreate = () => {itemNavInactive(); setItemCreateToggle(!itemCreateToggle);}
+  const handleItemCreateCancel = () => setItemCreateToggle(false);
+  /**/
+  const handleItemAdd = (_id, item_number) => {itemNavInactive(); setItemAddNavSelect({ _id: _id, item_number: item_number });}
+  const handleItemAddCancel = () => {itemNavInactive(); setItemAddNavSelect([]);}
+  /**/
+  const handleItemEdit = (itemItemList) => {itemNavInactive(); setItemEditNavContent(itemItemList);}
+  const handleItemEditCancel = () => setItemEditNavContent([]);
+  /**/
+  const handleItemDelete = (_id) => {itemNavInactive(); setItemDeleteNavId(_id);}
   const handleItemDeleteCancel = () => setItemDeleteNavId('');
-  const handleItemDeleteComfirm = () => setItemDeleteNavId('');
+  const handleItemDeleteComfirm = () => {
+    dispatch(itemDelete(itemDeleteNavId));
+  }
 
-  const itemWithHighestNumber = itemList.reduce((prevItem, currentItem) => {
-    return (prevItem.item_number > currentItem.item_number) ? prevItem : currentItem;
-  }, {});
-  console.log('itemWithHighestNumber', itemWithHighestNumber.item_number);
-
-  const highestNumber = itemList.reduce((max, item) => {
+  /* Check high number */
+/*   const highestNumber = itemList.reduce((max, item) => {
     return item.item_number > max ? item.item_number : max;
   }, 0);
-  console.log(highestNumber);
+  console.log(highestNumber); */
 
   return (
     <>
@@ -54,11 +61,11 @@ function ItemList() {
                   </svg>
                   <span>สร้าง</span>
                 </button>
-                {itemCreateToggle
-                ? <dialog className="modal">
+                {itemCreateToggle &&
+                  <dialog className="modal">
                     <div className="modal-content">
                       <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                        <button className="btn btn-icon btn-ghost" onClick={handleItemCreate}>
+                        <button className="btn btn-icon btn-ghost" onClick={handleItemCreateCancel}>
                           <svg viewBox="0 -960 960 960">
                             <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
                           </svg>
@@ -67,9 +74,8 @@ function ItemList() {
                       </div>
                       <ItemCreate />
                     </div>
-                    <button className="modal-close" onClick={handleItemCreate}></button>
+                    <button className="modal-close" onClick={handleItemCreateCancel}></button>
                   </dialog>
-                : null
                 }
               </th>
             </tr>
@@ -87,8 +93,8 @@ function ItemList() {
                       </svg>
                       <span className="hidden">เพิ่ม</span>
                     </button>
-                    {itemItemList?._id === itemAddNavSelect?._id
-                    ? <dialog className="hidden modal">
+                    {itemItemList?._id === itemAddNavSelect?._id &&
+                      <dialog className="modal">
                         <div className="modal-content">
                           <div className="tooltip tooltip-left" data-tip="ยกเลิก">
                             <button className="btn btn-icon btn-ghost" onClick={handleItemAddCancel}>
@@ -102,7 +108,6 @@ function ItemList() {
                         </div>
                         <button className="modal-close" onClick={handleItemAddCancel}></button>
                       </dialog>
-                    : null
                     }
                   </div>
                   <div className="tooltip" data-tip="แก้ไข">
@@ -112,22 +117,21 @@ function ItemList() {
                       </svg>
                       <span className="hidden">แก้ไข</span>
                     </button>
-                    {itemItemList?._id === itemEditNavContent?._id
-                    ? <dialog className="hidden modal">
+                    {itemItemList?._id === itemEditNavContent?._id &&
+                      <dialog className="modal">
                         <div className="modal-content">
                           <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                            <button className="btn btn-icon btn-ghost" onClick={handleItemEdit}>
+                            <button className="btn btn-icon btn-ghost" onClick={handleItemEditCancel}>
                               <svg viewBox="0 -960 960 960">
                                 <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
                               </svg>
                               <span className="hidden">ยกเลิก</span>
                             </button>
                           </div>
-                          <ItemEdit data={itemEditNavContent} />
+                          <ItemEdit itemEditNavContent={itemEditNavContent} />
                         </div>
-                        <button className="modal-close" onClick={handleItemEdit}></button>
+                        <button className="modal-close" onClick={handleItemEditCancel}></button>
                       </dialog>
-                    : null
                     }
                   </div>
                   <div className="tooltip" data-tip="ลบ">
@@ -137,8 +141,8 @@ function ItemList() {
                       </svg>
                       <span className="hidden">ลบ</span>
                     </button>
-                    {itemItemList?._id === itemDeleteNavId
-                    ? <dialog className="hidden modal modal-tooltip modal-tooltip-right">
+                    {itemItemList?._id === itemDeleteNavId &&
+                      <dialog className="modal modal-tooltip modal-tooltip-right">
                         <div className="modal-content">
                           <p>ลบรายการนี้?</p>
                           <fieldset className="fieldset-button">
@@ -151,7 +155,6 @@ function ItemList() {
                           </fieldset>
                         </div>
                       </dialog>
-                    : null
                     }
                   </div>
                 </td>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { itemCreate } from '../store/itemListSlice';
+import { nanoid } from 'nanoid';
 
 function ItemCreate() {
 
@@ -9,19 +10,18 @@ function ItemCreate() {
   const itemCreateInitial = { item_name: '', item_desc: '' };
   const [itemCreateContent, setItemCreateContent] = useState(itemCreateInitial);
   const itemCreateChange = (event) => setItemCreateContent({ ...itemCreateContent, [event.target.name]: event.target.value });
-  const itemCreateSubmit = (event) => {
+  const handleItemCreateSubmit = (event) => {
     event.preventDefault();
-    dispatch(itemCreate(itemCreateContent));
+    dispatch(itemCreate({ ...itemCreateContent, item_id: nanoid() }));
     setItemCreateContent(itemCreateInitial);
-    console.log('itemCreateInitial', itemCreateInitial);
-    console.log('itemCreateContent', itemCreateContent);
+    console.log('nanoid()', nanoid());
   };
   const itemCreateReset = () => setItemCreateContent(itemCreateInitial);
 
   return (
     <>
       <h4>เพิ่มบทสวดมนต์</h4>
-      <form onSubmit={itemCreateSubmit}>
+      <form onSubmit={handleItemCreateSubmit}>
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">ชื่อบทสวดมนต์</label>
