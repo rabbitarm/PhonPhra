@@ -5,41 +5,6 @@ function Bookmark({ itemList, itemAddNavSelect }) {
 
   /* Bookmark - List */
   const bookmarkListInitial = [
-    {
-      bookmark_id: 'idlist1',
-      bookmark_title: 'List 1',
-      bookmark_item_list: [
-        {
-          _id: '65c0902a4ad9b04b1819acaa',
-          item_number: 1,
-        },{
-          _id: '65c090324ad9b04b1819acae',
-          item_number: 3,
-        },{
-          _id: '65c0902f4ad9b04b1819acac',
-          item_number: 2,
-        },{
-          _id: '65c090364ad9b04b1819acb0',
-          item_number: 4,
-        }
-      ],
-    },
-    {
-      bookmark_id: 'idlist2',
-      bookmark_title: 'List 2',
-      bookmark_item_list: [
-        {
-          _id: '65c1f07715d1b7c380880a21',
-          item_number: 17,
-        },{
-          _id: '65c1d68cd84db6f5def7d3d4',
-          item_number: 15,
-        },{
-          _id: '65c1dbcd15d1b7c3808807ba',
-          item_number: 16,
-        }
-      ],
-    },
   ];
   const [bookmarkList, setBookmarkList] = useState(bookmarkListInitial);
 
@@ -71,33 +36,33 @@ function Bookmark({ itemList, itemAddNavSelect }) {
   },[handleBookmarkSelectDelete]);
 
   /* Item in bookmark - Add */
-/*  const bookmarkItemAdd = (bookmark_id, _id, item_number) => {
+/*  const bookmarkItemAdd = (bookmark_id, item_id, item_number) => {
     setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmark_id
-      ? [...list?.bookmark_item_list, { _id: _id, item_number: item_number }]
+      ? [...list?.bookmark_item_list, { item_id: item_id, item_number: item_number }]
       : null
     ));
   };*/
 
   /* Item in bookmark - Remove */
-  const handleBookmarkItemRemove = (bookmarkSelectId, _id) => {
+  const handleBookmarkItemRemove = (bookmarkSelectId, item_id) => {
     setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmarkSelectId
-      ? { ...list, bookmark_item_list: list?.bookmark_item_list?.filter(item => item?._id !== _id)}
+      ? { ...list, bookmark_item_list: list?.bookmark_item_list?.filter(item => item?.item_id !== item_id)}
       : list
     ));
   };
 
   /* Item in bookmark - Toggle checkbox */
-  const bookmarkItemSelect = (bookmark_id, _id, item_number) => {
+  const bookmarkItemSelect = (bookmark_id, item_id, item_number) => {
     setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmark_id
-      ? { ...list, bookmark_item_list: list?.bookmark_item_list?.some(item => item?._id === _id)
-        ? list?.bookmark_item_list?.filter(item => item?._id !== _id)
-        : [...list?.bookmark_item_list, { _id: _id, item_number: item_number }]
+      ? { ...list, bookmark_item_list: list?.bookmark_item_list?.some(item => item?.item_id === item_id)
+        ? list?.bookmark_item_list?.filter(item => item?._id !== item_id)
+        : [...list?.bookmark_item_list, { item_id: item_id, item_number: item_number }]
       }
       : list
     ));
   };
   /* Item in bookmark - Checked checkbox */
-  const bookmarkItemChecked = (bookmark_id, _id) => bookmarkList.find(list => list?.bookmark_id === bookmark_id)?.bookmark_item_list.some(item => item?._id === _id) ? 'checked' : '';
+  const bookmarkItemChecked = (bookmark_id, item_id) => bookmarkList.find(list => list?.bookmark_id === bookmark_id)?.bookmark_item_list.some(item => item?.item_id === item_id) ? 'checked' : '';
 /*
   useEffect(() => {
     console.log('Bookmark List', bookmarkList);
@@ -128,7 +93,7 @@ function Bookmark({ itemList, itemAddNavSelect }) {
                     <form>
                       <fieldset className="fieldset-inline">
                         <div className="field">
-                          <input type="checkbox" id={itemBookmarkList?.bookmark_id} checked={bookmarkItemChecked(itemBookmarkList?.bookmark_id, itemAddNavSelect?._id) === 'checked'} onChange={() => bookmarkItemSelect(itemBookmarkList?.bookmark_id, itemAddNavSelect?._id, itemAddNavSelect?.item_number)} />
+                          <input type="checkbox" id={itemBookmarkList?.bookmark_id} checked={bookmarkItemChecked(itemBookmarkList?.bookmark_id, itemAddNavSelect?.item_id) === 'checked'} onChange={() => bookmarkItemSelect(itemBookmarkList?.bookmark_id, itemAddNavSelect?.item_id, itemAddNavSelect?.item_number)} />
                           <label htmlFor={itemBookmarkList?.bookmark_id}>{itemBookmarkList?.bookmark_title}</label>
                         </div>
                       </fieldset>
@@ -196,15 +161,15 @@ function Bookmark({ itemList, itemAddNavSelect }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {itemList?.filter(itemItemList => bookmarkSelectItemList?.some(bookmarkItemList => bookmarkItemList?._id === itemItemList?._id))
-                            ?.sort((a, b) => bookmarkSelectItemList.findIndex(item => item?._id === a?._id) - bookmarkSelectItemList.findIndex(item => item?._id === b?._id))
+                    {itemList?.filter(itemItemList => bookmarkSelectItemList?.some(bookmarkItemList => bookmarkItemList?.item_id === itemItemList?.item_id))
+                            ?.sort((a, b) => bookmarkSelectItemList.findIndex(item => item?.item_id === a?.item_id) - bookmarkSelectItemList.findIndex(item => item?.item_id === b?.item_id))
                             ?.map(itemItemList => (
-                      <tr key={itemItemList?._id}>
+                      <tr key={itemItemList?.item_id}>
                         <td>{itemItemList?.item_number}</td>
                         <td><a href="#content">{itemItemList?.item_name}</a></td>
                         <td>
                           <div className="tooltip" data-tip="ลบ">
-                            <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleBookmarkItemRemove(bookmarkSelectId, itemItemList?._id)}>
+                            <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleBookmarkItemRemove(bookmarkSelectId, itemItemList?.item_id)}>
                               <svg viewBox="0 -960 960 960">
                                 <path d="M840-680H600v-80h240v80ZM200-120v-640q0-33 23.5-56.5T280-840h240v80H280v518l200-86 200 86v-278h80v400L480-240 200-120Zm80-640h240-240Z" />
                               </svg>

@@ -64,7 +64,7 @@ function ItemContent() {
           {itemList.some(item => item?.item_number === itemNumberIndex)
           ? <>
               {itemList.filter(item => item?.item_number === itemNumberIndex).map(itemContent => (itemContent &&
-                <main key={itemContent?._id} className="flex flex-col gap">
+                <main key={itemContent?.item_id} className="flex flex-col gap">
                   <div className="flex justify-between items-start gap">
                     <section>
                       <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>

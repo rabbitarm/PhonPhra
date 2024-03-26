@@ -6,27 +6,21 @@ function ItemEdit({ itemEditNavContent }) {
 
   const dispatch = useDispatch();
 
-  const itemEditPrev = {
-    _id: itemEditNavContent._id,
-    item_number: itemEditNavContent.item_number,
-    item_name: itemEditNavContent.item_name,
-    item_desc: itemEditNavContent.item_desc,
-    item_time_created: itemEditNavContent.item_time_created,
-    item_time_updated: itemEditNavContent.item_time_updated,
-  };
-  const [itemEditContent, setItemEditContent] = useState(itemEditPrev);
+  const [itemEditContent, setItemEditContent] = useState(itemEditNavContent);
+  console.log('itemEditNavContent', itemEditNavContent);
   const itemEditChange = (event) => setItemEditContent({ ...itemEditContent, [event.target.name]: event.target.value });
   const itemEditSubmit = (event) => {
     event.preventDefault();
     dispatch(itemEdit(itemEditContent));
+    console.log('itemEditContent', itemEditContent);
   }
-  const itemEditReset = () => setItemEditContent(itemEditPrev);
+  const itemEditReset = () => setItemEditContent(itemEditNavContent);
 
   return (
     <>
       <h4>แก้ไขบทสวดมนต์</h4>
       <span className="badge badge-lg badge-color-info">เลขที่: {itemEditContent?.item_number}</span>
-      <form key={itemEditContent._id} onSubmit={itemEditSubmit}>
+      <form key={itemEditContent.item_id} onSubmit={itemEditSubmit}>
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">ชื่อบทสวดมนต์</label>

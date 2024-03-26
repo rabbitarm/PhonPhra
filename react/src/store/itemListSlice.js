@@ -17,7 +17,7 @@ export const itemCreate = createAsyncThunk('itemList/itemCreate', async (itemCre
   return response.data;
 });
 export const itemEdit = createAsyncThunk('itemList/itemEdit', async (itemEditContent) => {
-  const response = await axios.put(`${itemApi}/edit/${itemEditContent?._id}`, itemEditContent);
+  const response = await axios.put(`${itemApi}/edit/${itemEditContent?.item_id}`, itemEditContent);
   return response.data;
 });
 export const itemDelete = createAsyncThunk('itemList/itemDelete', async (itemDeleteNavId) => {
@@ -48,12 +48,10 @@ const itemSlice = createSlice({
       })
       .addCase(itemEdit.fulfilled, (state, action) => {
         const itemUpdated = action.payload;
-        state.itemList = state.itemList.map(item =>
-          item._id === itemUpdated._id ? itemUpdated : item
-        );
+        state.itemList = state.itemList.map(item => item.item_id === itemUpdated.item_id ? itemUpdated : item );
       })
       .addCase(itemDelete.fulfilled, (state, action) => {
-        state.itemList = state.itemList.filter(item => item._id !== action.payload);
+        state.itemList = state.itemList.filter(item => item.item_id !== action.payload );
       });
   },
 });

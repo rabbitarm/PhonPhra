@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { itemCreate } from '../store/itemListSlice';
 import { nanoid } from 'nanoid';
 
-function ItemCreate() {
+function ItemCreate({ itemNumberHighest }) {
 
   const dispatch = useDispatch();
 
@@ -12,9 +12,8 @@ function ItemCreate() {
   const itemCreateChange = (event) => setItemCreateContent({ ...itemCreateContent, [event.target.name]: event.target.value });
   const handleItemCreateSubmit = (event) => {
     event.preventDefault();
-    dispatch(itemCreate({ ...itemCreateContent, item_id: nanoid() }));
+    dispatch(itemCreate({ ...itemCreateContent, item_id: nanoid(), item_number: itemNumberHighest + 1 }));
     setItemCreateContent(itemCreateInitial);
-    console.log('nanoid()', nanoid());
   };
   const itemCreateReset = () => setItemCreateContent(itemCreateInitial);
 

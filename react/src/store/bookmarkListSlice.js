@@ -3,59 +3,59 @@ import axios from 'axios';
 import { itemApi } from '../api/itemApi';
 
 const initialState = {
-  itemList: [],
+  bookmarkList: [],
   loading: false,
   error: null
 };
 
-export const itemFetch = createAsyncThunk('itemList/itemFetch', async () => {
+export const bookmarkFetch = createAsyncThunk('bookmarkList/bookmarkFetch', async () => {
   const response = await axios.get(`${itemApi}/list`);
   return response.data;
 });
-export const itemCreate = createAsyncThunk('itemList/itemCreate', async (itemCreateContent) => {
-  const response = await axios.post(`${itemApi}/create`, itemCreateContent);
+export const bookmarkCreate = createAsyncThunk('bookmarkList/bookmarkCreate', async (bookmarkCreateContent) => {
+  const response = await axios.post(`${itemApi}/create`, bookmarkCreateContent);
   return response.data;
 });
-export const itemEdit = createAsyncThunk('itemList/itemEdit', async (itemEditContent) => {
-  const response = await axios.put(`${itemApi}/edit/${itemEditContent?._id}`, itemEditContent);
+export const bookmarkEdit = createAsyncThunk('bookmarkList/bookmarkEdit', async (bookmarkEditContent) => {
+  const response = await axios.put(`${itemApi}/edit/${bookmarkEditContent?.bookmark_id}`, bookmarkEditContent);
   return response.data;
 });
-export const itemDelete = createAsyncThunk('itemList/itemDelete', async (itemDeleteNavId) => {
-  await axios.delete(`${itemApi}/delete/${itemDeleteNavId}`);
-  return itemDeleteNavId;
+export const bookmarkDelete = createAsyncThunk('bookmarkList/bookmarkDelete', async (bookmarkDeleteNavId) => {
+  await axios.delete(`${itemApi}/delete/${bookmarkDeleteNavId}`);
+  return bookmarkDeleteNavId;
 });
 
-const itemSlice = createSlice({
-  name: 'itemList',
+const bookmarkSlice = createSlice({
+  name: 'bookmarkList',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(itemFetch.pending, (state) => {
+      .addCase(bookmarkFetch.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(itemFetch.fulfilled, (state, action) => {
+      .addCase(bookmarkFetch.fulfilled, (state, action) => {
         state.loading = false;
-        state.itemList = action.payload;
+        state.bookmarkList = action.payload;
       })
       .addCase(itemFetch.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(itemCreate.fulfilled, (state, action) => {
-        state.itemList.push(action.payload);
+      .addCase(bookmarkCreate.fulfilled, (state, action) => {
+        state.bookmarkList.push(action.payload);
       })
-      .addCase(itemEdit.fulfilled, (state, action) => {
-        const itemUpdated = action.payload;
-        state.itemList = state.itemList.map(item =>
-          item._id === itemUpdated._id ? itemUpdated : item
+      .addCase(bookmarkEdit.fulfilled, (state, action) => {
+        const bookmarkUpdated = action.payload;
+        state.bookmarkList = state.bookmarkList.map(bookmark =>
+          bookmark.bookmark_id === bookmarkUpdated.bookmark_id ? bookmarkUpdated : bookmark
         );
       })
-      .addCase(itemDelete.fulfilled, (state, action) => {
-        state.itemList = state.itemList.filter(item => item._id !== action.payload);
+      .addCase(bookmarkDelete.fulfilled, (state, action) => {
+        state.bookmarkList = state.bookmarkList.filter(bookmark => bookmark.bookmark_id !== action.payload);
       });
   },
 });
 
-export default itemSlice.reducer;
+export default bookmarkSlice.reducer;
