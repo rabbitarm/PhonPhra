@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { itemFetch } from './store/itemListSlice';
+import { bookmarkFetch } from './store/bookmarkListSlice';
 
 import './App.css';
 import Header from './components/Header';
@@ -12,6 +13,7 @@ import ItemContent from './components/ItemContent';
 import ContactUs from './components/ContactUs';
 import Layer from './components/Layer';
 import NotFound from './components/NotFound';
+import Status from './components/Status';
 
 function App() {
 
@@ -20,6 +22,7 @@ function App() {
   /* Item List - Fetch */
   useEffect(() => {
     dispatch(itemFetch());
+    dispatch(bookmarkFetch());
   }, [dispatch]);
 
   return (
@@ -32,6 +35,7 @@ function App() {
         <Route path='/รายการโปรด' element={<Bookmark />} />
         <Route path='/ติดต่อเรา' element={<ContactUs />} />
         <Route path='/Layer' element={<Layer />} />
+        <Route path='/Status' element={<Status />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

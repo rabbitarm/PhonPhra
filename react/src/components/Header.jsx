@@ -45,6 +45,9 @@ function NavBar() {
           <li className="nav-layer">
             <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/Layer">Layer</Link>
           </li>
+          <li className="nav-status">
+            <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/Status">Status</Link>
+          </li>
         </ul>
       </nav>
     </header>

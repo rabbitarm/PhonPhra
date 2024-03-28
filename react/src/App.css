@@ -322,6 +322,8 @@
   .container {@apply relative flex flex-col max-w-screen-xl frame gap padding mx-auto mt-8;}
   .container hr {@apply clear-both flex-auto -mx-4 sm:-mx-8;}
 
+  .icon-status {@apply flex flex-col xs:flex-row justify-center items-center text-center xs:text-left gap-4;}
+
   #footer-logo ul {@apply flex flex-wrap justify-center md:justify-end items-center gap-sm;}
   #footer-logo ul li {@apply inline-block leading-[0];}
   #footer-logo svg {@apply w-fit h-4 2xs:h-5;}

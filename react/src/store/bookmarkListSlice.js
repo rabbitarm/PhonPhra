@@ -1,28 +1,28 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { itemApi } from '../api/itemApi';
+import { bookmarkApi } from '../api/bookmarkApi';
 
 const initialState = {
   bookmarkList: [],
-  loading: false,
-  error: null
+  bookmarkLoading: false,
+  bookmarkError: null
 };
 
 export const bookmarkFetch = createAsyncThunk('bookmarkList/bookmarkFetch', async () => {
-  const response = await axios.get(`${itemApi}/list`);
+  const response = await axios.get(`${bookmarkApi}/list`);
   return response.data;
 });
-export const bookmarkCreate = createAsyncThunk('bookmarkList/bookmarkCreate', async (bookmarkCreateContent) => {
-  const response = await axios.post(`${itemApi}/create`, bookmarkCreateContent);
+export const bookmarkCreate = createAsyncThunk('bookmarkList/bookmarkCreate', async (bookmarkCreateTitle) => {
+  const response = await axios.post(`${bookmarkApi}/create`, bookmarkCreateTitle);
   return response.data;
 });
 export const bookmarkEdit = createAsyncThunk('bookmarkList/bookmarkEdit', async (bookmarkEditContent) => {
-  const response = await axios.put(`${itemApi}/edit/${bookmarkEditContent?.bookmark_id}`, bookmarkEditContent);
+  const response = await axios.put(`${bookmarkApi}/edit/${bookmarkEditContent?.bookmark_id}`, bookmarkEditContent);
   return response.data;
 });
-export const bookmarkDelete = createAsyncThunk('bookmarkList/bookmarkDelete', async (bookmarkDeleteNavId) => {
-  await axios.delete(`${itemApi}/delete/${bookmarkDeleteNavId}`);
-  return bookmarkDeleteNavId;
+export const bookmarkDelete = createAsyncThunk('bookmarkList/bookmarkDelete', async (bookmarkSelectId) => {
+  await axios.delete(`${bookmarkApi}/delete/${bookmarkSelectId}`);
+  return bookmarkSelectId;
 });
 
 const bookmarkSlice = createSlice({
@@ -32,16 +32,16 @@ const bookmarkSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(bookmarkFetch.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.bookmarkLoading = true;
+        state.bookmarkError = null;
       })
       .addCase(bookmarkFetch.fulfilled, (state, action) => {
-        state.loading = false;
+        state.bookmarkLoading = false;
         state.bookmarkList = action.payload;
       })
-      .addCase(itemFetch.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
+      .addCase(bookmarkFetch.rejected, (state, action) => {
+        state.bookmarkLoading = false;
+        state.bookmarkError = action.error.message;
       })
       .addCase(bookmarkCreate.fulfilled, (state, action) => {
         state.bookmarkList.push(action.payload);
