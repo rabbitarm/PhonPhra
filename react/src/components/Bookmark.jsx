@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { bookmarkCreate, bookmarkDelete } from '../store/bookmarkListSlice';
+import { bookmarkCreate, bookmarkEdit, bookmarkDelete } from '../store/bookmarkListSlice';
 import { nanoid } from 'nanoid';
 import { IconLoading, IconBookmarkNotFound } from './Status';
+import BookmarkEdit from './BookmarkEdit';
 
 function Bookmark({ itemAddNavSelect }) {
 
@@ -25,21 +26,33 @@ function Bookmark({ itemAddNavSelect }) {
     setBookmarkCreateTitle('');
   };
 
-  /* Bookmark - Delete */
-  const bookmarkSelectInitial = bookmarkList[0]?.bookmark_id;
+  /* Bookmark - Select */
+  const bookmarkSelectInitial = bookmarkList[1]?.bookmark_id;
   const [bookmarkSelectId, setBookmarkSelectId] = useState(bookmarkSelectInitial);
   const bookmarkSelectItemList = bookmarkList?.find(itemBookmarkList => itemBookmarkList?.bookmark_id === bookmarkSelectId)?.bookmark_item_list;
-/*  const bookmarkDelete = (bookmark_id) => setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.filter(list => list?.bookmark_id !== bookmark_id));*/
   const handleBookmarkSelect = (event) => setBookmarkSelectId(bookmarkList[event]?.bookmark_id);
-  const handleBookmarkSelectDelete = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    setBookmarkSelectId(bookmarkSelectInitial)
+  }, [bookmarkSelectInitial]);
+  console.log('bookmarkSelectInitial', bookmarkSelectInitial);
+  console.log('bookmarkSelectId', bookmarkSelectId);
+
+  /* Bookmark - Edit */
+  const [bookmarkEditNavContent, setBookmarkEditNavContent] = useState([]);
+  const handleBookmarkSelectRename = () => {
+    setBookmarkEditNavContent(bookmarkList?.find(list => list.bookmark_id === bookmarkSelectId));
+  }
+
+  /* Bookmark - Delete */
+  const handleBookmarkSelectDelete = () => {
     dispatch(bookmarkDelete(bookmarkSelectId));
+    setBookmarkSelectId(bookmarkSelectInitial);
   };
   const handlebookmarkCheckboxDelete = (bookmark_id) => {
     const bookmarkSelectId = bookmark_id;
     dispatch(bookmarkDelete(bookmarkSelectId));
+    setBookmarkSelectId(bookmarkSelectInitial);
   }
-  console.log(bookmarkSelectInitial);
 
   /* Item in bookmark - Add */
 /*  const bookmarkItemAdd = (bookmark_id, item_id, item_number) => {
@@ -73,7 +86,7 @@ function Bookmark({ itemAddNavSelect }) {
   return (
     <section id="bookmark" className="container">
       <section id="bookmarkCheckbox" className="flex flex-col gap">
-        <h3>รายการโปรด (Chock Box)</h3>
+        <h3>รายการโปรด</h3>
         {bookmarkLoading
         ? <IconLoading />
         : <>
@@ -125,28 +138,43 @@ function Bookmark({ itemAddNavSelect }) {
             {bookmarkList?.length === 0
             ? <IconBookmarkNotFound />
             : <>
-                <form className="form-inline" onSubmit={handleBookmarkSelectDelete}>
-                  <fieldset className="fieldset-border md:max-w-80">
-                    <div className="field">
-                      <label className="label-border">เลือกรายการโปรด</label>
-                      <select onChange={(event) => handleBookmarkSelect(event.target.selectedIndex)}>
-                        {bookmarkList.map(itemBookmarkList => (
-                          <option key={itemBookmarkList?.bookmark_id} value={itemBookmarkList?.bookmark_title}>{itemBookmarkList?.bookmark_title}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </fieldset>
-                  <fieldset className="fieldset-button">
-                    <div className="tooltip" data-tip="ลบ">
-                      <button className="btn btn-icon btn-alternate-error" type="submit">
-                        <svg viewBox="0 -960 960 960">
-                        <path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
-                        </svg>
-                        <span className="hidden">ลบ</span>
-                      </button>
-                    </div>
-                  </fieldset>
-                </form>
+                <section className="flex justify-between items-end gap">
+                  {bookmarkList.find(bookmark => bookmark.bookmark_id === bookmarkSelectId)?.bookmark_time_updated === bookmarkEditNavContent?.bookmark_time_updated
+                  ? <BookmarkEdit bookmarkEditNavContent={bookmarkEditNavContent} />
+                  : <>
+                      <form className="form-inline">
+                        <fieldset className="fieldset-border">
+                          <div className="field">
+                            <label className="label-border">เลือกรายการโปรด</label>
+                            <select onChange={(event) => handleBookmarkSelect(event.target.selectedIndex)}>
+                              {bookmarkList.map(itemBookmarkList => (
+                                <option key={itemBookmarkList?.bookmark_id} value={itemBookmarkList?.bookmark_title}>{itemBookmarkList?.bookmark_title}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </fieldset>
+                      </form>
+                      <div className="action-bar">
+                        <div className="tooltip" data-tip="แก้ไข">
+                          <button className="btn btn-icon btn-ghost" onClick={handleBookmarkSelectRename}>
+                            <svg viewBox="0 -960 960 960">
+                              <path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
+                            </svg>
+                            <span className="hidden">แก้ไข</span>
+                          </button>
+                        </div>
+                        <div className="tooltip" data-tip="ลบ">
+                          <button className="btn btn-icon btn-ghost-alternate-error" onClick={handleBookmarkSelectDelete}>
+                            <svg viewBox="0 -960 960 960">
+                              <path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
+                            </svg>
+                            <span className="hidden">ลบ</span>
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  }
+                </section>
                 {bookmarkSelectItemList?.length === 0
                 ? <IconBookmarkNotFound />
                 : <>
@@ -160,8 +188,8 @@ function Bookmark({ itemAddNavSelect }) {
                       </thead>
                       <tbody>
                         {itemList?.filter(itemItemList => bookmarkSelectItemList?.some(bookmarkItemList => bookmarkItemList?.item_id === itemItemList?.item_id))
-                                ?.sort((a, b) => bookmarkSelectItemList.findIndex(item => item?.item_id === a?.item_id) - bookmarkSelectItemList.findIndex(item => item?.item_id === b?.item_id))
-                                ?.map(itemItemList => (
+                                 ?.sort((a, b) => bookmarkSelectItemList.findIndex(item => item?.item_id === a?.item_id) - bookmarkSelectItemList.findIndex(item => item?.item_id === b?.item_id))
+                                 ?.map(itemItemList => (
                           <tr key={itemItemList?.item_id}>
                             <td>{itemItemList?.item_number}</td>
                             <td><a href="#content">{itemItemList?.item_name}</a></td>

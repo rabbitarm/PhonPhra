@@ -221,7 +221,7 @@
   .tooltip:before {@apply content-[attr(data-tip)] min-w-10 text-xs text-center text-white px-2 py-1 rounded mb-1 bg-slate-600;}
   .tooltip:after {@apply content-[''] w-0 h-0 border-t-4 border-x-4 border-transparent border-t-slate-600;}
   .tooltip:before ,
-  .tooltip:after {@apply delay-500 pointer-events-none invisible opacity-0 absolute left-1/2 bottom-full -translate-x-1/2 -translate-y-0;}
+  .tooltip:after {@apply delay-700 pointer-events-none invisible opacity-0 absolute left-1/2 bottom-full -translate-x-1/2 -translate-y-0;}
   .tooltip:hover:before ,
   .tooltip:hover:after {@apply visible opacity-100 -translate-y-1;}
 
@@ -321,9 +321,7 @@
   .margin-b-lg  {@apply mb-8 sm:mb-16;}
   .container {@apply relative flex flex-col max-w-screen-xl frame gap padding mx-auto mt-8;}
   .container hr {@apply clear-both flex-auto -mx-4 sm:-mx-8;}
-
-  .icon-status {@apply flex flex-col xs:flex-row justify-center items-center text-center xs:text-left gap-4;}
-
+  /**/
   #footer-logo ul {@apply flex flex-wrap justify-center md:justify-end items-center gap-sm;}
   #footer-logo ul li {@apply inline-block leading-[0];}
   #footer-logo svg {@apply w-fit h-4 2xs:h-5;}
@@ -332,4 +330,10 @@
   #footer-logo svg.logo-vite:not(:hover) path + path {@apply fill-white;}
   #footer-logo svg.logo-vite:hover path + path {@apply fill-[#ffdd35];}
   #footer-logo svg.logo-axios {@apply h-2 2xs:h-2.5}
+  /**/
+  .status-code {@apply flex flex-col xs:flex-row justify-center items-center text-center xs:text-left gap-4;}
+  .status-code svg {@apply size-40 fill-slate-100 -my-6;}
+  .status-code h6 {@apply text-7xl sm:text-8xl !leading-[0.75] text-slate-100;}
+  .status-code h3 {@apply text-2xl sm:text-4xl !leading-[1.5] text-slate-300;}
+  .action-bar {@apply flex;}
 };
