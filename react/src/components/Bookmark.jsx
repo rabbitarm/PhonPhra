@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bookmarkCreate, bookmarkEdit, bookmarkDelete } from '../store/bookmarkListSlice';
 import { nanoid } from 'nanoid';
-import { IconLoading, IconBookmarkNotFound } from './Status';
+import { IconLoading, IconItemNotFound, IconBookmarkNotFound } from './Status';
 import BookmarkEdit from './BookmarkEdit';
 
 function Bookmark({ itemAddNavSelect }) {
@@ -25,24 +25,19 @@ function Bookmark({ itemAddNavSelect }) {
     dispatch(bookmarkCreate({ bookmark_title: bookmarkCreateTitle, bookmark_id: nanoid(), bookmark_number: bookmarkNumberHighest + 1, bookmark_item_list: [] }));
     setBookmarkCreateTitle('');
   };
-
   /* Bookmark - Select */
-  const bookmarkSelectInitial = bookmarkList[1]?.bookmark_id;
+  const bookmarkSelectInitial = bookmarkList[1]?.bookmark_id; /* Problem - Wrong choice */
   const [bookmarkSelectId, setBookmarkSelectId] = useState(bookmarkSelectInitial);
   const bookmarkSelectItemList = bookmarkList?.find(itemBookmarkList => itemBookmarkList?.bookmark_id === bookmarkSelectId)?.bookmark_item_list;
   const handleBookmarkSelect = (event) => setBookmarkSelectId(bookmarkList[event]?.bookmark_id);
   useEffect(() => {
-    setBookmarkSelectId(bookmarkSelectInitial)
+    setBookmarkSelectId(bookmarkSelectInitial);
   }, [bookmarkSelectInitial]);
-  console.log('bookmarkSelectInitial', bookmarkSelectInitial);
-  console.log('bookmarkSelectId', bookmarkSelectId);
-
   /* Bookmark - Edit */
   const [bookmarkEditNavContent, setBookmarkEditNavContent] = useState([]);
   const handleBookmarkSelectRename = () => {
-    setBookmarkEditNavContent(bookmarkList?.find(list => list.bookmark_id === bookmarkSelectId));
+    setBookmarkEditNavContent(bookmarkList?.find(list => list?.bookmark_id === bookmarkSelectId));
   }
-
   /* Bookmark - Delete */
   const handleBookmarkSelectDelete = () => {
     dispatch(bookmarkDelete(bookmarkSelectId));
@@ -54,6 +49,8 @@ function Bookmark({ itemAddNavSelect }) {
     setBookmarkSelectId(bookmarkSelectInitial);
   }
 
+  /* Item in bookmark */
+  const [bookmarkEditContent, setBookmarkEditContent] = useState([]);
   /* Item in bookmark - Add */
 /*  const bookmarkItemAdd = (bookmark_id, item_id, item_number) => {
     setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmark_id
@@ -72,16 +69,27 @@ function Bookmark({ itemAddNavSelect }) {
 
   /* Item in bookmark - Toggle checkbox */
   const bookmarkItemSelect = (bookmark_id, item_id, item_number) => {
-    setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmark_id
+/*    setBookmarkList(bookmarkListUpdate => bookmarkListUpdate.map(list => list?.bookmark_id === bookmark_id
       ? { ...list, bookmark_item_list: list?.bookmark_item_list?.some(item => item?.item_id === item_id)
-        ? list?.bookmark_item_list?.filter(item => item?._id !== item_id)
+        ? list?.bookmark_item_list?.filter(item => item?.item_id !== item_id)
         : [...list?.bookmark_item_list, { item_id: item_id, item_number: item_number }]
       }
       : list
+    ));*/
+    setBookmarkEditContent(bookmarkList.find(bookmark => bookmark.bookmark_id === bookmark_id 
+      ? { ...bookmark, bookmark_item_list: bookmark.bookmark_item_list.some(item => item.item_id === item_id)
+        ? bookmark.bookmark_item_list.filter(item => item.item_id !== item_id)
+        : [...bookmark.bookmark_item_list, { item_id, item_number }]
+      }
+      : bookmark
     ));
+    /*dispatch(bookmarkEdit(bookmarkEditContent));*/
   };
+  useEffect(() => {
+    console.log(bookmarkEditContent);
+  }, [bookmarkEditContent]);
   /* Item in bookmark - Checked checkbox */
-  const bookmarkItemChecked = (bookmark_id, item_id) => bookmarkList.find(list => list?.bookmark_id === bookmark_id)?.bookmark_item_list.some(item => item?.item_id === item_id) ? 'checked' : '';
+  const bookmarkItemChecked = (bookmark_id, item_id) => bookmarkList.find(list => list?.bookmark_id === bookmark_id)?.bookmark_item_list.some(item => item?.item_id === item_id) && 'checked';
 
   return (
     <section id="bookmark" className="container">
@@ -176,7 +184,7 @@ function Bookmark({ itemAddNavSelect }) {
                   }
                 </section>
                 {bookmarkSelectItemList?.length === 0
-                ? <IconBookmarkNotFound />
+                ? <IconItemNotFound />
                 : <>
                     <table className="table-action">
                       <thead>

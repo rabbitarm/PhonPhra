@@ -234,7 +234,7 @@
 
   .modal {@apply relative z-10 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
   .modal .modal-content {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] gap-sm padding;}
-  .modal-content > .tooltip {@apply absolute top-0 right-0;}
+  .modal-content > .tooltip {@apply absolute z-10 top-0 right-0;}
   .modal-content .fieldset-button {@apply gap-2 2xs:gap-4 pt-4;}
   .modal[class*="modal-"] .modal-content > .tooltip ,
   .modal[class*="modal-"] .modal-close {@apply hidden;}

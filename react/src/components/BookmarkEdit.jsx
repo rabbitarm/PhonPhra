@@ -12,6 +12,7 @@ function BookmarkEdit({ bookmarkEditNavContent }) {
     event.preventDefault();
     dispatch(bookmarkEdit(bookmarkEditContent));
   }
+  console.log(bookmarkEditNavContent);
 
   return (
     <>

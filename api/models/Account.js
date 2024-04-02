@@ -4,8 +4,9 @@ const AccountSchema = new mongoose.Schema({
   user_id: { type: String, required: true, trim: true },
   user_number: { type: Number, required: true, trim: true },
   user_email: { type: String, required: true, trim: true },
+  user_status: { type: String, required: true, trim: true, default:'allow' },
   user_bookmark_list: [{
-    bookmark_id: { type: String, required: false, trim: true },
+    bookmark_id: { type: String, required: true, trim: true },
     bookmark_title: { type: String, required: true, trim: true },
   }],
 },{
