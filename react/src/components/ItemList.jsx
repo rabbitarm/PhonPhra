@@ -13,23 +13,19 @@ function ItemList() {
   const dispatch = useDispatch();
   const { itemList, itemLoading } = useSelector((state) => state.itemList);
 
-  /* Item Nav */
-  const [itemCreateToggle, setItemCreateToggle] = useState(false);
-  const [itemAddNavSelect, setItemAddNavSelect] = useState([]);
-  const [itemEditNavContent, setItemEditNavContent] = useState([]);
-  const [itemDeleteNavId, setItemDeleteNavId] = useState('');
-
   /* Check highest item number */
   const itemNumberHighest = itemList.reduce((max, item) => {
     return item.item_number > max ? item.item_number : max;
   }, 0);
 
-  const itemNavInactive = () => {
-    setItemCreateToggle(false);
-    setItemAddNavSelect([]);
-    setItemEditNavContent([]);
-    setItemDeleteNavId('');
-  }
+  /* Item Action */
+  const [itemCreateToggle, setItemCreateToggle] = useState(false);
+  const [itemAddNavSelect, setItemAddNavSelect] = useState([]);
+  const [itemEditNavContent, setItemEditNavContent] = useState([]);
+  const [itemDeleteNavId, setItemDeleteNavId] = useState('');
+  /**/
+  const itemNavInactive = () => {setItemCreateToggle(false); setItemAddNavSelect([]); setItemEditNavContent([]); setItemDeleteNavId('');}
+  /**/
   const handleItemCreate = () => {itemNavInactive(); setItemCreateToggle(!itemCreateToggle);}
   const handleItemCreateCancel = () => setItemCreateToggle(false);
   /**/
@@ -41,9 +37,7 @@ function ItemList() {
   /**/
   const handleItemDelete = (item_id) => {itemNavInactive(); setItemDeleteNavId(item_id);}
   const handleItemDeleteCancel = () => setItemDeleteNavId('');
-  const handleItemDeleteComfirm = () => {
-    dispatch(itemDelete(itemDeleteNavId));
-  }
+  const handleItemDeleteComfirm = () => dispatch(itemDelete(itemDeleteNavId));
 
   return (
     <>
@@ -53,7 +47,33 @@ function ItemList() {
         ? <IconLoading />
         : <>
             {itemList?.length === 0
-            ? <IconItemNotFound />
+            ? <>
+                <IconItemNotFound />
+                <div className="flex justify-center">
+                  <button className="btn btn-alternate-primary" onClick={handleItemCreate}>
+                    <svg viewBox="0 -960 960 960">
+                      <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                    </svg>
+                    <span>สร้างบทสวดมนต์</span>
+                  </button>
+                  {itemCreateToggle &&
+                    <dialog className="modal">
+                      <div className="modal-content">
+                        <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                          <button className="btn btn-icon btn-ghost" onClick={handleItemCreateCancel}>
+                            <svg viewBox="0 -960 960 960">
+                              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                            <span className="hidden">ยกเลิก</span>
+                          </button>
+                        </div>
+                        <ItemCreate itemNumberHighest={itemNumberHighest} />
+                      </div>
+                      <button className="modal-close" onClick={handleItemCreateCancel}></button>
+                    </dialog>
+                  }
+                </div>
+              </>
             : <>
                 <table className="table-action">
                   <thead>
@@ -90,7 +110,7 @@ function ItemList() {
                     {itemList?.map(itemItemList => (
                       <tr key={itemItemList?.item_id}>
                         <td>{itemItemList?.item_number}</td>
-                        <td><Link to={'/บทสวดมนต์/' + itemItemList?.item_number}>{itemItemList?.item_name}</Link></td>
+                        <td><Link to={`/บทสวดมนต์/${itemItemList?.item_number}`}>{itemItemList?.item_name}</Link></td>
                         <td>
                           <div className="tooltip" data-tip="เพิ่ม">
                             <button className="btn btn-icon btn-mix" onClick={() => handleItemAdd(itemItemList?.item_id, itemItemList?.item_number)}>
@@ -174,7 +194,6 @@ function ItemList() {
           </>
         }
       </section>
-      <Bookmark itemList={itemList} />
     </>
   );
 

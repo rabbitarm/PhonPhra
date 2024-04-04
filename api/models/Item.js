@@ -5,7 +5,7 @@ const ItemSchema = new mongoose.Schema({
   item_number: { type: Number, required: true, trim: true },
   item_name: { type: String, required: true, trim: true },
   item_desc: { type: String, required: true, trim: true },
-  item_status: { type: String, required: true, trim: true, default:'pending' },
+  item_status: { type: String, required: true, trim: true, enum: ['pending', 'public', 'delete'], default:'pending' },
 },{
   timestamps: {
     createdAt: 'item_time_created',
