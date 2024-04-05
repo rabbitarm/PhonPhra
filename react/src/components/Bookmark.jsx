@@ -34,7 +34,6 @@ function Bookmark({ itemAddNavSelect }) {
   const handleBookmarkSelect = (event) => {
     setBookmarkSelectId(bookmarkList[event]?.bookmark_id);
     setBookmarkSelectValue(bookmarkList[event]?.bookmark_title)
-    console.log('bookmarkSelectId', bookmarkSelectId, '- bookmarkSelectValue', bookmarkSelectValue);
   }
   useEffect(() => {
     setBookmarkSelectId(bookmarkSelectInitial?.bookmark_id);

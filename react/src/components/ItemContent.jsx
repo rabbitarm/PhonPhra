@@ -10,19 +10,37 @@ function ItemContent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { itemList , itemLoading } = useSelector((state) => state.itemList);
+  const { bookmarkList } = useSelector((state) => state.bookmarkList);
 
   const [itemNumberIndex, setItemNumberIndex] = useState(1);
-  const { item_number } = useParams();
+  const [bookmarkIdIndex, setBookmarkIdIndex] = useState('');
+  const { item_number, bookmark_id } = useParams();
   useEffect(() => {
     setItemNumberIndex(parseInt(item_number));
-  }, [item_number]);
+    setBookmarkIdIndex(bookmark_id);
+  }, [item_number, bookmark_id]);
 
+  const bookmarkSelectId = bookmarkList.find(bookmark => bookmark?.bookmark_id === bookmarkIdIndex)
   /* Content Nav - https://www.w3schools.com/jsref/jsref_findindex.asp */
-  const itemIndexPresent = itemList.findIndex(item => item?.item_number === itemNumberIndex);
-  const itemIndexLast = itemList.findLastIndex(item => item);
+  const itemIndexPresent = bookmarkIdIndex === undefined 
+    ? itemList.findIndex(item => item?.item_number === itemNumberIndex)
+    : bookmarkSelectId?.bookmark_item_list?.findIndex(item => item?.item_number === itemNumberIndex)
+  const itemIndexLast = bookmarkIdIndex === undefined 
+    ? itemList.findLastIndex(item => item)
+    : bookmarkSelectId?.bookmark_item_list?.findLastIndex(item => item)
 
-  const handleItemNumberPrev = () => itemIndexPresent > 0 && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent - 1]?.item_number}`);
-  const handleItemNumberNext = () => itemIndexPresent < itemIndexLast && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent + 1]?.item_number}`);
+  const handleItemNumberPrev = () => {
+    {bookmarkIdIndex === undefined
+    ? itemIndexPresent > 0 && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent - 1]?.item_number}`)
+    : itemIndexPresent > 0 && navigate(`/รายการโปรด/${bookmarkSelectId?.bookmark_id}/${bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent - 1]?.item_number}`)
+    }
+  }
+  const handleItemNumberNext = () => {
+    {bookmarkIdIndex === undefined
+    ? itemIndexPresent < itemIndexLast && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent + 1]?.item_number}`)
+    : itemIndexPresent < itemIndexLast && navigate(`/รายการโปรด/${bookmarkSelectId?.bookmark_id}/${bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent + 1]?.item_number}`)
+    }
+  }
 
   const [itemNumberJumpIndex, setItemNumberJumpIndex] = useState('');
   const itemNumberJumpChange = (event) => setItemNumberJumpIndex(parseInt(event.target.value) || 0);
@@ -76,7 +94,7 @@ function ItemContent() {
                           <span className="hidden">แบ่งปัน</span>
                         </button>
                       </div>
-                      <div className="tooltip select-none" data-tip="ปรับแต่ง">
+                      <div className="tooltip" data-tip="ปรับแต่ง">
                         <button className={'btn btn-icon ' + (!contentCustomize && 'btn-ghost')} onClick={handleContentCustomize}>
                           <svg viewBox="0 -960 960 960">
                             <path d="M710-150q-63 0-106.5-43.5T560-300q0-63 43.5-106.5T710-450q63 0 106.5 43.5T860-300q0 63-43.5 106.5T710-150Zm0-80q29 0 49.5-20.5T780-300q0-29-20.5-49.5T710-370q-29 0-49.5 20.5T640-300q0 29 20.5 49.5T710-230Zm-550-30v-80h320v80H160Zm90-250q-63 0-106.5-43.5T100-660q0-63 43.5-106.5T250-810q63 0 106.5 43.5T400-660q0 63-43.5 106.5T250-510Zm0-80q29 0 49.5-20.5T320-660q0-29-20.5-49.5T250-730q-29 0-49.5 20.5T180-660q0 29 20.5 49.5T250-590Zm230-30v-80h320v80H480Zm230 320ZM250-660Z" />
@@ -144,34 +162,36 @@ function ItemContent() {
       }
       <hr />
       <section id="itemContentNav" className="flex flex-wrap justify-between items-end gap">
-        <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" disabled={itemIndexPresent <= 0 ? 'disabled' : null} onClick={handleItemNumberPrev}>
+        <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" disabled={itemIndexPresent <= 0 && 'disabled'} onClick={handleItemNumberPrev}>
           <svg viewBox="0 -960 960 960">
             <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />
           </svg>
           <span className="hidden 2xs:flex">บทก่อนหน้า</span>
         </button>
-        <button className="order-2 md:order-3 flex-1 md:max-w-40 btn btn-color-primary" disabled={itemIndexPresent >= itemIndexLast ? 'disabled' : null} onClick={handleItemNumberNext}>
+        <button className="order-2 md:order-3 flex-1 md:max-w-40 btn btn-color-primary" disabled={itemIndexPresent >= itemIndexLast && 'disabled'} onClick={handleItemNumberNext}>
           <span>บทต่อไป</span>
           <svg viewBox="0 -960 960 960">
             <path d="m600-200-57-56 184-184H80v-80h647L544-704l56-56 280 280-280 280Z" />
           </svg>
         </button>
-        <form className="form-inner md:flex-1 md:max-w-80 order-3 md:order-2" onSubmit={handleItemNumberJumpSubmit}>
-          <fieldset className="fieldset-border pt-0">
-            <div className="field">
-              <label className="label-border">ไปเลขที่อื่น</label>
-              <input type="number" pattern="[0-9]*" step="1" min="1" inputMode="numeric" name="number" value={itemNumberJumpIndex} onChange={itemNumberJumpChange} placeholder="9" />
-            </div>
-          </fieldset>
-          <fieldset className="fieldset-button-field-end">
-            <button className="btn btn-icon btn-ghost-alternate-primary" type="submit">
-              <svg viewBox="0 -960 960 960">
-                <path d="M160-160q-33 0-56.5-23.5T80-240v-120h80v120h640v-480H160v120H80v-120q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm300-140-56-58 83-82H80v-80h407l-83-82 56-58 180 180-180 180Z" />
-              </svg>
-              <span className="hidden">ค้นหา</span>
-            </button>
-          </fieldset>
-        </form>
+        {bookmarkIdIndex === undefined &&
+          <form className="form-inner md:flex-1 md:max-w-80 order-3 md:order-2" onSubmit={handleItemNumberJumpSubmit}>
+            <fieldset className="fieldset-border pt-0">
+              <div className="field">
+                <label className="label-border">ไปเลขที่อื่น</label>
+                <input type="number" pattern="[0-9]*" step="1" min="1" inputMode="numeric" name="number" value={itemNumberJumpIndex} onChange={itemNumberJumpChange} placeholder="9" />
+              </div>
+            </fieldset>
+            <fieldset className="fieldset-button-field-end">
+              <button className="btn btn-icon btn-ghost-alternate-primary" type="submit">
+                <svg viewBox="0 -960 960 960">
+                  <path d="M160-160q-33 0-56.5-23.5T80-240v-120h80v120h640v-480H160v120H80v-120q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm300-140-56-58 83-82H80v-80h407l-83-82 56-58 180 180-180 180Z" />
+                </svg>
+                <span className="hidden">ค้นหา</span>
+              </button>
+            </fieldset>
+          </form>
+        }
       </section>
     </article>
   )

@@ -10,7 +10,6 @@ import Footer from './components/Footer';
 import ItemList from './components/ItemList';
 import ItemContent from './components/ItemContent';
 import Bookmark from './components/Bookmark';
-import BookmarkContent from './components/BookmarkContent';
 import ContactUs from './components/ContactUs';
 import NotFound from './components/NotFound';
 import Layer from './components/Layer';
@@ -34,7 +33,7 @@ function App() {
         <Route path='/บทสวดมนต์' element={<ItemList />} />
         <Route path='/บทสวดมนต์/:item_number' element={<ItemContent />} />
         <Route path='/รายการโปรด' element={<Bookmark />} />
-        <Route path='/รายการโปรด/:bookmark_id/:item_number' element={<BookmarkContent />} />
+        <Route path='/รายการโปรด/:bookmark_id/:item_number' element={<ItemContent />} />
         <Route path='/ติดต่อเรา' element={<ContactUs />} />
         <Route path='/Layer' element={<Layer />} />
         <Route path='/Status' element={<Status />} />
