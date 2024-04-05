@@ -1,4 +1,5 @@
 import React from 'react';
+import StatusIcon from './StatusIcon';
 
 /* https://umbraco.com/knowledge-base/http-status-codes/ */
 
@@ -57,11 +58,14 @@ export function IconBookmarkNotFound() {
 function Status() {
 
   return (
-    <section className="container">
-      <IconLoading />
-      <IconItemNotFound />
-      <IconBookmarkNotFound />
-    </section>
+    <>
+      <section className="container">
+        <IconLoading />
+        <IconItemNotFound />
+        <IconBookmarkNotFound />
+      </section>
+      <StatusIcon />
+    </>
   )
 
 };

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { itemDelete } from '../store/itemListSlice';
+import { itemEdit, itemDelete } from '../store/itemListSlice';
 
 import { IconLoading, IconItemNotFound } from './Status';
 import ItemCreate from './ItemCreate';
@@ -38,6 +38,13 @@ function ItemList() {
   const handleItemDelete = (item_id) => {itemNavInactive(); setItemDeleteNavId(item_id);}
   const handleItemDeleteCancel = () => setItemDeleteNavId('');
   const handleItemDeleteComfirm = () => dispatch(itemDelete(itemDeleteNavId));
+
+  /* Check Item edit status */
+  useEffect(() => {
+    {itemList?.find(item => item?.item_id === itemEditNavContent?.item_id) !== itemEditNavContent &&
+      setItemEditNavContent([]);
+    }
+  }, [itemList?.find(item => item?.item_id === itemEditNavContent?.item_id)]);
 
   return (
     <>

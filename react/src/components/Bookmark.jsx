@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { bookmarkCreate, bookmarkEdit, bookmarkDelete } from '../store/bookmarkListSlice';
 import { nanoid } from 'nanoid';
 import { IconLoading, IconItemNotFound, IconBookmarkNotFound } from './Status';
+import { IconBookmarkPrivate, IconBookmarkPublic, IconBookmarkDelete, IconBookmarkError } from './StatusIcon';
 import BookmarkEdit from './BookmarkEdit';
 
 function Bookmark({ itemAddNavSelect }) {
 
   /* Bookmark - List */
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { itemList } = useSelector((state) => state.itemList);
   const { bookmarkList, bookmarkLoading } = useSelector((state) => state.bookmarkList);
 
@@ -100,7 +102,7 @@ function Bookmark({ itemAddNavSelect }) {
           ? <IconBookmarkNotFound />
           : <>
               {itemAddNavSelect !== undefined
-              ? <section id="bookmarkCheckbox">
+              ? <section id="bookmarkCheckbox" className="flex flex-col items-center gap">
                   <table className="table-action">
                     <thead>
                       <tr>
@@ -122,19 +124,41 @@ function Bookmark({ itemAddNavSelect }) {
                             </form>
                           </td>
                           <td>
-                            <div className="tooltip" data-tip="ลบ">
-                              <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handlebookmarkCheckboxDelete(itemBookmarkList?.bookmark_id)}>
-                                <svg viewBox="0 -960 960 960">
-                                  <path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
-                                </svg>
-                                <span className="hidden">ลบ</span>
-                              </button>
-                            </div>
+                            {itemAddNavSelect === undefined &&
+                              <div className="tooltip" data-tip="ลบ">
+                                <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handlebookmarkCheckboxDelete(itemBookmarkList?.bookmark_id)}>
+                                  <svg viewBox="0 -960 960 960">
+                                    <path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
+                                  </svg>
+                                  <span className="hidden">ลบ</span>
+                                </button>
+                              </div>
+                            }
+                            <svg className="icon-2xs fill-slate-200 my-3" viewBox="0 -960 960 960">
+                              {(() => {
+                                switch (itemBookmarkList?.bookmark_status) {
+                                  case 'public':
+                                    return <IconBookmarkPublic />;
+                                  case 'private':
+                                    return <IconBookmarkPrivate />;
+                                  case 'delete':
+                                    return <IconBookmarkDelete />;
+                                  default:
+                                    return <IconBookmarkError />;
+                                }
+                              })()}
+                            </svg>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
+                  <button className="btn btn-sm btn-ghost w-fit"onClick={() => navigate(`/รายการโปรด`)}>
+                    <svg viewBox="0 -960 960 960">
+                      <path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z" />
+                    </svg>
+                    <span>จัดการรายการโปรด</span>
+                  </button>
                 </section>
               : <section id="bookmarkList" className="flex flex-col gap">
                   <section className="flex justify-between items-end gap">
@@ -147,7 +171,7 @@ function Bookmark({ itemAddNavSelect }) {
                               <label className="label-border">เลือกรายการโปรด</label>
                               <select value={bookmarkSelectValue} onChange={(event) => handleBookmarkSelect(event.target.selectedIndex)}>
                                 {bookmarkList.map((itemBookmarkList, indexBookmarkList) => (
-                                  <option key={itemBookmarkList?.bookmark_id} value={itemBookmarkList?.bookmark_title}>{itemBookmarkList?.bookmark_title} - {itemBookmarkList?.bookmark_id}</option>
+                                  <option key={itemBookmarkList?.bookmark_id} value={itemBookmarkList?.bookmark_title}>{itemBookmarkList?.bookmark_title}</option>
                                 ))}
                               </select>
                             </div>

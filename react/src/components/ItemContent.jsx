@@ -3,7 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
 import { countNumberIncrease, countNumberDecrease, countNumberReset } from '../store/countNumberSlice';
+
 import { IconLoading, IconItemNotFound } from './Status';
+import Bookmark from './Bookmark';
 
 function ItemContent() {
 
@@ -41,7 +43,6 @@ function ItemContent() {
     : itemIndexPresent < itemIndexLast && navigate(`/รายการโปรด/${bookmarkSelectId?.bookmark_id}/${bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent + 1]?.item_number}`)
     }
   }
-
   const [itemNumberJumpIndex, setItemNumberJumpIndex] = useState('');
   const itemNumberJumpChange = (event) => setItemNumberJumpIndex(parseInt(event.target.value) || 0);
   const handleItemNumberJumpSubmit = (event) => {
@@ -50,6 +51,11 @@ function ItemContent() {
     setItemNumberJumpIndex('');
   };
 
+  
+  /* Add item to bookmark */
+  const [itemAddNavSelect, setItemAddNavSelect] = useState([]);
+  const handleItemAdd = (item_id, item_number) => {setItemAddNavSelect({ item_id: item_id, item_number: item_number });}
+  const handleItemAddCancel = () => {setItemAddNavSelect([]);}
   /* Customize Tool */
   const [contentCustomize, setContentCustomize] = useState(false);
   const handleContentCustomize = () => setContentCustomize(!contentCustomize);
@@ -79,12 +85,28 @@ function ItemContent() {
                     </section>
                     <div className="action-bar">
                       <div className="tooltip" data-tip="เพิ่ม">
-                        <button className="btn btn-icon btn-ghost">
+                        <button className="btn btn-icon btn-ghost" onClick={() => handleItemAdd(itemContent?.item_id, itemContent?.item_number)}>
                           <svg viewBox="0 -960 960 960">
                             <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
                           </svg>
                           <span className="hidden">เพิ่ม</span>
                         </button>
+                        {itemContent?.item_id === itemAddNavSelect?.item_id &&
+                          <dialog className="modal">
+                            <div className="modal-content">
+                              <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                                <button className="btn btn-icon btn-ghost" onClick={handleItemAddCancel}>
+                                  <svg viewBox="0 -960 960 960">
+                                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                                  </svg>
+                                  <span className="hidden">ยกเลิก</span>
+                                </button>
+                              </div>
+                              <Bookmark itemAddNavSelect={itemAddNavSelect} />
+                            </div>
+                            <button className="modal-close" onClick={handleItemAddCancel}></button>
+                          </dialog>
+                        }
                       </div>
                       <div className="tooltip" data-tip="แบ่งปัน">
                         <button className="btn btn-icon btn-ghost">

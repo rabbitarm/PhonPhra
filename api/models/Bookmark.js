@@ -8,7 +8,7 @@ const BookmarkSchema = new mongoose.Schema({
     item_id: { type: String, required: true, trim: true },
     item_number: { type: Number, required: true, trim: true },
   }],
-  bookmark_status: { type: String, required: true, trim: true, enum: ['private', 'public', 'delete'], default:'public' },
+  bookmark_status: { type: String, required: true, trim: true, enum: ['public', 'private', 'delete'], default:'public' },
 },{
   timestamps: {
     createdAt: 'bookmark_time_created',

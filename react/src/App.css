@@ -47,6 +47,8 @@
   .fieldset-border {@apply pt-3;}
   .fieldset-inline {@apply flex-row items-center gap-2 gap-x-8;}
   .fieldset-inline .field {@apply flex-row items-center gap-2;}
+  .fieldset-inline .field:only-child {@apply w-full;}
+  .fieldset-inline .field:only-child label {@apply w-full text-left;}
   .fieldset-button {@apply flex-row pt-4 gap-4;}
   .form-inner input[type="number"]::-webkit-outer-spin-button ,
   .form-inner input[type="number"]::-webkit-inner-spin-button {@apply appearance-none;}
