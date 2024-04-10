@@ -32,8 +32,10 @@ function App() {
         <Route index element={<ItemList />} />
         <Route path='/บทสวดมนต์' element={<ItemList />} />
         <Route path='/บทสวดมนต์/:item_number' element={<ItemContent />} />
+        <Route path='/บทสวดมนต์/:item_number/:item_name' element={<ItemContent />} />
         <Route path='/รายการโปรด' element={<Bookmark />} />
         <Route path='/รายการโปรด/:bookmark_id/:item_number' element={<ItemContent />} />
+        <Route path='/รายการโปรด/:bookmark_id/:item_number/:item_name' element={<ItemContent />} />
         <Route path='/ติดต่อเรา' element={<ContactUs />} />
         <Route path='/Layer' element={<Layer />} />
         <Route path='/Status' element={<Status />} />

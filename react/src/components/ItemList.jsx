@@ -117,7 +117,7 @@ function ItemList() {
                     {itemList?.map(itemItemList => (
                       <tr key={itemItemList?.item_id}>
                         <td>{itemItemList?.item_number}</td>
-                        <td><Link to={`/บทสวดมนต์/${itemItemList?.item_number}`}>{itemItemList?.item_name}</Link></td>
+                        <td><Link to={`/บทสวดมนต์/${itemItemList?.item_number}/${itemItemList?.item_name}`}>{itemItemList?.item_name}</Link></td>
                         <td>
                           <div className="tooltip" data-tip="เพิ่ม">
                             <button className="btn btn-icon btn-mix" onClick={() => handleItemAdd(itemItemList?.item_id, itemItemList?.item_number)}>

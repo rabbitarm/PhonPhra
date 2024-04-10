@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
+import { tinyApi } from '../api/tinyApi';
+
 import { useDispatch } from 'react-redux';
 import { itemCreate } from '../store/itemListSlice';
 import { nanoid } from 'nanoid';
 
 function ItemCreate({ itemNumberHighest }) {
 
+  const editorRef = useRef(null);
+  const log = () => {
+    if (editorRef.current) {
+      console.log(editorRef.current.getContent());
+    }
+  };
   const dispatch = useDispatch();
 
   const itemCreateInitial = { item_name: '', item_desc: '' };
@@ -27,11 +36,31 @@ function ItemCreate({ itemNumberHighest }) {
             <input type="text" name="item_name" value={itemCreateContent.item_name} onChange={itemCreateChange} placeholder="คําบูชาพระรัตนตรัย" />
           </div>
         </fieldset>
-        <fieldset className="fieldset-border">
-          <div className="field">
-            <label className="label-border">บทสวดมนต์</label>
-            <textarea name="item_desc" value={itemCreateContent.item_desc} onChange={itemCreateChange} placeholder="อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ&#10;สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ&#10;สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ"></textarea>
-          </div>
+        <fieldset>
+          <label>บทสวดมนต์</label>
+          { /*
+          <textarea name="item_desc" value={itemCreateContent.item_desc} onChange={itemCreateChange} placeholder="อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ&#10;สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ&#10;สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ"></textarea>
+          */ }
+          <Editor
+            apiKey = { tinyApi }
+            onInit = {(evt, editor) => editorRef.current = editor}
+            initialValue = "<p>อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ<br />สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ<br />สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ</p>"
+            init = {{
+              width: '100%',
+              height: 240,
+              min_height: 160,
+              menubar: false,
+              plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+              ],
+              toolbar: 'formatselect | ' +
+              'bold italic | alignleft aligncenter ' +
+              'alignright alignjustify | bullist numlist outdent indent | ' +
+              'removeformat'
+            }}
+          />
         </fieldset>
         <fieldset className="fieldset-button">
           <button className="btn btn-color-primary w-full 2xs:w-fit" type="submit">

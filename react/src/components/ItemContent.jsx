@@ -34,14 +34,14 @@ function ItemContent() {
 
   const handleItemNumberPrev = () => {
     {bookmarkIdIndex === undefined
-    ? itemIndexPresent > 0 && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent - 1]?.item_number}`)
-    : itemIndexPresent > 0 && navigate(`/รายการโปรด/${bookmarkSelectId?.bookmark_id}/${bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent - 1]?.item_number}`)
+    ? itemIndexPresent > 0 && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent - 1]?.item_number}/${itemList[itemIndexPresent - 1]?.item_name}`)
+    : itemIndexPresent > 0 && navigate(`/รายการโปรด/${bookmarkSelectId?.bookmark_id}/${bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent - 1]?.item_number}/${itemList?.find(item => item?.item_id === bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent - 1]?.item_id)?.item_name}`)
     }
   }
   const handleItemNumberNext = () => {
     {bookmarkIdIndex === undefined
-    ? itemIndexPresent < itemIndexLast && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent + 1]?.item_number}`)
-    : itemIndexPresent < itemIndexLast && navigate(`/รายการโปรด/${bookmarkSelectId?.bookmark_id}/${bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent + 1]?.item_number}`)
+    ? itemIndexPresent < itemIndexLast && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent + 1]?.item_number}/${itemList[itemIndexPresent + 1]?.item_name}`)
+    : itemIndexPresent < itemIndexLast && navigate(`/รายการโปรด/${bookmarkSelectId?.bookmark_id}/${bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent + 1]?.item_number}/${itemList?.find(item => item?.item_id === bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent + 1]?.item_id)?.item_name}`)
     }
   }
   const [itemNumberJumpIndex, setItemNumberJumpIndex] = useState('');
@@ -52,23 +52,17 @@ function ItemContent() {
     setItemNumberJumpIndex('');
   };
 
-  
   /* Add item to bookmark */
   const [itemAddNavSelect, setItemAddNavSelect] = useState([]);
   const [itemEditNavContent, setItemEditNavContent] = useState([]);
-  const [itemDeleteNavId, setItemDeleteNavId] = useState('');
   /**/
-  const itemNavInactive = () => {setItemAddNavSelect([]); setItemEditNavContent([]); setItemDeleteNavId('');}
+  const itemNavInactive = () => {setItemAddNavSelect([]); setItemEditNavContent([]);}
   /**/
   const handleItemAdd = (item_id, item_number) => {itemNavInactive(); setItemAddNavSelect({ item_id: item_id, item_number: item_number });}
   const handleItemAddCancel = () => {itemNavInactive(); setItemAddNavSelect([]);}
   /**/
   const handleItemEdit = (itemItemList) => {itemNavInactive(); setItemEditNavContent(itemItemList);}
   const handleItemEditCancel = () => setItemEditNavContent([]);
-  /**/
-  const handleItemDelete = (item_id) => {itemNavInactive(); setItemDeleteNavId(item_id);}
-  const handleItemDeleteCancel = () => setItemDeleteNavId('');
-  const handleItemDeleteComfirm = () => dispatch(itemDelete(itemDeleteNavId));
   /* Check Item edit status */
   useEffect(() => {
     {itemList?.find(item => item?.item_id === itemEditNavContent?.item_id) !== itemEditNavContent &&
@@ -97,7 +91,7 @@ function ItemContent() {
           ? <>
               {itemList.filter(item => item?.item_number === itemNumberIndex).map(itemContent => (itemContent &&
                 <main key={itemContent?.item_id} className="flex flex-col gap">
-                  <div className="flex flex-wrap justify-between items-stretch gap flex-col-reverse md:flex-row">
+                  <div className="flex flex-wrap justify-between items-stretch md:items-start gap flex-col-reverse md:flex-row">
                     <section className="content-title">
                       <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
                       <h1 className="text-2xl">{itemContent?.item_name}</h1>
@@ -149,29 +143,6 @@ function ItemContent() {
                               <ItemEdit itemEditNavContent={itemEditNavContent} />
                             </div>
                             <button className="modal-close" onClick={handleItemEditCancel}></button>
-                          </dialog>
-                        }
-                      </div>
-                      <div className="tooltip" data-tip="ลบ">
-                        <button className="btn btn-icon btn-ghost-alternate-warning" onClick={() => handleItemDelete(itemContent?.item_id)}>
-                          <svg viewBox="0 -960 960 960">
-                            <path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
-                          </svg>
-                          <span className="hidden">ลบ</span>
-                        </button>
-                        {itemContent?.item_id === itemDeleteNavId &&
-                          <dialog className="modal modal-tooltip modal-tooltip-right">
-                            <div className="modal-content">
-                              <p>ลบรายการนี้?</p>
-                              <fieldset className="fieldset-button">
-                                <button className="btn btn-2xs btn-alternate-success" onClick={handleItemDeleteCancel}>
-                                  <span>ยกเลิก</span>
-                                </button>
-                                <button className="btn btn-2xs btn-color-error" onClick={handleItemDeleteComfirm}>
-                                  <span>ลบ</span>
-                                </button>
-                              </fieldset>
-                            </div>
                           </dialog>
                         }
                       </div>

@@ -210,12 +210,18 @@ function Bookmark({ itemAddNavSelect }) {
                           </tr>
                         </thead>
                         <tbody>
-                          {itemList?.filter(itemItemList => bookmarkSelectItemList?.some(bookmarkItemList => bookmarkItemList?.item_id === itemItemList?.item_id))
-                                  ?.sort((a, b) => bookmarkSelectItemList.findIndex(item => item?.item_id === a?.item_id) - bookmarkSelectItemList.findIndex(item => item?.item_id === b?.item_id))
-                                  ?.map(itemItemList => (
+                          {bookmarkSelectItemList?.map(itemItemList => (
                             <tr key={itemItemList?.item_id}>
-                              <td>{itemItemList?.item_number}</td>
-                              <td><Link to={`/รายการโปรด/${bookmarkList?.find(bookmark => bookmark?.bookmark_id === bookmarkSelectId)?.bookmark_id}/${itemItemList?.item_number}`}>{itemItemList?.item_name}</Link></td>
+                              {itemList?.find(item => item?.item_id === itemItemList?.item_id)
+                              ? <>
+                                  <td>{itemItemList?.item_number}</td>
+                                  <td><Link to={`/รายการโปรด/${bookmarkList?.find(bookmark => bookmark?.bookmark_id === bookmarkSelectId)?.bookmark_id}/${itemItemList?.item_number}/${itemList?.find(item => item?.item_id === itemItemList?.item_id)?.item_name}`}>{itemList?.find(item => item?.item_id === itemItemList?.item_id)?.item_name}</Link></td>
+                                </>
+                              : <>
+                                  <td className="!text-slate-200">{itemItemList?.item_number}</td>
+                                  <td className="text-slate-200">ไม่พบบทสวดมนต์</td>
+                                </>
+                              }
                               <td>
                                 <div className="tooltip" data-tip="ลบ">
                                   <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleBookmarkItemRemove(bookmarkSelectId, itemItemList?.item_id)}>
