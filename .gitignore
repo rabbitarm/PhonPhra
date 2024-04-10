@@ -2,4 +2,4 @@
 api/node_modules
 api/key
 react/node_modules
-react/api
+react/src/api
