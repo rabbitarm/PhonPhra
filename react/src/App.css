@@ -18,6 +18,8 @@
   h6 , .h6 {@apply text-lg;}
   svg {@apply size-6;}
 
+  ul, ol, li {@apply list-inside p-0 m-0;}
+
   form {@apply relative flex flex-col w-full gap-4;}
   fieldset {@apply relative flex flex-col flex-wrap w-full gap-1;}
   label {@apply w-full whitespace-nowrap;}
@@ -135,7 +137,7 @@
   :is(.btn)[class*="-slate"]:hover             {@apply text-slate-active     fill-slate-active     border-slate-active     bg-slate-active    ;}
 
   /* Button */
-  .btn {@apply select-none flex justify-center items-center w-full xs:w-fit gap-2 border;}
+  .btn {@apply flex justify-center items-center w-full xs:w-fit gap-2 border;}
     .btn.btn-2xs {@apply h-6 text-xs font-medium px-1.5 py-1 rounded;}
     .btn.btn-xs  {@apply h-8 text-xs font-medium px-2.5 py-1 rounded;}
     .btn.btn-sm  {@apply h-9 text-sm font-medium px-3 py-1.5 rounded-md;}
@@ -261,10 +263,34 @@
 };
 
 @layer utilities {
-  .gap-xs       {@apply gap-1 sm:gap-2 ;}
-  .gap-sm       {@apply gap-2 sm:gap-4 ;}
-  .gap          {@apply gap-4 sm:gap-8 ;}
-  .gap-lg       {@apply gap-8 sm:gap-16;}
+  .gap-xs   {@apply gap-1   sm:gap-2   ;}
+  .gap-x-xs {@apply gap-x-1 sm:gap-x-2 ;}
+  .gap-y-xs {@apply gap-y-1 sm:gap-y-2 ;}
+  .gap-t-xs {@apply gap-t-1 sm:gap-t-2 ;}
+  .gap-l-xs {@apply gap-l-1 sm:gap-l-2 ;}
+  .gap-r-xs {@apply gap-r-1 sm:gap-r-2 ;}
+  .gap-b-xs {@apply gap-b-1 sm:gap-b-2 ;}
+  .gap-sm   {@apply gap-2   sm:gap-4   ;}
+  .gap-x-sm {@apply gap-x-2 sm:gap-x-4 ;}
+  .gap-y-sm {@apply gap-y-2 sm:gap-y-4 ;}
+  .gap-t-sm {@apply gap-t-2 sm:gap-t-4 ;}
+  .gap-l-sm {@apply gap-l-2 sm:gap-l-4 ;}
+  .gap-r-sm {@apply gap-r-2 sm:gap-r-4 ;}
+  .gap-b-sm {@apply gap-b-2 sm:gap-b-4 ;}
+  .gap      {@apply gap-4   sm:gap-8   ;}
+  .gap-x    {@apply gap-x-4 sm:gap-x-8 ;}
+  .gap-y    {@apply gap-y-4 sm:gap-y-8 ;}
+  .gap-t    {@apply gap-t-4 sm:gap-t-8 ;}
+  .gap-l    {@apply gap-l-4 sm:gap-l-8 ;}
+  .gap-r    {@apply gap-r-4 sm:gap-r-8 ;}
+  .gap-b    {@apply gap-b-4 sm:gap-b-8 ;}
+  .gap-lg   {@apply gap-8   sm:gap-16  ;}
+  .gap-x-lg {@apply gap-x-8 sm:gap-x-16;}
+  .gap-y-lg {@apply gap-y-8 sm:gap-y-16;}
+  .gap-t-lg {@apply gap-t-8 sm:gap-t-16;}
+  .gap-l-lg {@apply gap-l-8 sm:gap-l-16;}
+  .gap-r-lg {@apply gap-r-8 sm:gap-r-16;}
+  .gap-b-lg {@apply gap-b-8 sm:gap-b-16;}
   .padding-xs   {@apply p-1  sm:p-2  ;}
   .padding-x-xs {@apply px-1 sm:px-2 ;}
   .padding-y-xs {@apply py-1 sm:py-2 ;}
@@ -342,6 +368,41 @@
   .status-code h3 {@apply text-2xl sm:text-4xl !leading-[1.5] text-slate-300;}
   .action-bar {@apply flex flex-auto md:flex-none;}
   .action-bar hr {@apply h-10 border-t-0 border-r margin-x-sm;}
-  /* TinyMCE */
-  .tox .tox-statusbar__branding {@apply !hidden;}
+  /**/
+  #itemContentDesc {@apply font-display w-fit mx-auto;}
+  #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
+  #itemContentDesc ul[style*="list-style-type: square"] {@apply sm:grid sm:grid-cols-2 gap-x !list-none;}
 };
+
+/* TinyMCE */
+.tox.tox-tinymce {@apply w-full h-60 min-h-60 md:min-h-80 border border-slate-200 rounded-lg bg-white;}
+.tox.tox-tinymce:hover {@apply border-slate-300;}
+.tox.tox-tinymce.tox-edit-focus {@apply border-primary;}
+.tox.tox-tinymce.tox-fullscreen {@apply
+  !w-[calc(theme('width.full')-theme('gap.4'))]  sm:!w-[calc(theme('width.full')-theme('gap.8'))]
+  !h-[calc(theme('height.full')-theme('gap.4'))] sm:!h-[calc(theme('height.full')-theme('gap.8'))]
+  !top-2 sm:!top-1 !left-2 sm:!left-1;
+}
+.tox .tox-editor-header {@apply !py-2;}
+.tox .tox-toolbar__group {@apply !px-2;}
+.tox:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type) {@apply !border-slate-100;}
+.tox .tox-toolbar__group .tox-split-button {@apply my-0 mr-0.5;}
+.tox .tox-toolbar__group .tox-tbtn:not(.tox-split-button__chevron) {@apply w-7 h-7 rounded my-0 mr-0.5;}
+.tox .tox-toolbar__group .tox-tbtn:after {@apply hidden;}
+.tox .tox-toolbar__group .tox-tbtn:focus ,
+.tox .tox-toolbar__group .tox-tbtn:hover {@apply bg-slate-200;}
+.tox .tox-toolbar__group .tox-tbtn--active        ,
+.tox .tox-toolbar__group .tox-tbtn--enabled       ,
+.tox .tox-toolbar__group .tox-tbtn--enabled:focus ,
+.tox .tox-toolbar__group .tox-tbtn--enabled:hover {@apply bg-info;}
+.tox .tox-toolbar__group .tox-tbtn       svg {@apply fill-slate-400;}
+.tox .tox-toolbar__group .tox-tbtn:focus svg ,
+.tox .tox-toolbar__group .tox-tbtn:hover svg {@apply fill-slate-500;}
+.tox .tox-toolbar__group .tox-tbtn--active        svg ,
+.tox .tox-toolbar__group .tox-tbtn--enabled       svg ,
+.tox .tox-toolbar__group .tox-tbtn--enabled:focus svg ,
+.tox .tox-toolbar__group .tox-tbtn--enabled:hover svg {@apply !fill-white;}
+.tox .tox-edit-area:before {@apply hidden;}
+.tox .tox-statusbar__branding {@apply hidden;}
+.tox .tox-statusbar__resize-handle svg {@apply !w-3 !h-3;}
+.tox svg {@apply w-auto h-auto;}

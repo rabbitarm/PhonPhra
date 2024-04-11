@@ -213,7 +213,7 @@ function ItemContent() {
                       </div>
                     </div>
                   </div>
-                  <p className={'font-display whitespace-pre-wrap ' + fontSizes[fontSizeIndex]}>{itemContent?.item_desc}</p>
+                  <article id="itemContentDesc" className={fontSizes[fontSizeIndex]} dangerouslySetInnerHTML={{ __html: itemContent?.item_desc }} />
                 </main>
               ))}
             </>

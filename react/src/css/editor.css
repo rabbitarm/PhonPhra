@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* TinyMCE */
+body {@apply font-sans text-slate;}
+ul[style*="list-style-type: square"] {@apply 2xs:grid 2xs:grid-cols-2 gap-x-2 !list-none p-[11px_1px_1px];}
+ul[style*="list-style-type: square"] li {@apply border border-dashed border-slate-100;}
+ul[style*="list-style-type: square"] li:nth-child(2) {@apply border-t-0 2xs:border-t;}
+ul[style*="list-style-type: square"] li:nth-child(n+3) {@apply border-t-0;}
