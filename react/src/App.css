@@ -19,6 +19,7 @@
   svg {@apply size-6;}
 
   ul, ol, li {@apply list-inside p-0 m-0;}
+  ol {@apply list-decimal;}
 
   form {@apply relative flex flex-col w-full gap-4;}
   fieldset {@apply relative flex flex-col flex-wrap w-full gap-1;}
@@ -371,7 +372,11 @@
   /**/
   #itemContentDesc {@apply font-display w-fit mx-auto;}
   #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
+  #itemContentDesc ul {@apply list-disc;}
   #itemContentDesc ul[style*="list-style-type: square"] {@apply sm:grid sm:grid-cols-2 gap-x !list-none;}
+  #itemContentDesc p:not(:first-child) ,
+  #itemContentDesc ul:not(:first-child) ,
+  #itemContentDesc ol:not(:first-child) {@apply pt-4;}
 };
 
 /* TinyMCE */
@@ -381,7 +386,7 @@
 .tox.tox-tinymce.tox-fullscreen {@apply
   !w-[calc(theme('width.full')-theme('gap.4'))]  sm:!w-[calc(theme('width.full')-theme('gap.8'))]
   !h-[calc(theme('height.full')-theme('gap.4'))] sm:!h-[calc(theme('height.full')-theme('gap.8'))]
-  !top-2 sm:!top-1 !left-2 sm:!left-1;
+  !top-2 sm:!top-4 !left-2 sm:!left-4;
 }
 .tox .tox-editor-header {@apply !py-2;}
 .tox .tox-toolbar__group {@apply !px-2;}

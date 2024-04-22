@@ -52,10 +52,7 @@ function ItemEdit({ itemEditNavContent }) {
             onInit = {(evt, editor) => editorRef.current = editor}
             name = "item_desc"
             /*initialValue = "<p>อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ<br />สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ<br />สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ</p>"*/
-            value={itemEditContent?.item_desc
-              ? itemEditContent?.item_desc
-              : '<p>อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ<br />สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ<br />สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ</p>'
-            }
+            value={itemEditContent?.item_desc}
             onEditorChange = {content => {itemEditChange({ target: { name: "item_desc", value: content } });}}
             init = { tinyInit }
           />

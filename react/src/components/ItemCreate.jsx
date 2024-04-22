@@ -58,11 +58,8 @@ function ItemCreate({ itemNumberHighest }) {
             apiKey = { tinyApi }
             onInit = {(evt, editor) => editorRef.current = editor}
             name = "item_desc"
-            /*initialValue = "<p>อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ<br />สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ<br />สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ</p>"*/
-            value={itemCreateContent?.item_desc
-              ? itemCreateContent?.item_desc
-              : '<p>อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ<br />สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ<br />สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ</p>'
-            }
+            initialValue = "<p>อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ<br />สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ<br />สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ</p>"
+            value={itemCreateContent?.item_desc}
             onEditorChange = {content => {itemCreateChange({ target: { name: "item_desc", value: content } });}}
             init = { tinyInit }
           />
