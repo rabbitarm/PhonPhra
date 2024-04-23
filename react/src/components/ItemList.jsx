@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { itemEdit, itemDelete } from '../store/itemListSlice';
+import { itemDelete } from '../store/itemListSlice';
 
 import { IconLoading, IconItemNotFound } from './Status';
+import { IconPending, IconPublic, IconDelete, IconError } from './StatusIcon';
 import ItemCreate from './ItemCreate';
 import ItemEdit from './ItemEdit';
 import Bookmark from './Bookmark';
@@ -116,8 +117,26 @@ function ItemList() {
                   <tbody>
                     {itemList?.map(itemItemList => (
                       <tr key={itemItemList?.item_id}>
-                        <td>{itemItemList?.item_number}</td>
-                        <td><Link to={`/บทสวดมนต์/${itemItemList?.item_number}/${itemItemList?.item_name}`}>{itemItemList?.item_name}</Link></td>
+                        <td className="relative">
+                          <svg className="icon-2xs fill-slate-200 absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2" viewBox="0 -960 960 960">
+                            {(() => {
+                              switch (itemItemList?.item_status) {
+                                case 'pending':
+                                  return <IconPending />;
+                                case 'public':
+                                  return <IconPublic />;
+                                case 'delete':
+                                  return <IconDelete />;
+                                default:
+                                  return <IconError />;
+                              }
+                            })()}
+                          </svg>
+                          {itemItemList?.item_number}
+                        </td>
+                        <td>
+                          <Link to={`/บทสวดมนต์/${itemItemList?.item_number}/${itemItemList?.item_name}`}>{itemItemList?.item_name}</Link>
+                        </td>
                         <td>
                           <div className="tooltip" data-tip="เพิ่ม">
                             <button className="btn btn-icon btn-mix" onClick={() => handleItemAdd(itemItemList?.item_id, itemItemList?.item_number)}>

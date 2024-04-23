@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bookmarkCreate, bookmarkEdit, bookmarkDelete } from '../store/bookmarkListSlice';
 import { nanoid } from 'nanoid';
 import { IconLoading, IconItemNotFound, IconBookmarkNotFound } from './Status';
-import { IconBookmarkPrivate, IconBookmarkPublic, IconBookmarkDelete, IconBookmarkError } from './StatusIcon';
+import { IconPrivate, IconPublic, IconDelete, IconError } from './StatusIcon';
 import BookmarkEdit from './BookmarkEdit';
 
 function Bookmark({ itemAddNavSelect }) {
@@ -124,7 +124,7 @@ function Bookmark({ itemAddNavSelect }) {
                             </form>
                           </td>
                           <td>
-                            {itemAddNavSelect === undefined &&
+                            {/*
                               <div className="tooltip" data-tip="ลบ">
                                 <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handlebookmarkCheckboxDelete(itemBookmarkList?.bookmark_id)}>
                                   <svg viewBox="0 -960 960 960">
@@ -133,18 +133,18 @@ function Bookmark({ itemAddNavSelect }) {
                                   <span className="hidden">ลบ</span>
                                 </button>
                               </div>
-                            }
+                            */}
                             <svg className="icon-2xs fill-slate-200 my-3" viewBox="0 -960 960 960">
                               {(() => {
                                 switch (itemBookmarkList?.bookmark_status) {
                                   case 'public':
-                                    return <IconBookmarkPublic />;
+                                    return <IconPublic />;
                                   case 'private':
-                                    return <IconBookmarkPrivate />;
+                                    return <IconPrivate />;
                                   case 'delete':
-                                    return <IconBookmarkDelete />;
+                                    return <IconDelete />;
                                   default:
-                                    return <IconBookmarkError />;
+                                    return <IconError />;
                                 }
                               })()}
                             </svg>
