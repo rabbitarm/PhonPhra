@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { itemDelete } from '../store/itemListSlice';
+import { itemFetch, itemDelete, setCurrentPage } from '../store/itemListSlice';
+import ReactPaginate from 'react-paginate';
 
 import { IconLoading, IconItemNotFound } from './Status';
 import { IconPending, IconPublic, IconDelete, IconError } from './StatusIcon';
@@ -12,7 +13,23 @@ import Bookmark from './Bookmark';
 function ItemList() {
 
   const dispatch = useDispatch();
-  const { itemList, itemLoading } = useSelector((state) => state.itemList);
+  const { itemList, itemLoading, currentPage, itemsPerPage } = useSelector((state) => state.itemList);
+
+  /* Item List - Fetch */
+  useEffect(() => {
+    dispatch(itemFetch({ page: currentPage, itemsPerPage }));
+  }, [dispatch, currentPage, itemsPerPage]);
+
+  // Calculate the index of the last item on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  // Calculate the index of the first item on the current page
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // Slice the items array to get the items for the current page
+  const currentItems = itemList.slice(indexOfFirstItem, indexOfLastItem);
+  const handlePageClick = (data) => {
+    const selected = data.selected + 1;
+    dispatch(setCurrentPage(selected));
+  };
 
   /* Check highest item number */
   const itemNumberHighest = itemList.reduce((max, item) => {
@@ -115,7 +132,7 @@ function ItemList() {
                     </tr>
                   </thead>
                   <tbody>
-                    {itemList?.map(itemItemList => (
+                    {currentItems?.map(itemItemList => (
                       <tr key={itemItemList?.item_id}>
                         <td className="relative">
                           <svg className="icon-2xs fill-slate-200 absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2" viewBox="0 -960 960 960">
@@ -215,6 +232,35 @@ function ItemList() {
                   </tbody>
                 </table>
                 <span className="badge badge-sm mx-auto">{itemList?.length} บทสวดมนต์</span>
+                <ReactPaginate
+                  previousLabel={
+                    <svg viewBox="0 -960 960 960">
+                      <path d="M360-200 80-480l280-280 56 56-183 184h647v80H233l184 184-57 56Z" />
+                    </svg>
+                  }
+                  nextLabel={
+                    <svg viewBox="0 -960 960 960">
+                      <path d="m600-200-57-56 184-184H80v-80h647L544-704l56-56 280 280-280 280Z" />
+                    </svg>
+                  }
+                  breakLabel={
+                    <svg viewBox="0 -960 960 960">
+                      <path d="M240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400Z" />
+                    </svg>
+                  }
+                  pageCount={Math.ceil(itemList?.length / itemsPerPage)}
+                  marginPagesDisplayed={1}
+                  pageRangeDisplayed={3}
+                  onPageChange={handlePageClick}
+                  containerClassName={'pagination flex justify-center gap-2'}
+                  activeClassName={'active'}
+                  pageLinkClassName={'btn btn-xs'}
+                  previousLinkClassName={'btn btn-icon btn-xs'}
+                  nextLinkClassName={'btn btn-icon btn-xs'}
+                  activeLinkClassName={'!btn-color-primary'}
+                  disabledLinkClassName={'btn-disabled'}
+                  breakLinkClassName={'btn btn-icon btn-xs btn-disabled'}
+                />
               </>
             }
           </>

@@ -5,11 +5,14 @@ import { itemApi } from '../api/itemApi';
 const initialState = {
   itemList: [],
   itemLoading: false,
-  itemError: null
+  itemError: null,
+  currentPage: 1,
+  itemsPerPage: 5,
 };
 
-export const itemFetch = createAsyncThunk('itemList/itemFetch', async () => {
-  const response = await axios.get(`${itemApi}/list`);
+export const itemFetch = createAsyncThunk('itemList/itemFetch', async ({ page, itemsPerPage }) => {
+  //const response = await axios.get(`${itemApi}/list`);
+  const response = await axios.get(`${itemApi}/list?page=${page}&limit=${itemsPerPage}`);
   return response.data;
 });
 export const itemCreate = createAsyncThunk('itemList/itemCreate', async (itemCreateContent) => {
@@ -28,7 +31,11 @@ export const itemDelete = createAsyncThunk('itemList/itemDelete', async (itemDel
 const itemSlice = createSlice({
   name: 'itemList',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(itemFetch.pending, (state) => {
@@ -56,4 +63,5 @@ const itemSlice = createSlice({
   },
 });
 
+export const { setCurrentPage } = itemSlice.actions;
 export default itemSlice.reducer;
