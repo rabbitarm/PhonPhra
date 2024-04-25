@@ -140,13 +140,13 @@
 
   /* Button */
   .btn {@apply flex justify-center items-center w-full xs:w-fit gap-2 border;}
-    .btn.btn-2xs {@apply h-6 text-xs font-medium px-1.5 py-1 rounded;}
-    .btn.btn-xs  {@apply h-8 text-xs font-medium px-2.5 py-1 rounded;}
-    .btn.btn-sm  {@apply h-9 text-sm font-medium px-3 py-1.5 rounded-md;}
-    .btn         {@apply h-10 text-base px-4 py-2 rounded-lg;}
-    .btn.btn-lg  {@apply h-11 text-lg px-5 py-2.5 rounded-lg;}
-    .btn.btn-xl  {@apply h-12 text-xl px-6 py-3 rounded-lg;}
-    .btn.btn-2xl {@apply h-14 text-2xl px-7 py-3.5 rounded-lg;}
+    .btn.btn-2xs {@apply min-w-6  h-6  text-xs font-medium px-1.5 rounded;   }
+    .btn.btn-xs  {@apply min-w-8  h-8  text-xs font-medium px-2.5 rounded;   }
+    .btn.btn-sm  {@apply min-w-9  h-9  text-sm font-medium px-3   rounded-md;}
+    .btn         {@apply min-w-10 h-10 text-base           px-4   rounded-lg;}
+    .btn.btn-lg  {@apply min-w-11 h-11 text-lg             px-5   rounded-lg;}
+    .btn.btn-xl  {@apply min-w-12 h-12 text-xl             px-6   rounded-lg;}
+    .btn.btn-2xl {@apply min-w-14 h-14 text-2xl            px-7   rounded-lg;}
     .btn.btn-2xs svg , .icon-2xs  {@apply size-4;}
     .btn.btn-xs  svg , .icon-xs   {@apply size-5;}
     .btn.btn-sm  svg , .icon-sm   {@apply size-5;}
@@ -200,9 +200,9 @@
   .badge {@apply flex justify-center items-center w-fit whitespace-nowrap gap-0.5 rounded-md;}
   .badge-pill {@apply rounded-full;}
     .badge.badge-xs {@apply min-w-5 h-5 text-xs font-medium px-1.5 rounded;}
-    .badge.badge-sm {@apply min-w-6 h-6 text-xs font-medium px-1.5 rounded;}
-    .badge          {@apply min-w-7 h-7 text-sm px-2;}
-    .badge.badge-lg {@apply min-w-8 h-8 text-sm px-2;}
+    .badge.badge-sm {@apply min-w-6 h-6 text-xs font-medium px-2 rounded;}
+    .badge          {@apply min-w-7 h-7 text-sm px-2.5;}
+    .badge.badge-lg {@apply min-w-8 h-8 text-sm px-3;}
     .badge.badge-xs svg {@apply size-4;}
     .badge.badge-sm svg {@apply size-4;}
     .badge          svg {@apply size-5;}
@@ -265,6 +265,7 @@
 };
 
 @layer utilities {
+  .indent   {@apply indent-4 sm:indent-8;}
   .gap-xs   {@apply gap-1   sm:gap-2   ;}
   .gap-x-xs {@apply gap-x-1 sm:gap-x-2 ;}
   .gap-y-xs {@apply gap-y-1 sm:gap-y-2 ;}
@@ -371,18 +372,17 @@
   .action-bar {@apply flex flex-auto md:flex-none;}
   .action-bar hr {@apply h-10 border-t-0 border-r margin-x-sm;}
   /**/
-  #itemContentDesc {@apply font-display w-fit mx-auto;}
+  #itemContentDesc {@apply flex flex-col font-display w-fit gap mx-auto;}
   #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
   #itemContentDesc ul {@apply list-disc;}
-  #itemContentDesc ul[style*="list-style-type: square"] {@apply sm:grid sm:grid-cols-2 gap-x !list-none pl-0;}
-  #itemContentDesc ul[style*="list-style-type: square"] li {@apply p-0;}
-  #itemContentDesc p:not(:first-child) ,
-  #itemContentDesc ul:not(:first-child) ,
-  #itemContentDesc ol:not(:first-child) {@apply pt-4;}
-  #itemContentDesc hr {@apply my-4;}
+  #itemContentDesc ul[style*="list-style-type: square"] {@apply xs:grid xs:grid-cols-2 gap-x !list-none;}
+  #itemContentDesc sup {@apply text-primary-active;}
   #itemContentDesc a {@apply text-primary;}
   #itemContentDesc a:hover {@apply text-primary-active;}
 };
+
+/* Pagination */
+.pagination .btn {@apply !p-0;}
 
 /* TinyMCE */
 .tox.tox-tinymce {@apply w-full h-60 min-h-60 md:min-h-80 border border-slate-200 rounded-lg bg-white;}

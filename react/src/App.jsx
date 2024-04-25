@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useDispatch/*, useSelector*/ } from 'react-redux';
-/*import { itemFetch } from './store/itemListSlice';*/
+import { useDispatch } from 'react-redux';
+import { itemFetch } from './store/itemListSlice';
 import { bookmarkFetch } from './store/bookmarkListSlice';
 
 import './App.css';
@@ -18,14 +18,12 @@ import Status from './components/Status';
 function App() {
 
   const dispatch = useDispatch();
-  /*const { currentPage, itemsPerPage } = useSelector((state) => state.itemList);*/
 
   /* Item List - Fetch */
   useEffect(() => {
-    //dispatch(itemFetch());
-    //dispatch(itemFetch({ page: currentPage, itemsPerPage }));
+    dispatch(itemFetch());
     dispatch(bookmarkFetch());
-  }, [dispatch/*, currentPage, itemsPerPage*/]);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

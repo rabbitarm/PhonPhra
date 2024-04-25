@@ -17,7 +17,6 @@ function ItemEdit({ itemEditNavContent }) {
 
   const [itemEditContent, setItemEditContent] = useState(itemEditNavContent);
   const [itemModeUpdating, setItemModeUpdating] = useState(false);
-  const [itemModeError, setItemModeError] = useState(false);
   const itemEditChange = (event) => setItemEditContent({ ...itemEditContent, [event.target.name]: event.target.value });
   const handleItemEditSubmit = (event) => {
     event.preventDefault();

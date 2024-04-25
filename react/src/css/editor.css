@@ -2,6 +2,7 @@
 
 /* TinyMCE */
 body {@apply font-sans text-slate;}
+.indent {@apply indent-2 sm:indent-4;}
 ul[style*="list-style-type: square"] {@apply 2xs:grid 2xs:grid-cols-2 gap-x-2 !list-none p-[11px_1px_1px];}
 ul[style*="list-style-type: square"] li {@apply border border-dashed border-slate-100;}
 ul[style*="list-style-type: square"] li:nth-child(2) {@apply border-t-0 2xs:border-t;}
