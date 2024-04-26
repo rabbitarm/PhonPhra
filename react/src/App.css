@@ -375,7 +375,8 @@
   #itemContentDesc {@apply flex flex-col font-display w-fit gap mx-auto;}
   #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
   #itemContentDesc ul {@apply list-disc;}
-  #itemContentDesc ul[style*="list-style-type: square"] {@apply xs:grid xs:grid-cols-2 gap-x !list-none;}
+  #itemContentDesc ul[style*="list-style-type: square"] ,
+  .twocolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 gap-x !list-none;}
   #itemContentDesc sup {@apply text-primary-active;}
   #itemContentDesc a {@apply text-primary;}
   #itemContentDesc a:hover {@apply text-primary-active;}
