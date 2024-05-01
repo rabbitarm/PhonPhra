@@ -7,7 +7,7 @@ const initialState = {
   itemLoading: false,
   itemError: null,
   pageCurrent: 1,
-  pagePerItem: 5,
+  pagePerItem: 20,
 };
 
 export const itemFetch = createAsyncThunk('itemList/itemFetch', async () => {

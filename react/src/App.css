@@ -265,7 +265,8 @@
 };
 
 @layer utilities {
-  .indent   {@apply indent-4 sm:indent-8;}
+  .indent   {@apply indent-5 sm:indent-10;}
+  .prefix   {@apply inline-block min-w-10 -ml-10;}
   .gap-xs   {@apply gap-1   sm:gap-2   ;}
   .gap-x-xs {@apply gap-x-1 sm:gap-x-2 ;}
   .gap-y-xs {@apply gap-y-1 sm:gap-y-2 ;}
@@ -372,11 +373,11 @@
   .action-bar {@apply flex flex-auto md:flex-none;}
   .action-bar hr {@apply h-10 border-t-0 border-r margin-x-sm;}
   /**/
-  #itemContentDesc {@apply flex flex-col font-display w-fit gap mx-auto;}
+  #itemContentDesc {@apply flex flex-col font-display w-fit gap-4 mx-auto;}
   #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
   #itemContentDesc ul {@apply list-disc;}
-  #itemContentDesc ul[style*="list-style-type: square"] ,
-  .twocolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 gap-x !list-none;}
+  .twocolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 gap-x-5 !list-none;}
+  .twocolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden sm:list-item;}
   #itemContentDesc sup {@apply text-primary-active;}
   #itemContentDesc a {@apply text-primary;}
   #itemContentDesc a:hover {@apply text-primary-active;}
@@ -394,8 +395,9 @@
   !h-[calc(theme('height.full')-theme('gap.4'))] sm:!h-[calc(theme('height.full')-theme('gap.8'))]
   !top-2 sm:!top-4 !left-2 sm:!left-4;
 }
-.tox .tox-editor-header {@apply !py-2;}
-.tox .tox-toolbar__group {@apply !px-2;}
+.tox .tox-editor-header {@apply !py-1;}
+.tox .tox-toolbar {@apply !bg-none;}
+.tox .tox-toolbar__group {@apply !px-2 !py-1;}
 .tox:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type) {@apply !border-slate-100;}
 .tox .tox-toolbar__group .tox-split-button {@apply my-0 mr-0.5;}
 .tox .tox-toolbar__group .tox-tbtn:not(.tox-split-button__chevron) {@apply w-7 h-7 rounded my-0 mr-0.5;}

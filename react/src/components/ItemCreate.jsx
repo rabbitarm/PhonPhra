@@ -36,24 +36,15 @@ function ItemCreate({ itemNumberHighest }) {
             <input type="text" name="item_name" value={itemCreateContent.item_name} onChange={itemCreateChange} placeholder="คําบูชาพระรัตนตรัย" />
           </div>
         </fieldset>
-        { /*
+        {/*
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">บทสวดมนต์</label>
-            <textarea name="item_desc" value={itemEditContent?.item_desc} onChange={itemEditChange} placeholder="อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ&#10;สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ&#10;สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ"></textarea>
-          </div>
-        </fieldset>
-        */ }
-        { /*
-        <fieldset className="fieldset-border">
-          <div className="field">
-            <label>บทสวดมนต์</label>
             <textarea name="item_desc" value={itemCreateContent?.item_desc} onChange={itemCreateChange} placeholder="อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ&#10;สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ&#10;สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ"></textarea>
           </div>
         </fieldset>
-        */ }
+        */}
         <fieldset>
-          <label>บทสวดมนต์</label>
           <Editor
             apiKey = { tinyApi }
             onInit = {(evt, editor) => editorRef.current = editor}

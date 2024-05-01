@@ -27,8 +27,7 @@ function ItemEdit({ itemEditNavContent }) {
 
   return (
     <>
-      <h4>แก้ไขบทสวดมนต์</h4>
-      <span className="badge badge-lg badge-color-info">เลขที่: {itemEditContent?.item_number}</span>
+      <h4 className="flex items-center gap-sm">แก้ไขบทสวดมนต์ <span className="badge badge-lg badge-color-info">เลขที่: {itemEditContent?.item_number}</span></h4>
       <form key={itemEditContent.item_id} onSubmit={handleItemEditSubmit}>
         <fieldset className="fieldset-border">
           <div className="field">
@@ -36,16 +35,15 @@ function ItemEdit({ itemEditNavContent }) {
             <input type="text" name="item_name" value={itemEditContent.item_name} onChange={itemEditChange} placeholder="คําบูชาพระรัตนตรัย" />
           </div>
         </fieldset>
-        { /*
+        {/*
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">บทสวดมนต์</label>
             <textarea name="item_desc" value={itemEditContent?.item_desc} onChange={itemEditChange} placeholder="อะระหัง สัมมาสัมพุทโธ ภะคะวา, พุทธัง ภะคะวันตัง อภิวาเทมิ&#10;สวากขาโต ภะคะวะตา ธัมโม, ธัมมังนะมัสสามิ&#10;สุปะฏิปปันโน ภะคะวะโต สาวะกะสังโฆ, สังฆัง นะมามิ"></textarea>
           </div>
         </fieldset>
-        */ }
+        */}
         <fieldset>
-          <label>บทสวดมนต์</label>
           <Editor
             apiKey = { tinyApi }
             onInit = {(evt, editor) => editorRef.current = editor}
