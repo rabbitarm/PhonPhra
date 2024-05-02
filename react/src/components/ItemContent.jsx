@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
 import { countNumberIncrease, countNumberDecrease, countNumberReset } from '../store/countNumberSlice';
 
+import TimeFormat from './includes/TimeFormat';
 import { IconLoading, IconItemNotFound } from './Status';
+import { IconTime } from './StatusIcon';
 import ItemEdit from './ItemEdit';
 import Bookmark from './Bookmark';
 
@@ -94,6 +96,7 @@ function ItemContent() {
                   <div className="flex flex-wrap justify-between items-stretch md:items-start gap flex-col-reverse md:flex-row">
                     <section className="content-title">
                       <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
+                      <span className="badge badge-sm badge-reverse !p-0"><svg className="icon-2xs" viewBox="0 -960 960 960"><IconTime /></svg><TimeFormat itemTimeCreated={itemContent?.item_time_created} /></span>
                       <h1 className="text-2xl">{itemContent?.item_name}</h1>
                     </section>
                     <hr />
