@@ -12,7 +12,7 @@ function TimeFormat({ itemTimeCreated }) {
 
   return (
     <>
-      {thaiDateWithThaiMonth}
+      <span>{thaiDateWithThaiMonth}</span>
     </>
   );
 };

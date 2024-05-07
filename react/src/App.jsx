@@ -13,7 +13,7 @@ import Bookmark from './components/Bookmark';
 import ContactUs from './components/ContactUs';
 import NotFound from './components/NotFound';
 import Layer from './components/Layer';
-import Status from './components/Status';
+import StatusCode from './components/includes/StatusCode';
 
 function App() {
 
@@ -38,7 +38,7 @@ function App() {
         <Route path='/รายการโปรด/:bookmark_id/:item_number/:item_name' element={<ItemContent />} />
         <Route path='/ติดต่อเรา' element={<ContactUs />} />
         <Route path='/Layer' element={<Layer />} />
-        <Route path='/Status' element={<Status />} />
+        <Route path='/StatusCode' element={<StatusCode />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

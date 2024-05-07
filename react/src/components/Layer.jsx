@@ -1,8 +1,8 @@
 import React from 'react';
 import LayerButton from './LayerButton';
 import LayerBadge from './LayerBadge';
-import LayerModal from './LayerModal';
 import LayerForm from './LayerForm';
+import LayerModal from './LayerModal';
 
 function Layer() {
 
@@ -10,8 +10,8 @@ function Layer() {
     <>
       <LayerButton />
       <LayerBadge />
-      <LayerModal />
       <LayerForm />
+      <LayerModal />
     </>
   )
 

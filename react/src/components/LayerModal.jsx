@@ -14,9 +14,7 @@ function LayerModal() {
             <div className="modal-content">
               <div className="tooltip" data-tip="ยกเลิก">
                 <button className="btn btn-icon btn-text">
-                  <svg>
-                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                  </svg>
+                  <span className="material-symbols-outlined">close</span>
                   <span className="hidden">ยกเลิก</span>
                 </button>
               </div>
@@ -37,9 +35,7 @@ function LayerModal() {
             <div className="modal-content">
               <div className="tooltip" data-tip="ยกเลิก">
                 <button className="btn btn-icon btn-text">
-                  <svg>
-                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                  </svg>
+                  <span className="material-symbols-outlined">close</span>
                   <span className="hidden">ยกเลิก</span>
                 </button>
               </div>
@@ -57,19 +53,15 @@ function LayerModal() {
           </dialog>
           <div>
             <button className="btn btn-outline-alternate-info" onClick={handleModal}>
-              <svg viewBox="0 -960 960 960">
-                <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z" />
-              </svg>
+              <span className="material-symbols-outlined">open_in_new</span>
               <span>เปิด</span>
             </button>
             {modalToggle
             ? <dialog className="modal">
                 <div className="modal-content">
-                  <div className="tooltip" data-tip="ยกเลิก">
-                    <button className="btn btn-icon btn-text" onClick={handleModal}>
-                      <svg viewBox="0 -960 960 960">
-                        <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                      </svg>
+                  <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                    <button className="btn btn-icon btn-ghost" onClick={handleModal}>
+                      <span className="material-symbols-outlined">close</span>
                       <span className="hidden">ยกเลิก</span>
                     </button>
                   </div>

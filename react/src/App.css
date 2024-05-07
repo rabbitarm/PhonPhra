@@ -17,6 +17,7 @@
   h5 , .h5 {@apply text-xl;}
   h6 , .h6 {@apply text-lg;}
   svg {@apply inline-block size-6;}
+  .material-symbols-outlined {@apply inline-block size-6 [font-size:theme('gap.6')];}
 
   ul, ol, li {@apply p-0 m-0;}
   ol {@apply list-decimal pl-10;}
@@ -59,7 +60,7 @@
   .form-inline fieldset {@apply w-full;}
   .form-inner .fieldset-button-field-end {@apply absolute bottom-0 right-0 w-fit p-0;}
   .form-inner .fieldset-button-field-end .btn:not(.btn-icon) {@apply w-10 xs:w-fit px-0 xs:px-4;}
-  .form-inner .fieldset-button-field-end .btn:not(.btn-icon) span {@apply hidden xs:block;}
+  .form-inner .fieldset-button-field-end .btn:not(.btn-icon) span:not(.material-symbols-outlined) {@apply hidden xs:block;}
   .form-inline .fieldset-button {@apply w-fit p-0;}
   .field {@apply relative flex;}
   .field label {@apply w-fit;}
@@ -147,13 +148,20 @@
     .btn.btn-lg  {@apply min-w-11 h-11 text-lg             px-5   rounded-lg;}
     .btn.btn-xl  {@apply min-w-12 h-12 text-xl             px-6   rounded-lg;}
     .btn.btn-2xl {@apply min-w-14 h-14 text-2xl            px-7   rounded-lg;}
-    .btn.btn-2xs svg , .icon-2xs  {@apply size-4;}
-    .btn.btn-xs  svg , .icon-xs   {@apply size-5;}
-    .btn.btn-sm  svg , .icon-sm   {@apply size-5;}
-    .btn         svg , .icon-base {@apply size-6;}
-    .btn.btn-lg  svg , .icon-lg   {@apply size-7;}
-    .btn.btn-xl  svg , .icon-xl   {@apply size-8;}
-    .btn.btn-2xl svg , .icon-2xl  {@apply size-9;}
+    .btn.btn-2xs svg , svg.icon-2xs  {@apply size-4;}
+    .btn.btn-xs  svg , svg.icon-xs   {@apply size-5;}
+    .btn.btn-sm  svg , svg.icon-sm   {@apply size-5;}
+    .btn         svg , svg.icon-base {@apply size-6;}
+    .btn.btn-lg  svg , svg.icon-lg   {@apply size-7;}
+    .btn.btn-xl  svg , svg.icon-xl   {@apply size-8;}
+    .btn.btn-2xl svg , svg.icon-2xl  {@apply size-9;}
+    .btn.btn-2xs .material-symbols-outlined , .material-symbols-outlined.icon-2xs  {@apply size-4 [font-size:theme('gap.4')];}
+    .btn.btn-xs  .material-symbols-outlined , .material-symbols-outlined.icon-xs   {@apply size-5 [font-size:theme('gap.5')];}
+    .btn.btn-sm  .material-symbols-outlined , .material-symbols-outlined.icon-sm   {@apply size-5 [font-size:theme('gap.5')];}
+    .btn         .material-symbols-outlined , .material-symbols-outlined.icon-base {@apply size-6 [font-size:theme('gap.6')];}
+    .btn.btn-lg  .material-symbols-outlined , .material-symbols-outlined.icon-lg   {@apply size-7 [font-size:theme('gap.7')];}
+    .btn.btn-xl  .material-symbols-outlined , .material-symbols-outlined.icon-xl   {@apply size-8 [font-size:theme('gap.8')];}
+    .btn.btn-2xl .material-symbols-outlined , .material-symbols-outlined.icon-2xl  {@apply size-9 [font-size:theme('gap.9')];}
   .btn-icon {@apply !p-0;}
     .btn-icon.btn-2xs {@apply size-6;}
     .btn-icon.btn-xs  {@apply size-8;}
@@ -207,6 +215,10 @@
     .badge.badge-sm svg {@apply size-4;}
     .badge          svg {@apply size-5;}
     .badge.badge-lg svg {@apply size-6;}
+    .badge.badge-xs .material-symbols-outlined {@apply size-4 [font-size:theme('gap.4')];}
+    .badge.badge-sm .material-symbols-outlined {@apply size-4 [font-size:theme('gap.4')];}
+    .badge          .material-symbols-outlined {@apply size-5 [font-size:theme('gap.5')];}
+    .badge.badge-lg .material-symbols-outlined {@apply size-6 [font-size:theme('gap.6')];}
   .badge-icon {@apply !p-0;}
     .badge-icon.badge-xs {@apply size-5;}
     .badge-icon.badge-sm {@apply size-6;}
@@ -366,8 +378,11 @@
   #footer-logo svg.logo-vite:hover path + path {@apply fill-[#ffdd35];}
   #footer-logo svg.logo-axios {@apply h-2 2xs:h-2.5}
   /**/
-  .status-code {@apply flex flex-col xs:flex-row justify-center items-center text-center xs:text-left gap-4;}
-  .status-code svg {@apply size-40 fill-slate-100 -my-6;}
+  .status-code {@apply flex flex-col xs:flex-row justify-center items-center text-center xs:text-left;}
+  .status-code svg , .status-code .icon {@apply size-40 fill-slate-100 -my-6;}
+  .status-code .material-symbols-outlined {@apply size-32 [font-size:theme('gap.32')] sm:size-40 sm:[font-size:theme('gap.40')] text-slate-100;
+    font-variation-settings:'wght'100
+  }
   .status-code h6 {@apply text-7xl sm:text-8xl !leading-[0.75] text-slate-100;}
   .status-code h3 {@apply text-2xl sm:text-4xl !leading-[1.5] text-slate-300;}
   .action-bar {@apply flex flex-auto md:flex-none;}
@@ -382,6 +397,19 @@
   #itemContentDesc a {@apply text-primary;}
   #itemContentDesc a:hover {@apply text-primary-active;}
 };
+
+/*
+  Custom CSS
+*/
+
+/* Google Icon */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 300,
+    'GRAD' 0,
+    'opsz' 24
+}
 
 /* Pagination */
 .pagination .btn {@apply !p-0;}
