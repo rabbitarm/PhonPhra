@@ -40,6 +40,19 @@ export function IconBookmarkNotFound() {
   );
 }
 
+/* Page */
+export function IconPageNotFound() {
+  return (
+    <div className="status-code">
+      <span className="material-symbols-outlined">web_asset_off</span>
+      <div>
+        <h6>404</h6>
+        <h3>ไม่พบหน้านี้</h3>
+      </div>
+    </div>
+  );
+}
+
 function StatusCode() {
 
   return (
@@ -48,6 +61,7 @@ function StatusCode() {
         <IconLoading />
         <IconItemNotFound />
         <IconBookmarkNotFound />
+        <IconPageNotFound />
       </section>
     </>
   )

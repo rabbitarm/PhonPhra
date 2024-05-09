@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
 import { countNumberIncrease, countNumberDecrease, countNumberReset } from '../store/countNumberSlice';
 
-import ItemStatus from './includes/ItemStatus';
 import TimeFormat from './includes/TimeFormat';
 import { IconLoading, IconItemNotFound } from './includes/StatusCode';
 import ItemEdit from './ItemEdit';
@@ -71,6 +70,11 @@ function ItemContent() {
       setItemEditNavContent([]);
     }
   }, [itemList?.find(item => item?.item_id === itemEditNavContent?.item_id)]);
+  
+  /* Share */
+  const [contentShare, setContentShare] = useState(false);
+  const handleContentShare = () => setContentShare(!contentShare);
+
   /* Customize Tool */
   const [contentCustomize, setContentCustomize] = useState(false);
   const handleContentCustomize = () => setContentCustomize(!contentCustomize);
@@ -146,18 +150,23 @@ function ItemContent() {
                       </div>
                       <hr />
                       <div className="tooltip" data-tip="แบ่งปัน">
-                        <button className="btn btn-icon btn-ghost">
+                        <button className={'btn btn-icon ' + (!contentShare && 'btn-ghost')} onClick={handleContentShare}>
                           <span className="material-symbols-outlined">share</span>
                           <span className="hidden">แบ่งปัน</span>
                         </button>
+                        {contentShare &&
+                          <section className="absolute top-full right-0 translate-y-2 flex flex-wrap justify-between items-center gap-2">
+                            <p>QR Code</p>
+                          </section>
+                        }
                       </div>
                       <div className="tooltip" data-tip="ปรับแต่ง">
                         <button className={'btn btn-icon ' + (!contentCustomize && 'btn-ghost')} onClick={handleContentCustomize}>
                           <span className="material-symbols-outlined">page_info</span>
                           <span className="hidden">ปรับแต่ง</span>
                         </button>
-                        {contentCustomize
-                        ? <section className="absolute top-full right-0 translate-y-2 flex flex-wrap justify-between items-center gap-2">
+                        {contentCustomize &&
+                          <section className="absolute top-full right-0 translate-y-2 flex flex-wrap justify-between items-center gap-2">
                             <section id="itemContentFontSize" className="frame flex justify-between items-center w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
                               <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex >= fontSizes.length - 1 && 'disabled'} onClick={handleFontSizeIncrease}>
                                 <span className="material-symbols-outlined">add</span>
@@ -190,7 +199,6 @@ function ItemContent() {
                               </button>
                             </section>
                           </section>
-                        : null
                         }
                       </div>
                     </div>
