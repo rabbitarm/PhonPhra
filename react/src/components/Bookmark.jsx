@@ -133,7 +133,7 @@ function Bookmark({ itemAddNavSelect }) {
                                 </button>
                               </div>
                             */}
-                            <ItemStatus itemStatus={itemBookmarkList?.bookmark_status} addClassName={'icon-2xs text-slate-200 my-3'} />
+                            <ItemStatus itemStatus={itemBookmarkList?.bookmark_status} addClassNameIcon={'icon-2xs text-slate-200 my-3'} addClassNameText={'hidden'} />
                           </td>
                         </tr>
                       ))}

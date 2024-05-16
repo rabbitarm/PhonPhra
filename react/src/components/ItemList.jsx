@@ -116,7 +116,7 @@ function ItemList() {
                     {itemListCurrent?.map(itemItemList => (
                       <tr key={itemItemList?.item_id}>
                         <td className="relative">
-                          <ItemStatus itemStatus={itemItemList?.item_status} addClassName={'icon-2xs text-slate-200 absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2'} />
+                          <ItemStatus itemStatus={itemItemList?.item_status} addClassNameIcon={'icon-2xs text-slate-200 absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2'} addClassNameText={'hidden'} />
                           {itemItemList?.item_number}
                         </td>
                         <td>

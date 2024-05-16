@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
 import { countNumberIncrease, countNumberDecrease, countNumberReset } from '../store/countNumberSlice';
 
+import ItemStatus from './includes/ItemStatus';
 import TimeFormat from './includes/TimeFormat';
 import { IconLoading, IconItemNotFound } from './includes/StatusCode';
 import ItemEdit from './ItemEdit';
@@ -99,11 +100,15 @@ function ItemContent() {
                 <main key={itemContent?.item_id} className="flex flex-col gap">
                   <div className="flex flex-wrap justify-between items-stretch md:items-start gap flex-col-reverse md:flex-row">
                     <section className="content-title">
-                      <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
-                      <span className="badge badge-sm badge-reverse !p-0">
-                        <span className="material-symbols-outlined">schedule</span>
-                        <TimeFormat itemTimeCreated={itemContent?.item_time_created} />
-                      </span>
+                      <div className="status-bar flex items-center gap-2">
+                        <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
+                        <span className="badge badge-sm badge-reverse !p-0">
+                          <TimeFormat itemTimeCreated={itemContent?.item_time_created} addClassNameIcon={''} addClassNameText={''} />
+                        </span>
+                        <span className="badge badge-sm badge-reverse !p-0">
+                          <ItemStatus itemStatus={itemContent?.item_status} addClassNameIcon={''} addClassNameText={''} />
+                        </span>
+                      </div>
                       <h1 className="text-2xl">{itemContent?.item_name}</h1>
                     </section>
                     <hr />
