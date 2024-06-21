@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
 import { countNumberIncrease, countNumberDecrease, countNumberReset } from '../store/countNumberSlice';
 
-import ItemStatus from './includes/ItemStatus';
-import TimeFormat from './includes/TimeFormat';
 import { IconLoading, IconItemNotFound } from './includes/StatusCode';
+import ItemStatus from './includes/ItemStatus';
+import ItemCategoryStatus from './includes/ItemCategoryStatus';
+import TimeFormat from './includes/TimeFormat';
 import ItemEdit from './ItemEdit';
 import Bookmark from './Bookmark';
 
@@ -107,6 +108,9 @@ function ItemContent() {
                         </span>
                         <span className="badge badge-sm badge-reverse !p-0">
                           <ItemStatus itemStatus={itemContent?.item_status} addClassNameIcon={''} addClassNameText={''} />
+                        </span>
+                        <span className="badge badge-sm badge-reverse !p-0">
+                          <ItemCategoryStatus itemCategoryStatus={itemContent?.item_category_list} addClassNameIcon={''} addClassNameText={''} />
                         </span>
                       </div>
                       <h1 className="text-2xl">{itemContent?.item_name}</h1>

@@ -3,6 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { tinyApi, tinyInit } from '../api/tinyApi';
 
 import { useDispatch } from 'react-redux';
+import ItemCategory from './ItemCategory';
 import { itemEdit } from '../store/itemListSlice';
 
 function ItemEdit({ itemEditNavContent }) {
@@ -25,6 +26,12 @@ function ItemEdit({ itemEditNavContent }) {
   }
   const handleItemEditReset = () => setItemEditContent(itemEditNavContent);
 
+  const [itemCategoryChange, setItemCategoryChange] = useState(itemEditNavContent?.item_category_list);
+  const handleItemCategoryChange = (event) => {
+    setItemCategoryChange(event);
+    setItemEditContent({ ...itemEditContent, item_category_list: event });
+  }
+
   return (
     <>
       <h4 className="flex items-center gap-sm">แก้ไขบทสวดมนต์ <span className="badge badge-lg badge-color-info">เลขที่: {itemEditContent?.item_number}</span></h4>
@@ -35,6 +42,7 @@ function ItemEdit({ itemEditNavContent }) {
             <input type="text" name="item_name" value={itemEditContent.item_name} onChange={itemEditChange} placeholder="คําบูชาพระรัตนตรัย" />
           </div>
         </fieldset>
+        <ItemCategory itemCategorySelect={itemCategoryChange} itemCategoryChange={handleItemCategoryChange} />
         {/*
         <fieldset className="fieldset-border">
           <div className="field">

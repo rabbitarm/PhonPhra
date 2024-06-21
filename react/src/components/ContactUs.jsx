@@ -31,7 +31,7 @@ function ContactUs() {
           <div className="field">
             <label className="label-border">ช่องทางติดต่ออื่น</label>
             <input type="text" name="contact_other" value={contactFormContent.contact_other} onChange={contactFormChange} placeholder="เบอร์โทรติดต่อ / Line ID" />
-            <label className="label-field-end">Option</label>
+            <label className="label-field-end">เพิ่มเติม</label>
           </div>
         </fieldset>
         <fieldset className="fieldset-border">

@@ -33,6 +33,9 @@ function NavBar() {
           <li className="nav-bookmark">
             <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/รายการโปรด">รายการโปรด</Link>
           </li>
+          <li className="nav-itemcategory">
+            <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/หมวดหมู่">หมวดหมู่</Link>
+          </li>
           <li className="nav-contact">
             <Link className="btn btn-ghost-alternate-primary w-full md:w-fit justify-start" to="/ติดต่อเรา">ติดต่อเรา</Link>
           </li>

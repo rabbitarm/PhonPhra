@@ -3,6 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { tinyApi, tinyInit } from '../api/tinyApi';
 
 import { useDispatch } from 'react-redux';
+import ItemCategory from './ItemCategory';
 import { itemCreate } from '../store/itemListSlice';
 import { nanoid } from 'nanoid';
 
@@ -16,7 +17,7 @@ function ItemCreate({ itemNumberHighest }) {
   };
   const dispatch = useDispatch();
 
-  const itemCreateInitial = { item_name: '', item_desc: '' };
+  const itemCreateInitial = { item_name: '', item_desc: '', item_category_list: [] };
   const [itemCreateContent, setItemCreateContent] = useState(itemCreateInitial);
   const itemCreateChange = (event) => setItemCreateContent({ ...itemCreateContent, [event.target.name]: event.target.value });
   const handleItemCreateSubmit = (event) => {
@@ -25,6 +26,13 @@ function ItemCreate({ itemNumberHighest }) {
     setItemCreateContent(itemCreateInitial);
   };
   const itemCreateReset = () => setItemCreateContent(itemCreateInitial);
+
+  const [itemCategoryChange, setItemCategoryChange] = useState(itemCreateContent?.item_category_list);
+  const handleItemCategoryChange = (event) => {
+    setItemCategoryChange(event);
+    setItemCreateContent({ ...itemCreateContent, item_category_list: event });
+  }
+  console.log(itemCreateContent);
 
   return (
     <>
@@ -36,6 +44,7 @@ function ItemCreate({ itemNumberHighest }) {
             <input type="text" name="item_name" value={itemCreateContent.item_name} onChange={itemCreateChange} placeholder="คําบูชาพระรัตนตรัย" />
           </div>
         </fieldset>
+        <ItemCategory itemCategorySelect={itemCategoryChange} itemCategoryChange={handleItemCategoryChange} />
         {/*
         <fieldset className="fieldset-border">
           <div className="field">

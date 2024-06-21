@@ -24,7 +24,7 @@ function BookmarkEdit({ bookmarkEditNavContent }) {
           </fieldset>
           <fieldset className="fieldset-button-field-end">
             <button className="btn btn-icon btn-ghost-alternate-primary" type="submit">
-              <span class="material-symbols-outlined">done</span>
+              <span className="material-symbols-outlined">done</span>
               <span className="hidden">ยืนยันการแก้ไข</span>
             </button>
           </fieldset>

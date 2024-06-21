@@ -7,6 +7,7 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 const mongodbApi = require('./key/mongodbApi');
 const item = require('./routes/item');
+const itemCategory = require('./routes/itemCategory');
 const bookmark = require('./routes/bookmark');
 
 mongoose.Promise = global.Promise;
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/item', item);
+app.use('/itemCategory', itemCategory);
 app.use('/bookmark', bookmark);
 
 // catch 404 and forward to error handler

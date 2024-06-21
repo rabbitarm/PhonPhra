@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemDelete } from '../store/itemListSlice';
 
-import ItemStatus from './includes/ItemStatus';
 import { IconLoading, IconItemNotFound } from './includes/StatusCode';
+import ItemCategoryStatus from './includes/ItemCategoryStatus';
 import Paginate from './includes/Paginate';
 import ItemCreate from './ItemCreate';
 import ItemEdit from './ItemEdit';
@@ -115,11 +115,13 @@ function ItemList() {
                   <tbody>
                     {itemListCurrent?.map(itemItemList => (
                       <tr key={itemItemList?.item_id}>
-                        <td className="relative">
-                          <ItemStatus itemStatus={itemItemList?.item_status} addClassNameIcon={'icon-2xs text-slate-200 absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2'} addClassNameText={'hidden'} />
+                        <td>
                           {itemItemList?.item_number}
                         </td>
-                        <td>
+                        <td className="relative">
+                          <span className="badge badge-reverse absolute right-0">
+                            <ItemCategoryStatus itemCategoryStatus={itemItemList?.item_category_list} addClassNameIcon={'hidden'} addClassNameText={''} />
+                          </span>
                           <Link to={`/บทสวดมนต์/${itemItemList?.item_number}/${itemItemList?.item_name}`}>{itemItemList?.item_name}</Link>
                         </td>
                         <td>

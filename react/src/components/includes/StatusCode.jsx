@@ -28,6 +28,19 @@ export function IconItemNotFound() {
 }
 
 /* Bookamrk */
+export function IconItemCategoryNotFound() {
+  return (
+    <div className="status-code">
+      <span className="material-symbols-outlined">category</span>
+      <div>
+        <h6>404</h6>
+        <h3>ไม่พบหมวดหมู่</h3>
+      </div>
+    </div>
+  );
+}
+
+/* Bookamrk */
 export function IconBookmarkNotFound() {
   return (
     <div className="status-code">
@@ -60,6 +73,7 @@ function StatusCode() {
       <section className="container">
         <IconLoading />
         <IconItemNotFound />
+        <IconItemCategoryNotFound />
         <IconBookmarkNotFound />
         <IconPageNotFound />
       </section>

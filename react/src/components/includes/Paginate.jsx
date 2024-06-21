@@ -18,7 +18,7 @@ function Paginate() {
         <span className="material-symbols-outlined">arrow_right_alt</span>
       }
       breakLabel={
-        <span class="material-symbols-outlined">more_horiz</span>
+        <span className="material-symbols-outlined">more_horiz</span>
       }
       pageCount={Math.ceil(itemList?.length / pagePerItem)}
       marginPagesDisplayed={2}

@@ -207,7 +207,7 @@
   /* Badge */
   .badge {@apply flex justify-center items-center w-fit whitespace-nowrap gap-0.5 rounded-md;}
   .badge-pill {@apply rounded-full;}
-    .badge.badge-xs {@apply min-w-5 h-5 text-xs font-medium px-1.5 rounded;}
+    .badge.badge-xs {@apply min-w-5 h-5 text-2xs font-medium px-1.5 rounded;}
     .badge.badge-sm {@apply min-w-6 h-6 text-xs font-medium px-2 rounded;}
     .badge          {@apply min-w-7 h-7 text-sm px-2.5;}
     .badge.badge-lg {@apply min-w-8 h-8 text-sm px-3;}
@@ -231,6 +231,8 @@
   .badge-outline ,
   .badge-mix {@apply text-slate-400 fill-slate-400 border border-slate-400;}
   .badge[class*="badge-outline"] {@apply border bg-transparent;}
+  .badge .text + .text:before {@apply [content:','] inline-block pr-0.5;}
+  .badge .text:has(.hidden) {@apply [display:none;];}
 
   /* Layout */
   .frame {@apply padding rounded-lg bg-white shadow-lg;}
@@ -392,10 +394,21 @@
   #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
   #itemContentDesc ul {@apply list-disc;}
   .twocolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 gap-x-5 !list-none;}
-  .twocolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden sm:list-item;}
+  .twocolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
+  .threecolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 sm:grid-cols-3 gap-x-5 !list-none;}
+  .threecolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
   #itemContentDesc sup {@apply text-primary-active;}
   #itemContentDesc a {@apply text-primary;}
   #itemContentDesc a:hover {@apply text-primary-active;}
+  #itemContentDesc :is(p, ul, ol)[style*="padding-left: 60px"]  .prefix {@apply min-w-[60px] -ml-[60px];}
+  #itemContentDesc :is(p, ul, ol)[style*="padding-left: 80px"]  .prefix {@apply min-w-20 -ml-20;}
+  #itemContentDesc :is(p, ul, ol)[style*="padding-left: 120px"] .prefix {@apply min-w-[120px] -ml-[120px];}
+  #itemContentDesc table {@apply w-fit border-none;}
+  #itemContentDesc table :is(col, th, td) {@apply !w-auto;}
+  #itemContentDesc table :is(tr) {@apply border-none;}
+  #itemContentDesc table :is(tr):hover {@apply bg-transparent;}
+  #itemContentDesc table :is(th, td) {@apply p-0;}
+  #itemContentDesc table :is(th, td):not(:first-child) {@apply pl-5;}
 };
 
 /*

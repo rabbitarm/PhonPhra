@@ -4,7 +4,14 @@
 body {@apply font-sans text-slate;}
 .indent {@apply indent-5 sm:indent-10;}
 .prefix {@apply inline-block min-w-10 -ml-10;}
+:is(p, ul, ol)[style*="padding-left: 60px"]  .prefix {@apply min-w-[60px] -ml-[60px];}
+:is(p, ul, ol)[style*="padding-left: 80px"]  .prefix {@apply min-w-20 -ml-20;}
+:is(p, ul, ol)[style*="padding-left: 120px"] .prefix {@apply min-w-[120px] -ml-[120px];}
 .twocolumn:is(ul, ol) {@apply 2xs:grid 2xs:grid-cols-2 gap-x-2 !list-none p-[11px_1px_1px];}
 .twocolumn:is(ul, ol) li {@apply border border-dashed border-slate-100;}
 .twocolumn:is(ul, ol) li:nth-child(2) {@apply border-t-0 2xs:border-t;}
 .twocolumn:is(ul, ol) li:nth-child(n+3) {@apply border-t-0;}
+.threecolumn:is(ul, ol) {@apply 2xs:grid 2xs:grid-cols-3 gap-x-3 !list-none p-[11px_1px_1px];}
+.threecolumn:is(ul, ol) li {@apply border border-dashed border-slate-100;}
+.threecolumn:is(ul, ol) li:nth-child(2) {@apply border-t-0 2xs:border-t;}
+.threecolumn:is(ul, ol) li:nth-child(n+3) {@apply border-t-0;}

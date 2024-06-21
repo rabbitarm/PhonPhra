@@ -78,7 +78,7 @@ function Bookmark({ itemAddNavSelect }) {
     dispatch(bookmarkEdit(bookmarkEditContent));
   };
 
-  /* Item in bookmark - Toggle checkbox */
+  /* Item in bookmark - Toggle Checkbox */
   const bookmarkItemSelect = (bookmark_id, item_id, item_number) => {
     const bookmarkItemSelectContent = bookmarkList.find(bookmark => bookmark?.bookmark_id === bookmark_id);
     const bookmarkEditContent = (item_id !== undefined && item_number !== undefined && bookmarkItemSelectContent
@@ -90,7 +90,7 @@ function Bookmark({ itemAddNavSelect }) {
     dispatch(bookmarkEdit(bookmarkEditContent));
   };
 
-  /* Item in bookmark - Checked checkbox */
+  /* Item in bookmark - Checked Checkbox */
   const bookmarkItemChecked = (bookmark_id, item_id) => bookmarkList.find(bookmark => bookmark?.bookmark_id === bookmark_id)?.bookmark_item_list?.some(item => item?.item_id === item_id) && 'checked';
 
   return (
@@ -153,8 +153,8 @@ function Bookmark({ itemAddNavSelect }) {
                           <fieldset className="fieldset-border">
                             <div className="field">
                               <label className="label-border">เลือกรายการโปรด</label>
-                              <select value={bookmarkSelectValue} onChange={(event) => handleBookmarkSelect(event.target.selectedIndex)}>
-                                {bookmarkList.map((itemBookmarkList, indexBookmarkList) => (
+                              <select defaultValue={bookmarkSelectValue} onChange={(event) => handleBookmarkSelect(event.target.selectedIndex)}>
+                                {bookmarkList.map((itemBookmarkList) => (
                                   <option key={itemBookmarkList?.bookmark_id} value={itemBookmarkList?.bookmark_title}>{itemBookmarkList?.bookmark_title}</option>
                                 ))}
                               </select>
