@@ -78,7 +78,7 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
                             {!itemLoading && itemList !== 0 &&
                               <span className="badge badge-reverse">{itemList?.filter(item => item?.item_category_list?.find(category => category?.item_category_id === itemItemCategory?.item_category_id))?.length}</span>
                             }
-                            </td>
+                          </td>
                           {itemItemCategory?.item_category_time_updated === itemCategoryEditSelect?.item_category_time_updated                      
                           ? <>
                               <td colSpan="2"><ItemCategoryForm itemCategoryEditSelect={itemCategoryEditSelect} /></td>
@@ -103,6 +103,14 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
                           }
                         </tr>
                       ))}
+                      <tr>
+                        <td>
+                          {!itemLoading && itemList !== 0 &&
+                            <span className="badge badge-reverse">{itemList?.filter(item => !item?.item_category_list?.some(category => category?.item_category_id !== itemCategoryList?.item_category_id))?.length}</span>
+                          }
+                        </td>
+                        <td colSpan="2" className="!py-4">ไม่พบหมวดหมู่</td>
+                      </tr>
                     </tbody>
                   </table>
                   <span className="badge badge-sm mx-auto">{itemCategoryList?.length} หมวดหมู่</span>
