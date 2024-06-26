@@ -32,7 +32,6 @@ function ItemCreate({ itemNumberHighest }) {
     setItemCategoryChange(event);
     setItemCreateContent({ ...itemCreateContent, item_category_list: event });
   }
-  console.log(itemCreateContent);
 
   return (
     <>

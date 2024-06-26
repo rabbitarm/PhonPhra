@@ -2,9 +2,9 @@ import React from 'react'
 
 function Footer() {
   return (
-    <footer id="footer" className="container flex xs:!flex-row justify-between items-center !gap-1 sm:!gap-2 !p-0 !mb-0 !bg-transparent !shadow-none">
-      <p id="footer-copyright" className="text-sm text-slate-300 text-center md:text-left">ลิขสิทธิ์ © พรพระ</p>
-      <section id="footer-logo">
+    <footer id="footer">
+      <p id="footer-copyright">ลิขสิทธิ์ © พรพระ</p>
+      {/*<section id="footer-logo">
         <ul>
           <li>
             <div className="tooltip" data-tip="React">
@@ -65,7 +65,7 @@ function Footer() {
             </div>
           </li>
         </ul>
-      </section>
+      </section>*/}
     </footer>
   )
 }

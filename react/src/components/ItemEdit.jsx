@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import ItemCategory from './ItemCategory';
 import { itemEdit } from '../store/itemListSlice';
 
-function ItemEdit({ itemEditNavContent }) {
+function ItemEdit({ itemEditSelect }) {
 
   const editorRef = useRef(null);
   const log = () => {
@@ -16,7 +16,7 @@ function ItemEdit({ itemEditNavContent }) {
   };
   const dispatch = useDispatch();
 
-  const [itemEditContent, setItemEditContent] = useState(itemEditNavContent);
+  const [itemEditContent, setItemEditContent] = useState(itemEditSelect);
   const [itemModeUpdating, setItemModeUpdating] = useState(false);
   const itemEditChange = (event) => setItemEditContent({ ...itemEditContent, [event.target.name]: event.target.value });
   const handleItemEditSubmit = (event) => {
@@ -24,9 +24,9 @@ function ItemEdit({ itemEditNavContent }) {
     setItemModeUpdating(!itemModeUpdating);
     dispatch(itemEdit(itemEditContent));
   }
-  const handleItemEditReset = () => setItemEditContent(itemEditNavContent);
+  const handleItemEditReset = () => setItemEditContent(itemEditSelect);
 
-  const [itemCategoryChange, setItemCategoryChange] = useState(itemEditNavContent?.item_category_list);
+  const [itemCategoryChange, setItemCategoryChange] = useState(itemEditSelect?.item_category_list);
   const handleItemCategoryChange = (event) => {
     setItemCategoryChange(event);
     setItemEditContent({ ...itemEditContent, item_category_list: event });

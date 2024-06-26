@@ -28,30 +28,26 @@ function ItemList() {
   /* Item Action */
   const [itemCreateToggle, setItemCreateToggle] = useState(false);
   const [itemAddNavSelect, setItemAddNavSelect] = useState([]);
-  const [itemEditNavContent, setItemEditNavContent] = useState([]);
-  const [itemDeleteNavId, setItemDeleteNavId] = useState('');
+  const [itemEditSelect, setItemEditSelect] = useState([]);
+  const [itemDeleteSelect, setItemDeleteSelect] = useState('');
+  const [itemActionSelect, setItemActionSelect] = useState('');
   /**/
-  const itemNavInactive = () => {setItemCreateToggle(false); setItemAddNavSelect([]); setItemEditNavContent([]); setItemDeleteNavId('');}
+  const handleItemCreate = () => {handleItemCancel(); setItemCreateToggle(!itemCreateToggle);}
+  const handleItemAdd = (item_id, item_number) => {handleItemCancel(); setItemAddNavSelect({ item_id: item_id, item_number: item_number });}
+  const handleItemEdit = (itemItemList) => {handleItemCancel(); setItemEditSelect(itemItemList);}
+  const handleItemDelete = (item_id) => {handleItemCancel(); setItemDeleteSelect(item_id);}
+  const handleItemDeleteComfirm = () => dispatch(itemDelete(itemDeleteSelect));
+  const handleItemAction = (item_id) => {handleItemCancel(); setItemActionSelect(item_id);}
+  const handleItemActionDelete = () => dispatch(itemDelete(itemActionSelect));
   /**/
-  const handleItemCreate = () => {itemNavInactive(); setItemCreateToggle(!itemCreateToggle);}
-  const handleItemCreateCancel = () => setItemCreateToggle(false);
-  /**/
-  const handleItemAdd = (item_id, item_number) => {itemNavInactive(); setItemAddNavSelect({ item_id: item_id, item_number: item_number });}
-  const handleItemAddCancel = () => {itemNavInactive(); setItemAddNavSelect([]);}
-  /**/
-  const handleItemEdit = (itemItemList) => {itemNavInactive(); setItemEditNavContent(itemItemList);}
-  const handleItemEditCancel = () => setItemEditNavContent([]);
-  /**/
-  const handleItemDelete = (item_id) => {itemNavInactive(); setItemDeleteNavId(item_id);}
-  const handleItemDeleteCancel = () => setItemDeleteNavId('');
-  const handleItemDeleteComfirm = () => dispatch(itemDelete(itemDeleteNavId));
+  const handleItemCancel = () => {setItemCreateToggle(false); setItemAddNavSelect([]); setItemEditSelect([]); setItemDeleteSelect(''); setItemActionSelect('');}
 
   /* Check Item edit status */
   useEffect(() => {
-    {itemList?.find(item => item?.item_id === itemEditNavContent?.item_id) !== itemEditNavContent &&
-      setItemEditNavContent([]);
+    {itemList?.find(item => item?.item_id === itemEditSelect?.item_id) !== itemEditSelect &&
+      setItemEditSelect([]);
     }
-  }, [itemList?.find(item => item?.item_id === itemEditNavContent?.item_id)]);
+  }, [itemList?.find(item => item?.item_id === itemEditSelect?.item_id)]);
 
   return (
     <>
@@ -72,14 +68,14 @@ function ItemList() {
                     <dialog className="modal">
                       <div className="modal-content">
                         <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                          <button className="btn btn-icon btn-ghost" onClick={handleItemCreateCancel}>
+                          <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
                             <span className="material-symbols-outlined">close</span>
                             <span className="hidden">ยกเลิก</span>
                           </button>
                         </div>
                         <ItemCreate itemNumberHighest={itemNumberHighest} />
                       </div>
-                      <button className="modal-close" onClick={handleItemCreateCancel}></button>
+                      <button className="modal-close" onClick={handleItemCancel}></button>
                     </dialog>
                   }
                 </div>
@@ -99,14 +95,14 @@ function ItemList() {
                           <dialog className="modal">
                             <div className="modal-content">
                               <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                                <button className="btn btn-icon btn-ghost" onClick={handleItemCreateCancel}>
+                                <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
                                   <span className="material-symbols-outlined">close</span>
                                   <span className="hidden">ยกเลิก</span>
                                 </button>
                               </div>
                               <ItemCreate itemNumberHighest={itemNumberHighest} />
                             </div>
-                            <button className="modal-close" onClick={handleItemCreateCancel}></button>
+                            <button className="modal-close" onClick={handleItemCancel}></button>
                           </dialog>
                         }
                       </th>
@@ -134,14 +130,14 @@ function ItemList() {
                               <dialog className="modal">
                                 <div className="modal-content">
                                   <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                                    <button className="btn btn-icon btn-ghost" onClick={handleItemAddCancel}>
+                                    <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
                                       <span className="material-symbols-outlined">close</span>
                                       <span className="hidden">ยกเลิก</span>
                                     </button>
                                   </div>
                                   <Bookmark itemAddNavSelect={itemAddNavSelect} />
                                 </div>
-                                <button className="modal-close" onClick={handleItemAddCancel}></button>
+                                <button className="modal-close" onClick={handleItemCancel}></button>
                               </dialog>
                             }
                           </div>
@@ -150,18 +146,18 @@ function ItemList() {
                               <span className="material-symbols-outlined">edit</span>
                               <span className="hidden">แก้ไข</span>
                             </button>
-                            {itemItemList?.item_id === itemEditNavContent?.item_id &&
+                            {itemItemList?.item_id === itemEditSelect?.item_id &&
                               <dialog className="modal">
                                 <div className="modal-content">
                                   <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                                    <button className="btn btn-icon btn-ghost" onClick={handleItemEditCancel}>
+                                    <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
                                       <span className="material-symbols-outlined">close</span>
                                       <span className="hidden">ยกเลิก</span>
                                     </button>
                                   </div>
-                                  <ItemEdit itemEditNavContent={itemEditNavContent} />
+                                  <ItemEdit itemEditSelect={itemEditSelect} />
                                 </div>
-                                <button className="modal-close" onClick={handleItemEditCancel}></button>
+                                <button className="modal-close" onClick={handleItemCancel}></button>
                               </dialog>
                             }
                           </div>
@@ -170,18 +166,43 @@ function ItemList() {
                               <span className="material-symbols-outlined">delete_forever</span>
                               <span className="hidden">ลบ</span>
                             </button>
-                            {itemItemList?.item_id === itemDeleteNavId &&
+                            {itemItemList?.item_id === itemDeleteSelect &&
                               <dialog className="modal modal-tooltip modal-tooltip-right">
                                 <div className="modal-content">
                                   <p>ลบรายการนี้?</p>
                                   <fieldset className="fieldset-button">
-                                    <button className="btn btn-2xs btn-alternate-success" onClick={handleItemDeleteCancel}>
+                                    <button className="btn btn-2xs" onClick={handleItemCancel}>
                                       <span>ยกเลิก</span>
                                     </button>
-                                    <button className="btn btn-2xs btn-color-error" onClick={handleItemDeleteComfirm}>
+                                    <button className="btn btn-2xs btn-color-warning" onClick={handleItemDeleteComfirm}>
                                       <span>ลบ</span>
                                     </button>
                                   </fieldset>
+                                </div>
+                              </dialog>
+                            }
+                          </div>
+                          <div className="tooltip" data-tip="ตัวเลือก">
+                            <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleItemAction(itemItemList?.item_id)}>
+                              <span className="material-symbols-outlined">more_vert</span>
+                              <span className="hidden">ตัวเลือก</span>
+                            </button>
+                            {itemItemList?.item_id === itemActionSelect &&
+                              <dialog className="modal modal-tooltip modal-tooltip-right">
+                                <div className="modal-content !p-0">
+                                  <button className="btn btn-sm btn-ghost w-full justify-start" onClick={() => handleItemAdd(itemItemList?.item_id, itemItemList?.item_number)}>
+                                    <span className="material-symbols-outlined">bookmark_add</span>
+                                    <span>เพิ่มไปยังรายการโปรด</span>
+                                  </button>
+                                  <button className="btn btn-sm btn-ghost w-full justify-start" onClick={() => handleItemEdit(itemItemList)}>
+                                    <span className="material-symbols-outlined">edit</span>
+                                    <span>แก้ไขบทสวดมนต์</span>
+                                  </button>
+                                  <hr />
+                                  <button className="btn btn-sm btn-ghost-alternate-warning w-full justify-start" onClick={handleItemActionDelete}>
+                                    <span className="material-symbols-outlined">delete_forever</span>
+                                    <span>ลบบทสวดมนต์</span>
+                                  </button>
                                 </div>
                               </dialog>
                             }
