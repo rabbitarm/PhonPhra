@@ -6,7 +6,8 @@ import { itemCategoryFetch } from './store/itemCategorySlice';
 import { bookmarkFetch } from './store/bookmarkListSlice';
 
 import './App.css';
-import Aside from './components/Aside';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import ItemList from './components/ItemList';
 import ItemContent from './components/ItemContent';
 import ItemCategory from './components/ItemCategory';
@@ -29,7 +30,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Aside />
+      <Header />
       <main id="main">
         <Routes>
           <Route index element={<ItemList />} />
@@ -46,6 +47,7 @@ function App() {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </main>
+      <Footer />
     </BrowserRouter>
   );
   

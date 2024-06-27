@@ -239,7 +239,7 @@
   .tooltip:before {@apply content-[attr(data-tip)] min-w-10 text-xs text-center text-white px-2 py-1 rounded mb-1 bg-slate-600;}
   .tooltip:after {@apply content-[''] w-0 h-0 border-t-4 border-x-4 border-transparent border-t-slate-600;}
   .tooltip:before ,
-  .tooltip:after {@apply delay-700 pointer-events-none invisible opacity-0 absolute z-90 left-1/2 bottom-full -translate-x-1/2 -translate-y-0;}
+  .tooltip:after {@apply delay-700 pointer-events-none invisible opacity-0 absolute z-10 left-1/2 bottom-full -translate-x-1/2 -translate-y-0;}
   .tooltip:hover:before ,
   .tooltip:hover:after {@apply visible opacity-100 -translate-y-1;}
   /**/
@@ -256,10 +256,17 @@
   .tooltip-right:after {@apply top-auto left-full right-auto bottom-1/2 translate-x-0 translate-y-1/2;}
   .tooltip-right:hover:before ,
   .tooltip-right:hover:after {@apply translate-x-1 translate-y-1/2;}
+  /**/
+  .tooltip-bottom:before {@apply mb-0 mt-1;}
+  .tooltip-bottom:after {@apply border-t-0 border-x-4 border-b-4 border-transparent border-b-slate-600;}
+  .tooltip-bottom:before ,
+  .tooltip-bottom:after {@apply left-1/2 top-full bottom-auto -translate-x-1/2 -translate-y-0;}
+  .tooltip-bottom:hover:before ,
+  .tooltip-bottom:hover:after {@apply translate-y-1;}
 
-  .modal {@apply relative z-10 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
+  .modal {@apply relative z-20 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
   .modal .modal-content {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding;}
-  .modal-content > .tooltip {@apply absolute z-10 top-0 right-0;}
+  .modal-content > .tooltip {@apply absolute top-0 right-0;}
   .modal-content .fieldset-button {@apply gap-2 2xs:gap-4 pt-4;}
   .modal[class*="modal-"] .modal-content > .tooltip ,
   .modal[class*="modal-"] .modal-close {@apply hidden;}
@@ -370,7 +377,7 @@
   .margin-l-lg  {@apply ml-8 sm:ml-16;}
   .margin-r-lg  {@apply mr-8 sm:mr-16;}
   .margin-b-lg  {@apply mb-8 sm:mb-16;}
-  .container {@apply relative flex flex-col max-w-screen-xl frame gap padding mx-auto mt-8;}
+  .container {@apply relative flex flex-col justify-between max-w-screen-xl gap padding mx-auto;}
   hr {@apply clear-both w-full;}
   .container > hr ,
   #itemContent .content-title + hr {@apply clear-both flex-auto w-auto -mx-4 sm:-mx-8;}
@@ -461,48 +468,36 @@
 .tox .tox-statusbar__resize-handle svg {@apply !w-3 !h-3;}
 .tox svg {@apply w-auto h-auto;}
 
-#root {@apply flex;}
-
-/* Header & Main Navi */
-/*
-#header {@apply bg-white;}
-#header nav {@apply flex flex-wrap justify-between items-center padding;}
-#header #navBrand {@apply h-10;}
-#header #navToggle {@apply md:hidden;}
-#header #navMain {@apply hidden md:flex;}
-#header.active #navMain {@apply block w-full padding-t-sm;}
-#header.active #navMain a {@apply w-full;}
-*/
-
-/* A Side */
-#aside {@apply relative flex flex-col justify-between h-screen p-4 bg-slate-50;}
-#aside:not(.minimize) {@apply min-w-[200px];}
-#aside.minimize {@apply px-3;}
-#aside nav {@apply flex flex-col;}
-#aside #navBrand {@apply mb-4;}
-#aside #navToggle {@apply absolute z-90 top-5 -right-5;}
-#aside #navMain {@apply flex flex-col;}
-#aside:not(.minimize) #navMain a {@apply w-full justify-start whitespace-nowrap;}
+/* Header */
+#header {@apply bg-slate-50;}
+#header .container {@apply flex-row justify-between items-center padding-y-sm;}
+#header #navBrand a {@apply h-10 flex items-center gap-2;}
 /**/
-#widgetCalendar {@apply relative flex rounded-lg mt-4 bg-white;}
-#widgetCalendar .icon-moon {@apply w-fit rounded-lg px-2 py-3 bg-gradient-to-br from-info-950 to-info;}
-#widgetCalendar .material-symbols-outlined {@apply text-white;}
-#widgetCalendar .date {@apply w-full px-3 py-2;}
-#aside.minimize #widgetCalendar .date {@apply w-10 text-center p-0 pt-1 pb-2;}
-#widgetCalendar h6 {@apply text-sm font-medium text-info;}
-#aside.minimize #widgetCalendar h6 {@apply text-xs}
-#widgetCalendar p {@apply text-sm leading-5;}
-#widgetCalendar .date-number {@apply text-3xl font-light leading-6;}
-#aside:not(.minimize) #widgetCalendar .date-number {@apply hidden;}
+#header #navMain {@apply -order-1 md:order-none;}
+#header #navMain #navMainToggle {@apply md:hidden;}
+#header #navMain ul {@apply hidden md:flex;}
+#header.navmain-active #navMain ul {@apply absolute z-80 top-full left-0 block w-full padding border-t bg-slate-50 shadow-lg;}
+#header.navmain-active #navMain ul .btn {@apply w-full;}
 /**/
-#aside.minimize nav .text ,
-#aside.minimize #widgetCalendar .icon-moon ,
-#aside.minimize #widgetCalendar .date-full {@apply hidden;}
+#header #navSetting {@apply relative;}
+#header #navSetting ul {@apply hidden;}
+#header.navsetting-active #navSetting ul {@apply absolute z-80 top-full right-0 block rounded-lg bg-white shadow-lg;}
+#header.navsetting-active #navSetting ul .btn {@apply w-full whitespace-nowrap justify-start;}
+#header.navsetting-active #navSetting ul .btn .text {@apply text-left margin-r-sm;}
+/**/
+#widgetCalendar {@apply frame flex w-fit !p-0 -mb-5;}
+#widgetCalendar .icon-moon {@apply text-white rounded-lg p-2 bg-gradient-to-br from-info-950 to-info;}
+#widgetCalendar .date {@apply text-nowrap px-3 py-2;}
+#widgetCalendar h6 {@apply text-xs md:text-sm font-medium text-info;}
+#widgetCalendar p {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}
+#widgetCalendar p span:not(.date-number) {@apply hidden md:inline;}
+
+/* Footer */
+#footer {@apply bg-slate-50;}
+#footer .container {@apply flex-col 2xs:flex-row items-center 2xs:padding-y-sm gap-0;}
+#footerCopyright {@apply text-sm text-slate-300 text-center;}
+#footerLogo ul {@apply flex items-center;}
+#footerLogo ul a .text {@apply hidden;}
 
 /* Main */
-#main {@apply w-full;}
-/* Footer */
-/*
-#footer {@apply padding-t-sm padding-b-xs;}
-#footer p {@apply text-sm text-slate-300 text-center;}
-*/
+#main {@apply padding-y;}

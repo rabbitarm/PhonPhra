@@ -8,7 +8,7 @@ import ItemStatus from './includes/ItemStatus';
 import { IconLoading, IconItemNotFound, IconBookmarkNotFound } from './includes/StatusCode';
 import BookmarkEdit from './BookmarkEdit';
 
-function Bookmark({ itemAddNavSelect }) {
+function Bookmark({ itemAddSelect }) {
 
   /* Bookmark - List */
   const dispatch = useDispatch();
@@ -102,7 +102,7 @@ function Bookmark({ itemAddNavSelect }) {
           {bookmarkList?.length === 0
           ? <IconBookmarkNotFound />
           : <>
-              {itemAddNavSelect !== undefined
+              {itemAddSelect !== undefined
               ? <section id="bookmarkCheckbox" className="flex flex-col items-center gap">
                   <table className="table-action">
                     <thead>
@@ -118,7 +118,7 @@ function Bookmark({ itemAddNavSelect }) {
                             <form>
                               <fieldset className="fieldset-inline">
                                 <div className="field">
-                                <input type="checkbox" id={itemBookmarkList?.bookmark_id} checked={bookmarkItemChecked(itemBookmarkList?.bookmark_id, itemAddNavSelect?.item_id)} onChange={() => bookmarkItemSelect(itemBookmarkList?.bookmark_id, itemAddNavSelect?.item_id, itemAddNavSelect?.item_number)} />
+                                <input type="checkbox" id={itemBookmarkList?.bookmark_id} checked={bookmarkItemChecked(itemBookmarkList?.bookmark_id, itemAddSelect?.item_id)} onChange={() => bookmarkItemSelect(itemBookmarkList?.bookmark_id, itemAddSelect?.item_id, itemAddSelect?.item_number)} />
                                   <label htmlFor={itemBookmarkList?.bookmark_id}>{itemBookmarkList?.bookmark_title}</label>
                                 </div>
                               </fieldset>

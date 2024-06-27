@@ -103,6 +103,7 @@ function ItemContent() {
                     <section className="content-title">
                       <div className="status-bar flex items-center gap-2">
                         <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
+                        {/*
                         <span className="badge badge-sm badge-reverse !p-0">
                           <TimeFormat itemTimeCreated={itemContent?.item_time_created} addClassNameIcon={''} addClassNameText={''} />
                         </span>
@@ -112,6 +113,7 @@ function ItemContent() {
                         <span className="badge badge-sm badge-reverse !p-0">
                           <ItemCategoryStatus itemCategoryStatus={itemContent?.item_category_list} addClassNameIcon={''} addClassNameText={''} />
                         </span>
+                        */}
                       </div>
                       <h1 className="text-2xl">{itemContent?.item_name}</h1>
                     </section>
@@ -159,7 +161,7 @@ function ItemContent() {
                       </div>
                       <hr />
                       <div className="tooltip" data-tip="แบ่งปัน">
-                        <button className={'btn btn-icon ' + (!contentShare && 'btn-ghost')} onClick={handleContentShare}>
+                        <button className={'btn btn-icon' + (!contentShare ? ' btn-ghost' : '')} onClick={handleContentShare}>
                           <span className="material-symbols-outlined">share</span>
                           <span className="hidden">แบ่งปัน</span>
                         </button>
@@ -170,7 +172,7 @@ function ItemContent() {
                         }
                       </div>
                       <div className="tooltip" data-tip="ปรับแต่ง">
-                        <button className={'btn btn-icon ' + (!contentCustomize && 'btn-ghost')} onClick={handleContentCustomize}>
+                        <button className={'btn btn-icon' + (!contentCustomize ? ' btn-ghost' : '')} onClick={handleContentCustomize}>
                           <span className="material-symbols-outlined">page_info</span>
                           <span className="hidden">ปรับแต่ง</span>
                         </button>
