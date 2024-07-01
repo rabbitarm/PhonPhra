@@ -3,7 +3,7 @@ import { IconPageNotFound } from './includes/StatusCode';
 
 function NotFound() {
   return (
-    <section id="notFound" className="container">
+    <section id="notFound" className="container !justify-center">
       <IconPageNotFound />
     </section>
   );

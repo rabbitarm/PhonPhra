@@ -18,9 +18,12 @@ const countNumberSlice = createSlice({
     },
     countNumberReset: (state) => {
       state.countNumberIndex = state.countNumberInitial;
+    },
+    countNumberChange: (state, action) => {
+      state.countNumberIndex = action.payload > state.countNumberMaximum ? state.countNumberMaximum : action.payload;
     }
   }
 });
 
-export const { countNumberIncrease, countNumberDecrease, countNumberReset } = countNumberSlice.actions;
+export const { countNumberIncrease, countNumberDecrease, countNumberReset, countNumberChange } = countNumberSlice.actions;
 export default countNumberSlice.reducer;

@@ -205,7 +205,7 @@ function Bookmark({ itemAddSelect }) {
                               <td>
                                 <div className="tooltip" data-tip="ลบ">
                                   <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleBookmarkItemRemove(bookmarkSelectId, itemItemList?.item_id)}>
-                                    <span className="material-symbols-outlined">delete_forever</span>
+                                    <span className="material-symbols-outlined">bookmark_remove</span>
                                     <span className="hidden">ลบ</span>
                                   </button>
                                 </div>

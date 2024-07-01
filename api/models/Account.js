@@ -11,8 +11,10 @@ const AccountSchema = new mongoose.Schema({
   user_role: { type: String, required: true, trim: true, enum: ['admin', 'user'], default:'user' },
   user_status: { type: String, required: true, trim: true, enum: ['allow', 'ban'], default:'allow' },
   user_setting: [{
-    user_theme: { type: String, required: true, trim: true, enum: ['system', 'light', 'dark'], default:'system' },
-    user_font: { type: String, required: true, trim: true, enum: ['text-base', 'text-lg', 'text-xl', 'text-2xl', 'text-3xl', 'text-4xl', 'text-5xl'], default:'text-base' },
+    setting_theme: { type: String, required: true, trim: true, enum: ['system', 'light', 'dark'], default:'system' },
+    setting_fontsize: { type: String, required: true, trim: true, enum: ['text-base', 'text-lg', 'text-xl', 'text-2xl', 'text-3xl', 'text-4xl', 'text-5xl'], default:'text-base' },
+    setting_widget_calendar: { type: Boolean, required: true, trim: true, default:true },
+    setting_widget_countnumber: { type: Boolean, required: true, trim: true, default:true },
   }],
 },{
   timestamps: {

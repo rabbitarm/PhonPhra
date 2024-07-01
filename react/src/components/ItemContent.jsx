@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
-import { countNumberIncrease, countNumberDecrease, countNumberReset } from '../store/countNumberSlice';
 
 import { IconLoading, IconItemNotFound } from './includes/StatusCode';
-import ItemStatus from './includes/ItemStatus';
+/* import ItemStatus from './includes/ItemStatus';
 import ItemCategoryStatus from './includes/ItemCategoryStatus';
-import TimeFormat from './includes/TimeFormat';
+import TimeFormat from './includes/TimeFormat'; */
+import WidgetCountNumber from './includes/WidgetCountNumber';
 import ItemEdit from './ItemEdit';
 import Bookmark from './Bookmark';
 
@@ -56,22 +56,22 @@ function ItemContent() {
   };
 
   /* Add item to bookmark */
-  const [itemAddNavSelect, setItemAddNavSelect] = useState([]);
-  const [itemEditNavContent, setItemEditNavContent] = useState([]);
+  const [itemAddSelect, setItemAddSelect] = useState([]);
+  const [itemEditSelect, setItemEditSelect] = useState([]);
   /**/
-  const itemNavInactive = () => {setItemAddNavSelect([]); setItemEditNavContent([]);}
+  const itemNavInactive = () => {setItemAddSelect([]); setItemEditSelect([]);}
   /**/
-  const handleItemAdd = (item_id, item_number) => {itemNavInactive(); setItemAddNavSelect({ item_id: item_id, item_number: item_number });}
-  const handleItemAddCancel = () => {itemNavInactive(); setItemAddNavSelect([]);}
+  const handleItemAdd = (item_id, item_number) => {itemNavInactive(); setItemAddSelect({ item_id: item_id, item_number: item_number });}
+  const handleItemAddCancel = () => {itemNavInactive(); setItemAddSelect([]);}
   /**/
-  const handleItemEdit = (itemItemList) => {itemNavInactive(); setItemEditNavContent(itemItemList);}
-  const handleItemEditCancel = () => setItemEditNavContent([]);
+  const handleItemEdit = (itemItemList) => {itemNavInactive(); setItemEditSelect(itemItemList);}
+  const handleItemEditCancel = () => setItemEditSelect([]);
   /* Check Item edit status */
   useEffect(() => {
-    {itemList?.find(item => item?.item_id === itemEditNavContent?.item_id) !== itemEditNavContent &&
-      setItemEditNavContent([]);
+    {itemList?.find(item => item?.item_id === itemEditSelect?.item_id) !== itemEditSelect &&
+      setItemEditSelect([]);
     }
-  }, [itemList?.find(item => item?.item_id === itemEditNavContent?.item_id)]);
+  }, [itemList?.find(item => item?.item_id === itemEditSelect?.item_id)]);
   
   /* Share */
   const [contentShare, setContentShare] = useState(false);
@@ -84,11 +84,6 @@ function ItemContent() {
   const { fontSizes, fontSizeIndex } = useSelector((state) => state.fontSize);
   const handleFontSizeIncrease = () => dispatch(fontSizeIncrease());
   const handleFontSizeDecrease = () => dispatch(fontSizeDecrease());
-  /* Count Number */
-  const { countNumberInitial, countNumberMaximum, countNumberIndex } = useSelector((state) => state.countNumber);
-  const handleCountNumberIncrease = () => dispatch(countNumberIncrease());
-  const handleCountNumberDecrease = () => dispatch(countNumberDecrease());
-  const handleCountNumberReset    = () => dispatch(countNumberReset());
 
   return (
     <article id="itemContent" className="container">
@@ -99,6 +94,7 @@ function ItemContent() {
           ? <>
               {itemList.filter(item => item?.item_number === itemNumberIndex).map(itemContent => (itemContent &&
                 <main key={itemContent?.item_id} className="flex flex-col gap">
+                  <WidgetCountNumber />
                   <div className="flex flex-wrap justify-between items-stretch md:items-start gap flex-col-reverse md:flex-row">
                     <section className="content-title">
                       <div className="status-bar flex items-center gap-2">
@@ -124,7 +120,7 @@ function ItemContent() {
                           <span className="material-symbols-outlined">bookmark_add</span>
                           <span className="hidden">เพิ่ม</span>
                         </button>
-                        {itemContent?.item_id === itemAddNavSelect?.item_id &&
+                        {itemContent?.item_id === itemAddSelect?.item_id &&
                           <dialog className="modal">
                             <div className="modal-content">
                               <div className="tooltip tooltip-left" data-tip="ยกเลิก">
@@ -133,7 +129,7 @@ function ItemContent() {
                                   <span className="hidden">ยกเลิก</span>
                                 </button>
                               </div>
-                              <Bookmark itemAddNavSelect={itemAddNavSelect} />
+                              <Bookmark itemAddSelect={itemAddSelect} />
                             </div>
                             <button className="modal-close" onClick={handleItemAddCancel}></button>
                           </dialog>
@@ -144,7 +140,7 @@ function ItemContent() {
                           <span className="material-symbols-outlined">edit</span>
                           <span className="hidden">แก้ไข</span>
                         </button>
-                        {itemContent?.item_id === itemEditNavContent?.item_id &&
+                        {itemContent?.item_id === itemEditSelect?.item_id &&
                           <dialog className="modal">
                             <div className="modal-content">
                               <div className="tooltip tooltip-left" data-tip="ยกเลิก">
@@ -153,7 +149,7 @@ function ItemContent() {
                                   <span className="hidden">ยกเลิก</span>
                                 </button>
                               </div>
-                              <ItemEdit itemEditNavContent={itemEditNavContent} />
+                              <ItemEdit itemEditSelect={itemEditSelect} />
                             </div>
                             <button className="modal-close" onClick={handleItemEditCancel}></button>
                           </dialog>
@@ -192,21 +188,6 @@ function ItemContent() {
                               <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex <= 0 && 'disabled'} onClick={handleFontSizeDecrease}>
                                 <span className="material-symbols-outlined">remove</span>
                                 <span className="hidden">ลดขนาด</span>
-                              </button>
-                            </section>
-                            <section id="itemContentCountNumber" className="frame flex justify-between items-center w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
-                              <button className="btn btn-icon btn-alternate-info" disabled={countNumberIndex >= countNumberMaximum && 'disabled'} onClick={handleCountNumberIncrease}>
-                                <span className="material-symbols-outlined">exposure_plus_1</span>
-                                <span className="hidden">เพิ่ม</span>
-                              </button>
-                              <span className="block w-16 text-4xl leading-none text-center text-info">{countNumberIndex}</span>
-                              <button className="btn btn-icon btn-alternate-info" disabled={countNumberIndex <= countNumberInitial && 'disabled'} onClick={handleCountNumberDecrease}>
-                                <span className="material-symbols-outlined">exposure_neg_1</span>
-                                <span className="hidden">ลด</span>
-                              </button>
-                              <button className="btn btn-icon btn-alternate-warning" disabled={countNumberIndex <= countNumberInitial && 'disabled'} onClick={handleCountNumberReset}>
-                                <span className="material-symbols-outlined -scale-x-100">refresh</span>
-                                <span className="hidden">เริ่มใหม่</span>
                               </button>
                             </section>
                           </section>

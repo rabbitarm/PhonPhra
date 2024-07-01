@@ -36,7 +36,7 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
   return (
     <section id="itemCategory" className="container">
       {itemCategorySelect !== undefined
-      ? <section id="itemCategoryCheckbox" className="flex justify-between items-end gap-xs">
+      ? <section id="itemCategorySelectOption" className="flex justify-between items-end gap-2">
           <fieldset className="fieldset-border pt-0">
             <div className="field">
               <label className="label-border">หมวดหมู่</label>
@@ -49,7 +49,7 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
             </div>
           </fieldset>
           <div className="tooltip" data-tip="จัดการหมวดหมู่">
-            <button className="btn btn-icon btn-ghost" onClick={() => navigate(`/หมวดหมู่`)}>
+            <button className="btn btn-icon" onClick={() => navigate(`/หมวดหมู่`)}>
               <span className="material-symbols-outlined">settings</span>
               <span className="hidden">จัดการหมวดหมู่</span>
             </button>
@@ -76,7 +76,7 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
                         <tr key={itemItemCategory?.item_category_id}>
                           <td>
                             {!itemLoading && itemList !== 0 &&
-                              <span className="badge badge-reverse">{itemList?.filter(item => item?.item_category_list?.find(category => category?.item_category_id === itemItemCategory?.item_category_id))?.length}</span>
+                              itemList?.filter(item => item?.item_category_list?.find(category => category?.item_category_id === itemItemCategory?.item_category_id))?.length
                             }
                           </td>
                           {itemItemCategory?.item_category_time_updated === itemCategoryEditSelect?.item_category_time_updated                      
@@ -106,10 +106,11 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
                       <tr>
                         <td>
                           {!itemLoading && itemList !== 0 &&
-                            <span className="badge badge-reverse">{itemList?.filter(item => !item?.item_category_list?.some(category => category?.item_category_id !== itemCategoryList?.item_category_id))?.length}</span>
+                            itemList?.filter(item => !item?.item_category_list?.some(category => category?.item_category_id !== itemCategoryList?.item_category_id))?.length
                           }
                         </td>
-                        <td colSpan="2" className="!py-4">ไม่พบหมวดหมู่</td>
+                        <td>ไม่พบหมวดหมู่</td>
+                        <td></td>
                       </tr>
                     </tbody>
                   </table>

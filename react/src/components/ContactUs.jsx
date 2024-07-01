@@ -43,11 +43,11 @@ function ContactUs() {
         <fieldset className="fieldset-button">
           <button className="btn btn-color-primary w-full 2xs:w-fit" type="submit">
             <span className="material-symbols-outlined">forward_to_inbox</span>
-            <span>ส่งข้อความ</span>
+            <span className="text">ส่งข้อความ</span>
           </button>
           <button className="btn btn-ghost w-full 2xs:w-fit" type="reset" onClick={contactFormReset}>
             <span className="material-symbols-outlined">backspace</span>
-            <span>ล้าง</span>
+            <span className="text">ล้าง</span>
           </button>
         </fieldset>
       </form>

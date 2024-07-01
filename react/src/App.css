@@ -23,7 +23,7 @@
   ol {@apply list-decimal pl-10;}
   ol li {@apply pl-1;}
 
-  form {@apply relative flex flex-col w-full gap-4;}
+  form {@apply relative flex flex-col items-center w-full gap-4;}
   fieldset {@apply relative flex flex-col flex-wrap w-full gap-1;}
   label {@apply w-full whitespace-nowrap;}
   input ,
@@ -36,6 +36,7 @@
   label[for="radio"] {@apply w-fit;}
   input[type="checkbox"] ,
   input[type="radio"] {@apply size-6 rounded;}
+  input[type="password"] {@apply tracking-widest;}
   input:hover       , fieldset:hover input             , 
   select:hover      , fieldset:hover select            , 
   textarea:hover    , fieldset:hover textarea          {@apply border-slate-300;}
@@ -45,8 +46,12 @@
   input:disabled    , fieldset:hover input:disabled    ,
   select:disabled   , fieldset:hover select:disabled   , 
   textarea:disabled , fieldset:hover textarea:disabled {@apply border-slate-200 bg-slate-100;}
+  /**/
   form * , input , select , textarea {@apply outline-none;}
-
+  input::-webkit-outer-spin-button ,
+  input::-webkit-inner-spin-button {@apply [-webkit-appearance:none] m-0;}
+  input[type=number] {@apply [-moz-appearance:textfield];}
+  /**/
   .form-inline {@apply flex-row justify-between items-end gap-4;}
   .form-inner {@apply flex-row justify-between items-end gap-0;}
   .fieldset-border {@apply pt-3;}
@@ -66,44 +71,33 @@
   .field label {@apply w-fit;}
   .label-border {@apply absolute -top-3 left-3 inline-block text-sm px-1 py-0 rounded mt-[1px] bg-white;}
   .label-field-on {@apply absolute top-0.5 left-4 text-sm;}
-  .label-field-end {@apply absolute top-1.5 right-1.5 min-w-10 text-xs text-center text-white px-2 py-1 rounded bg-slate-200;}
+  .label-field-end {@apply absolute top-1.5 right-1.5 flex justify-center items-center min-w-10 min-h-7 text-xs text-center text-white px-2 py-1 rounded bg-slate-200;}
   fieldset:hover .label-field-end {@apply bg-slate-300;}
+  .fieldset-inline .label-field-end {@apply w-fit;}
 
   table {@apply w-full;}
-  table thead tr {@apply text-sm border-b border-slate-200;}
+  table tr {@apply border-b border-slate-200;}
   table thead th ,
-  table thead td {@apply font-medium text-nowrap text-left align-bottom pt-0;}
-  table tbody tr {@apply border-b border-slate-100;}
-  table tbody tr:hover {@apply bg-slate-100;}
+  table thead td {@apply text-sm font-medium text-nowrap text-left align-bottom !pt-0;}
+  table tbody tr {@apply border-slate-100;}
+  table tbody tr:hover {@apply bg-slate-50;}
   table th ,
-  table td {@apply align-top pr-4 sm:pr-8 py-2 sm:py-4;}
+  table td {@apply align-top py-2 pr-4 sm:pr-8;}
   table th:first-child ,
   table td:first-child {@apply w-0 pl-4 sm:pl-8;}
   table th:last-child ,
-  table td:last-child {@apply w-0 pr-4 sm:pr-8;}
-  table a:not(.btn):hover {@apply underline underline-offset-4 decoration-primary-active;}
-  
-  table.frame thead th ,
-  table.frame thead td {@apply align-middle py-6;}
-  table.frame thead th:last-child ,
-  table.frame thead td:last-child {@apply py-2 pr-4;}
+  table td:last-child {@apply w-0;}
+  table a:not(.btn):hover {@apply underline underline-offset-2 decoration-primary-active;}
   /**/
-  .table-action tbody th ,
-  .table-action tbody td {@apply py-4;}
+  .table-action thead th ,
+  .table-action thead td {@apply align-middle;}
+  .table-action tbody th:not(:last-child) ,
+  .table-action tbody td:not(:last-child) {@apply py-3.5;}
   .table-action th:first-child ,
-  .table-action td:first-child {@apply w-0 font-medium text-right text-info;}
+  .table-action td:first-child {@apply font-medium text-right text-info;}
   .table-action th:last-child ,
-  .table-action td:last-child {@apply w-0 whitespace-nowrap py-[10px] pr-[10px];}
-  .table-action:not(.frame) thead th ,
-  .table-action:not(.frame) thead td {@apply align-middle;}
-  .table-action:not(.frame) thead th:first-child ,
-  .table-action:not(.frame) thead td:first-child {@apply pl-0 sm:pl-4}
-  .table-action:not(.frame) thead th:last-child ,
-  .table-action:not(.frame) thead td:last-child {@apply pt-0;}
-  .table-action a {@apply block;}
-  /**/
-  .frame table tbody tr:hover ,
-  table.frame tbody tr:hover {@apply bg-slate-50;}
+  .table-action td:last-child {@apply whitespace-nowrap text-right pr-2;}
+  .table-action a:not(.btn) {@apply block leading-5 py-1;}
 
   a ,
   button , .btn ,
@@ -263,6 +257,9 @@
   .tooltip-bottom:after {@apply left-1/2 top-full bottom-auto -translate-x-1/2 -translate-y-0;}
   .tooltip-bottom:hover:before ,
   .tooltip-bottom:hover:after {@apply translate-y-1;}
+  /**/
+  .tooltip-none:hover:before ,
+  .tooltip-none:hover:after {@apply invisible opacity-0;}
 
   .modal {@apply relative z-20 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
   .modal .modal-content {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding;}
@@ -423,9 +420,9 @@
   #itemContentDesc table :is(th, td):not(:first-child) {@apply pl-5;}
 };
 
-/*
+/***********
   Custom CSS
-*/
+***********/
 
 /* Google Icon */
 .material-symbols-outlined      {font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24}
@@ -468,6 +465,9 @@
 .tox .tox-statusbar__resize-handle svg {@apply !w-3 !h-3;}
 .tox svg {@apply w-auto h-auto;}
 
+/* Layout */
+#root {@apply flex flex-col min-h-screen;}
+
 /* Header */
 #header {@apply bg-slate-50;}
 #header .container {@apply flex-row justify-between items-center padding-y-sm;}
@@ -477,20 +477,13 @@
 #header #navMain #navMainToggle {@apply md:hidden;}
 #header #navMain ul {@apply hidden md:flex;}
 #header.navmain-active #navMain ul {@apply absolute z-80 top-full left-0 block w-full padding border-t bg-slate-50 shadow-lg;}
-#header.navmain-active #navMain ul .btn {@apply w-full;}
+#header.navmain-active #navMain ul .btn {@apply w-full justify-start;}
 /**/
 #header #navSetting {@apply relative;}
-#header #navSetting ul {@apply hidden;}
-#header.navsetting-active #navSetting ul {@apply absolute z-80 top-full right-0 block rounded-lg bg-white shadow-lg;}
-#header.navsetting-active #navSetting ul .btn {@apply w-full whitespace-nowrap justify-start;}
-#header.navsetting-active #navSetting ul .btn .text {@apply text-left margin-r-sm;}
-/**/
-#widgetCalendar {@apply frame flex w-fit !p-0 -mb-5;}
-#widgetCalendar .icon-moon {@apply text-white rounded-lg p-2 bg-gradient-to-br from-info-950 to-info;}
-#widgetCalendar .date {@apply text-nowrap px-3 py-2;}
-#widgetCalendar h6 {@apply text-xs md:text-sm font-medium text-info;}
-#widgetCalendar p {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}
-#widgetCalendar p span:not(.date-number) {@apply hidden md:inline;}
+#header #navSetting ul {@apply hidden absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
+#header.navsetting-active #navSetting ul {@apply block;}
+#header #navSetting ul .btn {@apply w-full justify-start;}
+#header #navSetting ul .btn .text {@apply flex-1 whitespace-nowrap text-left;}
 
 /* Footer */
 #footer {@apply bg-slate-50;}
@@ -500,4 +493,24 @@
 #footerLogo ul a .text {@apply hidden;}
 
 /* Main */
-#main {@apply padding-y;}
+#main {@apply flex flex-col flex-1 padding-y;}
+/**/
+.bg-gradient-1 {@apply text-white bg-gradient-to-br from-info-950 to-info;}
+
+/* Widget */
+.widget {@apply frame flex w-fit p-0;}
+.widget h6 {@apply flex items-center gap-1 text-xs md:text-sm font-medium text-info;}
+/**/
+#widgetCalendar .icon-moon {@apply p-2 rounded-lg;}
+#widgetCalendar .date {@apply text-nowrap px-3 py-2;}
+#widgetCalendar p {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}
+#widgetCalendar p span:not(.date-number) {@apply hidden md:inline;}
+/**/
+#widgetCountNumber {@apply flex-col;}
+#widgetCountNumber .heading {@apply flex items-center px-2 py-0.5 gap-1 rounded-lg;}
+#widgetCountNumber h6 {@apply text-white;}
+#widgetCountNumber form {@apply flex-row p-2 gap-0;}
+#widgetCountNumber form fieldset {@apply flex flex-row gap-0 rounded-lg bg-slate-100;}
+#widgetCountNumber form input {@apply w-[72px] text-3xl font-light text-slate text-center p-2 rounded-lg;}
+#widgetCountNumber form input:not(:hover, :focus) {@apply border-slate-100;}
+#widgetCountNumber form .btn-countnumber-reset {@apply absolute -top-[38px] right-0;}

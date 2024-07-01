@@ -8,6 +8,7 @@ import { bookmarkFetch } from './store/bookmarkListSlice';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import SignUp from './components/SignUp';
 import ItemList from './components/ItemList';
 import ItemContent from './components/ItemContent';
 import ItemCategory from './components/ItemCategory';
@@ -41,6 +42,9 @@ function App() {
           <Route path='/รายการโปรด/:bookmark_id/:item_number' element={<ItemContent />} />
           <Route path='/รายการโปรด/:bookmark_id/:item_number/:item_name' element={<ItemContent />} />
           <Route path='/หมวดหมู่' element={<ItemCategory />} />
+
+          <Route path='/สมัครสมาชิก' element={<SignUp />} />
+
           <Route path='/ติดต่อเรา' element={<ContactUs />} />
           <Route path='/Layer' element={<Layer />} />
           <Route path='/StatusCode' element={<StatusCode />} />
