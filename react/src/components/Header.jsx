@@ -38,7 +38,7 @@ function Header() {
             <NavMain className="bookmark" to="/รายการโปรด" icon="bookmark" text="รายการโปรด" />
             <NavMain className="itemcategory" to="/หมวดหมู่" icon="category" text="หมวดหมู่" />
             <NavMain className="signUp" to="/สมัครสมาชิก" icon="account_circle" text="สมัครสมาชิก" />
-            <NavMain className="logIn" to="/เข้าระบบ" icon="login" text="เข้าระบบ" />
+            <NavMain className="logIn" to="/เข้าสู่ระบบ" icon="login" text="เข้าสู่ระบบ" />
           </ul>
         </nav>
         <WidgetCalendar calendarActive={calendarActive} className="absolute top-2 sm:top-4 right-16 sm:right-20 -mb-5" />

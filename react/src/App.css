@@ -54,11 +54,11 @@
   /**/
   .form-inline {@apply flex-row justify-between items-end gap-4;}
   .form-inner {@apply flex-row justify-between items-end gap-0;}
-  .fieldset-border {@apply pt-3;}
-  .fieldset-inline {@apply flex-row items-center gap-2 gap-x-8;}
-  .fieldset-inline .field {@apply flex-row items-center gap-2;}
-  .fieldset-inline .field:only-child {@apply w-full;}
-  .fieldset-inline .field:only-child label {@apply w-full text-left;}
+  .fieldset-border {@apply pt-2;}
+  .fieldset-inline {@apply flex-col sm:flex-row gap-2 gap-x-8 mt-2;}
+  .fieldset-inline.border {@apply p-4 border-slate-200 rounded-lg;}
+  .fieldset-inline .field {@apply flex-row items-center;}
+  .fieldset-inline .field label {@apply pl-2;}
   .fieldset-button {@apply flex-row pt-4 gap-4;}
   .form-inner input[type="number"]::-webkit-outer-spin-button ,
   .form-inner input[type="number"]::-webkit-inner-spin-button {@apply appearance-none;}
@@ -69,11 +69,12 @@
   .form-inline .fieldset-button {@apply w-fit p-0;}
   .field {@apply relative flex;}
   .field label {@apply w-fit;}
-  .label-border {@apply absolute -top-3 left-3 inline-block text-sm px-1 py-0 rounded mt-[1px] bg-white;}
+  .label-border {@apply absolute -top-3 left-3 inline-block w-fit text-sm px-1 py-0 rounded mt-[1px] bg-white;}
   .label-field-on {@apply absolute top-0.5 left-4 text-sm;}
   .label-field-end {@apply absolute top-1.5 right-1.5 flex justify-center items-center min-w-10 min-h-7 text-xs text-center text-white px-2 py-1 rounded bg-slate-200;}
   fieldset:hover .label-field-end {@apply bg-slate-300;}
   .fieldset-inline .label-field-end {@apply w-fit;}
+  .field-button-end {@apply absolute bottom-0 right-0 w-fit p-0;}
 
   table {@apply w-full;}
   table tr {@apply border-b border-slate-200;}

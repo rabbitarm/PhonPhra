@@ -9,6 +9,7 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SignUp from './components/SignUp';
+import LogIn from './components/LogIn';
 import ItemList from './components/ItemList';
 import ItemContent from './components/ItemContent';
 import ItemCategory from './components/ItemCategory';
@@ -44,6 +45,7 @@ function App() {
           <Route path='/หมวดหมู่' element={<ItemCategory />} />
 
           <Route path='/สมัครสมาชิก' element={<SignUp />} />
+          <Route path='/เข้าสู่ระบบ' element={<LogIn />} />
 
           <Route path='/ติดต่อเรา' element={<ContactUs />} />
           <Route path='/Layer' element={<Layer />} />
