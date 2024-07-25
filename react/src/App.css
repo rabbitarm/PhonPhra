@@ -51,6 +51,9 @@
   input::-webkit-outer-spin-button ,
   input::-webkit-inner-spin-button {@apply [-webkit-appearance:none] m-0;}
   input[type=number] {@apply [-moz-appearance:textfield];}
+  input[type=date]::-webkit-calendar-picker-indicator {@apply absolute left-0 pl-4 pr-[calc(theme('width.full')-theme('gap.8'))] py-3;}
+  input[type=date]::-webkit-datetime-edit-fields-wrapper ,
+  input[type=date]::-webkit-datetime-edit {@apply relative left-3;}
   /**/
   .form-inline {@apply flex-row justify-between items-end gap-4;}
   .form-inner {@apply flex-row justify-between items-end gap-0;}

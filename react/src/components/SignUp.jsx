@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function SignUp() {
 
-  const signUpInitial = { user_name: '', user_email: '', user_password: '', user_password2: '', user_birth_year: '', user_gender: '' };
+  const signUpInitial = { user_name: '', user_email: '', user_password: '', user_password2: '', user_birthday: '', user_gender: '' };
   const [signUpContent, setSignUpContent] = useState(signUpInitial);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const handleSignUpPasswordVisibility = () => setPasswordVisibility(!passwordVisibility);
@@ -62,8 +62,8 @@ function SignUp() {
         </fieldset>
         <fieldset className="fieldset-border">
           <div className="field">
-            <label className="label-border">ปีเกิด (พ.ศ.)</label>
-            <input className="pr-16" type="number" name="user_birth_year" value={signUpContent?.user_birth_year} onChange={signUpChange} min="2000" max="2567" placeholder="2499" />
+            <label className="label-border">วันเกิด</label>
+            <input className="pr-16" type="date" name="user_birthday" value={signUpContent?.user_birthday} onChange={signUpChange} min="1901-01-01" max="2030-12-31" placeholder="dd mm yyyy" />
             <label className="label-field-end">เพิ่มเติม</label>
           </div>
         </fieldset>

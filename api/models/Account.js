@@ -6,7 +6,7 @@ const AccountSchema = new mongoose.Schema({
   user_name: { type: String, required: true, trim: true },
   user_email: { type: String, required: true, trim: true },
   user_profile: [{
-    user_birth_year: { type: Number, required: false, trim: true },
+    user_birthday: { type: Number, required: false, trim: true },
     user_gender: { type: String, required: false, trim: true, enum: ['male', 'female', 'other'] },
   }],
   user_bookmark_list: [{
