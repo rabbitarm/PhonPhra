@@ -52,7 +52,7 @@ function ItemList() {
 
   return (
     <section id="itemList" className="container">
-      <h3>บทสวดมนต์</h3>
+      <h1>บทสวดมนต์</h1>
       {itemLoading
       ? <IconLoading />
       : <>

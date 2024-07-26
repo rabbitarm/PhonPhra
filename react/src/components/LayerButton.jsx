@@ -8,7 +8,7 @@ function LayerButton() {
 
   return (
     <>
-      <section className="container frame !gap-4">
+      <section className="container frame !gap-4 bg-primary-50">
         <h5>Button - Size</h5>
         <section className="flex flex-wrap gap-2">
           <button className="btn btn-icon btn-2xs">

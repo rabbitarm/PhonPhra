@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { countNumberIncrease, countNumberDecrease, countNumberReset, countNumberChange } from '../../store/countNumberSlice';
+import { useDrag } from "./useDrag";
 
 function WidgetCountNumber({ countNumberActive }) {
 
@@ -13,14 +14,23 @@ function WidgetCountNumber({ countNumberActive }) {
   const handleCountNumberChange = (event) => dispatch(countNumberChange(parseInt(event.target.value) || 0));
   const handleCountNumberSubmit = (event) => {event.preventDefault();}
 
+  const draggableRef = useRef(null);
+  const { position, handleDragMouseDown } = useDrag({
+    ref: draggableRef
+  });
+
   return (
     <>
       {countNumberActive &&
-        <section id="widgetCountNumber" className="widget">
+        <section id="widgetCountNumber" className="widget draggable" ref={draggableRef} style={{top:position.y, left:position.x}}>
           <div className="heading bg-gradient-1">
             <span className="icon-xl -ml-0.5 material-symbols-outlined fill">pin</span>
             <h6>ที่นับจำนวน</h6>
           </div>
+          <button className="btn-drag btn btn-sm btn-text" onMouseDown={handleDragMouseDown}>
+            <span className="material-symbols-outlined">drag_indicator</span>
+            <span className="text hidden">สามารถลากได้</span>
+          </button>
           <form onSubmit={handleCountNumberSubmit}>
             <fieldset>
               <button className="btn btn-icon" disabled={countNumberIndex >= countNumberMaximum && 'disabled'} onClick={handleCountNumberIncrease}>

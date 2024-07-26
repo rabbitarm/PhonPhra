@@ -7,10 +7,10 @@ import WidgetCountNumber from './includes/WidgetCountNumber';
 function Header() {
 
   const [navMainActive, setNavMainActive] = useState(false);
-  const [navSettingActive, setNavSettingActive] = useState(false);
+  const [navUserActive, setNavUserActive] = useState(false);
   const navToggle = () => {navLeave(); setNavMainActive(!navMainActive);}
-  const navSettingToggle = () => {navLeave(); setNavSettingActive(!navSettingActive);}
-  const navLeave = () => {setNavMainActive(false); setNavSettingActive(false);}
+  const navUserToggle = () => {navLeave(); setNavUserActive(!navUserActive);}
+  const navLeave = () => {/*setNavMainActive(false); setNavUserActive(false);*/}
 
   const [calendarActive, setCalendarActive] = useState(false);
   const handleCalendarToggle = () => setCalendarActive(!calendarActive);
@@ -20,7 +20,7 @@ function Header() {
   const handleCountNumberToggle = () => setCountNumberActive(!countNumberActive);
 
   return (
-    <header id="header" className={(navMainActive ? 'navmain-active' : '') + (navSettingActive ? ' navsetting-active' : '')} onMouseLeave={navLeave}>
+    <header id="header" className={(navMainActive ? 'navmain-active' : '') + (navUserActive ? ' navuser-active' : '')} onMouseLeave={navLeave}>
       <div className="container">
         <div id="navBrand">
           <Link to="/">
@@ -37,18 +37,31 @@ function Header() {
             <NavMain className="itemlist" to="/" icon="description" text="บทสวดมนต์" />
             <NavMain className="bookmark" to="/รายการโปรด" icon="bookmark" text="รายการโปรด" />
             <NavMain className="itemcategory" to="/หมวดหมู่" icon="category" text="หมวดหมู่" />
-            <NavMain className="signUp" to="/สมัครสมาชิก" icon="account_circle" text="สมัครสมาชิก" />
-            <NavMain className="logIn" to="/เข้าสู่ระบบ" icon="login" text="เข้าสู่ระบบ" />
           </ul>
         </nav>
         <WidgetCalendar calendarActive={calendarActive} className="absolute top-2 sm:top-4 right-16 sm:right-20 -mb-5" />
         <WidgetCountNumber countNumberActive={countNumberActive} />
-        <nav id="navSetting">
-          <button id="navSettingToggle" className="btn btn-icon btn-mix" onClick={navSettingToggle}>
-            <span className={"material-symbols-outlined" + (navSettingActive ? ' fill' : '')}>settings</span>
+        <nav id="navUser">
+          <Link id="navUserToggle" className="btn btn-icon btn-mix" to="เข้าสู่ระบบ">
+            <span className={`material-symbols-outlined ${navUserActive ? 'fill' : ''}`}>account_circle</span>
+            <span className="text hidden">เข้าสู่ระบบ</span>
+          </Link>
+          <button id="navUserToggle" className="btn btn-icon btn-mix" onClick={navUserToggle}>
+            <span className={`material-symbols-outlined ${navUserActive ? 'fill' : ''}`}>settings</span>
             <span className="text hidden">ตั้งค่า</span>
           </button>
-          {navSettingActive &&
+          {navUserActive &&
+          <div>
+            <ul>
+              <li className="user-profile">
+                <Link className="btn btn-ghost" to="#ข้อมูลผู้ใช้งาน">
+                  <span className="material-symbols-outlined">badge</span>
+                  <span className="text">ข้อมูลผู้ใช้งาน</span>
+                </Link>
+              </li>
+            </ul>
+            <hr />
+            <h6 className="text-slate px-4 pt-4 pb-2">การตั้งค่า</h6>
             <ul>
               <li className="calendar">
                 <button id="navCalendarToggle" className="btn btn-ghost" onClick={handleCalendarToggle}>
@@ -72,6 +85,7 @@ function Header() {
                 </button>
               </li>
             </ul>
+          </div>
           }
         </nav>
       </div>

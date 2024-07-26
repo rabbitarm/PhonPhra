@@ -56,7 +56,7 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
           </div>
         </section>
       : <>
-          <h3>หมวดหมู่</h3>
+          <h1>หมวดหมู่</h1>
           {itemCategoryLoading
           ? <IconLoading />
           : <>

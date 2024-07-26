@@ -8,13 +8,14 @@ import { bookmarkFetch } from './store/bookmarkListSlice';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import SignUp from './components/SignUp';
-import LogIn from './components/LogIn';
+import Register from './components/forms/Register';
+import LogIn from './components/forms/LogIn';
+import ForgotPassword from './components/forms/ForgotPassword';
 import ItemList from './components/ItemList';
 import ItemContent from './components/ItemContent';
 import ItemCategory from './components/ItemCategory';
 import Bookmark from './components/Bookmark';
-import ContactUs from './components/ContactUs';
+import ContactUs from './components/forms/ContactUs';
 import NotFound from './components/NotFound';
 import Layer from './components/Layer';
 import StatusCode from './components/includes/StatusCode';
@@ -44,12 +45,14 @@ function App() {
           <Route path='/รายการโปรด/:bookmark_id/:item_number/:item_name' element={<ItemContent />} />
           <Route path='/หมวดหมู่' element={<ItemCategory />} />
 
-          <Route path='/สมัครสมาชิก' element={<SignUp />} />
+          <Route path='/สมัครสมาชิก' element={<Register />} />
           <Route path='/เข้าสู่ระบบ' element={<LogIn />} />
+          <Route path='/ลืมรหัสผ่าน' element={<ForgotPassword />} />
 
           <Route path='/ติดต่อเรา' element={<ContactUs />} />
           <Route path='/Layer' element={<Layer />} />
           <Route path='/StatusCode' element={<StatusCode />} />
+
           <Route path='*' element={<NotFound />} />
         </Routes>
       </main>

@@ -95,7 +95,7 @@ function Bookmark({ itemAddSelect }) {
 
   return (
     <section id="bookmark" className="container">
-      <h3>รายการโปรด</h3>
+      <h1>รายการโปรด</h1>
       {bookmarkLoading
       ? <IconLoading />
       : <>

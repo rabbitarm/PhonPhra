@@ -9,13 +9,14 @@
   * {@apply select-none border-slate-100;}
   body {@apply bg-white;}
   body , p , dialog , button , input , optgroup , select , textarea {@apply text-base text-slate-500;}
-  h1 , h2 , h3 , h4 , h5 , h6 , .h1 , .h2 , .h3 , .h4 , .h5 , .h6 {@apply text-slate-600 font-normal;}
-  h1 , .h1 {@apply text-5xl;}
-  h2 , .h2 {@apply text-4xl;}
-  h3 , .h3 {@apply text-3xl;}
-  h4 , .h4 {@apply text-2xl;}
-  h5 , .h5 {@apply text-xl;}
-  h6 , .h6 {@apply text-lg;}
+  h1 , h2 , h3 , h4 , h5 , h6 , .h1 , .h2 , .h3 , .h4 , .h5 , .h6 , .h7 {@apply flex items-center text-slate-600 font-normal;}
+  h1 , .h1 {@apply text-3xl;}
+  h2 , .h2 {@apply text-2xl;}
+  h3 , .h3 {@apply text-xl;}
+  h4 , .h4 {@apply text-lg;}
+  h5 , .h5 {@apply text-base;}
+  h6 , .h6 {@apply text-xs  font-medium;}
+       .h7 {@apply text-2xs font-medium;}
   svg {@apply inline-block size-6;}
   .material-symbols-outlined {@apply inline-block size-6 [font-size:theme('gap.6')];}
 
@@ -63,8 +64,8 @@
   .fieldset-inline .field {@apply flex-row items-center;}
   .fieldset-inline .field label {@apply pl-2;}
   .fieldset-button {@apply flex-row pt-4 gap-4;}
-  .form-inner input[type="number"]::-webkit-outer-spin-button ,
-  .form-inner input[type="number"]::-webkit-inner-spin-button {@apply appearance-none;}
+  .form-inner input[type=number]::-webkit-outer-spin-button ,
+  .form-inner input[type=number]::-webkit-inner-spin-button {@apply appearance-none;}
   .form-inline fieldset {@apply w-full;}
   .form-inner .fieldset-button-field-end {@apply absolute bottom-0 right-0 w-fit p-0;}
   .form-inner .fieldset-button-field-end .btn:not(.btn-icon) {@apply w-10 xs:w-fit px-0 xs:px-4;}
@@ -398,7 +399,7 @@
   .status-code .material-symbols-outlined {@apply size-32 [font-size:theme('gap.32')] sm:size-40 sm:[font-size:theme('gap.40')] text-slate-100;
     font-variation-settings:'wght'100
   }
-  .status-code h6 {@apply text-7xl sm:text-8xl !leading-[0.75] text-slate-100;}
+  .status-code h6 {@apply text-7xl sm:text-8xl !leading-[0.75] font-normal text-slate-100;}
   .status-code h3 {@apply text-2xl sm:text-4xl !leading-[1.5] text-slate-300;}
   .action-bar {@apply flex flex-auto md:flex-none;}
   .action-bar hr {@apply h-10 border-t-0 border-r margin-x-sm;}
@@ -483,11 +484,11 @@
 #header.navmain-active #navMain ul {@apply absolute z-80 top-full left-0 block w-full padding border-t bg-slate-50 shadow-lg;}
 #header.navmain-active #navMain ul .btn {@apply w-full justify-start;}
 /**/
-#header #navSetting {@apply relative;}
-#header #navSetting ul {@apply hidden absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
-#header.navsetting-active #navSetting ul {@apply block;}
-#header #navSetting ul .btn {@apply w-full justify-start;}
-#header #navSetting ul .btn .text {@apply flex-1 whitespace-nowrap text-left;}
+#header #navUser {@apply relative flex;}
+#header #navUser div {@apply hidden absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
+#header.navuser-active #navUser div {@apply block;}
+#header #navUser ul .btn {@apply w-full justify-start;}
+#header #navUser ul .btn .text {@apply flex-1 whitespace-nowrap text-left;}
 
 /* Footer */
 #footer {@apply bg-slate-50;}
@@ -502,7 +503,7 @@
 .bg-gradient-1 {@apply text-white bg-gradient-to-br from-info-950 to-info;}
 
 /* Widget */
-.widget {@apply frame flex w-fit p-0;}
+.widget {@apply frame flex w-max p-0;}
 .widget h6 {@apply flex items-center gap-1 text-xs md:text-sm font-medium text-info;}
 /**/
 #widgetCalendar .icon-moon {@apply p-2 rounded-lg;}
@@ -517,4 +518,7 @@
 #widgetCountNumber form fieldset {@apply flex flex-row gap-0 rounded-lg bg-slate-100;}
 #widgetCountNumber form input {@apply w-[72px] text-3xl font-light text-slate text-center p-2 rounded-lg;}
 #widgetCountNumber form input:not(:hover, :focus) {@apply border-slate-100;}
-#widgetCountNumber form .btn-countnumber-reset {@apply absolute -top-[38px] right-0;}
+#widgetCountNumber form .btn-countnumber-reset {@apply absolute -top-[38px] -right-0.5;}
+/**/
+.draggable {@apply fixed z-10 top-[calc(100%-108px)] left-[calc(100%-184px)];}
+.btn-drag {@apply cursor-move absolute top-0 right-0 !min-w-0 !px-1 !text-white;}
