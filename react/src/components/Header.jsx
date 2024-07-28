@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import NavMain from './includes/NavMain';
 import WidgetCalendar from './includes/WidgetCalendar';
 import WidgetCountNumber from './includes/WidgetCountNumber';
+import FontSize from './includes/FontSize';
 
 function Header() {
 
@@ -74,8 +75,9 @@ function Header() {
                 <button id="navFontSizeToggle" className="btn btn-ghost" onClick={handleFontSizeToggle}>
                   <span className="material-symbols-outlined">format_size</span>
                   <span className="text">ขนาดอักษร</span>
-                  <span className={"icon-xl ml-6 material-symbols-outlined" + (fontSizeActive ? ' fill text-success' : '')}>{fontSizeActive ? 'toggle_on' : 'toggle_off'}</span>
+                  <span className={"icon ml-6 material-symbols-outlined" + (fontSizeActive ? ' fill text-success' : '')}>{fontSizeActive ? 'expand_circle_down' : 'expand_circle_right'}</span>
                 </button>
+                <FontSize fontSizeActive={fontSizeActive} />
               </li>
               <li className="countnumber">
                 <button id="navCountNumberToggle" className="btn btn-ghost" onClick={handleCountNumberToggle}>

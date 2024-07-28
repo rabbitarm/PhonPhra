@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { countNumberIncrease, countNumberDecrease, countNumberReset, countNumberChange } from '../../store/countNumberSlice';
-import { useDrag } from "./useDrag";
+import { useDrag } from "./UseDrag";
 
 function WidgetCountNumber({ countNumberActive }) {
 

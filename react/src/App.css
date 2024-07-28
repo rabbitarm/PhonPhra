@@ -476,7 +476,7 @@
 /* Header */
 #header {@apply bg-slate-50;}
 #header .container {@apply flex-row justify-between items-center padding-y-sm;}
-#header #navBrand a {@apply h-10 flex items-center gap-2;}
+#header #navBrand a {@apply h-10 flex flex-nowrap items-center gap-2;}
 /**/
 #header #navMain {@apply -order-1 md:order-none;}
 #header #navMain #navMainToggle {@apply md:hidden;}
@@ -485,10 +485,10 @@
 #header.navmain-active #navMain ul .btn {@apply w-full justify-start;}
 /**/
 #header #navUser {@apply relative flex;}
-#header #navUser div {@apply hidden absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
-#header.navuser-active #navUser div {@apply block;}
-#header #navUser ul .btn {@apply w-full justify-start;}
-#header #navUser ul .btn .text {@apply flex-1 whitespace-nowrap text-left;}
+#header #navUser > div {@apply hidden absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
+#header.navuser-active #navUser > div {@apply block;}
+#header #navUser ul :not(form) .btn {@apply w-full justify-start;}
+#header #navUser ul :not(form) .btn .text {@apply flex-1 whitespace-nowrap text-left;}
 
 /* Footer */
 #footer {@apply bg-slate-50;}
@@ -503,22 +503,25 @@
 .bg-gradient-1 {@apply text-white bg-gradient-to-br from-info-950 to-info;}
 
 /* Widget */
-.widget {@apply frame flex w-max p-0;}
-.widget h6 {@apply flex items-center gap-1 text-xs md:text-sm font-medium text-info;}
+.widget {@apply frame flex flex-col w-max p-0;}
+.widget .heading {@apply flex items-center min-h-8 px-2 py-0.5 gap-1 rounded-lg;}
+.widget h6 {@apply flex items-center whitespace-nowrap gap-1 text-info;}
+.widget .heading[class*="bg"] :is(h6) {@apply text-white;}
+.widget form {@apply flex-row p-2 gap-0;}
+.widget form fieldset {@apply flex flex-row flex-nowrap gap-0 rounded-lg bg-slate-100;}
+.widget form input:read-only {@apply !border-slate-100;}
 /**/
-#widgetCalendar .icon-moon {@apply p-2 rounded-lg;}
+#widgetCountNumber form input {@apply w-[72px] text-3xl font-light text-slate text-center p-2 rounded-lg;}
+#widgetCountNumber form input:not(:hover, :focus) {@apply border-slate-100;}
+#widgetCountNumber form .btn-countnumber-reset {@apply absolute -top-[38px] right-[22px];}
+/**/
+#fontSize form input {@apply w-10 text-3xl font-light text-slate text-center p-2 rounded-lg}
+/**/
+#widgetCalendar {@apply flex-row;}
+#widgetCalendar .icon-moon {@apply hidden xs:block p-2 rounded-lg;}
 #widgetCalendar .date {@apply text-nowrap px-3 py-2;}
 #widgetCalendar p {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}
 #widgetCalendar p span:not(.date-number) {@apply hidden md:inline;}
 /**/
-#widgetCountNumber {@apply flex-col;}
-#widgetCountNumber .heading {@apply flex items-center px-2 py-0.5 gap-1 rounded-lg;}
-#widgetCountNumber h6 {@apply text-white;}
-#widgetCountNumber form {@apply flex-row p-2 gap-0;}
-#widgetCountNumber form fieldset {@apply flex flex-row gap-0 rounded-lg bg-slate-100;}
-#widgetCountNumber form input {@apply w-[72px] text-3xl font-light text-slate text-center p-2 rounded-lg;}
-#widgetCountNumber form input:not(:hover, :focus) {@apply border-slate-100;}
-#widgetCountNumber form .btn-countnumber-reset {@apply absolute -top-[38px] -right-0.5;}
-/**/
 .draggable {@apply fixed z-10 top-[calc(100%-108px)] left-[calc(100%-184px)];}
-.btn-drag {@apply cursor-move absolute top-0 right-0 !min-w-0 !px-1 !text-white;}
+.btn-drag {@apply cursor-move absolute top-0 right-0 !w-auto !min-w-0 !px-1 hover:text-white;}

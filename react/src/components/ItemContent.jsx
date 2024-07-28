@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
+import { /*useDispatch, */useSelector } from 'react-redux';
+//import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
 
 import { IconLoading, IconItemNotFound } from './includes/StatusCode';
 /* import ItemStatus from './includes/ItemStatus';
@@ -13,7 +13,7 @@ import Bookmark from './Bookmark';
 
 function ItemContent() {
 
-  const dispatch = useDispatch();
+//  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { itemList , itemLoading } = useSelector((state) => state.itemList);
   const { bookmarkList } = useSelector((state) => state.bookmarkList);
@@ -78,12 +78,12 @@ function ItemContent() {
   const handleContentShare = () => setContentShare(!contentShare);
 
   /* Customize Tool */
-  const [contentCustomize, setContentCustomize] = useState(false);
-  const handleContentCustomize = () => setContentCustomize(!contentCustomize);
+/*  const [contentCustomize, setContentCustomize] = useState(false);
+  const handleContentCustomize = () => setContentCustomize(!contentCustomize);*/
   /* Font Size */
   const { fontSizes, fontSizeIndex } = useSelector((state) => state.fontSize);
-  const handleFontSizeIncrease = () => dispatch(fontSizeIncrease());
-  const handleFontSizeDecrease = () => dispatch(fontSizeDecrease());
+/*  const handleFontSizeIncrease = () => dispatch(fontSizeIncrease());
+  const handleFontSizeDecrease = () => dispatch(fontSizeDecrease());*/
 
   return (
     <article id="itemContent" className="container">
@@ -94,7 +94,6 @@ function ItemContent() {
           ? <>
               {itemList.filter(item => item?.item_number === itemNumberIndex).map(itemContent => (itemContent &&
                 <main key={itemContent?.item_id} className="flex flex-col gap">
-                  <WidgetCountNumber />
                   <div className="flex flex-wrap justify-between items-stretch md:items-start gap flex-col-reverse md:flex-row">
                     <section className="content-title">
                       <div className="status-bar flex items-center gap-2">
@@ -167,6 +166,7 @@ function ItemContent() {
                           </section>
                         }
                       </div>
+                      {/*
                       <div className="tooltip" data-tip="ปรับแต่ง">
                         <button className={'btn btn-icon' + (!contentCustomize ? ' btn-ghost' : '')} onClick={handleContentCustomize}>
                           <span className="material-symbols-outlined">page_info</span>
@@ -193,6 +193,7 @@ function ItemContent() {
                           </section>
                         }
                       </div>
+                      */}
                     </div>
                   </div>
                   <article id="itemContentDesc" className={fontSizes[fontSizeIndex]} dangerouslySetInnerHTML={{ __html: itemContent?.item_desc }} />
