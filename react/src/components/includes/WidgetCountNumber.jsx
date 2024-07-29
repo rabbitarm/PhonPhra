@@ -43,7 +43,7 @@ function WidgetCountNumber({ countNumberActive }) {
                 <span className="text hidden">ลดจำนวน</span>
               </button>
               {countNumberIndex > countNumberInitial &&
-                <button className="btn-countnumber-reset btn btn-2xs btn-icon btn-reverse-warning" disabled={countNumberIndex <= countNumberInitial && 'disabled'} onClick={handleCountNumberReset}>
+                <button className="btn-countnumber-reset btn btn-2xs btn-icon btn-ghost-alternate-warning" disabled={countNumberIndex <= countNumberInitial && 'disabled'} onClick={handleCountNumberReset}>
                   <span className="material-symbols-outlined -scale-x-100">refresh</span>
                   <span className="text hidden">เริ่มใหม่</span>
                 </button>

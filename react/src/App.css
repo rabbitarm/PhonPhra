@@ -10,8 +10,8 @@
   body {@apply bg-white;}
   body , p , dialog , button , input , optgroup , select , textarea {@apply text-base text-slate-500;}
   h1 , h2 , h3 , h4 , h5 , h6 , .h1 , .h2 , .h3 , .h4 , .h5 , .h6 , .h7 {@apply flex items-center text-slate-600 font-normal;}
-  h1 , .h1 {@apply text-3xl;}
-  h2 , .h2 {@apply text-2xl;}
+  h1 , .h1 {@apply text-3xl font-light;}
+  h2 , .h2 {@apply text-2xl font-light;}
   h3 , .h3 {@apply text-xl;}
   h4 , .h4 {@apply text-lg;}
   h5 , .h5 {@apply text-base;}
@@ -30,7 +30,8 @@
   input ,
   select ,
   textarea {@apply w-full h-10 px-4 py-2 border border-slate-200 rounded-lg bg-white;}
-  textarea {@apply min-h-40 md:min-h-60 py-4;}
+  select {@apply px-3 py-0;}
+  textarea {@apply min-h-40 md:min-h-60;}
   input[type="checkbox"] ,
   label[for="checkbox"] ,
   input[type="radio"] ,
@@ -51,10 +52,28 @@
   form * , input , select , textarea {@apply outline-none;}
   input::-webkit-outer-spin-button ,
   input::-webkit-inner-spin-button {@apply [-webkit-appearance:none] m-0;}
-  input[type=number] {@apply [-moz-appearance:textfield];}
-  input[type=date]::-webkit-calendar-picker-indicator {@apply absolute left-0 pl-4 pr-[calc(theme('width.full')-theme('gap.8'))] py-3;}
-  input[type=date]::-webkit-datetime-edit-fields-wrapper ,
-  input[type=date]::-webkit-datetime-edit {@apply relative left-3;}
+  input[type="number"] {@apply [-moz-appearance:textfield];}
+  input[type="date"]::-webkit-calendar-picker-indicator {@apply absolute left-0 pl-4 pr-[calc(theme('width.full')-theme('gap.8'))] py-3;}
+  input[type="date"]::-webkit-datetime-edit-fields-wrapper ,
+  input[type="date"]::-webkit-datetime-edit {@apply relative left-3;}
+/* https://codepen.io/vkjgr/pen/VYMeXp
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, blue 50%),
+      linear-gradient(135deg, blue 50%, transparent 50%),
+      linear-gradient(to right, white, white);
+    background-position:
+      calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px),
+      100% 0;
+    background-size:
+      5px 5px,
+      5px 5px,
+      2.5em 2.5em;
+    background-repeat: no-repeat;
+  }*/
   /**/
   .form-inline {@apply flex-row justify-between items-end gap-4;}
   .form-inner {@apply flex-row justify-between items-end gap-0;}
@@ -75,6 +94,7 @@
   .field label {@apply w-fit;}
   .label-border {@apply absolute -top-3 left-3 inline-block w-fit text-sm px-1 py-0 rounded mt-[1px] bg-white;}
   .label-field-on {@apply absolute top-0.5 left-4 text-sm;}
+  .label-field-on + input {@apply h-12 pt-4 pb-1;}
   .label-field-end {@apply absolute top-1.5 right-1.5 flex justify-center items-center min-w-10 min-h-7 text-xs text-center text-white px-2 py-1 rounded bg-slate-200;}
   fieldset:hover .label-field-end {@apply bg-slate-300;}
   .fieldset-inline .label-field-end {@apply w-fit;}
@@ -379,50 +399,6 @@
   .margin-l-lg  {@apply ml-8 sm:ml-16;}
   .margin-r-lg  {@apply mr-8 sm:mr-16;}
   .margin-b-lg  {@apply mb-8 sm:mb-16;}
-  .container {@apply relative flex flex-col justify-between max-w-screen-xl gap padding mx-auto;}
-  hr {@apply clear-both w-full;}
-  .container > hr ,
-  #itemContent .content-title + hr {@apply clear-both flex-auto w-auto -mx-4 sm:-mx-8;}
-  #itemContent .content-title + hr {@apply block md:hidden w-[calc(100%+32px)] sm:w-[calc(100%+64px)] md:w-fit;}
-  /**/
-  #footer-logo ul {@apply flex flex-wrap justify-center md:justify-end items-center gap-sm;}
-  #footer-logo ul li {@apply inline-block leading-[0];}
-  #footer-logo svg {@apply w-fit h-4 2xs:h-5;}
-  #footer-logo svg:not(:hover) ,
-  #footer-logo svg:not(:hover) * {@apply fill-slate-300;}
-  #footer-logo svg.logo-vite:not(:hover) path + path {@apply fill-white;}
-  #footer-logo svg.logo-vite:hover path + path {@apply fill-[#ffdd35];}
-  #footer-logo svg.logo-axios {@apply h-2 2xs:h-2.5}
-  /**/
-  .status-code {@apply flex flex-col xs:flex-row justify-center items-center text-center xs:text-left;}
-  .status-code svg , .status-code .icon {@apply size-40 fill-slate-100 -my-6;}
-  .status-code .material-symbols-outlined {@apply size-32 [font-size:theme('gap.32')] sm:size-40 sm:[font-size:theme('gap.40')] text-slate-100;
-    font-variation-settings:'wght'100
-  }
-  .status-code h6 {@apply text-7xl sm:text-8xl !leading-[0.75] font-normal text-slate-100;}
-  .status-code h3 {@apply text-2xl sm:text-4xl !leading-[1.5] text-slate-300;}
-  .action-bar {@apply flex flex-auto md:flex-none;}
-  .action-bar hr {@apply h-10 border-t-0 border-r margin-x-sm;}
-  /**/
-  #itemContentDesc {@apply flex flex-col font-display w-fit gap-4 mx-auto;}
-  #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
-  #itemContentDesc ul {@apply list-disc;}
-  .twocolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 gap-x-5 !list-none;}
-  .twocolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
-  .threecolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 sm:grid-cols-3 gap-x-5 !list-none;}
-  .threecolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
-  #itemContentDesc sup {@apply text-primary-active;}
-  #itemContentDesc a {@apply text-primary;}
-  #itemContentDesc a:hover {@apply text-primary-active;}
-  #itemContentDesc :is(p, ul, ol)[style*="padding-left: 60px"]  .prefix {@apply min-w-[60px] -ml-[60px];}
-  #itemContentDesc :is(p, ul, ol)[style*="padding-left: 80px"]  .prefix {@apply min-w-20 -ml-20;}
-  #itemContentDesc :is(p, ul, ol)[style*="padding-left: 120px"] .prefix {@apply min-w-[120px] -ml-[120px];}
-  #itemContentDesc table {@apply w-fit border-none;}
-  #itemContentDesc table :is(col, th, td) {@apply !w-auto;}
-  #itemContentDesc table :is(tr) {@apply border-none;}
-  #itemContentDesc table :is(tr):hover {@apply bg-transparent;}
-  #itemContentDesc table :is(th, td) {@apply p-0;}
-  #itemContentDesc table :is(th, td):not(:first-child) {@apply pl-5;}
 };
 
 /***********
@@ -430,8 +406,20 @@
 ***********/
 
 /* Google Icon */
-.material-symbols-outlined      {font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24}
-.material-symbols-outlined.fill {font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24}
+.material-symbols-outlined.wght-700       {font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-600       {font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-500       {font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-400       {font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined                {font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-200       {font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-100       {font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-700  {font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-600  {font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-500  {font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-400  {font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill           {font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-200  {font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-100  {font-variation-settings: 'FILL' 1, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
 
 /* Pagination */
 .pagination .btn {@apply !p-0;}
@@ -470,9 +458,6 @@
 .tox .tox-statusbar__resize-handle svg {@apply !w-3 !h-3;}
 .tox svg {@apply w-auto h-auto;}
 
-/* Layout */
-#root {@apply flex flex-col min-h-screen;}
-
 /* Header */
 #header {@apply bg-slate-50;}
 #header .container {@apply flex-row justify-between items-center padding-y-sm;}
@@ -485,10 +470,16 @@
 #header.navmain-active #navMain ul .btn {@apply w-full justify-start;}
 /**/
 #header #navUser {@apply relative flex;}
-#header #navUser > div {@apply hidden absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
-#header.navuser-active #navUser > div {@apply block;}
-#header #navUser ul :not(form) .btn {@apply w-full justify-start;}
-#header #navUser ul :not(form) .btn .text {@apply flex-1 whitespace-nowrap text-left;}
+#header #navUser > div {@apply absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
+#header #navUser > div > hr {@apply my-2;}
+#header #navUser > div > h6 {@apply text-slate px-4 pt-4 pb-1;}
+#header #navUser > div > hr + h6 {@apply pt-2;}
+#header #navUser ul li > .btn {@apply w-full justify-start;}
+#header #navUser ul li > .btn .text {@apply flex-1 whitespace-nowrap text-left pr-2;}
+#header li.fontsize #fontSize.nav {@apply -mr-2.5;}
+#header li.fontsize #fontSize.nav form {@apply flex-row;}
+#header li.fontsize #fontSize.nav form fieldset {@apply flex flex-row flex-nowrap items-center gap-0 rounded border border-slate-100;}
+#header li.fontsize #fontSize.nav form input {@apply w-6 h-6 text-center p-0 border-none;}
 
 /* Footer */
 #footer {@apply bg-slate-50;}
@@ -497,10 +488,47 @@
 #footerLogo ul {@apply flex items-center;}
 #footerLogo ul a .text {@apply hidden;}
 
-/* Main */
+/* Layout */
+#root {@apply flex flex-col min-h-screen;}
 #main {@apply flex flex-col flex-1 padding-y;}
 /**/
+.container {@apply relative flex flex-col justify-between max-w-screen-xl gap padding mx-auto;}
+hr {@apply clear-both w-full;}
+.container > hr ,
+#itemContent .content-title + hr {@apply clear-both flex-auto w-auto -mx-4 sm:-mx-8;}
+#itemContent .content-title + hr {@apply block md:hidden w-[calc(100%+32px)] sm:w-[calc(100%+64px)] md:w-fit;}
+/**/
+.action-bar {@apply flex flex-auto md:flex-none;}
+.action-bar hr {@apply h-10 border-t-0 border-r margin-x-sm;}
+/**/
+#itemContentDesc {@apply flex flex-col font-display w-fit gap-4 mx-auto;}
+#itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
+#itemContentDesc ul {@apply list-disc;}
+.twocolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 gap-x-5 !list-none;}
+.twocolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
+.threecolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 sm:grid-cols-3 gap-x-5 !list-none;}
+.threecolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
+#itemContentDesc sup {@apply text-primary-active;}
+#itemContentDesc a {@apply text-primary;}
+#itemContentDesc a:hover {@apply text-primary-active;}
+#itemContentDesc :is(p, ul, ol)[style*="padding-left: 60px"]  .prefix {@apply min-w-[60px] -ml-[60px];}
+#itemContentDesc :is(p, ul, ol)[style*="padding-left: 80px"]  .prefix {@apply min-w-20 -ml-20;}
+#itemContentDesc :is(p, ul, ol)[style*="padding-left: 120px"] .prefix {@apply min-w-[120px] -ml-[120px];}
+#itemContentDesc table {@apply w-fit border-none;}
+#itemContentDesc table :is(col, th, td) {@apply !w-auto;}
+#itemContentDesc table :is(tr) {@apply border-none;}
+#itemContentDesc table :is(tr):hover {@apply bg-transparent;}
+#itemContentDesc table :is(th, td) {@apply p-0;}
+#itemContentDesc table :is(th, td):not(:first-child) {@apply pl-5;}
+/**/
 .bg-gradient-1 {@apply text-white bg-gradient-to-br from-info-950 to-info;}
+/**/
+.status-code {@apply flex flex-col xs:flex-row justify-center items-center text-center xs:text-left;}
+.status-code .material-symbols-outlined {@apply size-32 [font-size:theme('gap.32')] sm:size-40 sm:[font-size:theme('gap.40')] text-slate-100;
+  font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;
+}
+.status-code h6 {@apply text-7xl sm:text-8xl !leading-[0.75] font-light text-slate-100;}
+.status-code h3 {@apply text-2xl sm:text-4xl !leading-[1.5] text-slate-300;}
 
 /* Widget */
 .widget {@apply frame flex flex-col w-max p-0;}
@@ -515,9 +543,9 @@
 #widgetCountNumber form input:not(:hover, :focus) {@apply border-slate-100;}
 #widgetCountNumber form .btn-countnumber-reset {@apply absolute -top-[38px] right-[22px];}
 /**/
-#fontSize form input {@apply w-10 text-3xl font-light text-slate text-center p-2 rounded-lg}
+.widget#fontSize form input {@apply w-10 text-3xl font-light text-slate text-center p-2 rounded-lg}
 /**/
-#widgetCalendar {@apply flex-row;}
+#widgetCalendar {@apply flex-row fixed z-10 bottom-4 left-4;}
 #widgetCalendar .icon-moon {@apply hidden xs:block p-2 rounded-lg;}
 #widgetCalendar .date {@apply text-nowrap px-3 py-2;}
 #widgetCalendar p {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}

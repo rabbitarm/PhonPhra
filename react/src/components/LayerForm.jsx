@@ -20,13 +20,14 @@ function LayerModal() {
               <div className="field">
                 <label className="label-border">ตัวเลข</label>
                 <input type="number" placeholder="1234567890" />
-                <label className="label-field-end">Option</label>
+                <label className="label-field-end">เพิ่มเติม</label>
               </div>
             </fieldset>
             <fieldset>
               <div className="field">
                 <label className="label-field-on">เบอร์ติดต่อ</label>
                 <input type="tel" placeholder="081-234-5678" />
+                <label className="label-field-end">เพิ่มเติม</label>
               </div>
             </fieldset>
             <fieldset>
@@ -46,7 +47,7 @@ function LayerModal() {
               <label>ข้อความ</label>
               <div className="field">
                 <textarea placeholder="ข้อความ"></textarea>
-                <label className="label-field-end">Option</label>
+                <label className="label-field-end">เพิ่มเติม</label>
               </div>
             </fieldset>
             <fieldset className="fieldset-inline">
