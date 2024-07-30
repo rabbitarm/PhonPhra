@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import FontSize from './includes/FontSize';
+import { useSelector } from 'react-redux';
 import WidgetCalendar from './includes/WidgetCalendar';
-import WidgetCountNumber from './includes/WidgetCountNumber';
 
 function Header() {
 
+  const { userProfile } = useSelector((state) => state.user);
+
   const [navMainActive, setNavMainActive] = useState(false);
   const [navUserActive, setNavUserActive] = useState(false);
-  const navToggle = () => {navLeave(); setNavMainActive(!navMainActive);}
-  const navUserToggle = () => {navLeave(); setNavUserActive(!navUserActive);}
-  const navLeave = () => {setNavMainActive(false); setNavUserActive(false);}
+  const navToggle = () => {headerLeave(); setNavMainActive(!navMainActive);}
+  const navUserToggle = () => {headerLeave(); setNavUserActive(!navUserActive);}
+  const headerLeave = () => {setNavMainActive(false); setNavUserActive(false);}
 
   const [calendarActive, setCalendarActive] = useState(false);
   const handleCalendarToggle = () => setCalendarActive(!calendarActive);
-  const [countNumberActive, setCountNumberActive] = useState(false);
-  const handleCountNumberToggle = () => setCountNumberActive(!countNumberActive);
 
   return (
-    <header id="header" className={`${navMainActive ? 'navmain-active' : ''} ${navUserActive ? 'navuser-active' : ''}`} onMouseLeave={navLeave}>
+    <header id="header" className={`${navMainActive ? 'navmain-active' : ''} ${navUserActive ? 'navuser-active' : ''}`} onMouseLeave={headerLeave}>
       <div className="container">
         <div id="navBrand">
           <Link to="/">
@@ -52,61 +51,48 @@ function Header() {
             </li>
           </ul>
         </nav>
-        <WidgetCalendar calendarActive={calendarActive} />
-        <WidgetCountNumber countNumberActive={countNumberActive} />
         <nav id="navUser">
-          <Link className="btn btn-icon btn-mix" to="เข้าสู่ระบบ">
-            <span className={`material-symbols-outlined ${navUserActive ? 'fill' : ''}`}>account_circle</span>
-            <span className="text hidden">เข้าสู่ระบบ</span>
-          </Link>
-          <button id="navUserToggle" className="btn btn-icon btn-mix" onClick={navUserToggle}>
-            <span className={`material-symbols-outlined ${navUserActive ? 'fill' : ''}`}>settings</span>
-            <span className="text hidden">ตั้งค่า</span>
-          </button>
+          <WidgetCalendar calendarActive={calendarActive} addClassNameMode={'nav'} />
+          {userProfile?.user_id === ''
+          ? <Link className="btn btn-icon btn-mix" to="เข้าสู่ระบบ">
+              <span className={`material-symbols-outlined ${navUserActive ? 'fill' : ''}`}>account_circle</span>
+              <span className="text hidden">เข้าสู่ระบบ</span>
+            </Link>
+          : <button id="navUserToggle" className="btn btn-icon btn-mix" onClick={navUserToggle}>
+              <span className={`material-symbols-outlined ${navUserActive ? 'fill' : ''}`}>settings</span>
+              <span className="text hidden">ตั้งค่า</span>
+            </button>
+          }
           {navUserActive &&
-          <div id="navUserList">
-            <h6>การตั้งค่า</h6>
-            <ul>
-              <li className="userprofile">
-                <Link className="btn btn-ghost" to="#ข้อมูลผู้ใช้งาน">
-                  <span className="material-symbols-outlined">badge</span>
-                  <span className="text">ข้อมูลผู้ใช้งาน</span>
-                </Link>
-              </li>
-            </ul>
-            <hr />
-            <h6>ตัวเลือก</h6>
-            <ul>
-              <li className="fontsize">
-                <div id="navFontSizeToggle" className="btn btn-text">
-                  <span className="material-symbols-outlined">format_size</span>
-                  <span className="text">ขนาดอักษร</span>
-                  <FontSize fontSizeActive={true} addClassMode={`nav`} />
-                </div>
-              </li>
-              <li className="calendar">
-                <button className="btn btn-ghost" onClick={handleCalendarToggle}>
-                  <span className="material-symbols-outlined">today</span>
-                  <span className="text">วันพระ</span>
-                  <span className={`icon-xl material-symbols-outlined wght-200 ${calendarActive ? 'fill text-success' : ''}`}>{calendarActive ? 'toggle_on' : 'toggle_off'}</span>
-                </button>
-              </li>
-              <li className="countnumber">
-                <button className="btn btn-ghost" onClick={handleCountNumberToggle}>
-                  <span className="material-symbols-outlined">pin</span>
-                  <span className="text">ที่นับจำนวน</span>
-                  <span className={`icon-xl material-symbols-outlined wght-200 ${countNumberActive ? ' fill text-success' : ''}`}>{countNumberActive ? 'toggle_on' : 'toggle_off'}</span>
-                </button>
-              </li>
-              <hr className="!m-0" />
-              <li className="lotout">
-                <button className="btn btn-ghost-alternate-warning">
-                  <span className="material-symbols-outlined">logout</span>
-                  <span className="text">ออกจากระบบ</span>
-                </button>
-              </li>
-            </ul>
-          </div>
+            <div id="navUserList" className="nav-dropdown">
+              <h6>การตั้งค่า</h6>
+              <ul>
+                <li className="userprofile">
+                  <Link className="btn btn-ghost" to="#ข้อมูลผู้ใช้งาน">
+                    <span className="material-symbols-outlined">badge</span>
+                    <span className="text">ข้อมูลผู้ใช้งาน</span>
+                  </Link>
+                </li>
+              </ul>
+              <hr />
+              <h6>ตัวเลือก</h6>
+              <ul>
+                <li className="calendar">
+                  <button className="btn btn-ghost" onClick={handleCalendarToggle}>
+                    <span className="material-symbols-outlined">today</span>
+                    <span className="text">วันพระ</span>
+                    <span className={`icon-xl material-symbols-outlined wght-200 ${calendarActive ? 'fill text-success' : ''}`}>{calendarActive ? 'toggle_on' : 'toggle_off'}</span>
+                  </button>
+                </li>
+                <hr />
+                <li className="lotout">
+                  <button className="btn btn-ghost-alternate-warning">
+                    <span className="material-symbols-outlined">logout</span>
+                    <span className="text">ออกจากระบบ</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
           }
         </nav>
       </div>

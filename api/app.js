@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 const mongodbApi = require('./key/mongodbApi');
+const user = require('./routes/user');
 const item = require('./routes/item');
 const itemCategory = require('./routes/itemCategory');
 const bookmark = require('./routes/bookmark');
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/user', user);
 app.use('/item', item);
 app.use('/itemCategory', itemCategory);
 app.use('/bookmark', bookmark);

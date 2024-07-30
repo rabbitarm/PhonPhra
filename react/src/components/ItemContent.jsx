@@ -7,6 +7,7 @@ import { IconLoading, IconItemNotFound } from './includes/StatusCode';
 /* import ItemStatus from './includes/ItemStatus';
 import ItemCategoryStatus from './includes/ItemCategoryStatus';
 import TimeFormat from './includes/TimeFormat'; */
+import FontSize from './includes/FontSize';
 import WidgetCountNumber from './includes/WidgetCountNumber';
 import ItemEdit from './ItemEdit';
 import Bookmark from './Bookmark';
@@ -76,14 +77,17 @@ function ItemContent() {
   /* Share */
   const [contentShare, setContentShare] = useState(false);
   const handleContentShare = () => setContentShare(!contentShare);
+  const contentShareLeave = () => {setContentShare(false);}
 
   /* Customize Tool */
-/*  const [contentCustomize, setContentCustomize] = useState(false);
-  const handleContentCustomize = () => setContentCustomize(!contentCustomize);*/
+  const [contentCustomize, setContentCustomize] = useState(false);
+  const handleContentCustomize = () => setContentCustomize(!contentCustomize);
+  const contentCustomizeLeave = () => {setContentCustomize(false);}
   /* Font Size */
   const { fontSizes, fontSizeIndex } = useSelector((state) => state.fontSize);
-/*  const handleFontSizeIncrease = () => dispatch(fontSizeIncrease());
-  const handleFontSizeDecrease = () => dispatch(fontSizeDecrease());*/
+  /* Count Number */
+  const [countNumberActive, setCountNumberActive] = useState(false);
+  const handleCountNumberToggle = () => setCountNumberActive(!countNumberActive);
 
   return (
     <article id="itemContent" className="container">
@@ -141,7 +145,7 @@ function ItemContent() {
                         </button>
                         {itemContent?.item_id === itemEditSelect?.item_id &&
                           <dialog className="modal">
-                            <div className="modal-content">
+                            <div className="modal-content fullscreen">
                               <div className="tooltip tooltip-left" data-tip="ยกเลิก">
                                 <button className="btn btn-icon btn-ghost" onClick={handleItemEditCancel}>
                                   <span className="material-symbols-outlined">close</span>
@@ -155,45 +159,45 @@ function ItemContent() {
                         }
                       </div>
                       <hr />
-                      <div className="tooltip" data-tip="แบ่งปัน">
+                      <div className="tooltip" data-tip="แบ่งปัน" onMouseLeave={contentShareLeave}>
                         <button className={'btn btn-icon' + (!contentShare ? ' btn-ghost' : '')} onClick={handleContentShare}>
                           <span className="material-symbols-outlined">share</span>
                           <span className="hidden">แบ่งปัน</span>
                         </button>
                         {contentShare &&
-                          <section className="absolute top-full right-0 translate-y-2 flex flex-wrap justify-between items-center gap-2">
+                          <section className="absolute top-full right-0 frame">
                             <p>QR Code</p>
                           </section>
                         }
                       </div>
-                      {/*
-                      <div className="tooltip" data-tip="ปรับแต่ง">
-                        <button className={'btn btn-icon' + (!contentCustomize ? ' btn-ghost' : '')} onClick={handleContentCustomize}>
-                          <span className="material-symbols-outlined">page_info</span>
+                      <div className="tooltip" data-tip="ปรับแต่ง" onMouseLeave={contentCustomizeLeave}>
+                        <button className={`btn btn-icon ${contentCustomize ? '' : 'btn-ghost'}`} onClick={handleContentCustomize}>
+                          <span className="material-symbols-outlined">tune</span>
                           <span className="hidden">ปรับแต่ง</span>
                         </button>
                         {contentCustomize &&
-                          <section className="absolute top-full right-0 translate-y-2 flex flex-wrap justify-between items-center gap-2">
-                            <section id="itemContentFontSize" className="frame flex justify-between items-center w-full sm:min-w-60 gap-2 p-2 border border-info rounded-xl">
-                              <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex >= fontSizes.length - 1 && 'disabled'} onClick={handleFontSizeIncrease}>
-                                <span className="material-symbols-outlined">add</span>
-                                <span className="hidden">เพิ่มขนาด</span>
-                              </button>
-                              <span className="flex justify-between items-center gap-1 text-info fill-info">
-                                <span className="material-symbols-outlined">format_size</span>
-                                <span className="flex justify-center items-center gap-1">ขนาดอักษร:
-                                  <span className="block w-4 text-2xl leading-none text-center">{fontSizeIndex + 1}</span>
-                                </span>
-                              </span>
-                              <button className="btn btn-icon btn-alternate-info" disabled={fontSizeIndex <= 0 && 'disabled'} onClick={handleFontSizeDecrease}>
-                                <span className="material-symbols-outlined">remove</span>
-                                <span className="hidden">ลดขนาด</span>
-                              </button>
-                            </section>
-                          </section>
+                          <div id="navCustomizeList" className="nav-dropdown">
+                            <h6>ตัวเลือก</h6>
+                            <ul>
+                              <li className="fontsize">
+                                <div id="navFontSizeToggle" className="btn btn-text">
+                                  <span className="material-symbols-outlined">format_size</span>
+                                  <span className="text">ขนาดเนื้อหา</span>
+                                  <FontSize fontSizeActive={true} addClassNameMode={'nav'} />
+                                </div>
+                              </li>
+                              <li className="countnumber">
+                                <button className="btn btn-ghost" onClick={handleCountNumberToggle}>
+                                  <span className="material-symbols-outlined">pin</span>
+                                  <span className="text">ที่นับจำนวน</span>
+                                  <span className={`icon-xl material-symbols-outlined wght-200 ${countNumberActive ? ' fill text-success' : ''}`}>{countNumberActive ? 'toggle_on' : 'toggle_off'}</span>
+                                </button>
+                              </li>
+                            </ul>
+                          </div>
                         }
                       </div>
-                      */}
+                      <WidgetCountNumber countNumberActive={countNumberActive} />
                     </div>
                   </div>
                   <article id="itemContentDesc" className={fontSizes[fontSizeIndex]} dangerouslySetInnerHTML={{ __html: itemContent?.item_desc }} />

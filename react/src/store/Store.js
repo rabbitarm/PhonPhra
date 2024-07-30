@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import userSlice from './userSlice';
 import itemListSlice from './itemListSlice';
 import itemCategorySlice from './itemCategorySlice';
 import bookmarkListSlice from './bookmarkListSlice';
@@ -7,6 +8,7 @@ import countNumberSlice from './countNumberSlice';
 
 const store = configureStore({
   reducer: {
+    user: userSlice,
     itemList: itemListSlice,
     itemCategory: itemCategorySlice,
     bookmarkList: bookmarkListSlice,

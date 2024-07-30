@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const AccountSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   user_id: { type: String, required: true, trim: true },
   user_number: { type: Number, required: true, trim: true },
   user_name: { type: String, required: true, trim: true },
@@ -18,8 +18,8 @@ const AccountSchema = new mongoose.Schema({
   user_setting: [{
     setting_theme: { type: String, required: true, trim: true, enum: ['system', 'light', 'dark'], default:'system' },
     setting_fontsize: { type: String, required: true, trim: true, enum: ['text-base', 'text-lg', 'text-xl', 'text-2xl', 'text-3xl', 'text-4xl', 'text-5xl'], default:'text-base' },
-    setting_widget_calendar: { type: Boolean, required: true, trim: true, default:true },
-    setting_widget_countnumber: { type: Boolean, required: true, trim: true, default:true },
+    setting_widget_calendar: { type: Boolean, required: true, trim: true, default:false },
+    setting_widget_countnumber: { type: Boolean, required: true, trim: true, default:false },
   }],
 },{
   timestamps: {
@@ -29,4 +29,4 @@ const AccountSchema = new mongoose.Schema({
   versionKey: false,
 });
 
-module.exports = mongoose.model('Account', AccountSchema);
+module.exports = mongoose.model('User', UserSchema);

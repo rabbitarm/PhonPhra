@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { itemDelete } from '../store/itemListSlice';
 
 import { IconLoading, IconItemNotFound } from './includes/StatusCode';
-/* import ItemStatus from './includes/ItemStatus';
-import ItemCategoryStatus from './includes/ItemCategoryStatus'; */
+/*import ItemStatus from './includes/ItemStatus';
+import ItemCategoryStatus from './includes/ItemCategoryStatus';*/
 import Paginate from './includes/Paginate';
 import ItemCreate from './ItemCreate';
 import ItemEdit from './ItemEdit';
@@ -14,6 +14,7 @@ import Bookmark from './Bookmark';
 function ItemList() {
 
   const dispatch = useDispatch();
+  const { userProfile } = useSelector((state) => state.user);
   const { itemList, itemLoading, pageCurrent, pagePerItem } = useSelector((state) => state.itemList);
 
   /* Check item index of item list */
@@ -66,7 +67,7 @@ function ItemList() {
                 </button>
                 {itemCreateToggle &&
                   <dialog className="modal">
-                    <div className="modal-content">
+                    <div className="modal-content fullscreen">
                       <div className="tooltip tooltip-left" data-tip="ยกเลิก">
                         <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
                           <span className="material-symbols-outlined">close</span>
@@ -95,7 +96,7 @@ function ItemList() {
                       </div>
                       {itemCreateToggle &&
                         <dialog className="modal">
-                          <div className="modal-content">
+                          <div className="modal-content fullscreen">
                             <div className="tooltip tooltip-left" data-tip="ยกเลิก">
                               <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
                                 <span className="material-symbols-outlined">close</span>
@@ -116,19 +117,21 @@ function ItemList() {
                       <td>
                         {itemItemList?.item_number}
                       </td>
-                      <td>
-                        {/*
-                        <span className="badge badge-sm badge-reverse absolute top-1 right-0">
-                          <ItemStatus itemStatus={itemItemList?.item_status} addClassNameIcon={''} addClassNameText={'hidden'} />
-                        </span>
-                        <span className="badge badge-sm badge-reverse absolute bottom-1 right-0">
-                          <ItemCategoryStatus itemCategoryStatus={itemItemList?.item_category_list} addClassNameIcon={''} addClassNameText={'hidden'} />
-                        </span>
+                      <td /*className={userProfile?.user_role === 'admin' ? 'relative' : ''}*/>
+                        {/*userProfile?.user_role === 'admin' &&
+                          <>
+                            <span className="badge badge-sm badge-reverse absolute top-1 right-0">
+                              <ItemStatus itemStatus={itemItemList?.item_status} addClassNameIcon={''} addClassNameText={'hidden'} />
+                            </span>
+                            <span className="badge badge-sm badge-reverse absolute bottom-1 right-0">
+                              <ItemCategoryStatus itemCategoryStatus={itemItemList?.item_category_list} addClassNameIcon={''} addClassNameText={'hidden'} />
+                            </span>
+                          </>
                         */}
                         <Link to={`/บทสวดมนต์/${itemItemList?.item_number}/${itemItemList?.item_name}`}>{itemItemList?.item_name}</Link>
                       </td>
                       <td>
-                        <div className="tooltip hidden sm:inline-block" data-tip="เพิ่ม">
+                        <div className={`tooltip ${userProfile?.user_role === 'admin' ? 'hidden sm:inline-block' : ''}`} data-tip="เพิ่ม">
                           <button className="btn btn-icon btn-mix" onClick={() => handleItemAdd(itemItemList?.item_id, itemItemList?.item_number)}>
                             <span className="material-symbols-outlined">bookmark_add</span>
                             <span className="text hidden">เพิ่ม</span>
@@ -148,72 +151,76 @@ function ItemList() {
                             <button className="modal-close" onClick={handleItemCancel}></button>
                           </dialog>
                         }
-                        <div className="tooltip hidden sm:inline-block" data-tip="แก้ไข">
-                          <button className="btn btn-icon btn-mix" onClick={() => handleItemEdit(itemItemList)}>
-                            <span className="material-symbols-outlined">edit</span>
-                            <span className="text hidden">แก้ไข</span>
-                          </button>
-                        </div>
-                        {itemItemList?.item_id === itemEditSelect?.item_id &&
-                          <dialog className="modal">
-                            <div className="modal-content">
-                              <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                                <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
-                                  <span className="material-symbols-outlined">close</span>
-                                  <span className="text hidden">ยกเลิก</span>
-                                </button>
-                              </div>
-                              <ItemEdit itemEditSelect={itemEditSelect} />
+                        {userProfile?.user_role === 'admin' &&
+                          <>
+                            <div className="tooltip hidden sm:inline-block" data-tip="แก้ไข">
+                              <button className="btn btn-icon btn-mix" onClick={() => handleItemEdit(itemItemList)}>
+                                <span className="material-symbols-outlined">edit</span>
+                                <span className="text hidden">แก้ไข</span>
+                              </button>
                             </div>
-                            <button className="modal-close" onClick={handleItemCancel}></button>
-                          </dialog>
+                            {itemItemList?.item_id === itemEditSelect?.item_id &&
+                              <dialog className="modal">
+                                <div className="modal-content fullscreen">
+                                  <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                                    <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
+                                      <span className="material-symbols-outlined">close</span>
+                                      <span className="text hidden">ยกเลิก</span>
+                                    </button>
+                                  </div>
+                                  <ItemEdit itemEditSelect={itemEditSelect} />
+                                </div>
+                                <button className="modal-close" onClick={handleItemCancel}></button>
+                              </dialog>
+                            }
+                            <div className="tooltip hidden sm:inline-block" data-tip="ลบ">
+                              <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleItemDelete(itemItemList?.item_id)}>
+                                <span className="material-symbols-outlined">delete_forever</span>
+                                <span className="text hidden">ลบ</span>
+                              </button>
+                              {itemItemList?.item_id === itemDeleteSelect &&
+                                <dialog className="modal modal-tooltip modal-tooltip-right">
+                                  <div className="modal-content">
+                                    <p>ลบรายการนี้?</p>
+                                    <fieldset className="fieldset-button">
+                                      <button className="btn btn-2xs" onClick={handleItemCancel}>
+                                        <span className="text">ยกเลิก</span>
+                                      </button>
+                                      <button className="btn btn-2xs btn-color-warning" onClick={handleItemDeleteComfirm}>
+                                        <span className="text">ลบ</span>
+                                      </button>
+                                    </fieldset>
+                                  </div>
+                                </dialog>
+                              }
+                            </div>
+                            <div className="tooltip sm:hidden" data-tip="ตัวเลือก">
+                              <button className="btn btn-icon btn-mix" onClick={() => handleItemAction(itemItemList?.item_id)}>
+                                <span className="material-symbols-outlined">more_vert</span>
+                                <span className="text hidden">ตัวเลือก</span>
+                              </button>
+                              {itemItemList?.item_id === itemActionSelect &&
+                                <dialog className="modal modal-tooltip modal-tooltip-right">
+                                  <div className="modal-content !p-0">
+                                    <button className="btn btn-sm btn-ghost w-full justify-start" onClick={() => handleItemAdd(itemItemList?.item_id, itemItemList?.item_number)}>
+                                      <span className="material-symbols-outlined">bookmark_add</span>
+                                      <span className="text">เพิ่มไปยังรายการโปรด</span>
+                                    </button>
+                                    <button className="btn btn-sm btn-ghost w-full justify-start" onClick={() => handleItemEdit(itemItemList)}>
+                                      <span className="material-symbols-outlined">edit</span>
+                                      <span className="text">แก้ไขบทสวดมนต์</span>
+                                    </button>
+                                    <hr />
+                                    <button className="btn btn-sm btn-ghost-alternate-warning w-full justify-start" onClick={handleItemActionDelete}>
+                                      <span className="material-symbols-outlined">delete_forever</span>
+                                      <span className="text">ลบบทสวดมนต์</span>
+                                    </button>
+                                  </div>
+                                </dialog>
+                              }
+                            </div>
+                          </>
                         }
-                        <div className="tooltip hidden sm:inline-block" data-tip="ลบ">
-                          <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleItemDelete(itemItemList?.item_id)}>
-                            <span className="material-symbols-outlined">delete_forever</span>
-                            <span className="text hidden">ลบ</span>
-                          </button>
-                          {itemItemList?.item_id === itemDeleteSelect &&
-                            <dialog className="modal modal-tooltip modal-tooltip-right">
-                              <div className="modal-content">
-                                <p>ลบรายการนี้?</p>
-                                <fieldset className="fieldset-button">
-                                  <button className="btn btn-2xs" onClick={handleItemCancel}>
-                                    <span className="text">ยกเลิก</span>
-                                  </button>
-                                  <button className="btn btn-2xs btn-color-warning" onClick={handleItemDeleteComfirm}>
-                                    <span className="text">ลบ</span>
-                                  </button>
-                                </fieldset>
-                              </div>
-                            </dialog>
-                          }
-                        </div>
-                        <div className="tooltip sm:hidden" data-tip="ตัวเลือก">
-                          <button className="btn btn-icon btn-mix" onClick={() => handleItemAction(itemItemList?.item_id)}>
-                            <span className="material-symbols-outlined">more_vert</span>
-                            <span className="text hidden">ตัวเลือก</span>
-                          </button>
-                          {itemItemList?.item_id === itemActionSelect &&
-                            <dialog className="modal modal-tooltip modal-tooltip-right">
-                              <div className="modal-content !p-0">
-                                <button className="btn btn-sm btn-ghost w-full justify-start" onClick={() => handleItemAdd(itemItemList?.item_id, itemItemList?.item_number)}>
-                                  <span className="material-symbols-outlined">bookmark_add</span>
-                                  <span className="text">เพิ่มไปยังรายการโปรด</span>
-                                </button>
-                                <button className="btn btn-sm btn-ghost w-full justify-start" onClick={() => handleItemEdit(itemItemList)}>
-                                  <span className="material-symbols-outlined">edit</span>
-                                  <span className="text">แก้ไขบทสวดมนต์</span>
-                                </button>
-                                <hr />
-                                <button className="btn btn-sm btn-ghost-alternate-warning w-full justify-start" onClick={handleItemActionDelete}>
-                                  <span className="material-symbols-outlined">delete_forever</span>
-                                  <span className="text">ลบบทสวดมนต์</span>
-                                </button>
-                              </div>
-                            </dialog>
-                          }
-                        </div>
                       </td>
                     </tr>
                   ))}

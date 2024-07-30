@@ -5,10 +5,10 @@ function Aside() {
 
   const [navActive, setNavActive] = useState(false);
   const navToggle = () => setNavActive(!navActive);
-  /*const navLeave = () => setNavActive(false);*/
+  const navLeave = () => setNavActive(false);
 
   return (
-    <aside id="aside" className={navActive ? 'active' : ''} /*onMouseLeave={navLeave}*/>
+    <aside id="aside" className={navActive ? 'active' : ''} onMouseLeave={navLeave}>
       <nav>
         <div id="navBrand">
           <Link className="flex flex-row items-center gap-2 text-2xl fill-slate" to="/">

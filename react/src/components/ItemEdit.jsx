@@ -34,8 +34,8 @@ function ItemEdit({ itemEditSelect }) {
 
   return (
     <>
-      <h4 className="flex items-center gap-sm">แก้ไขบทสวดมนต์ <span className="badge badge-lg badge-color-info">เลขที่: {itemEditContent?.item_number}</span></h4>
-      <form key={itemEditContent.item_id} onSubmit={handleItemEditSubmit}>
+      <h3 className="flex items-center gap-sm">แก้ไขบทสวดมนต์ <span className="badge badge-lg badge-color-info">เลขที่: {itemEditContent?.item_number}</span></h3>
+      <form className="flex-1" key={itemEditContent.item_id} onSubmit={handleItemEditSubmit}>
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">ชื่อบทสวดมนต์</label>
@@ -51,7 +51,7 @@ function ItemEdit({ itemEditSelect }) {
           </div>
         </fieldset>
         */}
-        <fieldset>
+        <fieldset className="flex-1">
           <Editor
             apiKey = { tinyApi }
             onInit = {(evt, editor) => editorRef.current = editor}

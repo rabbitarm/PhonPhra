@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { userSimpleID } from './api/userApi';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { userFetch } from './store/userSlice';
 import { itemFetch } from './store/itemListSlice';
 import { itemCategoryFetch } from './store/itemCategorySlice';
 import { bookmarkFetch } from './store/bookmarkListSlice';
@@ -26,6 +28,7 @@ function App() {
 
   /* Item List - Fetch */
   useEffect(() => {
+    dispatch(userFetch(userSimpleID));
     dispatch(itemFetch());
     dispatch(itemCategoryFetch());
     dispatch(bookmarkFetch());

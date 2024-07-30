@@ -56,24 +56,6 @@
   input[type="date"]::-webkit-calendar-picker-indicator {@apply absolute left-0 pl-4 pr-[calc(theme('width.full')-theme('gap.8'))] py-3;}
   input[type="date"]::-webkit-datetime-edit-fields-wrapper ,
   input[type="date"]::-webkit-datetime-edit {@apply relative left-3;}
-/* https://codepen.io/vkjgr/pen/VYMeXp
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image:
-      linear-gradient(45deg, transparent 50%, blue 50%),
-      linear-gradient(135deg, blue 50%, transparent 50%),
-      linear-gradient(to right, white, white);
-    background-position:
-      calc(100% - 20px) calc(1em + 2px),
-      calc(100% - 15px) calc(1em + 2px),
-      100% 0;
-    background-size:
-      5px 5px,
-      5px 5px,
-      2.5em 2.5em;
-    background-repeat: no-repeat;
-  }*/
   /**/
   .form-inline {@apply flex-row justify-between items-end gap-4;}
   .form-inner {@apply flex-row justify-between items-end gap-0;}
@@ -288,7 +270,8 @@
 
   .modal {@apply relative z-20 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
   .modal .modal-content {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding;}
-  .modal-content > .tooltip {@apply absolute top-0 right-0;}
+  .modal .modal-content.fullscreen {@apply !w-full max-w-screen-xl !h-full max-h-none;}
+  .modal-content > .tooltip {@apply absolute z-0 top-0 right-0;}
   .modal-content .fieldset-button {@apply gap-2 2xs:gap-4 pt-4;}
   .modal[class*="modal-"] .modal-content > .tooltip ,
   .modal[class*="modal-"] .modal-close {@apply hidden;}
@@ -470,16 +453,16 @@
 #header.navmain-active #navMain ul .btn {@apply w-full justify-start;}
 /**/
 #header #navUser {@apply relative flex;}
-#header #navUser > div {@apply absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
-#header #navUser > div > hr {@apply my-2;}
-#header #navUser > div > h6 {@apply text-slate px-4 pt-4 pb-1;}
-#header #navUser > div > hr + h6 {@apply pt-2;}
-#header #navUser ul li > .btn {@apply w-full justify-start;}
-#header #navUser ul li > .btn .text {@apply flex-1 whitespace-nowrap text-left pr-2;}
-#header li.fontsize #fontSize.nav {@apply -mr-2.5;}
-#header li.fontsize #fontSize.nav form {@apply flex-row;}
-#header li.fontsize #fontSize.nav form fieldset {@apply flex flex-row flex-nowrap items-center gap-0 rounded border border-slate-100;}
-#header li.fontsize #fontSize.nav form input {@apply w-6 h-6 text-center p-0 border-none;}
+.nav-dropdown {@apply absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
+.nav-dropdown hr {@apply my-2;}
+.nav-dropdown > h6 {@apply text-slate px-4 pt-4 pb-1;}
+.nav-dropdown hr + h6 {@apply pt-2;}
+.nav-dropdown li > .btn {@apply w-full justify-start;}
+.nav-dropdown li > .btn .text {@apply flex-1 whitespace-nowrap text-left pr-2;}
+/*.nav-dropdown li.fontsize #fontSize.nav {@apply -mr-2.5;}*/
+.nav-dropdown li.fontsize #fontSize.nav form {@apply flex-row;}
+.nav-dropdown li.fontsize #fontSize.nav form fieldset {@apply flex flex-row flex-nowrap items-center gap-0 rounded border border-slate-100;}
+.nav-dropdown li.fontsize #fontSize.nav form input {@apply w-6 h-6 text-center p-0 border-none;}
 
 /* Footer */
 #footer {@apply bg-slate-50;}
@@ -545,7 +528,9 @@ hr {@apply clear-both w-full;}
 /**/
 .widget#fontSize form input {@apply w-10 text-3xl font-light text-slate text-center p-2 rounded-lg}
 /**/
-#widgetCalendar {@apply flex-row fixed z-10 bottom-4 left-4;}
+#widgetCalendar {@apply flex-row;}
+#widgetCalendar.widget:not(.nav) {@apply fixed z-10 bottom-4 left-4;}
+#widgetCalendar.widget.nav {@apply -mb-5 md:-mb-9 mr-2 sm:mr-4;}
 #widgetCalendar .icon-moon {@apply hidden xs:block p-2 rounded-lg;}
 #widgetCalendar .date {@apply text-nowrap px-3 py-2;}
 #widgetCalendar p {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}

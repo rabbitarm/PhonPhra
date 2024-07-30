@@ -1,11 +1,11 @@
 import React from 'react';
 
-function WidgetCalendar({ calendarActive }) {
+function WidgetCalendar({ calendarActive,  addClassNameMode }) {
 
   return (
     <>
       {calendarActive &&
-        <section id="widgetCalendar" className="widget">
+        <section id="widgetCalendar" className={`widget ${addClassNameMode}`}>
           <span className="icon-moon bg-gradient-1">
             <span className="material-symbols-outlined fill">clear_night</span>
           </span>

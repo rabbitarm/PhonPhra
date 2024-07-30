@@ -35,8 +35,8 @@ function ItemCreate({ itemNumberHighest }) {
 
   return (
     <>
-      <h4>เพิ่มบทสวดมนต์</h4>
-      <form onSubmit={handleItemCreateSubmit}>
+      <h3>เพิ่มบทสวดมนต์</h3>
+      <form className="flex-1" onSubmit={handleItemCreateSubmit}>
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">ชื่อบทสวดมนต์</label>
@@ -52,7 +52,7 @@ function ItemCreate({ itemNumberHighest }) {
           </div>
         </fieldset>
         */}
-        <fieldset>
+        <fieldset className="flex-1">
           <Editor
             apiKey = { tinyApi }
             onInit = {(evt, editor) => editorRef.current = editor}
