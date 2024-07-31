@@ -40,14 +40,14 @@ function ItemContent() {
     {bookmarkIdIndex === undefined
     ? itemIndexPresent > 0 && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent - 1]?.item_number}/${itemList[itemIndexPresent - 1]?.item_name}`)
     : itemIndexPresent > 0 && navigate(`/รายการโปรด/${bookmarkSelectId?.bookmark_id}/${bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent - 1]?.item_number}/${itemList?.find(item => item?.item_id === bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent - 1]?.item_id)?.item_name}`)
-    }
-  }
+    };
+  };
   const handleItemNumberNext = () => {
     {bookmarkIdIndex === undefined
     ? itemIndexPresent < itemIndexLast && navigate(`/บทสวดมนต์/${itemList[itemIndexPresent + 1]?.item_number}/${itemList[itemIndexPresent + 1]?.item_name}`)
     : itemIndexPresent < itemIndexLast && navigate(`/รายการโปรด/${bookmarkSelectId?.bookmark_id}/${bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent + 1]?.item_number}/${itemList?.find(item => item?.item_id === bookmarkSelectId?.bookmark_item_list?.[itemIndexPresent + 1]?.item_id)?.item_name}`)
-    }
-  }
+    };
+  };
   const [itemNumberJumpIndex, setItemNumberJumpIndex] = useState('');
   const itemNumberJumpChange = (event) => setItemNumberJumpIndex(parseInt(event.target.value) || 0);
   const handleItemNumberJumpSubmit = (event) => {
@@ -78,7 +78,6 @@ function ItemContent() {
   const [contentShare, setContentShare] = useState(false);
   const handleContentShare = () => setContentShare(!contentShare);
   const contentShareLeave = () => {setContentShare(false);}
-
   /* Customize Tool */
   const [contentCustomize, setContentCustomize] = useState(false);
   const handleContentCustomize = () => setContentCustomize(!contentCustomize);
@@ -90,17 +89,17 @@ function ItemContent() {
   const handleCountNumberToggle = () => setCountNumberActive(!countNumberActive);
 
   return (
-    <article id="itemContent" className="container">
+    <div id="itemContent" className="container">
       {itemLoading
       ? <IconLoading />
       : <>
           {itemList.some(item => item?.item_number === itemNumberIndex)
           ? <>
               {itemList.filter(item => item?.item_number === itemNumberIndex).map(itemContent => (itemContent &&
-                <main key={itemContent?.item_id} className="flex flex-col gap">
+                <section key={itemContent?.item_id} className="flex flex-col flex-1 gap">
                   <div className="flex flex-wrap justify-between items-stretch md:items-start gap flex-col-reverse md:flex-row">
-                    <section className="content-title">
-                      <div className="status-bar flex items-center gap-2">
+                    <section id="itemContentHeading">
+                      <div id="itemContentMeta">
                         <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
                         {/*
                         <span className="badge badge-sm badge-reverse !p-0">
@@ -117,7 +116,7 @@ function ItemContent() {
                       <h1 className="text-2xl">{itemContent?.item_name}</h1>
                     </section>
                     <hr />
-                    <div className="action-bar">
+                    <div id="itemContentNavAction">
                       <div className="tooltip" data-tip="เพิ่ม">
                         <button className="btn btn-icon btn-ghost" onClick={() => handleItemAdd(itemContent?.item_id, itemContent?.item_number)}>
                           <span className="material-symbols-outlined">bookmark_add</span>
@@ -201,7 +200,7 @@ function ItemContent() {
                     </div>
                   </div>
                   <article id="itemContentDesc" className={fontSizes[fontSizeIndex]} dangerouslySetInnerHTML={{ __html: itemContent?.item_desc }} />
-                </main>
+                </section>
               ))}
             </>
           : <IconItemNotFound />
@@ -209,17 +208,17 @@ function ItemContent() {
         </>
       }
       <hr />
-      <section id="itemContentNav" className="flex flex-wrap justify-between items-end gap">
-        <button className="order-1 w-10 2xs:w-fit xs:w-40 px-0 2xs:px-4 btn" disabled={itemIndexPresent <= 0 && 'disabled'} onClick={handleItemNumberPrev}>
+      <section id="itemContentNavPagination">
+        <button className="btn-prev btn" disabled={itemIndexPresent <= 0 && 'disabled'} onClick={handleItemNumberPrev}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="hidden 2xs:flex">บทก่อนหน้า</span>
+          <span className="text hidden 2xs:flex">บทก่อนหน้า</span>
         </button>
-        <button className="order-2 md:order-3 flex-1 md:max-w-40 btn btn-color-primary" disabled={itemIndexPresent >= itemIndexLast && 'disabled'} onClick={handleItemNumberNext}>
-          <span>บทต่อไป</span>
+        <button className="btn-next btn btn-color-primary" disabled={itemIndexPresent >= itemIndexLast && 'disabled'} onClick={handleItemNumberNext}>
+          <span className="text">บทต่อไป</span>
           <span className="material-symbols-outlined">arrow_right_alt</span>
         </button>
         {bookmarkIdIndex === undefined &&
-          <form className="form-inner md:flex-1 md:max-w-80 order-3 md:order-2" onSubmit={handleItemNumberJumpSubmit}>
+          <form className="form-jump form-inner" onSubmit={handleItemNumberJumpSubmit}>
             <fieldset className="fieldset-border pt-0">
               <div className="field">
                 <label className="label-border">ไปเลขที่อื่น</label>
@@ -229,14 +228,15 @@ function ItemContent() {
             <fieldset className="fieldset-button-field-end">
               <button className="btn btn-icon btn-ghost-alternate-primary" type="submit">
                 <span className="material-symbols-outlined">input</span>
-                <span className="hidden">ค้นหา</span>
+                <span className="text hidden">ค้นหา</span>
               </button>
             </fieldset>
           </form>
         }
       </section>
-    </article>
-  )
-}
+    </div>
+  );
+
+};
 
 export default ItemContent;

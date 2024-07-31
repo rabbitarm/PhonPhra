@@ -476,21 +476,23 @@
 #main {@apply flex flex-col flex-1 padding-y;}
 /**/
 .container {@apply relative flex flex-col justify-between max-w-screen-xl gap padding mx-auto;}
-hr {@apply clear-both w-full;}
-.container > hr ,
-#itemContent .content-title + hr {@apply clear-both flex-auto w-auto -mx-4 sm:-mx-8;}
-#itemContent .content-title + hr {@apply block md:hidden w-[calc(100%+32px)] sm:w-[calc(100%+64px)] md:w-fit;}
-/**/
-.action-bar {@apply flex flex-auto md:flex-none;}
-.action-bar hr {@apply h-10 border-t-0 border-r margin-x-sm;}
-/**/
+#main > .container {@apply flex-1;}
+hr {@apply clear-both;}
+.container > hr {@apply -mx-4 sm:-mx-8;}
+
+/* Item - Content */
+#itemContentHeading + hr {@apply block md:hidden -mx-4 sm:-mx-8;}
+
+#itemContentMeta {@apply flex items-center gap-2;}
+#itemContentNavAction {@apply flex flex-1 md:flex-none;}
+#itemContentNavAction hr {@apply h-10 border-t-0 border-r margin-x-sm;}
 #itemContentDesc {@apply flex flex-col font-display w-fit gap-4 mx-auto;}
 #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
 #itemContentDesc ul {@apply list-disc;}
-.twocolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 gap-x-5 !list-none;}
-.twocolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
-.threecolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 sm:grid-cols-3 gap-x-5 !list-none;}
-.threecolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
+#itemContentDesc .twocolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 gap-x-5 !list-none;}
+#itemContentDesc .twocolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
+#itemContentDesc .threecolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 sm:grid-cols-3 gap-x-5 !list-none;}
+#itemContentDesc .threecolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
 #itemContentDesc sup {@apply text-primary-active;}
 #itemContentDesc a {@apply text-primary;}
 #itemContentDesc a:hover {@apply text-primary-active;}
@@ -503,6 +505,10 @@ hr {@apply clear-both w-full;}
 #itemContentDesc table :is(tr):hover {@apply bg-transparent;}
 #itemContentDesc table :is(th, td) {@apply p-0;}
 #itemContentDesc table :is(th, td):not(:first-child) {@apply pl-5;}
+#itemContentNavPagination {@apply flex flex-wrap justify-between items-end gap;}
+#itemContentNavPagination .btn-prev {@apply 2xs:flex-1 w-10 2xs:w-full xs:max-w-40 px-0 2xs:px-4;}
+#itemContentNavPagination .btn-next {@apply order-2 xs:order-3 flex-1 xs:max-w-40;}
+#itemContentNavPagination .form-jump {@apply order-3 xs:order-2 xs:flex-1 xs:max-w-80;}
 /**/
 .bg-gradient-1 {@apply text-white bg-gradient-to-br from-info-950 to-info;}
 /**/
