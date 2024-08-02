@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemCategoryDelete } from '../store/itemCategorySlice';
 
-import { IconLoading, IconItemCategoryNotFound } from './includes/StatusCode';
-import ItemCategoryForm from './includes/ItemCategoryForm';
+import { IconLoading, IconItemCategoryNotFound } from '../utilities/StatusCode';
+import ItemCategoryForm from '../components/includes/ItemCategoryForm';
 
 function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
 
@@ -62,7 +62,7 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
           : <>
               {itemCategoryList?.length === 0
               ? <IconItemCategoryNotFound />
-              : <section id="itemCategoryList" className="flex flex-col gap">
+              : <section id="itemCategoryList" className="flex flex-1 flex-col gap">
                   <table className="table-action">
                     <thead>
                       <tr>

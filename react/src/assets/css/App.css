@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 @tailwind base;
 @tailwind components;
@@ -476,16 +477,18 @@
 #main {@apply flex flex-col flex-1 padding-y;}
 /**/
 .container {@apply relative flex flex-col justify-between max-w-screen-xl gap padding mx-auto;}
-#main > .container {@apply flex-1;}
+#main > .container {@apply flex-1 justify-start;}
 hr {@apply clear-both;}
-.container > hr {@apply -mx-4 sm:-mx-8;}
+.container > hr {@apply -mx-4 sm:-mx-8 xl:mx-0 my-4 sm:my-8;}
 
 /* Item - Content */
-#itemContentHeading + hr {@apply block md:hidden -mx-4 sm:-mx-8;}
-
-#itemContentMeta {@apply flex items-center gap-2;}
-#itemContentNavAction {@apply flex flex-1 md:flex-none;}
-#itemContentNavAction hr {@apply h-10 border-t-0 border-r margin-x-sm;}
+.wrapper {@apply flex flex-col flex-1 gap;}
+.itemcontent-heading {@apply flex flex-col;}
+.itemcontent-heading > hr {@apply -mx-4 sm:-mx-8 xl:mx-0 margin-y-sm;}
+.itemcontent-info {@apply flex flex-wrap justify-between items-center /*gap*/;}
+.itemcontent-meta {@apply flex items-center gap-2;}
+.nav-action {@apply flex;}
+.nav-action hr {@apply -order-1 2xs:order-none h-auto border-t-0 border-r margin-x-sm -mb-2 sm:-mb-4;}
 #itemContentDesc {@apply flex flex-col font-display w-fit gap-4 mx-auto;}
 #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
 #itemContentDesc ul {@apply list-disc;}
@@ -505,14 +508,14 @@ hr {@apply clear-both;}
 #itemContentDesc table :is(tr):hover {@apply bg-transparent;}
 #itemContentDesc table :is(th, td) {@apply p-0;}
 #itemContentDesc table :is(th, td):not(:first-child) {@apply pl-5;}
-#itemContentNavPagination {@apply flex flex-wrap justify-between items-end gap;}
-#itemContentNavPagination .btn-prev {@apply 2xs:flex-1 w-10 2xs:w-full xs:max-w-40 px-0 2xs:px-4;}
-#itemContentNavPagination .btn-next {@apply order-2 xs:order-3 flex-1 xs:max-w-40;}
-#itemContentNavPagination .form-jump {@apply order-3 xs:order-2 xs:flex-1 xs:max-w-80;}
+.itemcontent-nav-pagination {@apply flex flex-wrap justify-between items-end gap;}
+.itemcontent-nav-pagination .btn-prev {@apply 2xs:flex-1 w-10 2xs:w-full xs:max-w-40 px-0 2xs:px-4;}
+.itemcontent-nav-pagination .btn-next {@apply order-2 xs:order-3 flex-1 xs:max-w-40;}
+.itemcontent-nav-pagination .form-jump {@apply order-3 xs:order-2 xs:flex-1 xs:max-w-80;}
 /**/
 .bg-gradient-1 {@apply text-white bg-gradient-to-br from-info-950 to-info;}
 /**/
-.status-code {@apply flex flex-col xs:flex-row justify-center items-center text-center xs:text-left;}
+.status-code {@apply flex flex-1 flex-col xs:flex-row justify-center items-center text-center xs:text-left;}
 .status-code .material-symbols-outlined {@apply size-32 [font-size:theme('gap.32')] sm:size-40 sm:[font-size:theme('gap.40')] text-slate-100;
   font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;
 }

@@ -7,20 +7,20 @@ import { itemFetch } from './store/itemListSlice';
 import { itemCategoryFetch } from './store/itemCategorySlice';
 import { bookmarkFetch } from './store/bookmarkListSlice';
 
-import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import './assets/css/App.css';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import Register from './components/forms/Register';
 import LogIn from './components/forms/LogIn';
 import ForgotPassword from './components/forms/ForgotPassword';
-import ItemList from './components/ItemList';
-import ItemContent from './components/ItemContent';
-import ItemCategory from './components/ItemCategory';
-import Bookmark from './components/Bookmark';
+import ItemList from './pages/ItemList';
+import ItemContent from './pages/ItemContent';
+import ItemCategory from './pages/ItemCategory';
+import Bookmark from './pages/Bookmark';
 import ContactUs from './components/forms/ContactUs';
-import NotFound from './components/NotFound';
+import NotFound from './pages/NotFound';
 import Layer from './components/Layer';
-import StatusCode from './components/includes/StatusCode';
+import StatusCode from './utilities/StatusCode';
 
 function App() {
 

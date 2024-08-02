@@ -3,3 +3,11 @@ api/node_modules
 api/key
 react/node_modules
 react/src/api
+
+react/coverage
+react/build
+
+.DS_Store
+.env*
+.local*
+.log*

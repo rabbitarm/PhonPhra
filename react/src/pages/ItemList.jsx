@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemDelete } from '../store/itemListSlice';
 
-import { IconLoading, IconItemNotFound } from './includes/StatusCode';
-/*import ItemStatus from './includes/ItemStatus';
-import ItemCategoryStatus from './includes/ItemCategoryStatus';*/
-import Paginate from './includes/Paginate';
-import ItemCreate from './ItemCreate';
-import ItemEdit from './ItemEdit';
-import Bookmark from './Bookmark';
+import { IconLoading, IconItemNotFound } from '../utilities/StatusCode';
+import StatusItem from '../utilities/StatusItem';
+import StatusItemCategory from '../utilities/StatusItemCategory';
+import Paginate from '../components/includes/Paginate';
+import ItemCreate from '../components/ItemCreate';
+import ItemEdit from '../components/ItemEdit';
+import Bookmark from './/Bookmark';
 
 function ItemList() {
 
@@ -117,17 +117,17 @@ function ItemList() {
                       <td>
                         {itemItemList?.item_number}
                       </td>
-                      <td /*className={userProfile?.user_role === 'admin' ? 'relative' : ''}*/>
-                        {/*userProfile?.user_role === 'admin' &&
+                      <td className={userProfile?.user_role === 'admin' ? 'relative' : ''}>
+                        {userProfile?.user_role === 'admin' &&
                           <>
                             <span className="badge badge-sm badge-reverse absolute top-1 right-0">
-                              <ItemStatus itemStatus={itemItemList?.item_status} addClassNameIcon={''} addClassNameText={'hidden'} />
+                              <StatusItem statusItem={itemItemList?.item_status} addClassNameIcon={''} addClassNameText={'hidden'} />
                             </span>
                             <span className="badge badge-sm badge-reverse absolute bottom-1 right-0">
-                              <ItemCategoryStatus itemCategoryStatus={itemItemList?.item_category_list} addClassNameIcon={''} addClassNameText={'hidden'} />
+                              <StatusItemCategory statusItemCategory={itemItemList?.item_category_list} addClassNameIcon={''} addClassNameText={'hidden'} />
                             </span>
                           </>
-                        */}
+                        }
                         <Link to={`/บทสวดมนต์/${itemItemList?.item_number}/${itemItemList?.item_name}`}>{itemItemList?.item_name}</Link>
                       </td>
                       <td>

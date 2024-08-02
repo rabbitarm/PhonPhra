@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconPageNotFound } from './includes/StatusCode';
+import { IconPageNotFound } from '../utilities/StatusCode';
 
 function NotFound() {
   return (

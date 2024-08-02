@@ -3,13 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { /*useDispatch, */useSelector } from 'react-redux';
 //import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
 
-import { IconLoading, IconItemNotFound } from './includes/StatusCode';
-/* import ItemStatus from './includes/ItemStatus';
-import ItemCategoryStatus from './includes/ItemCategoryStatus';
-import TimeFormat from './includes/TimeFormat'; */
-import FontSize from './includes/FontSize';
-import WidgetCountNumber from './includes/WidgetCountNumber';
-import ItemEdit from './ItemEdit';
+import { IconLoading, IconItemNotFound } from '../utilities/StatusCode';
+import StatusItem from '../utilities/StatusItem';
+import StatusItemCategory from '../utilities/StatusItemCategory';
+import FormatDate from '../utilities/FormatDate';
+import FontSize from '../components/includes/FontSize';
+import WidgetCountNumber from '../components/includes/WidgetCountNumber';
+import ItemEdit from '../components/ItemEdit';
 import Bookmark from './Bookmark';
 
 function ItemContent() {
@@ -96,108 +96,108 @@ function ItemContent() {
           {itemList.some(item => item?.item_number === itemNumberIndex)
           ? <>
               {itemList.filter(item => item?.item_number === itemNumberIndex).map(itemContent => (itemContent &&
-                <section key={itemContent?.item_id} className="flex flex-col flex-1 gap">
-                  <div className="flex flex-wrap justify-between items-stretch md:items-start gap flex-col-reverse md:flex-row">
-                    <section id="itemContentHeading">
-                      <div id="itemContentMeta">
+                <section key={itemContent?.item_id} className="wrapper">
+                  <div className="itemcontent-heading">
+                    <div className="itemcontent-info">
+                      <div className="itemcontent-meta">
                         <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
-                        {/*
+                        
                         <span className="badge badge-sm badge-reverse !p-0">
-                          <TimeFormat itemTimeCreated={itemContent?.item_time_created} addClassNameIcon={''} addClassNameText={''} />
+                          <FormatDate itemDateCreated={itemContent?.item_time_created} addClassNameIcon={''} addClassNameText={''} />
                         </span>
                         <span className="badge badge-sm badge-reverse !p-0">
-                          <ItemStatus itemStatus={itemContent?.item_status} addClassNameIcon={''} addClassNameText={''} />
+                          <StatusItem statusItem={itemContent?.item_status} addClassNameIcon={''} addClassNameText={''} />
                         </span>
                         <span className="badge badge-sm badge-reverse !p-0">
-                          <ItemCategoryStatus itemCategoryStatus={itemContent?.item_category_list} addClassNameIcon={''} addClassNameText={''} />
+                          <StatusItemCategory statusItemCategory={itemContent?.item_category_list} addClassNameIcon={''} addClassNameText={''} />
                         </span>
-                        */}
+                        
                       </div>
-                      <h1 className="text-2xl">{itemContent?.item_name}</h1>
-                    </section>
-                    <hr />
-                    <div id="itemContentNavAction">
-                      <div className="tooltip" data-tip="เพิ่ม">
-                        <button className="btn btn-icon btn-ghost" onClick={() => handleItemAdd(itemContent?.item_id, itemContent?.item_number)}>
-                          <span className="material-symbols-outlined">bookmark_add</span>
-                          <span className="hidden">เพิ่ม</span>
-                        </button>
-                        {itemContent?.item_id === itemAddSelect?.item_id &&
-                          <dialog className="modal">
-                            <div className="modal-content">
-                              <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                                <button className="btn btn-icon btn-ghost" onClick={handleItemAddCancel}>
-                                  <span className="material-symbols-outlined">close</span>
-                                  <span className="hidden">ยกเลิก</span>
-                                </button>
-                              </div>
-                              <Bookmark itemAddSelect={itemAddSelect} />
-                            </div>
-                            <button className="modal-close" onClick={handleItemAddCancel}></button>
-                          </dialog>
-                        }
-                      </div>
-                      <div className="tooltip" data-tip="แก้ไข">
-                        <button className="btn btn-icon btn-ghost" onClick={() => handleItemEdit(itemContent)}>
-                          <span className="material-symbols-outlined">edit</span>
-                          <span className="hidden">แก้ไข</span>
-                        </button>
-                        {itemContent?.item_id === itemEditSelect?.item_id &&
-                          <dialog className="modal">
-                            <div className="modal-content fullscreen">
-                              <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                                <button className="btn btn-icon btn-ghost" onClick={handleItemEditCancel}>
-                                  <span className="material-symbols-outlined">close</span>
-                                  <span className="hidden">ยกเลิก</span>
-                                </button>
-                              </div>
-                              <ItemEdit itemEditSelect={itemEditSelect} />
-                            </div>
-                            <button className="modal-close" onClick={handleItemEditCancel}></button>
-                          </dialog>
-                        }
-                      </div>
-                      <hr />
-                      <div className="tooltip" data-tip="แบ่งปัน" onMouseLeave={contentShareLeave}>
-                        <button className={'btn btn-icon' + (!contentShare ? ' btn-ghost' : '')} onClick={handleContentShare}>
-                          <span className="material-symbols-outlined">share</span>
-                          <span className="hidden">แบ่งปัน</span>
-                        </button>
-                        {contentShare &&
-                          <section className="absolute top-full right-0 frame">
-                            <p>QR Code</p>
-                          </section>
-                        }
-                      </div>
-                      <div className="tooltip" data-tip="ปรับแต่ง" onMouseLeave={contentCustomizeLeave}>
-                        <button className={`btn btn-icon ${contentCustomize ? '' : 'btn-ghost'}`} onClick={handleContentCustomize}>
-                          <span className="material-symbols-outlined">tune</span>
-                          <span className="hidden">ปรับแต่ง</span>
-                        </button>
-                        {contentCustomize &&
-                          <div id="navCustomizeList" className="nav-dropdown">
-                            <h6>ตัวเลือก</h6>
-                            <ul>
-                              <li className="fontsize">
-                                <div id="navFontSizeToggle" className="btn btn-text">
-                                  <span className="material-symbols-outlined">format_size</span>
-                                  <span className="text">ขนาดเนื้อหา</span>
-                                  <FontSize fontSizeActive={true} addClassNameMode={'nav'} />
+                      <nav className="nav-action">
+                        <div className="tooltip" data-tip="เพิ่ม">
+                          <button className="btn btn-icon btn-ghost" onClick={() => handleItemAdd(itemContent?.item_id, itemContent?.item_number)}>
+                            <span className="material-symbols-outlined">bookmark_add</span>
+                            <span className="hidden">เพิ่ม</span>
+                          </button>
+                          {itemContent?.item_id === itemAddSelect?.item_id &&
+                            <dialog className="modal">
+                              <div className="modal-content">
+                                <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                                  <button className="btn btn-icon btn-ghost" onClick={handleItemAddCancel}>
+                                    <span className="material-symbols-outlined">close</span>
+                                    <span className="hidden">ยกเลิก</span>
+                                  </button>
                                 </div>
-                              </li>
-                              <li className="countnumber">
-                                <button className="btn btn-ghost" onClick={handleCountNumberToggle}>
-                                  <span className="material-symbols-outlined">pin</span>
-                                  <span className="text">ที่นับจำนวน</span>
-                                  <span className={`icon-xl material-symbols-outlined wght-200 ${countNumberActive ? ' fill text-success' : ''}`}>{countNumberActive ? 'toggle_on' : 'toggle_off'}</span>
-                                </button>
-                              </li>
-                            </ul>
-                          </div>
-                        }
-                      </div>
-                      <WidgetCountNumber countNumberActive={countNumberActive} />
+                                <Bookmark itemAddSelect={itemAddSelect} />
+                              </div>
+                              <button className="modal-close" onClick={handleItemAddCancel}></button>
+                            </dialog>
+                          }
+                        </div>
+                        <div className="tooltip" data-tip="แก้ไข">
+                          <button className="btn btn-icon btn-ghost" onClick={() => handleItemEdit(itemContent)}>
+                            <span className="material-symbols-outlined">edit</span>
+                            <span className="hidden">แก้ไข</span>
+                          </button>
+                          {itemContent?.item_id === itemEditSelect?.item_id &&
+                            <dialog className="modal">
+                              <div className="modal-content fullscreen">
+                                <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                                  <button className="btn btn-icon btn-ghost" onClick={handleItemEditCancel}>
+                                    <span className="material-symbols-outlined">close</span>
+                                    <span className="hidden">ยกเลิก</span>
+                                  </button>
+                                </div>
+                                <ItemEdit itemEditSelect={itemEditSelect} />
+                              </div>
+                              <button className="modal-close" onClick={handleItemEditCancel}></button>
+                            </dialog>
+                          }
+                        </div>
+                        <hr />
+                        <div className="tooltip" data-tip="แบ่งปัน" onMouseLeave={contentShareLeave}>
+                          <button className={'btn btn-icon' + (!contentShare ? ' btn-ghost' : '')} onClick={handleContentShare}>
+                            <span className="material-symbols-outlined">share</span>
+                            <span className="hidden">แบ่งปัน</span>
+                          </button>
+                          {contentShare &&
+                            <section className="absolute top-full right-0 frame">
+                              <p>QR Code</p>
+                            </section>
+                          }
+                        </div>
+                        <div className="tooltip" data-tip="ปรับแต่ง" onMouseLeave={contentCustomizeLeave}>
+                          <button className={`btn btn-icon ${contentCustomize ? '' : 'btn-ghost'}`} onClick={handleContentCustomize}>
+                            <span className="material-symbols-outlined">tune</span>
+                            <span className="hidden">ปรับแต่ง</span>
+                          </button>
+                          {contentCustomize &&
+                            <div id="navCustomizeList" className="nav-dropdown">
+                              <h6>ตัวเลือก</h6>
+                              <ul>
+                                <li className="fontsize">
+                                  <div id="navFontSizeToggle" className="btn btn-text">
+                                    <span className="material-symbols-outlined">format_size</span>
+                                    <span className="text">ขนาดเนื้อหา</span>
+                                    <FontSize fontSizeActive={true} addClassNameMode={'nav'} />
+                                  </div>
+                                </li>
+                                <li className="countnumber">
+                                  <button className="btn btn-ghost" onClick={handleCountNumberToggle}>
+                                    <span className="material-symbols-outlined">pin</span>
+                                    <span className="text">ที่นับจำนวน</span>
+                                    <span className={`icon-xl material-symbols-outlined wght-200 ${countNumberActive ? 'fill text-success' : ''}`}>{countNumberActive ? 'toggle_on' : 'toggle_off'}</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </div>
+                          }
+                        </div>
+                        <WidgetCountNumber countNumberActive={countNumberActive} />
+                      </nav>
                     </div>
+                    <hr />
+                    <h1 className="text-2xl">{itemContent?.item_name}</h1>
                   </div>
                   <article id="itemContentDesc" className={fontSizes[fontSizeIndex]} dangerouslySetInnerHTML={{ __html: itemContent?.item_desc }} />
                 </section>
@@ -208,7 +208,7 @@ function ItemContent() {
         </>
       }
       <hr />
-      <section id="itemContentNavPagination">
+      <nav className="itemcontent-nav-pagination">
         <button className="btn-prev btn" disabled={itemIndexPresent <= 0 && 'disabled'} onClick={handleItemNumberPrev}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
           <span className="text hidden 2xs:flex">บทก่อนหน้า</span>
@@ -233,7 +233,7 @@ function ItemContent() {
             </fieldset>
           </form>
         }
-      </section>
+      </nav>
     </div>
   );
 

@@ -2,8 +2,8 @@ import React from 'react';
 
 function ItemStatus({ userGender  , addClassNameIcon, addClassNameText }) {
 
-  const classNameIcon = 'material-symbols-outlined' + (addClassNameIcon ? ' ' + addClassNameIcon : '');
-  const classNameText = 'text' + (addClassNameText ? ' ' + addClassNameText : '');
+  const classNameIcon = `material-symbols-outlined ${addClassNameIcon}`;
+  const classNameText = `text ${addClassNameText}`;
 
   return (
     <>

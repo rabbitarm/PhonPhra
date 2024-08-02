@@ -1,14 +1,14 @@
 import React from 'react';
 
-function ItemStatus({ itemStatus, addClassNameIcon, addClassNameText }) {
+function StatusItem({ statusItem, addClassNameIcon, addClassNameText }) {
 
-  const classNameIcon = 'material-symbols-outlined' + (addClassNameIcon ? ' ' + addClassNameIcon : '');
-  const classNameText = 'text' + (addClassNameText ? ' ' + addClassNameText : '');
+  const classNameIcon = `material-symbols-outlined ${addClassNameIcon}`;
+  const classNameText = `text ${addClassNameText}`;
 
   return (
     <>
       {(() => {
-        switch (itemStatus) {
+        switch (statusItem) {
           case 'pending' : return <><span className={classNameIcon}>update</span><span className={classNameText}>รอดำเนินการ</span></>;
           case 'public'  : return <><span className={classNameIcon}>public</span><span className={classNameText}>เผยแพร่</span></>;
           case 'private' : return <><span className={classNameIcon}>lock</span><span className={classNameText}>ส่วนตัว</span></>;
@@ -21,4 +21,4 @@ function ItemStatus({ itemStatus, addClassNameIcon, addClassNameText }) {
 
 };
 
-export default ItemStatus;
+export default StatusItem;

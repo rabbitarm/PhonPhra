@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import WidgetCalendar from './includes/WidgetCalendar';
+import WidgetCalendar from '../includes/WidgetCalendar';
 
 function Header() {
 

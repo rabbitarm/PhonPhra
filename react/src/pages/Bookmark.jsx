@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bookmarkCreate, bookmarkEdit, bookmarkDelete } from '../store/bookmarkListSlice';
 import { nanoid } from 'nanoid';
 
-import ItemStatus from './includes/ItemStatus';
-import { IconLoading, IconItemNotFound, IconBookmarkNotFound } from './includes/StatusCode';
-import BookmarkEdit from './BookmarkEdit';
+import ItemStatus from '../utilities/StatusItem';
+import { IconLoading, IconItemNotFound, IconBookmarkNotFound } from '../utilities/StatusCode';
+import BookmarkEdit from '../components/BookmarkEdit';
 
 function Bookmark({ itemAddSelect }) {
 
@@ -144,7 +144,7 @@ function Bookmark({ itemAddSelect }) {
                     <span>จัดการรายการโปรด</span>
                   </button>
                 </section>
-              : <section id="bookmarkList" className="flex flex-col gap">
+              : <section id="bookmarkList" className="flex flex-1 flex-col gap">
                   <section className="flex justify-between items-end gap">
                     {bookmarkList.find(bookmark => bookmark.bookmark_id === bookmarkSelectId)?.bookmark_time_updated === bookmarkEditNavContent?.bookmark_time_updated
                     ? <BookmarkEdit bookmarkEditNavContent={bookmarkEditNavContent} />
@@ -161,7 +161,7 @@ function Bookmark({ itemAddSelect }) {
                             </div>
                           </fieldset>
                         </form>
-                        <div className="action-bar">
+                        <div className="nav-action">
                           <div className="tooltip" data-tip="แก้ไข">
                             <button className="btn btn-icon btn-ghost" onClick={handleBookmarkSelectRename}>
                               <span className="material-symbols-outlined">edit</span>

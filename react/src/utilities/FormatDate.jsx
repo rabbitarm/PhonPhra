@@ -1,8 +1,8 @@
 import React from 'react';
 
-function TimeFormat({ itemTimeCreated, addClassNameIcon, addClassNameText }) {
+function FormatDate({ itemDateCreated, addClassNameIcon, addClassNameText }) {
 
-  const dateCreated = new Date(itemTimeCreated);
+  const dateCreated = new Date(itemDateCreated);
   const dateThai = dateCreated.toLocaleDateString('th-TH', {year: 'numeric', month: 'long', day: '2-digit'});
   const monthThaiNames = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
   const thaiDateWithThaiMonth = dateThai.replace(
@@ -10,12 +10,12 @@ function TimeFormat({ itemTimeCreated, addClassNameIcon, addClassNameText }) {
     (_, month, day, year) => `${parseInt(day, 10)} ${monthThaiNames[parseInt(month, 10) - 1]} ${parseInt(year, 10) + 543}`
   );
 
-  const classNameIcon = 'material-symbols-outlined' + (addClassNameIcon ? ' ' + addClassNameIcon : '');
-  const classNameText = 'text' + (addClassNameText ? ' ' + addClassNameText : '');
+  const classNameIcon = `material-symbols-outlined ${addClassNameIcon}`;
+  const classNameText = `text' ${addClassNameText}`;
 
   return (
     <>
-      {itemTimeCreated
+      {itemDateCreated
         ? <>
             <span className={classNameIcon}>schedule</span>
             <span className={classNameText}>{thaiDateWithThaiMonth}</span>
@@ -29,4 +29,4 @@ function TimeFormat({ itemTimeCreated, addClassNameIcon, addClassNameText }) {
   );
 };
 
-export default TimeFormat;
+export default FormatDate;

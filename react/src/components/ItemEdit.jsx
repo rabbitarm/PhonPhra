@@ -3,7 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { tinyApi, tinyInit } from '../api/tinyApi';
 
 import { useDispatch } from 'react-redux';
-import ItemCategory from './ItemCategory';
+import ItemCategory from '../pages/ItemCategory';
 import { itemEdit } from '../store/itemListSlice';
 
 function ItemEdit({ itemEditSelect }) {
