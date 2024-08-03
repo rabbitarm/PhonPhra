@@ -6,10 +6,10 @@ import { itemDelete } from '../store/itemListSlice';
 import { IconLoading, IconItemNotFound } from '../utilities/StatusCode';
 import StatusItem from '../utilities/StatusItem';
 import StatusItemCategory from '../utilities/StatusItemCategory';
-import Paginate from '../components/includes/Paginate';
+import Paginate from '../lib/Paginate';
 import ItemCreate from '../components/ItemCreate';
 import ItemEdit from '../components/ItemEdit';
-import Bookmark from './/Bookmark';
+import Bookmark from './Bookmark';
 
 function ItemList() {
 

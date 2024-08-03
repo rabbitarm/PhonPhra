@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { itemCategoryCreate, itemCategoryEdit } from '../../store/itemCategorySlice';
+import { itemCategoryCreate, itemCategoryEdit } from '../store/itemCategorySlice';
 import { nanoid } from 'nanoid';
 
 function ItemCategoryForm({ itemCategoryNumberHighest, itemCategoryEditSelect }) {
@@ -16,9 +16,9 @@ function ItemCategoryForm({ itemCategoryNumberHighest, itemCategoryEditSelect })
     ? dispatch(itemCategoryEdit(itemCategoryFormContent))
     : (
         dispatch(itemCategoryCreate({
-          item_category_title: itemCategoryFormContent?.item_category_title,
           item_category_id: nanoid(),
-          item_category_number: itemCategoryNumberHighest + 1
+          item_category_number: itemCategoryNumberHighest + 1,
+          item_category_title: itemCategoryFormContent?.item_category_title,
         })),
         setItemCategoryFormContent({'item_category_title': ''})
       )
@@ -41,11 +41,11 @@ function ItemCategoryForm({ itemCategoryNumberHighest, itemCategoryEditSelect })
           {itemCategoryEditSelect
           ? <>
               <span className="material-symbols-outlined">done</span>
-              <span className="hidden">ยืนยันการแก้ไข</span>
+              <span className="text hidden">ยืนยันการแก้ไข</span>
             </>
           : <>
               <span className="material-symbols-outlined">add</span>
-              <span>สร้าง</span>
+              <span className="text">สร้าง</span>
             </>
           }
         </button>

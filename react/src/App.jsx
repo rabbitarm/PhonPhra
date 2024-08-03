@@ -10,16 +10,19 @@ import { bookmarkFetch } from './store/bookmarkListSlice';
 import './assets/css/App.css';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import Register from './components/forms/Register';
-import LogIn from './components/forms/LogIn';
-import ForgotPassword from './components/forms/ForgotPassword';
+import NotFound from './pages/NotFound';
+
 import ItemList from './pages/ItemList';
 import ItemContent from './pages/ItemContent';
 import ItemCategory from './pages/ItemCategory';
 import Bookmark from './pages/Bookmark';
-import ContactUs from './components/forms/ContactUs';
-import NotFound from './pages/NotFound';
-import Layer from './components/Layer';
+
+import Register from './pages/Register';
+import LogIn from './pages/LogIn';
+import ForgotPassword from './pages/ForgotPassword';
+
+import ContactUs from './pages/ContactUs';
+import Layer from './pages/example/Layer';
 import StatusCode from './utilities/StatusCode';
 
 function App() {
@@ -43,10 +46,10 @@ function App() {
           <Route path='/บทสวดมนต์' element={<ItemList />} />
           <Route path='/บทสวดมนต์/:item_number' element={<ItemContent />} />
           <Route path='/บทสวดมนต์/:item_number/:item_name' element={<ItemContent />} />
+          <Route path='/หมวดหมู่' element={<ItemCategory />} />
           <Route path='/รายการโปรด' element={<Bookmark />} />
           <Route path='/รายการโปรด/:bookmark_id/:item_number' element={<ItemContent />} />
           <Route path='/รายการโปรด/:bookmark_id/:item_number/:item_name' element={<ItemContent />} />
-          <Route path='/หมวดหมู่' element={<ItemCategory />} />
 
           <Route path='/สมัครสมาชิก' element={<Register />} />
           <Route path='/เข้าสู่ระบบ' element={<LogIn />} />

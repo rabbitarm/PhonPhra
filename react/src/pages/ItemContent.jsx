@@ -7,8 +7,9 @@ import { IconLoading, IconItemNotFound } from '../utilities/StatusCode';
 import StatusItem from '../utilities/StatusItem';
 import StatusItemCategory from '../utilities/StatusItemCategory';
 import FormatDate from '../utilities/FormatDate';
-import FontSize from '../components/includes/FontSize';
-import WidgetCountNumber from '../components/includes/WidgetCountNumber';
+import QRCode from '../lib/QRCode';
+import ItemContentFontSize from '../features/ItemContentFontSize';
+import WidgetCountNumber from '../features/WidgetCountNumber';
 import ItemEdit from '../components/ItemEdit';
 import Bookmark from './Bookmark';
 
@@ -162,7 +163,7 @@ function ItemContent() {
                           </button>
                           {contentShare &&
                             <section className="absolute top-full right-0 frame">
-                              <p>QR Code</p>
+                              <QRCode />
                             </section>
                           }
                         </div>
@@ -179,7 +180,7 @@ function ItemContent() {
                                   <div id="navFontSizeToggle" className="btn btn-text">
                                     <span className="material-symbols-outlined">format_size</span>
                                     <span className="text">ขนาดเนื้อหา</span>
-                                    <FontSize fontSizeActive={true} addClassNameMode={'nav'} />
+                                    <ItemContentFontSize itemContentFontSizeActive={true} addClassNameMode={'nav'} />
                                   </div>
                                 </li>
                                 <li className="countnumber">

@@ -48,6 +48,10 @@
 - [Get Started](https://www.tiny.cloud/docs/integrations/react/)
 - `npm install @tinymce/tinymce-react`
 
+### QR Code
+- [Get Started](https://www.npmjs.com/package/qrcode.react)
+- `npm install qrcode.react`
+
 
 
 # Create Back-End

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { qrCodeApi } from '../../api/qrCodeApi';
+import { qrCodeApi } from '../api/qrCodeApi';
 
 function QRCode() {
 
   // https://www.qrcode-monkey.com/qr-code-api-with-logo/
   // https://rapidapi.com/qrcode-monkey/api/custom-qr-code-with-logo
-  const [qrCodeData, setQRCodeData] = useState('');
-  const [logoURL, setLogoURL] = useState('');
+  const [qrCodeData, setQRCodeData] = useState('https://www.qrcode-monkey.com');
+  const [logoURL, setLogoURL] = useState('https://www.qrcode-monkey.com/img/qr/logos/facebook-circle.svg');
   const [generatedQRCode, setGeneratedQRCode] = useState('');
 
   const generateQRCode = async () => {
     try {
-      const response = await axios.post('https://www.qrcode-monkey.com/qr/custom', {
+      const response = await axios.post('https://api.qrcode-monkey.com/qr/custom', {
         headers: {
           'Content-Type': 'application/json',
           'X-RapidAPI-Key': { qrCodeApi },
@@ -21,13 +21,16 @@ function QRCode() {
       }, {
         data: qrCodeData,
         config: {
-          body: logoURL,
-          eye: 'frame13',
-          eyeBall: 'ball15',
-          bodyColor: '#eceef2',
-          bgColor: '#ffffff',
-          size: 200
-        }
+          body      : 'circle',
+          logo      : logoURL,
+          eye       : 'frame13',
+          eyeBall   : 'ball15',
+          bodyColor : '#eceef2',
+          bgColor   : '#ffffff'
+        },
+        size     : 300,
+        download : false,
+        file     : 'svg'
       });
       setGeneratedQRCode(response.data.imageUrl);
     } catch (error) {

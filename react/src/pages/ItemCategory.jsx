@@ -4,19 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { itemCategoryDelete } from '../store/itemCategorySlice';
 
 import { IconLoading, IconItemCategoryNotFound } from '../utilities/StatusCode';
-import ItemCategoryForm from '../components/includes/ItemCategoryForm';
+import ItemCategoryForm from '../components/ItemCategoryForm';
 
 function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
 
   /* Item Category - List */
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { itemList , itemLoading } = useSelector((state) => state.itemList);
+  const { itemList, itemLoading } = useSelector((state) => state.itemList);
   const { itemCategoryList, itemCategoryLoading } = useSelector((state) => state.itemCategory);
 
-  /* Check highest item category number */
+  /* Item Category - Check highest number */
   const itemCategoryNumberHighest = itemCategoryList.reduce((max, itemCategory) => {
-    return itemCategory.item_category_number > max ? itemCategory.item_category_number : max;
+    return itemCategory?.item_category_number > max ? itemCategory?.item_category_number : max;
   }, 0);
 
   /* Item Category - Edit */
@@ -27,7 +27,7 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
     dispatch(itemCategoryDelete(item_category_id));
   };
 
-  /* Item Category - Change on Item */
+  /* Item Category - Change value in Item */
   const itemCategorySelectValue = itemCategorySelect ? itemCategoryList?.find(item => item?.item_category_id === itemCategorySelect?.find(item => item?.item_category_id)?.item_category_id)?.item_category_title : 'ไม่พบหมวดหมู่';
   const handleItemCategoryChange = (event) => {
     itemCategoryChange([{ item_category_id: itemCategoryList[event - 1]?.item_category_id, item_category_number: itemCategoryList[event - 1]?.item_category_number }]);
@@ -51,7 +51,7 @@ function ItemCategory({ itemCategorySelect, itemCategoryChange }) {
           <div className="tooltip" data-tip="จัดการหมวดหมู่">
             <button className="btn btn-icon" onClick={() => navigate(`/หมวดหมู่`)}>
               <span className="material-symbols-outlined">settings</span>
-              <span className="hidden">จัดการหมวดหมู่</span>
+              <span className="text hidden">จัดการหมวดหมู่</span>
             </button>
           </div>
         </section>

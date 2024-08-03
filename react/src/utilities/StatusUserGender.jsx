@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ItemStatus({ userGender  , addClassNameIcon, addClassNameText }) {
+function StatusUserGender({ statusUserGender  , addClassNameIcon, addClassNameText }) {
 
   const classNameIcon = `material-symbols-outlined ${addClassNameIcon}`;
   const classNameText = `text ${addClassNameText}`;
@@ -8,7 +8,7 @@ function ItemStatus({ userGender  , addClassNameIcon, addClassNameText }) {
   return (
     <>
       {(() => {
-        switch (userGender) {
+        switch (statusUserGender) {
           case 'male'   : return <><span className={classNameIcon}>face_6</span><span className={classNameText}>ชาย</span></>;
           case 'female' : return <><span className={classNameIcon}>face_3</span><span className={classNameText}>หญิง</span></>;
           case 'other'  : return <><span className={classNameIcon}>face_retouching_off</span><span className={classNameText}>ทางเลือก</span></>;
@@ -20,4 +20,4 @@ function ItemStatus({ userGender  , addClassNameIcon, addClassNameText }) {
 
 };
 
-export default ItemStatus;
+export default StatusUserGender;

@@ -16,7 +16,7 @@ function StatusItemCategory({ statusItemCategory, addClassNameIcon, addClassName
             <span className={classNameText} key={statusItemCategory?.item_category_id}>
               {itemCategoryList?.find(item => item?.item_category_id === statusItemCategory?.item_category_id)
               ? <>{itemCategoryList?.find(item => item?.item_category_id === statusItemCategory?.item_category_id)?.item_category_title}</>
-              : <>ไม่พบหมวดหมู่</>
+              : 'ไม่พบหมวดหมู่'
               }
             </span>
           ))}

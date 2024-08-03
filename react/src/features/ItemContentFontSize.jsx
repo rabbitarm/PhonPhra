@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fontSizeIncrease, fontSizeDecrease } from '../../store/fontSizeSlice';
+import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
 
-function WidgetCountNumber({ fontSizeActive, addClassNameMode }) {
+function ItemContentFontSize({ itemContentFontSizeActive, addClassNameMode }) {
 
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ function WidgetCountNumber({ fontSizeActive, addClassNameMode }) {
 
   return (
     <>
-      {fontSizeActive &&     
+      {itemContentFontSizeActive &&     
         <section id="fontSize" className={addClassNameMode}>
           {addClassNameMode === 'widget' &&
           <div className="heading bg-gradient-1">
@@ -43,4 +43,4 @@ function WidgetCountNumber({ fontSizeActive, addClassNameMode }) {
 
 };
 
-export default WidgetCountNumber;
+export default ItemContentFontSize;

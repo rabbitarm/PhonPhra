@@ -34,6 +34,14 @@ function Footer() {
               </div>
             </li>
             <li>
+              <div className="tooltip" data-tip="เข้าสู่ระบบ">
+                <Link className="btn btn-icon btn-mix" to="เข้าสู่ระบบ">
+                  <span className="material-symbols-outlined">account_circle</span>
+                  <span className="text hidden">เข้าสู่ระบบ</span>
+                </Link>
+              </div>
+            </li>
+            <li>
               <div className="tooltip" data-tip="GitHub">
                 <Link className="btn btn-icon btn-mix" to="https://github.com/rabbitarm" target="_blank">
                   <svg viewBox="0 0 98 96">

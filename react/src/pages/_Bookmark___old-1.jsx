@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { bookmarkEdit, bookmarkDelete } from '../store/bookmarkListSlice';
+import { bookmarkCreate, bookmarkEdit, bookmarkDelete } from '../store/bookmarkListSlice';
+import { nanoid } from 'nanoid';
 
+import ItemStatus from '../utilities/StatusItem';
 import { IconLoading, IconItemNotFound, IconBookmarkNotFound } from '../utilities/StatusCode';
-import StatusItem from '../utilities/StatusItem';
-import BookmarkForm from '../components/BookmarkForm';
+import BookmarkEdit from '../components/BookmarkEdit';
 
 function Bookmark({ itemAddSelect }) {
 
   /* Bookmark - List */
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { itemList, itemLoading } = useSelector((state) => state.itemList);
+  const { itemList } = useSelector((state) => state.itemList);
   const { bookmarkList, bookmarkLoading } = useSelector((state) => state.bookmarkList);
 
-  /* Bookmark - Check highest number */
+  /* Check highest bookmark number */
   const bookmarkNumberHighest = bookmarkList.reduce((max, bookmark) => {
-    return bookmark?.bookmark_number > max ? bookmark?.bookmark_number : max;
+    return bookmark.bookmark_number > max ? bookmark.bookmark_number : max;
   }, 0);
 
+  /* Bookmark - Create */
+  const [bookmarkCreateTitle, setBookmarkCreateTitle] = useState('');
+  const bookmarkCreateChange = (event) => setBookmarkCreateTitle(event.target.value);
+  const handleBookmarkCreateSubmit = (event) => {
+    event.preventDefault();
+    dispatch(bookmarkCreate({ bookmark_title: bookmarkCreateTitle, bookmark_id: nanoid(), bookmark_number: bookmarkNumberHighest + 1, bookmark_item_list: [] }));
+    setBookmarkCreateTitle('');
+  };
   /* Bookmark - Select */
   const bookmarkSelectInitial = bookmarkList[0];
   const [bookmarkSelectId, setBookmarkSelectId] = useState(bookmarkSelectInitial?.bookmark_id);
@@ -33,25 +42,19 @@ function Bookmark({ itemAddSelect }) {
     setBookmarkSelectId(bookmarkSelectInitial?.bookmark_id);
     setBookmarkSelectValue(bookmarkSelectInitial?.bookmark_title);
   }, [bookmarkSelectInitial]);
-
   /* Bookmark - Edit */
-  const [bookmarkEditSelect, setBookmarkEditSelect] = useState([]);
-  const handleBookmarkEdit = () => setBookmarkEditSelect(bookmarkList?.find(list => list?.bookmark_id === bookmarkSelectId));
-  /* Bookmark - Delete on list */
-/*  const handleBookmarkDelete = (bookmark_id) => {
-    dispatch(bookmarkDelete(bookmark_id));
-  };*/
-  /* Bookmark - Delete on select */
+  const [bookmarkEditNavContent, setBookmarkEditNavContent] = useState([]);
+  const handleBookmarkSelectRename = () => setBookmarkEditNavContent(bookmarkList?.find(list => list?.bookmark_id === bookmarkSelectId));
+  /* Bookmark - Delete */
   const handleBookmarkSelectDelete = () => {
     dispatch(bookmarkDelete(bookmarkSelectId));
     setBookmarkSelectId(bookmarkSelectInitial?.bookmark_id);
   };
-  /* Bookmark - Delete on checkbox */
-/*  const handleBookmarkCheckboxDelete = (bookmark_id) => {
+  const handleBookmarkCheckboxDelete = (bookmark_id) => {
     const bookmarkSelectId = bookmark_id;
     dispatch(bookmarkDelete(bookmarkSelectId));
     setBookmarkSelectId(bookmarkSelectInitial?.bookmark_id);
-  }*/
+  }
 
   /* Item in bookmark - Add */
 /*  const handleBookmarkItemAdd = (bookmark_id, item_id, item_number) => {
@@ -75,9 +78,9 @@ function Bookmark({ itemAddSelect }) {
     dispatch(bookmarkEdit(bookmarkEditContent));
   };
 
-  /* Item in bookmark - Toggle checkbox */
+  /* Item in bookmark - Toggle Checkbox */
   const bookmarkItemSelect = (bookmark_id, item_id, item_number) => {
-    const bookmarkItemSelectContent = bookmarkList?.find(list => list?.bookmark_id === bookmark_id);
+    const bookmarkItemSelectContent = bookmarkList.find(bookmark => bookmark?.bookmark_id === bookmark_id);
     const bookmarkEditContent = (item_id !== undefined && item_number !== undefined && bookmarkItemSelectContent
       && { ...bookmarkItemSelectContent, bookmark_item_list: bookmarkItemSelectContent?.bookmark_item_list?.some(item => item?.item_id === item_id)
         ? bookmarkItemSelectContent?.bookmark_item_list?.filter(item => item?.item_id !== item_id)
@@ -87,8 +90,8 @@ function Bookmark({ itemAddSelect }) {
     dispatch(bookmarkEdit(bookmarkEditContent));
   };
 
-  /* Item in bookmark - Checked checkbox */
-  const bookmarkItemChecked = (bookmark_id, item_id) => bookmarkList?.find(bookmark => bookmark?.bookmark_id === bookmark_id)?.bookmark_item_list?.some(item => item?.item_id === item_id) && 'checked';
+  /* Item in bookmark - Checked Checkbox */
+  const bookmarkItemChecked = (bookmark_id, item_id) => bookmarkList.find(bookmark => bookmark?.bookmark_id === bookmark_id)?.bookmark_item_list?.some(item => item?.item_id === item_id) && 'checked';
 
   return (
     <section id="bookmark" className="container">
@@ -109,13 +112,13 @@ function Bookmark({ itemAddSelect }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {bookmarkList?.map(itemBookmarkList => (
+                      {bookmarkList.map(itemBookmarkList => (
                         <tr key={itemBookmarkList?.bookmark_id}>
                           <td>
                             <form>
                               <fieldset className="fieldset-inline">
                                 <div className="field">
-                                  <input type="checkbox" id={itemBookmarkList?.bookmark_id} checked={bookmarkItemChecked(itemBookmarkList?.bookmark_id, itemAddSelect?.item_id)} onChange={() => bookmarkItemSelect(itemBookmarkList?.bookmark_id, itemAddSelect?.item_id, itemAddSelect?.item_number)} />
+                                <input type="checkbox" id={itemBookmarkList?.bookmark_id} checked={bookmarkItemChecked(itemBookmarkList?.bookmark_id, itemAddSelect?.item_id)} onChange={() => bookmarkItemSelect(itemBookmarkList?.bookmark_id, itemAddSelect?.item_id, itemAddSelect?.item_number)} />
                                   <label htmlFor={itemBookmarkList?.bookmark_id}>{itemBookmarkList?.bookmark_title}</label>
                                 </div>
                               </fieldset>
@@ -126,11 +129,11 @@ function Bookmark({ itemAddSelect }) {
                               <div className="tooltip" data-tip="ลบ">
                                 <button className="btn btn-icon btn-mix-alternate-warning" onClick={() => handleBookmarkCheckboxDelete(itemBookmarkList?.bookmark_id)}>
                                   <span className="material-symbols-outlined">delete_forever</span>
-                                  <span className="text hidden">ลบ</span>
+                                  <span className="hidden">ลบ</span>
                                 </button>
                               </div>
                             */}
-                            <StatusItem statusItem={itemBookmarkList?.bookmark_status} addClassNameIcon={'icon-2xs text-slate-200 my-3'} addClassNameText={'hidden'} />
+                            <ItemStatus itemStatus={itemBookmarkList?.bookmark_status} addClassNameIcon={'icon-2xs text-slate-200 my-3'} addClassNameText={'hidden'} />
                           </td>
                         </tr>
                       ))}
@@ -138,13 +141,13 @@ function Bookmark({ itemAddSelect }) {
                   </table>
                   <button className="btn btn-sm btn-ghost w-fit"onClick={() => navigate(`/รายการโปรด`)}>
                     <span className="material-symbols-outlined">settings</span>
-                    <span className="text">จัดการรายการโปรด</span>
+                    <span>จัดการรายการโปรด</span>
                   </button>
                 </section>
               : <section id="bookmarkList" className="flex flex-1 flex-col gap">
                   <section className="flex justify-between items-end gap">
-                    {bookmarkList.find(bookmark => bookmark.bookmark_id === bookmarkSelectId)?.bookmark_time_updated === bookmarkEditSelect?.bookmark_time_updated
-                    ? <BookmarkForm bookmarkEditSelect={bookmarkEditSelect} />
+                    {bookmarkList.find(bookmark => bookmark.bookmark_id === bookmarkSelectId)?.bookmark_time_updated === bookmarkEditNavContent?.bookmark_time_updated
+                    ? <BookmarkEdit bookmarkEditNavContent={bookmarkEditNavContent} />
                     : <>
                         <form className="form-inline">
                           <fieldset className="fieldset-border">
@@ -160,15 +163,15 @@ function Bookmark({ itemAddSelect }) {
                         </form>
                         <div className="nav-action">
                           <div className="tooltip" data-tip="แก้ไข">
-                            <button className="btn btn-icon btn-ghost" onClick={handleBookmarkEdit}>
+                            <button className="btn btn-icon btn-ghost" onClick={handleBookmarkSelectRename}>
                               <span className="material-symbols-outlined">edit</span>
-                              <span className="text hidden">แก้ไข</span>
+                              <span className="hidden">แก้ไข</span>
                             </button>
                           </div>
                           <div className="tooltip" data-tip="ลบ">
                             <button className="btn btn-icon btn-ghost-alternate-error" onClick={handleBookmarkSelectDelete}>
                               <span className="material-symbols-outlined">delete_forever</span>
-                              <span className="text hidden">ลบ</span>
+                              <span className="hidden">ลบ</span>
                             </button>
                           </div>
                         </div>
@@ -222,7 +225,20 @@ function Bookmark({ itemAddSelect }) {
       }
       <hr />
       <section id="bookmarkCreate">
-        <BookmarkForm bookmarkNumberHighest={bookmarkNumberHighest} />
+        <form className="form-inner" onSubmit={handleBookmarkCreateSubmit}>
+          <fieldset className="fieldset-border pt-0">
+            <div className="field">
+              <label className="label-border">สร้างรายการโปรด</label>
+              <input type="text" name="bookmark_title" value={bookmarkCreateTitle} onChange={bookmarkCreateChange} placeholder="บทสวดมนต์ประจำวัน" />
+            </div>
+          </fieldset>
+          <fieldset className="fieldset-button-field-end">
+            <button className="btn btn-ghost-alternate-primary" type="submit">
+              <span className="material-symbols-outlined">add</span>
+              <span>สร้าง</span>
+            </button>
+          </fieldset>
+        </form>
       </section>
     </section>
   );
