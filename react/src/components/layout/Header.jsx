@@ -26,8 +26,8 @@ function Header() {
           </Link>
         </div>
         <nav id="navMain">
-          <button id="navMainToggle" className="btn btn-icon btn-mix" onClick={navToggle}>
-            <span className={`material-symbols-outlined ${navMainActive ? '' : ' fill'}`}>{navMainActive ? 'close' : 'menu'}</span>
+          <button id="navMainToggle" className={`btn btn-icon ${navMainActive ? 'btn-reverse' : 'btn-mix'}`} onClick={navToggle}>
+            <span className="material-symbols-outlined">{navMainActive ? 'close' : 'menu'}</span>
             <span className="hidden">เมนู</span>
           </button>
           <ul id="navMainList">
@@ -58,7 +58,7 @@ function Header() {
               <span className={`material-symbols-outlined ${navUserActive ? 'fill' : ''}`}>account_circle</span>
               <span className="text hidden">เข้าสู่ระบบ</span>
             </Link>
-          : <button id="navUserToggle" className="btn btn-icon btn-mix" onClick={navUserToggle}>
+          : <button id="navUserToggle" className={`btn btn-icon ${navUserActive ? 'btn-reverse' : 'btn-mix'}`} onClick={navUserToggle}>
               <span className={`material-symbols-outlined ${navUserActive ? 'fill' : ''}`}>settings</span>
               <span className="text hidden">ตั้งค่า</span>
             </button>

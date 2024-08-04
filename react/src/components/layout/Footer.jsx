@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Footer() {
 
+  const [donateActive, setDonateActive] = useState(false);
+  const handleDonateActive = () => {footerLeave(); setDonateActive(!donateActive);};
+  const footerLeave = () => {setDonateActive(false);}
+
   return (
-    <footer id="footer">
+    <footer id="footer" onMouseLeave={footerLeave}>
       <div className="container">
         <p id="footerCopyright">ลิขสิทธิ์ © พรพระ</p>
         <section id="footerLogo">
@@ -33,12 +37,25 @@ function Footer() {
                 </Link>
               </div>
             </li>
-            <li>
+            <li className="login">
               <div className="tooltip" data-tip="เข้าสู่ระบบ">
                 <Link className="btn btn-icon btn-mix" to="เข้าสู่ระบบ">
                   <span className="material-symbols-outlined">account_circle</span>
                   <span className="text hidden">เข้าสู่ระบบ</span>
                 </Link>
+              </div>
+            </li>
+            <li className="donate">
+              <div className="tooltip" data-tip="ร่วมสนับสนุน">
+                <button className={`btn btn-icon ${donateActive ? 'btn-reverse-tertiary' : 'btn-mix'}`} onClick={handleDonateActive}>
+                  <span className={`material-symbols-outlined ${donateActive ? 'fill' : ''}`}>volunteer_activism</span>
+                  <span className="text hidden">ร่วมสนับสนุน</span>
+                </button>
+                {donateActive &&
+                  <section className="nav-dropdown p-4">
+                    555
+                  </section>
+                }
               </div>
             </li>
             <li>

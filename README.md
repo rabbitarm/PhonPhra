@@ -50,17 +50,26 @@
 
 ### QR Code
 - [Get Started](https://www.npmjs.com/package/qrcode.react)
+- [Demo](https://zpao.github.io/qrcode.react/)
 - `npm install qrcode.react`
 
 
 
 # Create Back-End
 
+- `npm init -y`
+- `npx install express`
+- `npx install express-session`
+- `npx install ejs`
+- `npx install connect-flash`
+- `npx install bcrypt`
+
 ### Express application generator
 - [Get Started](https://expressjs.com/en/starter/generator.html)
 - `npx express-generator`
 - `npm install`
 - Can change port to other number in /bin/www file `var port = normalizePort(process.env.PORT || '3001');`
+
 ## Cors
 - [Installation](https://expressjs.com/en/resources/middleware/cors.html)
 - `npm install cors`

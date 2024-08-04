@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -61,13 +61,14 @@
   .form-inline {@apply flex-row justify-between items-end gap-4;}
   .form-inner {@apply flex-row justify-between items-end gap-0;}
   .fieldset-border {@apply pt-2;}
+  :is(form) .fieldset-border:first-child:has(.label-border.hidden) {@apply pt-0;}
   .fieldset-inline {@apply flex-col sm:flex-row gap-2 gap-x-8 mt-2;}
   .fieldset-inline.border {@apply p-4 border-slate-200 rounded-lg;}
   .fieldset-inline .field {@apply flex-row items-center;}
   .fieldset-inline .field label {@apply pl-2;}
   .fieldset-button {@apply flex-row pt-4 gap-4;}
-  .form-inner input[type=number]::-webkit-outer-spin-button ,
-  .form-inner input[type=number]::-webkit-inner-spin-button {@apply appearance-none;}
+  .form-inner input[type="number"]::-webkit-outer-spin-button ,
+  .form-inner input[type="number"]::-webkit-inner-spin-button {@apply appearance-none;}
   .form-inline fieldset {@apply w-full;}
   .form-inner .fieldset-button-field-end {@apply absolute bottom-0 right-0 w-fit p-0;}
   .form-inner .fieldset-button-field-end .btn:not(.btn-icon) {@apply w-10 xs:w-fit px-0 xs:px-4;}
@@ -82,6 +83,8 @@
   fieldset:hover .label-field-end {@apply bg-slate-300;}
   .fieldset-inline .label-field-end {@apply w-fit;}
   .field-button-end {@apply absolute bottom-0 right-0 w-fit p-0;}
+  .form-inner:has(.fieldset-button-field-end .btn-icon) input ,
+  .field:has(.field-button-end .btn-icon) > input {@apply whitespace-nowrap text-ellipsis pr-11;}
 
   table {@apply w-full;}
   table tr {@apply border-b border-slate-200;}
@@ -243,7 +246,7 @@
   .tooltip:before ,
   .tooltip:after {@apply delay-700 pointer-events-none invisible opacity-0 absolute z-10 left-1/2 bottom-full -translate-x-1/2 -translate-y-0;}
   .tooltip:hover:before ,
-  .tooltip:hover:after {@apply visible opacity-100 -translate-y-1;}
+  .tooltip:hover:after {@apply -translate-y-1;}
   /**/
   .tooltip-left:before {@apply mb-0 mr-1;}
   .tooltip-left:after {@apply border-y-4 border-r-0 border-transparent border-l-slate-600;}
@@ -266,6 +269,8 @@
   .tooltip-bottom:hover:before ,
   .tooltip-bottom:hover:after {@apply translate-y-1;}
   /**/
+  .tooltip:has(> .btn:hover):hover:before ,
+  .tooltip:has(> .btn:hover):hover:after {@apply visible opacity-100;}
   .tooltip-none:hover:before ,
   .tooltip-none:hover:after {@apply invisible opacity-0;}
 
@@ -454,7 +459,8 @@
 #header.navmain-active #navMain ul .btn {@apply w-full justify-start;}
 /**/
 #header #navUser {@apply relative flex;}
-.nav-dropdown {@apply absolute z-80 top-full right-0 rounded-lg bg-white shadow-lg;}
+.nav-dropdown {@apply absolute z-20 hover:z-30 top-full right-0 rounded-lg bg-white shadow-lg;}
+.container:hover .nav-dropdown {@apply z-40;}
 .nav-dropdown hr {@apply my-2;}
 .nav-dropdown > h6 {@apply text-slate px-4 pt-4 pb-1;}
 .nav-dropdown hr + h6 {@apply pt-2;}
@@ -464,6 +470,7 @@
 .nav-dropdown li.fontsize #fontSize.nav form {@apply flex-row;}
 .nav-dropdown li.fontsize #fontSize.nav form fieldset {@apply flex flex-row flex-nowrap items-center gap-0 rounded border border-slate-100;}
 .nav-dropdown li.fontsize #fontSize.nav form input {@apply w-6 h-6 text-center p-0 border-none;}
+#footer .nav-dropdown {@apply top-auto bottom-full;}
 
 /* Footer */
 #footer {@apply bg-slate-50;}
@@ -484,11 +491,13 @@ hr {@apply clear-both;}
 /* Item - Content */
 .wrapper {@apply flex flex-col flex-1 gap;}
 .itemcontent-heading {@apply flex flex-col;}
-.itemcontent-heading > hr {@apply -mx-4 sm:-mx-8 xl:mx-0 margin-y-sm;}
+.itemcontent-heading > hr {@apply -mx-4 sm:-mx-8 xl:mx-0 mt-2 mb-4 sm:my-4;}
 .itemcontent-info {@apply flex flex-wrap justify-between items-center /*gap*/;}
 .itemcontent-meta {@apply flex items-center gap-2;}
 .nav-action {@apply flex;}
 .nav-action hr {@apply -order-1 2xs:order-none h-auto border-t-0 border-r margin-x-sm -mb-2 sm:-mb-4;}
+#share {@apply flex flex-col gap-4;}
+#share .heading {@apply text-info;}
 #itemContentDesc {@apply flex flex-col font-display w-fit gap-4 mx-auto;}
 #itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
 #itemContentDesc ul {@apply list-disc;}
@@ -541,7 +550,7 @@ hr {@apply clear-both;}
 #widgetCalendar.widget:not(.nav) {@apply fixed z-10 bottom-4 left-4;}
 #widgetCalendar.widget.nav {@apply -mb-5 md:-mb-9 mr-2 sm:mr-4;}
 #widgetCalendar .icon-moon {@apply hidden xs:block p-2 rounded-lg;}
-#widgetCalendar .date {@apply text-nowrap px-3 py-2;}
+#widgetCalendar .date {@apply text-nowrap text-center md:text-left px-3 py-2;}
 #widgetCalendar p {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}
 #widgetCalendar p span:not(.date-number) {@apply hidden md:inline;}
 /**/

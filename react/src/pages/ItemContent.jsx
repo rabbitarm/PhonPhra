@@ -4,10 +4,10 @@ import { /*useDispatch, */useSelector } from 'react-redux';
 //import { fontSizeIncrease, fontSizeDecrease } from '../store/fontSizeSlice';
 
 import { IconLoading, IconItemNotFound } from '../utilities/StatusCode';
-import StatusItem from '../utilities/StatusItem';
+/* import StatusItem from '../utilities/StatusItem';
 import StatusItemCategory from '../utilities/StatusItemCategory';
-import FormatDate from '../utilities/FormatDate';
-import QRCode from '../lib/QRCode';
+import FormatDate from '../utilities/FormatDate'; */
+import Share from '../lib/Share';
 import ItemContentFontSize from '../features/ItemContentFontSize';
 import WidgetCountNumber from '../features/WidgetCountNumber';
 import ItemEdit from '../components/ItemEdit';
@@ -74,20 +74,22 @@ function ItemContent() {
       setItemEditSelect([]);
     }
   }, [itemList?.find(item => item?.item_id === itemEditSelect?.item_id)]);
-  
+ 
   /* Share */
   const [contentShare, setContentShare] = useState(false);
-  const handleContentShare = () => setContentShare(!contentShare);
-  const contentShareLeave = () => {setContentShare(false);}
+  const handleContentShare = () => {navActionLeave(); setContentShare(!contentShare);};
+  /*const contentShareLeave = () => {setContentShare(false);}*/
   /* Customize Tool */
   const [contentCustomize, setContentCustomize] = useState(false);
-  const handleContentCustomize = () => setContentCustomize(!contentCustomize);
-  const contentCustomizeLeave = () => {setContentCustomize(false);}
-  /* Font Size */
-  const { fontSizes, fontSizeIndex } = useSelector((state) => state.fontSize);
-  /* Count Number */
-  const [countNumberActive, setCountNumberActive] = useState(false);
-  const handleCountNumberToggle = () => setCountNumberActive(!countNumberActive);
+  const handleContentCustomize = () => {navActionLeave(); setContentCustomize(!contentCustomize);};
+  /*const contentCustomizeLeave = () => {setContentCustomize(false);}*/
+    /* Font Size */
+    const { fontSizes, fontSizeIndex } = useSelector((state) => state.fontSize);
+    /* Count Number */
+    const [countNumberActive, setCountNumberActive] = useState(false);
+    const handleCountNumberToggle = () => setCountNumberActive(!countNumberActive);
+  /**/
+  const navActionLeave = () => {setContentShare(false); setContentCustomize(false);}
 
   return (
     <div id="itemContent" className="container">
@@ -102,7 +104,7 @@ function ItemContent() {
                     <div className="itemcontent-info">
                       <div className="itemcontent-meta">
                         <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
-                        
+                        {/*
                         <span className="badge badge-sm badge-reverse !p-0">
                           <FormatDate itemDateCreated={itemContent?.item_time_created} addClassNameIcon={''} addClassNameText={''} />
                         </span>
@@ -112,13 +114,13 @@ function ItemContent() {
                         <span className="badge badge-sm badge-reverse !p-0">
                           <StatusItemCategory statusItemCategory={itemContent?.item_category_list} addClassNameIcon={''} addClassNameText={''} />
                         </span>
-                        
+                        */}
                       </div>
-                      <nav className="nav-action">
+                      <nav className="nav-action" onMouseLeave={navActionLeave}>
                         <div className="tooltip" data-tip="เพิ่ม">
                           <button className="btn btn-icon btn-ghost" onClick={() => handleItemAdd(itemContent?.item_id, itemContent?.item_number)}>
                             <span className="material-symbols-outlined">bookmark_add</span>
-                            <span className="hidden">เพิ่ม</span>
+                            <span className="text hidden">เพิ่ม</span>
                           </button>
                           {itemContent?.item_id === itemAddSelect?.item_id &&
                             <dialog className="modal">
@@ -138,7 +140,7 @@ function ItemContent() {
                         <div className="tooltip" data-tip="แก้ไข">
                           <button className="btn btn-icon btn-ghost" onClick={() => handleItemEdit(itemContent)}>
                             <span className="material-symbols-outlined">edit</span>
-                            <span className="hidden">แก้ไข</span>
+                            <span className="text hidden">แก้ไข</span>
                           </button>
                           {itemContent?.item_id === itemEditSelect?.item_id &&
                             <dialog className="modal">
@@ -156,21 +158,21 @@ function ItemContent() {
                           }
                         </div>
                         <hr />
-                        <div className="tooltip" data-tip="แบ่งปัน" onMouseLeave={contentShareLeave}>
-                          <button className={'btn btn-icon' + (!contentShare ? ' btn-ghost' : '')} onClick={handleContentShare}>
-                            <span className="material-symbols-outlined">share</span>
-                            <span className="hidden">แบ่งปัน</span>
+                        <div className="tooltip" data-tip="แบ่งปัน">
+                          <button className={`btn btn-icon ${contentShare ? '' : 'btn-ghost'}`} onClick={handleContentShare}>
+                            <span className={`material-symbols-outlined ${contentShare ? 'fill' : ''}`}>share</span>
+                            <span className="text hidden">แบ่งปัน</span>
                           </button>
                           {contentShare &&
-                            <section className="absolute top-full right-0 frame">
-                              <QRCode />
+                            <section className="nav-dropdown p-4">
+                              <Share />
                             </section>
                           }
                         </div>
-                        <div className="tooltip" data-tip="ปรับแต่ง" onMouseLeave={contentCustomizeLeave}>
+                        <div className="tooltip" data-tip="ปรับแต่ง">
                           <button className={`btn btn-icon ${contentCustomize ? '' : 'btn-ghost'}`} onClick={handleContentCustomize}>
                             <span className="material-symbols-outlined">tune</span>
-                            <span className="hidden">ปรับแต่ง</span>
+                            <span className="text hidden">ปรับแต่ง</span>
                           </button>
                           {contentCustomize &&
                             <div id="navCustomizeList" className="nav-dropdown">
