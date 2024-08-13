@@ -45,7 +45,7 @@ function Footer() {
                 </Link>
               </div>
             </li>
-            <li className="donate">
+            {/*<li className="donate">
               <div className="tooltip" data-tip="ร่วมสนับสนุน">
                 <button className={`btn btn-icon ${donateActive ? 'btn-reverse-tertiary' : 'btn-mix'}`} onClick={handleDonateActive}>
                   <span className={`material-symbols-outlined ${donateActive ? 'fill' : ''}`}>volunteer_activism</span>
@@ -57,7 +57,7 @@ function Footer() {
                   </section>
                 }
               </div>
-            </li>
+            </li>*/}
             <li>
               <div className="tooltip" data-tip="GitHub">
                 <Link className="btn btn-icon btn-mix" to="https://github.com/rabbitarm" target="_blank">
