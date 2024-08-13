@@ -5,8 +5,6 @@ react/node_modules
 react/src/api
 react/src/_*
 react/src/*_
-react/src/*/_*
-react/src/*/*_
 
 react/coverage
 react/build
