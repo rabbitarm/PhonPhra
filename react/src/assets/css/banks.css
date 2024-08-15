@@ -1,0 +1,37 @@
+i.bank            {@apply inline-block size-10 align-middle rounded-lg
+                 bg-slate-50 bg-no-repeat bg-[length:80%] bg-center bg-origin-content;}
+i.bank.bank-bbl   {@apply bg-[#1e4598] bg-[url('../svg/banks/bbl.svg')];  }
+i.bank.bank-kbank {@apply bg-[#138f2d] bg-[url('../svg/banks/kbank.svg')];}
+i.bank.bank-rbs   {@apply bg-[#032952] bg-[url('../svg/banks/rbs.svg')];  }
+i.bank.bank-ktb   {@apply bg-[#1ba5e1] bg-[url('../svg/banks/ktb.svg')];  }
+i.bank.bank-jpm   {@apply bg-[#321c10] bg-[url('../svg/banks/jpm.svg')];  }
+i.bank.bank-mufg  {@apply bg-[#d61323] bg-[url('../svg/banks/mufg.svg')]; }
+i.bank.bank-tmb   {@apply bg-[#1279be] bg-[url('../svg/banks/tmb.svg')];  }
+i.bank.bank-scb   {@apply bg-[#4e2e7f] bg-[url('../svg/banks/scb.svg')];  }
+i.bank.bank-citi  {@apply bg-[#1583c7] bg-[url('../svg/banks/citi.svg')]; }
+i.bank.bank-smbc  {@apply bg-[#a0d235] bg-[url('../svg/banks/smbc.svg')]; }
+i.bank.bank-sc    {@apply bg-[#0f6ea1] bg-[url('../svg/banks/sc.svg')];   }
+i.bank.bank-cimb  {@apply bg-[#7e2f36] bg-[url('../svg/banks/cimb.svg')]; }
+i.bank.bank-uob   {@apply bg-[#0b3979] bg-[url('../svg/banks/uob.svg')];  }
+i.bank.bank-uob   {@apply bg-[#0b3979] bg-[url('../svg/banks/uob.svg')];  }
+i.bank.bank-bay   {@apply bg-[#fec43b] bg-[url('../svg/banks/bay.svg')];  }
+i.bank.bank-mega  {@apply bg-[#815e3b] bg-[url('../svg/banks/mega.svg')]; }
+i.bank.bank-boa   {@apply bg-[#e11e3c] bg-[url('../svg/banks/boa.svg')];  }
+i.bank.bank-cacib {@apply bg-[#0e765b] bg-[url('../svg/banks/cacib.svg')];}
+i.bank.bank-gsb   {@apply bg-[#eb198d] bg-[url('../svg/banks/gsb.svg')];  }
+i.bank.bank-hsbc  {@apply bg-[#fd0d1b] bg-[url('../svg/banks/hsbc.svg')]; }
+i.bank.bank-db    {@apply bg-[#0522a5] bg-[url('../svg/banks/db.svg')];   }
+i.bank.bank-ghb   {@apply bg-[#f57d23] bg-[url('../svg/banks/ghb.svg')];  }
+i.bank.bank-baac  {@apply bg-[#4b9b1d] bg-[url('../svg/banks/baac.svg')]; }
+i.bank.bank-mb    {@apply bg-[#150b78] bg-[url('../svg/banks/mb.svg')];   }
+i.bank.bank-bnp   {@apply bg-[#14925e] bg-[url('../svg/banks/bnp.svg')];  }
+i.bank.bank-tbank {@apply bg-[#fc4f1f] bg-[url('../svg/banks/tbank.svg')];}
+i.bank.bank-ibank {@apply bg-[#184615] bg-[url('../svg/banks/ibank.svg')];}
+i.bank.bank-tisco {@apply bg-[#12549f] bg-[url('../svg/banks/tisco.svg')];}
+i.bank.bank-kk    {@apply bg-[#199cc5] bg-[url('../svg/banks/kk.svg')];   }
+i.bank.bank-icbc  {@apply bg-[#c50f1c] bg-[url('../svg/banks/icbc.svg')]; }
+i.bank.bank-tcrb  {@apply bg-[#0a4ab3] bg-[url('../svg/banks/tcrb.svg')]; }
+i.bank.bank-lhb   {@apply bg-[#6d6e71] bg-[url('../svg/banks/lhb.svg')];  }
+i.bank.bank-ttb   {@apply bg-[#ecf0f1] bg-[url('../svg/banks/ttb.svg')];  }
+i.bank.bank-tmn   {@apply bg-[#ecf0f1] bg-[url('../svg/banks/tmn.svg')];  }
+i.bank.bank-pp    {@apply bg-[#00427a] bg-[url('../svg/banks/pp.svg')];   }

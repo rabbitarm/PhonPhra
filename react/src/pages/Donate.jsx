@@ -21,7 +21,9 @@ function Donate() {
               <span className="h3 block text-white">สแกน QR</span>
               <span className="">เพื่อโอนเข้าบัญชี</span></h6>
           </div>
-          <p className="leading-snug"><strong>นายทดลอง  ทดสอบ</strong><br />
+          <p className="leading-snug">
+            <i className="bank bank-kbank"></i><br />
+            <strong>นายทดลอง  ทดสอบ</strong><br />
             บัญชี: XXX-X-X0000-X<br />
             <span className="text-sm text-slate-400">เลขที่อ้างอิง: 012345678901234</span></p>
         </section>
