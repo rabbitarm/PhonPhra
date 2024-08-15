@@ -18,7 +18,7 @@ function ItemContentFontSize({ itemContentFontSizeActive, addClassNameMode }) {
       {itemContentFontSizeActive &&     
         <section id="fontSize" className={addClassNameMode}>
           {addClassNameMode === 'widget' &&
-          <div className="heading bg-gradient-1">
+          <div className="heading bg-info-gradient">
             <span className="material-symbols-outlined fill">format_size</span>
             <h6>ปรับขนาดอักษร</h6>
           </div>

@@ -23,7 +23,7 @@ function WidgetCountNumber({ countNumberActive }) {
     <>
       {countNumberActive &&
         <section id="widgetCountNumber" className="widget draggable" ref={draggableRef} style={{top:position.y, left:position.x}}>
-          <div className="heading bg-gradient-1">
+          <div className="heading bg-info-gradient">
             <span className="icon-xl -ml-0.5 material-symbols-outlined fill">pin</span>
             <h6>ที่นับจำนวน</h6>
           </div>

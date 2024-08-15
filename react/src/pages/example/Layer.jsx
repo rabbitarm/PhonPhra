@@ -1,13 +1,15 @@
-import React from 'react';
-import LayerButton from './LayerButton';
-import LayerBadge from './LayerBadge';
-import LayerForm from './LayerForm';
-import LayerModal from './LayerModal';
+import React from 'react'
+import LayerColor  from './LayerColor'
+import LayerButton from './LayerButton'
+import LayerBadge  from './LayerBadge'
+import LayerForm   from './LayerForm'
+import LayerModal  from './LayerModal'
 
 function Layer() {
 
   return (
     <>
+      <LayerColor />
       <LayerButton />
       <LayerBadge />
       <LayerForm />
@@ -15,6 +17,6 @@ function Layer() {
     </>
   )
 
-};
+}
 
-export default Layer;
+export default Layer

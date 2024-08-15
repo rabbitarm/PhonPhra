@@ -155,6 +155,17 @@
   :is(.btn)[class*="-info"]:hover              {@apply text-info-active      fill-info-active      border-info-active      bg-info-active     ;}
   :is(.btn)[class*="-grey"]:hover              {@apply text-grey-active      fill-grey-active      border-grey-active      bg-grey-active     ;}
   :is(.btn)[class*="-slate"]:hover             {@apply text-slate-active     fill-slate-active     border-slate-active     bg-slate-active    ;}
+  /**/
+  [class*="bg-"][class*="-gradient"] {@apply text-white bg-gradient-to-br;}
+  .bg-primary-gradient   {@apply from-primary-700   to-primary  ;}
+  .bg-secondary-gradient {@apply from-secondary-600 to-secondary;}
+  .bg-tertiary-gradient  {@apply from-tertiary-600  to-tertiary ;}
+  .bg-error-gradient     {@apply from-error-800     to-error    ;}
+  .bg-warning-gradient   {@apply from-warning-700   to-warning  ;}
+  .bg-success-gradient   {@apply from-success-800   to-success  ;}
+  .bg-info-gradient      {@apply from-info-950      to-info     ;}
+  .bg-grey-gradient      {@apply from-grey-800      to-grey     ;}
+  .bg-slate-gradient     {@apply from-slate-900     to-slate    ;}
 
   /* Button */
   .btn {@apply flex justify-center items-center w-full xs:w-fit gap-2 border;}
@@ -291,13 +302,13 @@
   .tooltip-none:has(> .btn:hover):hover:after  {@apply invisible opacity-0;}
 
   .modal {@apply relative z-20 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
-  .modal .modal-content {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding;}
+  .modal .modal-content {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding bg-white;}
   .modal .modal-content.fullscreen {@apply !w-full max-w-screen-xl !h-full max-h-none;}
   .modal-content > .tooltip {@apply absolute z-0 top-0 right-0;}
   .modal-content .fieldset-button {@apply gap-2 2xs:gap-4 pt-4;}
   .modal[class*="modal-"] .modal-content > .tooltip ,
   .modal[class*="modal-"] .modal-close {@apply hidden;}
-  .modal-state {@apply border rounded-lg shadow-none;}
+  .modal-state {@apply overflow-hidden border rounded-lg shadow-none;}
   .modal-tooltip {@apply visible opacity-100 absolute left-auto right-0 bottom-full -translate-y-2;}
   .modal-tooltip .modal-content {@apply frame w-fit text-sm gap-0 padding-sm;}
   .modal-tooltip .modal-content .fieldset-button {@apply flex-nowrap gap-2 padding-t-xs;}
@@ -541,8 +552,6 @@ hr {@apply clear-both;}
 .itemcontent-nav-pagination .btn-next {@apply order-2 xs:order-3 flex-1 xs:max-w-40;}
 .itemcontent-nav-pagination .form-jump {@apply order-3 xs:order-2 xs:flex-1 xs:max-w-80;}
 /**/
-.bg-gradient-1 {@apply text-white bg-gradient-to-br from-info-950 to-info;}
-/**/
 .status-code {@apply flex flex-1 flex-col xs:flex-row justify-center items-center text-center xs:text-left;}
 .status-code .material-symbols-outlined {@apply size-32 [font-size:theme('gap.32')] sm:size-40 sm:[font-size:theme('gap.40')] text-slate-100;
   font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;
@@ -575,3 +584,8 @@ hr {@apply clear-both;}
 /**/
 .draggable {@apply fixed z-10 top-[calc(100%-108px)] left-[calc(100%-184px)];}
 .btn-drag {@apply cursor-move absolute top-0 right-0 !w-auto !min-w-0 !px-1 hover:text-white;}
+
+/* Layer - Example page */
+section.layer {@apply container rounded-xl hover:bg-slate-50;}
+section.layer > div {@apply flex flex-wrap gap-2;}
+#layerColor span {@apply w-10 sm:w-20 h-10 sm:h-20 rounded sm:rounded-lg;}

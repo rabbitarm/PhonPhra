@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Donate from '../../pages/Donate'
 
 function Footer() {
 
@@ -48,24 +47,7 @@ function Footer() {
                 </Link>
               </div>
             </li>
-<<<<<<< Updated upstream
-            <li className="donate">
-              <div className="tooltip" data-tip="ร่วมสนับสนุน">
-                <button className={`btn btn-icon ${donateActive ? 'btn-reverse-tertiary' : 'btn-mix'}`} onClick={handleDonateActive}>
-                  <span className={`material-symbols-outlined ${donateActive ? 'fill' : ''}`}>volunteer_activism</span>
-                  <span className="text hidden">ร่วมสนับสนุน</span>
-                </button>
-                {donateActive &&
-                  <section className="nav-dropdown p-4">
-                    555
-                  </section>
-                }
-              </div>
-            </li>
-            <li>
-=======
             <li className="github">
->>>>>>> Stashed changes
               <div className="tooltip" data-tip="GitHub">
                 <Link className="btn btn-icon btn-mix" to="https://github.com/rabbitarm" target="_blank">
                   <svg viewBox="0 0 98 96">

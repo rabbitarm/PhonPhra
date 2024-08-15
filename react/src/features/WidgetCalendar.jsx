@@ -6,7 +6,7 @@ function WidgetCalendar({ calendarActive,  addClassNameMode }) {
     <>
       {calendarActive &&
         <section id="widgetCalendar" className={`widget ${addClassNameMode}`}>
-          <span className="icon-moon bg-gradient-1">
+          <span className="icon-moon bg-info-gradient">
             <span className="material-symbols-outlined fill">clear_night</span>
           </span>
           <div className="date">
