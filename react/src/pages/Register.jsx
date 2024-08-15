@@ -8,7 +8,7 @@ function Register() {
   const handleRegisterSubmit = (event) => {
     event.preventDefault();
   };
-  const handleRegisterReset = () => setRegisterContent(registerContentInitial);
+  /* const handleRegisterReset = () => setRegisterContent(registerContentInitial); */
 
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const handlePasswordVisibility = () => setPasswordVisibility(!passwordVisibility);
@@ -66,8 +66,7 @@ function Register() {
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">วันเกิด</label>
-            <input className="pr-16" type="date" name="user_birthday" value={registerContent?.user_birthday} onChange={registerChange} min="1901-01-01" max="2030-12-31" placeholder="dd mm yyyy" />
-            <label className="label-field-end">เพิ่มเติม</label>
+            <input type="date" name="user_birthday" value={registerContent?.user_birthday} onChange={registerChange} min="1901-01-01" max="2030-12-31" placeholder="dd mm yyyy" />
           </div>
         </fieldset>
         <fieldset className="fieldset-inline border">
@@ -81,8 +80,8 @@ function Register() {
             <label htmlFor="female">หญิง</label>
           </div>
           <div className="field">
-            <input type="radio" name="user_gender" value="other" onChange={registerChange} id="other" />
-            <label htmlFor="other">ทางเลือก</label>
+            <input type="radio" name="user_gender" value="notspecified" onChange={registerChange} id="notspecified" />
+            <label htmlFor="notspecified">ไม่ระบุ</label>
           </div>
           <label className="label-field-end">เพิ่มเติม</label>
         </fieldset>
@@ -91,10 +90,10 @@ function Register() {
             <span className="material-symbols-outlined">person_add</span>
             <span className="text">สมัคร</span>
           </button>
-          <button className="btn btn-ghost w-full 2xs:w-fit" type="reset" onClick={handleRegisterReset}>
+          {/* <button className="btn btn-ghost w-full 2xs:w-fit" type="reset" onClick={handleRegisterReset}>
             <span className="material-symbols-outlined">backspace</span>
             <span className="text">ล้าง</span>
-          </button>
+          </button> */}
         </fieldset>
       </form>
     </section>

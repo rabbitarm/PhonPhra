@@ -22,6 +22,7 @@ import LogIn from './pages/LogIn';
 import ForgotPassword from './pages/ForgotPassword';
 
 import ContactUs from './pages/ContactUs';
+import Donate from './pages/Donate';
 import Layer from './pages/example/Layer';
 import StatusCode from './utilities/StatusCode';
 
@@ -56,6 +57,7 @@ function App() {
           <Route path='/ลืมรหัสผ่าน' element={<ForgotPassword />} />
 
           <Route path='/ติดต่อเรา' element={<ContactUs />} />
+          <Route path='/ร่วมสนับสนุน' element={<Donate />} />
           <Route path='/Layer' element={<Layer />} />
           <Route path='/StatusCode' element={<StatusCode />} />
 

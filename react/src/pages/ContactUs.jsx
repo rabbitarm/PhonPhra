@@ -8,7 +8,7 @@ function ContactUs() {
   const handleContactSubmit = (event) => {
     event.preventDefault();
   };
-  const handleContactReset = () => setContactContent(contactContentInitial);
+  /* const handleContactReset = () => setContactContent(contactContentInitial); */
 
   return (
     <section id="contactUs" className="container">
@@ -29,7 +29,7 @@ function ContactUs() {
         <fieldset className="fieldset-border">
           <div className="field">
             <label className="label-border">ช่องทางติดต่ออื่น</label>
-            <input type="text" name="contact_other" value={contactContent?.contact_other} onChange={contactChange} placeholder="เบอร์โทรติดต่อ , ไลน์ไอดี" />
+            <input className="pr-16" type="text" name="contact_other" value={contactContent?.contact_other} onChange={contactChange} placeholder="เบอร์โทรติดต่อ , ไลน์ไอดี" />
             <label className="label-field-end">เพิ่มเติม</label>
           </div>
         </fieldset>
@@ -44,10 +44,10 @@ function ContactUs() {
             <span className="material-symbols-outlined">forward_to_inbox</span>
             <span className="text">ส่งข้อความ</span>
           </button>
-          <button className="btn btn-ghost w-full 2xs:w-fit" type="reset" onClick={handleContactReset}>
+          {/* <button className="btn btn-ghost w-full 2xs:w-fit" type="reset" onClick={handleContactReset}>
             <span className="material-symbols-outlined">backspace</span>
             <span className="text">ล้าง</span>
-          </button>
+          </button> */}
         </fieldset>
       </form>
     </section>

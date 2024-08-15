@@ -33,19 +33,28 @@
   textarea {@apply w-full h-10 px-4 py-2 border border-slate-200 rounded-lg bg-white;}
   select {@apply px-3 py-0;}
   textarea {@apply min-h-40 md:min-h-60;}
-  input[type="checkbox"] ,
-  label[for="checkbox"] ,
-  input[type="radio"] ,
-  label[for="radio"] {@apply w-fit;}
-  input[type="checkbox"] ,
-  input[type="radio"] {@apply size-6 rounded;}
+  input:is([type="checkbox"], [type="radio"]) {@apply size-6 rounded;}
+  label:is( [for="checkbox"],  [for="radio"]) {@apply w-fit;}
   input[type="password"] {@apply tracking-widest;}
-  input:hover       , fieldset:hover input             , 
+  /*input:hover       , fieldset:hover input             , 
   select:hover      , fieldset:hover select            , 
   textarea:hover    , fieldset:hover textarea          {@apply border-slate-300;}
   input:focus       , fieldset:hover input:focus       ,
   select:focus      , fieldset:hover select:focus      , 
-  textarea:focus    , fieldset:hover textarea:focus    {@apply border-primary;}
+  textarea:focus    , fieldset:hover textarea:focus    {@apply border-primary;}*/
+  .fieldset-inline.border:hover                                   ,
+                            :is(input, select, textarea):hover {@apply border-slate-300;}
+  .fieldset-inline.border:has(:focus) ,
+                            :is(input, select, textarea):focus    ,
+  form[class*="-primary"]   :is(input, select, textarea):focus {@apply border-primary  ;}
+  form[class*="-secondary"] :is(input, select, textarea):focus {@apply border-secondary;}
+  form[class*="-tertiary"]  :is(input, select, textarea):focus {@apply border-tertiary ;}
+  form[class*="-error"]     :is(input, select, textarea):focus {@apply border-error    ;}
+  form[class*="-warning"]   :is(input, select, textarea):focus {@apply border-warning  ;}
+  form[class*="-success"]   :is(input, select, textarea):focus {@apply border-success  ;}
+  form[class*="-info"]      :is(input, select, textarea):focus {@apply border-info     ;}
+  form[class*="-grey"]      :is(input, select, textarea):focus {@apply border-grey     ;}
+  form[class*="-slate"]     :is(input, select, textarea):focus {@apply border-slate    ;}
   input:disabled    , fieldset:hover input:disabled    ,
   select:disabled   , fieldset:hover select:disabled   , 
   textarea:disabled , fieldset:hover textarea:disabled {@apply border-slate-200 bg-slate-100;}
@@ -54,19 +63,24 @@
   input::-webkit-outer-spin-button ,
   input::-webkit-inner-spin-button {@apply [-webkit-appearance:none] m-0;}
   input[type="number"] {@apply [-moz-appearance:textfield];}
-  input[type="date"]::-webkit-calendar-picker-indicator {@apply absolute left-0 pl-4 pr-[calc(theme('width.full')-theme('gap.8'))] py-3;}
+  /*input[type="date"]::-webkit-calendar-picker-indicator ,
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator {@apply absolute left-0 pl-4 pr-[calc(theme('width.full')-theme('gap.8'))] py-3;}
   input[type="date"]::-webkit-datetime-edit-fields-wrapper ,
-  input[type="date"]::-webkit-datetime-edit {@apply relative left-3;}
+  input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper ,
+  input[type="date"]::-webkit-datetime-edit ,
+  input[type="datetime-local"]::-webkit-datetime-edit {@apply relative left-3;}*/
+  input:is([type="date"], [type="datetime-local"])::-webkit-calendar-picker-indicator {@apply p-3 -mr-4;}
   /**/
   .form-inline {@apply flex-row justify-between items-end gap-4;}
   .form-inner {@apply flex-row justify-between items-end gap-0;}
-  .fieldset-border {@apply pt-2;}
+  form:not(.form-gap-0) .fieldset-border {@apply pt-2;}
   :is(form) .fieldset-border:first-child:has(.label-border.hidden) {@apply pt-0;}
   .fieldset-inline {@apply flex-col sm:flex-row gap-2 gap-x-8 mt-2;}
   .fieldset-inline.border {@apply p-4 border-slate-200 rounded-lg;}
   .fieldset-inline .field {@apply flex-row items-center;}
   .fieldset-inline .field label {@apply pl-2;}
-  .fieldset-button {@apply flex-row pt-4 gap-4;}
+  .fieldset-button {@apply flex-row gap-4;}
+  form:not(.form-gap-0) .fieldset-button {@apply pt-4;}
   .form-inner input[type="number"]::-webkit-outer-spin-button ,
   .form-inner input[type="number"]::-webkit-inner-spin-button {@apply appearance-none;}
   .form-inline fieldset {@apply w-full;}
@@ -242,37 +256,39 @@
 
   .tooltip {@apply relative whitespace-nowrap inline-block w-fit;}
   .tooltip:before {@apply content-[attr(data-tip)] min-w-10 text-xs text-center text-white px-2 py-1 rounded mb-1 bg-slate-600;}
-  .tooltip:after {@apply content-[''] w-0 h-0 border-t-4 border-x-4 border-transparent border-t-slate-600;}
+  .tooltip:after  {@apply content-[''] w-0 h-0 border-t-4 border-x-4 border-transparent border-t-slate-600;}
   .tooltip:before ,
-  .tooltip:after {@apply delay-700 pointer-events-none invisible opacity-0 absolute z-10 left-1/2 bottom-full -translate-x-1/2 -translate-y-0;}
+  .tooltip:after  {@apply delay-700 pointer-events-none invisible opacity-0 absolute z-10 left-1/2 bottom-full -translate-x-1/2 -translate-y-0;}
   .tooltip:hover:before ,
-  .tooltip:hover:after {@apply -translate-y-1;}
+  .tooltip:hover:after  {@apply -translate-y-1;}
   /**/
   .tooltip-left:before {@apply mb-0 mr-1;}
-  .tooltip-left:after {@apply border-y-4 border-r-0 border-transparent border-l-slate-600;}
+  .tooltip-left:after  {@apply border-y-4 border-r-0 border-transparent border-l-slate-600;}
   .tooltip-left:before ,
-  .tooltip-left:after {@apply top-auto left-auto right-full bottom-1/2 -translate-x-0 translate-y-1/2;}
+  .tooltip-left:after  {@apply top-auto left-auto right-full bottom-1/2 -translate-x-0 translate-y-1/2;}
   .tooltip-left:hover:before ,
-  .tooltip-left:hover:after {@apply -translate-x-1 translate-y-1/2;}
+  .tooltip-left:hover:after  {@apply -translate-x-1 translate-y-1/2;}
   /**/
   .tooltip-right:before {@apply mb-0 ml-1;}
-  .tooltip-right:after {@apply border-y-4 border-l-0 border-transparent border-r-slate-600;}
+  .tooltip-right:after  {@apply border-y-4 border-l-0 border-transparent border-r-slate-600;}
   .tooltip-right:before ,
-  .tooltip-right:after {@apply top-auto left-full right-auto bottom-1/2 translate-x-0 translate-y-1/2;}
+  .tooltip-right:after  {@apply top-auto left-full right-auto bottom-1/2 translate-x-0 translate-y-1/2;}
   .tooltip-right:hover:before ,
-  .tooltip-right:hover:after {@apply translate-x-1 translate-y-1/2;}
+  .tooltip-right:hover:after  {@apply translate-x-1 translate-y-1/2;}
   /**/
   .tooltip-bottom:before {@apply mb-0 mt-1;}
-  .tooltip-bottom:after {@apply border-t-0 border-x-4 border-b-4 border-transparent border-b-slate-600;}
+  .tooltip-bottom:after  {@apply border-t-0 border-x-4 border-b-4 border-transparent border-b-slate-600;}
   .tooltip-bottom:before ,
   .tooltip-bottom:after {@apply left-1/2 top-full bottom-auto -translate-x-1/2 -translate-y-0;}
   .tooltip-bottom:hover:before ,
-  .tooltip-bottom:hover:after {@apply translate-y-1;}
+  .tooltip-bottom:hover:after  {@apply translate-y-1;}
   /**/
   .tooltip:has(> .btn:hover):hover:before ,
-  .tooltip:has(> .btn:hover):hover:after {@apply visible opacity-100;}
+  .tooltip:has(> .btn:hover):hover:after  {@apply visible opacity-100;}
   .tooltip-none:hover:before ,
-  .tooltip-none:hover:after {@apply invisible opacity-0;}
+  .tooltip-none:hover:after  ,
+  .tooltip-none:has(> .btn:hover):hover:before ,
+  .tooltip-none:has(> .btn:hover):hover:after  {@apply invisible opacity-0;}
 
   .modal {@apply relative z-20 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
   .modal .modal-content {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding;}
@@ -474,10 +490,13 @@
 
 /* Footer */
 #footer {@apply bg-slate-50;}
-#footer .container {@apply flex-col 2xs:flex-row items-center 2xs:padding-y-sm gap-0;}
+#footer > .container {@apply flex-col xs:flex-row items-center xs:padding-y-sm gap-0;}
 #footerCopyright {@apply text-sm text-slate-300 text-center;}
-#footerLogo ul {@apply flex items-center;}
-#footerLogo ul a .text {@apply hidden;}
+#navFooter ul {@apply flex}
+#navFooter ul a .text {@apply hidden;}
+#navFooter hr {@apply h-auto border-r-2 margin-x-sm;}
+#navFooter .donate .nav-dropdown:has(#kofiframe) {@apply overflow-hidden p-4;}
+#kofiframe {@apply h-[600px] m-[-134px_-16px_-65px];}
 
 /* Layout */
 #root {@apply flex flex-col min-h-screen;}

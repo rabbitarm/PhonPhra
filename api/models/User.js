@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
   user_email: { type: String, required: true, trim: true },
   user_profile: [{
     user_birthday: { type: Number, required: false, trim: true },
-    user_gender: { type: String, required: false, trim: true, enum: ['male', 'female', 'other'] },
+    user_gender: { type: String, required: false, trim: true, enum: ['male', 'female', 'notspecified'] },
   }],
   user_bookmark_list: [{
     bookmark_id: { type: String, required: true, trim: true },
