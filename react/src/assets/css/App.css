@@ -414,25 +414,25 @@
   .margin-b-lg  {@apply mb-8 sm:mb-16;}
 };
 
-/***********
+/*************
   Custom CSS
-***********/
+*************/
 
 /* Google Icon */
-.material-symbols-outlined.wght-700       {font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.wght-600       {font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.wght-500       {font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.wght-400       {font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined                {font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.wght-200       {font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.wght-100       {font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.fill.wght-700  {font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.fill.wght-600  {font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.fill.wght-500  {font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.fill.wght-400  {font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.fill           {font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.fill.wght-200  {font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
-.material-symbols-outlined.fill.wght-100  {font-variation-settings: 'FILL' 1, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-700      {font-variation-settings:'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-600      {font-variation-settings:'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-500      {font-variation-settings:'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-400      {font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined               {font-variation-settings:'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-200      {font-variation-settings:'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.wght-100      {font-variation-settings:'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-700 {font-variation-settings:'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-600 {font-variation-settings:'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-500 {font-variation-settings:'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-400 {font-variation-settings:'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill          {font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-200 {font-variation-settings:'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;}
+.material-symbols-outlined.fill.wght-100 {font-variation-settings:'FILL' 1, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
 
 /* Pagination */
 .pagination .btn {@apply !p-0;}
@@ -472,118 +472,119 @@
 .tox svg {@apply w-auto h-auto;}
 
 /* Header */
-#header {@apply bg-slate-50;}
-#header .container {@apply flex-row justify-between items-center padding-y-sm;}
+#header             {@apply bg-slate-50;}
+#header .container  {@apply flex-row justify-between items-center padding-y-sm;}
 #header #navBrand a {@apply h-10 flex flex-nowrap items-center gap-2;}
 /**/
-#header #navMain {@apply -order-1 md:order-none;}
-#header #navMain #navMainToggle {@apply md:hidden;}
-#header #navMain ul {@apply hidden md:flex;}
-#header.navmain-active #navMain ul {@apply absolute z-80 top-full left-0 block w-full padding border-t bg-slate-50 shadow-lg;}
+#header #navMain                        {@apply -order-1 md:order-none;}
+#header #navMain #navMainToggle         {@apply md:hidden;}
+#header #navMain ul                     {@apply hidden md:flex;}
+#header.navmain-active #navMain ul      {@apply absolute z-80 top-full left-0 block w-full padding border-t bg-slate-50 shadow-lg;}
 #header.navmain-active #navMain ul .btn {@apply w-full justify-start;}
 /**/
-#header #navUser {@apply relative flex;}
-.nav-dropdown {@apply absolute z-20 hover:z-30 top-full right-0 rounded-lg bg-white shadow-lg;}
+#header #navUser               {@apply relative flex;}
+.nav-dropdown                  {@apply absolute z-20 hover:z-30 top-full right-0 rounded-lg bg-white shadow-lg;}
 .container:hover .nav-dropdown {@apply z-40;}
-.nav-dropdown hr {@apply my-2;}
-.nav-dropdown > h6 {@apply text-slate px-4 pt-4 pb-1;}
-.nav-dropdown hr + h6 {@apply pt-2;}
-.nav-dropdown li > .btn {@apply w-full justify-start;}
-.nav-dropdown li > .btn .text {@apply flex-1 whitespace-nowrap text-left pr-2;}
+.nav-dropdown hr               {@apply my-2;}
+.nav-dropdown > h6             {@apply text-slate px-4 pt-4 pb-1;}
+.nav-dropdown hr + h6          {@apply pt-2;}
+.nav-dropdown li > .btn        {@apply w-full justify-start;}
+.nav-dropdown li > .btn .text  {@apply flex-1 whitespace-nowrap text-left pr-2;}
 /*.nav-dropdown li.fontsize #fontSize.nav {@apply -mr-2.5;}*/
-.nav-dropdown li.fontsize #fontSize.nav form {@apply flex-row;}
+.nav-dropdown li.fontsize #fontSize.nav form          {@apply flex-row;}
 .nav-dropdown li.fontsize #fontSize.nav form fieldset {@apply flex flex-row flex-nowrap items-center gap-0 rounded border border-slate-100;}
-.nav-dropdown li.fontsize #fontSize.nav form input {@apply w-6 h-6 text-center p-0 border-none;}
-#footer .nav-dropdown {@apply top-auto bottom-full;}
+.nav-dropdown li.fontsize #fontSize.nav form input    {@apply w-6 h-6 text-center p-0 border-none;}
+#footer .nav-dropdown          {@apply top-auto bottom-full;}
 
 /* Footer */
-#footer {@apply bg-slate-50;}
-#footer > .container {@apply flex-col xs:flex-row items-center xs:padding-y-sm gap-0;}
-#footerCopyright {@apply text-sm text-slate-300 text-center;}
-#navFooter ul {@apply flex}
-#navFooter ul a .text {@apply hidden;}
-#navFooter hr {@apply h-auto border-r-2 margin-x-sm;}
+#footer                                          {@apply bg-slate-50;}
+#footer > .container                             {@apply flex-col xs:flex-row items-center xs:padding-y-sm gap-0;}
+#footerCopyright                                 {@apply text-sm text-slate-300 text-center;}
+#navFooter ul                                    {@apply flex}
+#navFooter ul a .text                            {@apply hidden;}
+#navFooter hr                                    {@apply h-auto border-r-2 margin-x-sm;}
 #navFooter .donate .nav-dropdown:has(#kofiframe) {@apply overflow-hidden p-4;}
+/**/
 #kofiframe {@apply h-[600px] m-[-134px_-16px_-65px];}
 
 /* Layout */
 #root {@apply flex flex-col min-h-screen;}
 #main {@apply flex flex-col flex-1 padding-y;}
 /**/
-.container {@apply relative flex flex-col justify-between max-w-screen-xl gap padding mx-auto;}
+.container         {@apply relative flex flex-col justify-between max-w-screen-xl gap padding mx-auto;}
 #main > .container {@apply flex-1 justify-start;}
-hr {@apply clear-both;}
-.container > hr {@apply -mx-4 sm:-mx-8 xl:mx-0 my-4 sm:my-8;}
+hr                 {@apply clear-both;}
+.container > hr    {@apply -mx-4 sm:-mx-8 xl:mx-0 my-4 sm:my-8;}
+.wrapper           {@apply flex flex-col flex-1 gap;}
 
 /* Item - Content */
-.wrapper {@apply flex flex-col flex-1 gap;}
-.itemcontent-heading {@apply flex flex-col;}
+.itemcontent-heading      {@apply flex flex-col;}
 .itemcontent-heading > hr {@apply -mx-4 sm:-mx-8 xl:mx-0 mt-2 mb-4 sm:my-4;}
-.itemcontent-info {@apply flex flex-wrap justify-between items-center /*gap*/;}
-.itemcontent-meta {@apply flex items-center gap-2;}
-.nav-action {@apply flex;}
-.nav-action hr {@apply -order-1 2xs:order-none h-auto border-t-0 border-r margin-x-sm -mb-2 sm:-mb-4;}
-#share {@apply flex flex-col gap-4;}
-#share .heading {@apply text-info;}
-#itemContentDesc {@apply flex flex-col font-display w-fit gap-4 mx-auto;}
-#itemContentDesc p {@apply [font-size:inherit] [line-height:inherit]}
+.itemcontent-info         {@apply flex flex-wrap justify-between items-center /*gap*/;}
+.itemcontent-meta         {@apply flex items-center gap-2;}
+.nav-action               {@apply flex;}
+.nav-action hr            {@apply -order-1 2xs:order-none h-auto border-t-0 border-r margin-x-sm -mb-2 sm:-mb-4;}
+#share              {@apply flex flex-col gap-4;}
+#share .heading     {@apply text-info;}
+#itemContentDesc    {@apply flex flex-col font-display w-fit gap-4 mx-auto;}
+#itemContentDesc p  {@apply [font-size:inherit] [line-height:inherit]}
 #itemContentDesc ul {@apply list-disc;}
-#itemContentDesc .twocolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 gap-x-5 !list-none;}
-#itemContentDesc .twocolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
-#itemContentDesc .threecolumn:is(ul, ol) {@apply xs:grid xs:grid-cols-2 sm:grid-cols-3 gap-x-5 !list-none;}
+#itemContentDesc .twocolumn:is(ul, ol)                          {@apply xs:grid xs:grid-cols-2 gap-x-5 !list-none;}
+#itemContentDesc .twocolumn:is(ul, ol) li:has(.mce-nbsp-wrap)   {@apply hidden xs:list-item;}
+#itemContentDesc .threecolumn:is(ul, ol)                        {@apply xs:grid xs:grid-cols-2 sm:grid-cols-3 gap-x-5 !list-none;}
 #itemContentDesc .threecolumn:is(ul, ol) li:has(.mce-nbsp-wrap) {@apply hidden xs:list-item;}
-#itemContentDesc sup {@apply text-primary-active;}
-#itemContentDesc a {@apply text-primary;}
+#itemContentDesc sup     {@apply text-primary-active;}
+#itemContentDesc a       {@apply text-primary;}
 #itemContentDesc a:hover {@apply text-primary-active;}
 #itemContentDesc :is(p, ul, ol)[style*="padding-left: 60px"]  .prefix {@apply min-w-[60px] -ml-[60px];}
 #itemContentDesc :is(p, ul, ol)[style*="padding-left: 80px"]  .prefix {@apply min-w-20 -ml-20;}
 #itemContentDesc :is(p, ul, ol)[style*="padding-left: 120px"] .prefix {@apply min-w-[120px] -ml-[120px];}
-#itemContentDesc table {@apply w-fit border-none;}
-#itemContentDesc table :is(col, th, td) {@apply !w-auto;}
-#itemContentDesc table :is(tr) {@apply border-none;}
-#itemContentDesc table :is(tr):hover {@apply bg-transparent;}
-#itemContentDesc table :is(th, td) {@apply p-0;}
+#itemContentDesc table                               {@apply w-fit border-none;}
+#itemContentDesc table :is(col, th, td)              {@apply !w-auto;}
+#itemContentDesc table :is(tr)                       {@apply border-none;}
+#itemContentDesc table :is(tr):hover                 {@apply bg-transparent;}
+#itemContentDesc table :is(th, td)                   {@apply p-0;}
 #itemContentDesc table :is(th, td):not(:first-child) {@apply pl-5;}
-.itemcontent-nav-pagination {@apply flex flex-wrap justify-between items-end gap;}
-.itemcontent-nav-pagination .btn-prev {@apply 2xs:flex-1 w-10 2xs:w-full xs:max-w-40 px-0 2xs:px-4;}
-.itemcontent-nav-pagination .btn-next {@apply order-2 xs:order-3 flex-1 xs:max-w-40;}
+.itemcontent-nav-pagination            {@apply flex flex-wrap justify-between items-end gap;}
+.itemcontent-nav-pagination .btn-prev  {@apply 2xs:flex-1 w-10 2xs:w-full xs:max-w-40 px-0 2xs:px-4;}
+.itemcontent-nav-pagination .btn-next  {@apply order-2 xs:order-3 flex-1 xs:max-w-40;}
 .itemcontent-nav-pagination .form-jump {@apply order-3 xs:order-2 xs:flex-1 xs:max-w-80;}
 /**/
-.status-code {@apply flex flex-1 flex-col xs:flex-row justify-center items-center text-center xs:text-left;}
+.status-code                            {@apply flex flex-1 flex-col xs:flex-row justify-center items-center text-center xs:text-left;}
 .status-code .material-symbols-outlined {@apply size-32 [font-size:theme('gap.32')] sm:size-40 sm:[font-size:theme('gap.40')] text-slate-100;
-  font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;
+                                         font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;
 }
 .status-code h6 {@apply text-7xl sm:text-8xl !leading-[0.75] font-light text-slate-100;}
 .status-code h3 {@apply text-2xl sm:text-4xl !leading-[1.5] text-slate-300;}
 
 /* Widget */
-.widget {@apply frame flex flex-col w-max p-0;}
-.widget .heading {@apply flex items-center min-h-8 px-2 py-0.5 gap-1 rounded-lg;}
-.widget h6 {@apply flex items-center whitespace-nowrap gap-1 text-info;}
+.widget                               {@apply frame flex flex-col w-max p-0;}
+.widget .heading                      {@apply flex items-center min-h-8 px-2 py-0.5 gap-1 rounded-lg;}
+.widget h6                            {@apply flex items-center whitespace-nowrap gap-1 text-info;}
 .widget .heading[class*="bg"] :is(h6) {@apply text-white;}
-.widget form {@apply flex-row p-2 gap-0;}
-.widget form fieldset {@apply flex flex-row flex-nowrap gap-0 rounded-lg bg-slate-100;}
-.widget form input:read-only {@apply !border-slate-100;}
+.widget form                          {@apply flex-row p-2 gap-0;}
+.widget form fieldset                 {@apply flex flex-row flex-nowrap gap-0 rounded-lg bg-slate-100;}
+.widget form input:read-only          {@apply !border-slate-100;}
 /**/
-#widgetCountNumber form input {@apply w-[72px] text-3xl font-light text-slate text-center p-2 rounded-lg;}
+#widgetCountNumber form input                     {@apply w-[72px] text-3xl font-light text-slate text-center p-2 rounded-lg;}
 #widgetCountNumber form input:not(:hover, :focus) {@apply border-slate-100;}
-#widgetCountNumber form .btn-countnumber-reset {@apply absolute -top-[38px] right-[22px];}
+#widgetCountNumber form .btn-countnumber-reset    {@apply absolute -top-[38px] right-[22px];}
 /**/
-.widget#fontSize form input {@apply w-10 text-3xl font-light text-slate text-center p-2 rounded-lg}
+.widget#fontSize form input                       {@apply w-10 text-3xl font-light text-slate text-center p-2 rounded-lg}
 /**/
-#widgetCalendar {@apply flex-row;}
-#widgetCalendar.widget:not(.nav) {@apply fixed z-10 bottom-4 left-4;}
-#widgetCalendar.widget.nav {@apply -mb-5 md:-mb-9 mr-2 sm:mr-4;}
-#widgetCalendar .icon-moon {@apply hidden xs:block p-2 rounded-lg;}
-#widgetCalendar .date {@apply text-nowrap text-center md:text-left px-3 py-2;}
-#widgetCalendar p {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}
+#widgetCalendar                          {@apply flex-row;}
+#widgetCalendar.widget:not(.nav)         {@apply fixed z-10 bottom-4 left-4;}
+#widgetCalendar.widget.nav               {@apply -mb-5 md:-mb-9 mr-2 sm:mr-4;}
+#widgetCalendar .icon-moon               {@apply hidden xs:block p-2 rounded-lg;}
+#widgetCalendar .date                    {@apply text-nowrap text-center md:text-left px-3 py-2;}
+#widgetCalendar p                        {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}
 #widgetCalendar p span:not(.date-number) {@apply hidden md:inline;}
 /**/
 .draggable {@apply fixed z-10 top-[calc(100%-108px)] left-[calc(100%-184px)];}
-.btn-drag {@apply cursor-move absolute top-0 right-0 !w-auto !min-w-0 !px-1 hover:text-white;}
+.btn-drag  {@apply cursor-move absolute top-0 right-0 !w-auto !min-w-0 !px-1 hover:text-white;}
 
 /* Donate */
-#donate .wrapper                         {@apply flex flex-col sm:flex-row justify-between gap;}
+#donate .wrapper                         {@apply sm:flex-row justify-between;}
 .donate-channel                          {@apply flex flex-wrap flex-row justify-center items-center w-fit h-fit gap mx-auto sm:mx-0;}
 .donate-channel-qrcode                   {@apply w-28 p-1 rounded-lg bg-bank-kbank;}
 .donate-channel-qrcode img               {@apply w-[104px] h-[104px] rounded-md bg-white;}
@@ -596,7 +597,7 @@ hr {@apply clear-both;}
 #donate form                             {@apply sm:w-1/2;}
 
 /* Layer - Example page */
-section.layer {@apply container rounded-xl hover:bg-slate-50;}
+section.layer       {@apply container rounded-xl hover:bg-slate-50;}
 section.layer > div {@apply flex flex-wrap gap-2;}
-#layerColor span  ,
-#layerBank i.bank {@apply w-10 sm:w-20 h-10 sm:h-20 rounded sm:rounded-lg;}
+#layerColor span    ,
+#layerBank i.bank   {@apply w-10 sm:w-20 h-10 sm:h-20 rounded sm:rounded-lg;}
