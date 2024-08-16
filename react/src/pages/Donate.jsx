@@ -1,34 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 function Donate() {
 
   const donateTime = new Date(new Date - new Date()?.getTimezoneOffset() * 60000)?.toISOString()?.slice(0, 16)
-  const donateContentInitial = { donate_name: '', donate_email: '', donate_time: donateTime, donate_message: '' };
-  const [donateContent, setDonateContent] = useState(donateContentInitial);
-  const donateChange = (event) => setDonateContent({ ...donateContent, [event.target.name]: event.target.value });
+  const donateContentInitial = { donate_name: '', donate_email: '', donate_time: donateTime, donate_message: '' }
+  const [donateContent, setDonateContent] = useState(donateContentInitial)
+  const donateChange = (event) => setDonateContent({ ...donateContent, [event.target.name]: event.target.value })
   const handleDonateSubmit = (event) => {
     event.preventDefault();
-  };
+  }
 
   return (
     <section id="donate" className="container">
       <h1>ร่วมสนับสนุน</h1>
-      <div className="flex flex-col sm:flex-row justify-between gap">
-        <section id="donatePayment" className="flex flex-col w-fit gap-4 text-nowrap mx-auto sm:mx-0">
-          <div className="text-center w-28 p-1 rounded-lg mx-auto bg-secondary">
-            <img className="donate-qrcode w-[104px] h-[104px] rounded bg-white" src="" />
-            <h6 className="block leading-none text-white pb-1.5">
-              <span className="h3 block text-white">สแกน QR</span>
-              <span className="">เพื่อโอนเข้าบัญชี</span></h6>
+      <div className="wrapper">
+        <section className="donate-channel">
+          <div className="donate-channel-qrcode">
+            <img src="" />
+            <h6 className="heading"><span>สแกน QR</span> เพื่อโอนเข้าบัญชี</h6>
           </div>
-          <p className="leading-snug">
-            <i className="bank bank-kbank"></i><br />
-            <strong>นายทดลอง  ทดสอบ</strong><br />
-            บัญชี: XXX-X-X0000-X<br />
-            <span className="text-sm text-slate-400">เลขที่อ้างอิง: 012345678901234</span></p>
+          <div className="donate-channel-desc">
+            <i className="bank bank-color bank-kbank"></i>
+            <h4 className="heading text-bank-kbank">ธนาคารกสิกรไทย</h4>
+            <p>
+              นายทดลอง  ทดสอบ<br />
+              บัญชี: XXX-X-X0000-X<br />
+              <span className="number-reference">เลขที่อ้างอิง: 012345678901234</span>
+            </p>
+          </div>
         </section>
-        <hr className="sm:w-0 sm:h-auto sm:border-t-0 sm:border-r -mx-4 sm:mx-0 my-4 sm:my-0" />
-        <form className="sm:w-1/2 form-color-secondary" onSubmit={handleDonateSubmit}>
+        <hr />
+        <form className="form-color-secondary" onSubmit={handleDonateSubmit}>
           <fieldset className="fieldset-border">
             <div className="field">
               <label className="label-border">ชื่อผู้ใช้</label>
@@ -66,6 +68,6 @@ function Donate() {
     </section>
   )
 
-};
+}
 
-export default Donate;
+export default Donate

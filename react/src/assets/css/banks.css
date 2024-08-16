@@ -1,37 +1,72 @@
 i.bank            {@apply inline-block size-10 align-middle rounded-lg
                  bg-slate-50 bg-no-repeat bg-[length:80%] bg-center bg-origin-content;}
-i.bank.bank-bbl   {@apply bg-[#1e4598] bg-[url('../svg/banks/bbl.svg')];  }
-i.bank.bank-kbank {@apply bg-[#138f2d] bg-[url('../svg/banks/kbank.svg')];}
-i.bank.bank-rbs   {@apply bg-[#032952] bg-[url('../svg/banks/rbs.svg')];  }
-i.bank.bank-ktb   {@apply bg-[#1ba5e1] bg-[url('../svg/banks/ktb.svg')];  }
-i.bank.bank-jpm   {@apply bg-[#321c10] bg-[url('../svg/banks/jpm.svg')];  }
-i.bank.bank-mufg  {@apply bg-[#d61323] bg-[url('../svg/banks/mufg.svg')]; }
-i.bank.bank-tmb   {@apply bg-[#1279be] bg-[url('../svg/banks/tmb.svg')];  }
-i.bank.bank-scb   {@apply bg-[#4e2e7f] bg-[url('../svg/banks/scb.svg')];  }
-i.bank.bank-citi  {@apply bg-[#1583c7] bg-[url('../svg/banks/citi.svg')]; }
-i.bank.bank-smbc  {@apply bg-[#a0d235] bg-[url('../svg/banks/smbc.svg')]; }
-i.bank.bank-sc    {@apply bg-[#0f6ea1] bg-[url('../svg/banks/sc.svg')];   }
-i.bank.bank-cimb  {@apply bg-[#7e2f36] bg-[url('../svg/banks/cimb.svg')]; }
-i.bank.bank-uob   {@apply bg-[#0b3979] bg-[url('../svg/banks/uob.svg')];  }
-i.bank.bank-uob   {@apply bg-[#0b3979] bg-[url('../svg/banks/uob.svg')];  }
-i.bank.bank-bay   {@apply bg-[#fec43b] bg-[url('../svg/banks/bay.svg')];  }
-i.bank.bank-mega  {@apply bg-[#815e3b] bg-[url('../svg/banks/mega.svg')]; }
-i.bank.bank-boa   {@apply bg-[#e11e3c] bg-[url('../svg/banks/boa.svg')];  }
-i.bank.bank-cacib {@apply bg-[#0e765b] bg-[url('../svg/banks/cacib.svg')];}
-i.bank.bank-gsb   {@apply bg-[#eb198d] bg-[url('../svg/banks/gsb.svg')];  }
-i.bank.bank-hsbc  {@apply bg-[#fd0d1b] bg-[url('../svg/banks/hsbc.svg')]; }
-i.bank.bank-db    {@apply bg-[#0522a5] bg-[url('../svg/banks/db.svg')];   }
-i.bank.bank-ghb   {@apply bg-[#f57d23] bg-[url('../svg/banks/ghb.svg')];  }
-i.bank.bank-baac  {@apply bg-[#4b9b1d] bg-[url('../svg/banks/baac.svg')]; }
-i.bank.bank-mb    {@apply bg-[#150b78] bg-[url('../svg/banks/mb.svg')];   }
-i.bank.bank-bnp   {@apply bg-[#14925e] bg-[url('../svg/banks/bnp.svg')];  }
-i.bank.bank-tbank {@apply bg-[#fc4f1f] bg-[url('../svg/banks/tbank.svg')];}
-i.bank.bank-ibank {@apply bg-[#184615] bg-[url('../svg/banks/ibank.svg')];}
-i.bank.bank-tisco {@apply bg-[#12549f] bg-[url('../svg/banks/tisco.svg')];}
-i.bank.bank-kk    {@apply bg-[#199cc5] bg-[url('../svg/banks/kk.svg')];   }
-i.bank.bank-icbc  {@apply bg-[#c50f1c] bg-[url('../svg/banks/icbc.svg')]; }
-i.bank.bank-tcrb  {@apply bg-[#0a4ab3] bg-[url('../svg/banks/tcrb.svg')]; }
-i.bank.bank-lhb   {@apply bg-[#6d6e71] bg-[url('../svg/banks/lhb.svg')];  }
-i.bank.bank-ttb   {@apply bg-[#ecf0f1] bg-[url('../svg/banks/ttb.svg')];  }
-i.bank.bank-tmn   {@apply bg-[#ecf0f1] bg-[url('../svg/banks/tmn.svg')];  }
-i.bank.bank-pp    {@apply bg-[#00427a] bg-[url('../svg/banks/pp.svg')];   }
+i.bank.bank-baac  {@apply bg-bank-baac  bg-[url('../svg/banks/baac.svg')]; }
+i.bank.bank-bay   {@apply bg-bank-bay   bg-[url('../svg/banks/bay.svg')];  }
+i.bank.bank-bbl   {@apply bg-bank-bbl   bg-[url('../svg/banks/bbl.svg')];  }
+i.bank.bank-bnp   {@apply bg-bank-bnp   bg-[url('../svg/banks/bnp.svg')];  }
+i.bank.bank-boa   {@apply bg-bank-boa   bg-[url('../svg/banks/boa.svg')];  }
+i.bank.bank-cacib {@apply bg-bank-cacib bg-[url('../svg/banks/cacib.svg')];}
+i.bank.bank-cimb  {@apply bg-bank-cimb  bg-[url('../svg/banks/cimb.svg')]; }
+i.bank.bank-citi  {@apply bg-bank-citi  bg-[url('../svg/banks/citi.svg')]; }
+i.bank.bank-db    {@apply bg-bank-db    bg-[url('../svg/banks/db.svg')];   }
+i.bank.bank-ghb   {@apply bg-bank-ghb   bg-[url('../svg/banks/ghb.svg')];  }
+i.bank.bank-gsb   {@apply bg-bank-gsb   bg-[url('../svg/banks/gsb.svg')];  }
+i.bank.bank-hsbc  {@apply bg-bank-hsbc  bg-[url('../svg/banks/hsbc.svg')]; }
+i.bank.bank-ibank {@apply bg-bank-ibank bg-[url('../svg/banks/ibank.svg')];}
+i.bank.bank-icbc  {@apply bg-bank-icbc  bg-[url('../svg/banks/icbc.svg')]; }
+i.bank.bank-jpm   {@apply bg-bank-jpm   bg-[url('../svg/banks/jpm.svg')];  }
+i.bank.bank-kbank {@apply bg-bank-kbank bg-[url('../svg/banks/kbank.svg')];}
+i.bank.bank-kk    {@apply bg-bank-kk    bg-[url('../svg/banks/kk.svg')];   }
+i.bank.bank-ktb   {@apply bg-bank-ktb   bg-[url('../svg/banks/ktb.svg')];  }
+i.bank.bank-lhb   {@apply bg-bank-lhb   bg-[url('../svg/banks/lhb.svg')];  }
+i.bank.bank-mb    {@apply bg-bank-mb    bg-[url('../svg/banks/mb.svg')];   }
+i.bank.bank-mega  {@apply bg-bank-mega  bg-[url('../svg/banks/mega.svg')]; }
+i.bank.bank-mufg  {@apply bg-bank-mufg  bg-[url('../svg/banks/mufg.svg')]; }
+i.bank.bank-pp    {@apply bg-bank-pp    bg-[url('../svg/banks/pp.svg')];   }
+i.bank.bank-rbs   {@apply bg-bank-rbs   bg-[url('../svg/banks/rbs.svg')];  }
+i.bank.bank-sc    {@apply bg-bank-sc    bg-[url('../svg/banks/sc.svg')];   }
+i.bank.bank-scb   {@apply bg-bank-scb   bg-[url('../svg/banks/scb.svg')];  }
+i.bank.bank-smbc  {@apply bg-bank-smbc  bg-[url('../svg/banks/smbc.svg')]; }
+i.bank.bank-tbank {@apply bg-bank-tbank bg-[url('../svg/banks/tbank.svg')];}
+i.bank.bank-tcrb  {@apply bg-bank-tcrb  bg-[url('../svg/banks/tcrb.svg')]; }
+i.bank.bank-tisco {@apply bg-bank-tisco bg-[url('../svg/banks/tisco.svg')];}
+i.bank.bank-tmb   {@apply bg-bank-tmb   bg-[url('../svg/banks/tmb.svg')];  }
+i.bank.bank-tmn   {@apply bg-bank-tmn   bg-[url('../svg/banks/tmn.svg')];  }
+i.bank.bank-ttb   {@apply bg-bank-ttb   bg-[url('../svg/banks/ttb.svg')];  }
+i.bank.bank-uob   {@apply bg-bank-uob   bg-[url('../svg/banks/uob.svg')];  }
+
+i.bank.bank-color            {@apply bg-white;}
+i.bank.bank-color.bank-baac  {@apply bg-[url('../svg/banks-color/baac.svg')]; }
+i.bank.bank-color.bank-bay   {@apply bg-[url('../svg/banks-color/bay.svg')];  }
+i.bank.bank-color.bank-bbl   {@apply bg-[url('../svg/banks-color/bbl.svg')];  }
+i.bank.bank-color.bank-bnp   {@apply bg-[url('../svg/banks-color/bnp.svg')];  }
+i.bank.bank-color.bank-boa   {@apply bg-[url('../svg/banks-color/boa.svg')];  }
+i.bank.bank-color.bank-cacib {@apply bg-[url('../svg/banks-color/cacib.svg')];}
+i.bank.bank-color.bank-cimb  {@apply bg-[url('../svg/banks-color/cimb.svg')]; }
+i.bank.bank-color.bank-citi  {@apply bg-[url('../svg/banks-color/citi.svg')]; }
+i.bank.bank-color.bank-db    {@apply bg-[url('../svg/banks-color/db.svg')];   }
+i.bank.bank-color.bank-ghb   {@apply bg-[url('../svg/banks-color/ghb.svg')];  }
+i.bank.bank-color.bank-gsb   {@apply bg-[url('../svg/banks-color/gsb.svg')];  }
+i.bank.bank-color.bank-hsbc  {@apply bg-[url('../svg/banks-color/hsbc.svg')]; }
+i.bank.bank-color.bank-ibank {@apply bg-[url('../svg/banks-color/ibank.svg')];}
+i.bank.bank-color.bank-icbc  {@apply bg-[url('../svg/banks-color/icbc.svg')]; }
+i.bank.bank-color.bank-jpm   {@apply bg-[url('../svg/banks-color/jpm.svg')];  }
+i.bank.bank-color.bank-kbank {@apply bg-[url('../svg/banks-color/kbank.svg')];}
+i.bank.bank-color.bank-kk    {@apply bg-[url('../svg/banks-color/kk.svg')];   }
+i.bank.bank-color.bank-ktb   {@apply bg-[url('../svg/banks-color/ktb.svg')];  }
+i.bank.bank-color.bank-lhb   {@apply bg-[url('../svg/banks-color/lhb.svg')];  }
+i.bank.bank-color.bank-mb    {@apply bg-[url('../svg/banks-color/mb.svg')];   }
+i.bank.bank-color.bank-mega  {@apply bg-[url('../svg/banks-color/mega.svg')]; }
+i.bank.bank-color.bank-mufg  {@apply bg-[url('../svg/banks-color/mufg.svg')]; }
+i.bank.bank-color.bank-pp    {@apply bg-[url('../svg/banks-color/pp.svg')];   }
+i.bank.bank-color.bank-rbs   {@apply bg-[url('../svg/banks-color/rbs.svg')];  }
+i.bank.bank-color.bank-sc    {@apply bg-[url('../svg/banks-color/sc.svg')];   }
+i.bank.bank-color.bank-scb   {@apply bg-[url('../svg/banks-color/scb.svg')];  }
+i.bank.bank-color.bank-smbc  {@apply bg-[url('../svg/banks-color/smbc.svg')]; }
+i.bank.bank-color.bank-tbank {@apply bg-[url('../svg/banks-color/tbank.svg')];}
+i.bank.bank-color.bank-tcrb  {@apply bg-[url('../svg/banks-color/tcrb.svg')]; }
+i.bank.bank-color.bank-tisco {@apply bg-[url('../svg/banks-color/tisco.svg')];}
+i.bank.bank-color.bank-tmb   {@apply bg-[url('../svg/banks-color/tmb.svg')];  }
+i.bank.bank-color.bank-tmn   {@apply bg-[url('../svg/banks-color/tmn.svg')];  }
+i.bank.bank-color.bank-ttb   {@apply bg-[url('../svg/banks-color/ttb.svg')];  }
+i.bank.bank-color.bank-uob   {@apply bg-[url('../svg/banks-color/uob.svg')];  }

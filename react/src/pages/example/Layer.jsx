@@ -4,6 +4,7 @@ import LayerButton from './LayerButton'
 import LayerBadge  from './LayerBadge'
 import LayerForm   from './LayerForm'
 import LayerModal  from './LayerModal'
+import LayerBank  from './LayerBank'
 
 function Layer() {
 
@@ -14,6 +15,7 @@ function Layer() {
       <LayerBadge />
       <LayerForm />
       <LayerModal />
+      <LayerBank />
     </>
   )
 

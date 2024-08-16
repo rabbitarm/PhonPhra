@@ -240,14 +240,10 @@
     .badge.badge-sm {@apply min-w-6 h-6 text-xs font-medium px-2 rounded;}
     .badge          {@apply min-w-7 h-7 text-sm px-2.5;}
     .badge.badge-lg {@apply min-w-8 h-8 text-sm px-3;}
-    .badge.badge-xs svg {@apply size-4;}
-    .badge.badge-sm svg {@apply size-4;}
-    .badge          svg {@apply size-5;}
-    .badge.badge-lg svg {@apply size-6;}
-    .badge.badge-xs .material-symbols-outlined {@apply size-4 [font-size:theme('gap.4')];}
-    .badge.badge-sm .material-symbols-outlined {@apply size-4 [font-size:theme('gap.4')];}
-    .badge          .material-symbols-outlined {@apply size-5 [font-size:theme('gap.5')];}
-    .badge.badge-lg .material-symbols-outlined {@apply size-6 [font-size:theme('gap.6')];}
+    .badge.badge-xs :is(svg, .icon, .material-symbols-outlined) {@apply size-4 [font-size:theme('gap.4')];}
+    .badge.badge-sm :is(svg, .icon, .material-symbols-outlined) {@apply size-4 [font-size:theme('gap.4')];}
+    .badge          :is(svg, .icon, .material-symbols-outlined) {@apply size-5 [font-size:theme('gap.5')];}
+    .badge.badge-lg :is(svg, .icon, .material-symbols-outlined) {@apply size-6 [font-size:theme('gap.6')];}
   .badge-icon {@apply !p-0;}
     .badge-icon.badge-xs {@apply size-5;}
     .badge-icon.badge-sm {@apply size-6;}
@@ -586,7 +582,21 @@ hr {@apply clear-both;}
 .draggable {@apply fixed z-10 top-[calc(100%-108px)] left-[calc(100%-184px)];}
 .btn-drag {@apply cursor-move absolute top-0 right-0 !w-auto !min-w-0 !px-1 hover:text-white;}
 
+/* Donate */
+#donate .wrapper                         {@apply flex flex-col sm:flex-row justify-between gap;}
+.donate-channel                          {@apply flex flex-wrap flex-row justify-center items-center w-fit h-fit gap mx-auto sm:mx-0;}
+.donate-channel-qrcode                   {@apply w-28 p-1 rounded-lg bg-bank-kbank;}
+.donate-channel-qrcode img               {@apply w-[104px] h-[104px] rounded-md bg-white;}
+.donate-channel-qrcode .heading          {@apply flex-col leading-none text-white text-center gap-0 pb-1.5;}
+.donate-channel-qrcode .heading span     {@apply h3 text-white;}
+.donate-channel-desc .heading            {@apply font-medium;}
+.donate-channel-desc p                   {@apply leading-snug text-nowrap;}
+.donate-channel-desc p .number-reference {@apply text-sm text-slate-400;}
+#donate .wrapper > hr                    {@apply sm:w-0 sm:h-auto sm:border-t-0 sm:border-r -mx-4 sm:mx-0 my-4 sm:my-0;}
+#donate form                             {@apply sm:w-1/2;}
+
 /* Layer - Example page */
 section.layer {@apply container rounded-xl hover:bg-slate-50;}
 section.layer > div {@apply flex flex-wrap gap-2;}
-#layerColor span {@apply w-10 sm:w-20 h-10 sm:h-20 rounded sm:rounded-lg;}
+#layerColor span  ,
+#layerBank i.bank {@apply w-10 sm:w-20 h-10 sm:h-20 rounded sm:rounded-lg;}

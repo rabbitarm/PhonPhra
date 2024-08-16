@@ -3,9 +3,10 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1221.9 782.4" style="enable-background:new 0 0 1221.9 782.4;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#FFFFFF;}
+	.st0{fill:#00427A;}
 	.st1{fill:#00A796;}
 	.st2{opacity:0;}
+	.st3{fill:#FFFFFF;}
 </style>
 <g id="BorderBox">
 	<path class="st0" d="M547,782.4H377c-86.6,0-156.8-70.2-156.8-156.8c0,0,0,0,0,0V450.1h183.7v95.8c0,29,23.5,52.5,52.5,52.5H547
@@ -20,7 +21,7 @@
 </g>
 <g id="Padding">
 	<g class="st2">
-		<path class="st0" d="M5.8,393.8c7.7,0,7.7-12,0-12S-1.9,393.8,5.8,393.8z"/>
+		<path class="st3" d="M5.8,393.8c7.7,0,7.7-12,0-12S-1.9,393.8,5.8,393.8z"/>
 	</g>
 </g>
 </svg>
