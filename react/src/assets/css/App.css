@@ -138,35 +138,35 @@
 @layer components {
 
   /* Color */
-  :is(.btn, .badge)[class*="-primary"]         {@apply text-primary          fill-primary          border-primary          bg-primary         ;}
-  :is(.btn, .badge)[class*="-secondary"]       {@apply text-secondary        fill-secondary        border-secondary        bg-secondary       ;}
-  :is(.btn, .badge)[class*="-tertiary"]        {@apply text-tertiary         fill-tertiary         border-tertiary         bg-tertiary        ;}
-  :is(.btn, .badge)[class*="-error"]           {@apply text-error            fill-error            border-error            bg-error           ;}
-  :is(.btn, .badge)[class*="-warning"]         {@apply text-warning          fill-warning          border-warning          bg-warning         ;}
-  :is(.btn, .badge)[class*="-success"]         {@apply text-success          fill-success          border-success          bg-success         ;}
-  :is(.btn, .badge)[class*="-info"]            {@apply text-info             fill-info             border-info             bg-info            ;}
-  :is(.btn, .badge)[class*="-grey"]            {@apply text-grey             fill-grey             border-grey             bg-grey            ;}
-  :is(.btn, .badge)[class*="-slate"]           {@apply text-slate            fill-slate            border-slate            bg-slate           ;}
-  :is(.btn)[class*="-primary"]:hover           {@apply text-primary-active   fill-primary-active   border-primary-active   bg-primary-active  ;}
-  :is(.btn)[class*="-secondary"]:hover         {@apply text-secondary-active fill-secondary-active border-secondary-active bg-secondary-active;}
-  :is(.btn)[class*="-tertiary"]:hover          {@apply text-tertiary-active  fill-tertiary-active  border-tertiary-active  bg-tertiary-active ;}
-  :is(.btn)[class*="-error"]:hover             {@apply text-error-active     fill-error-active     border-error-active     bg-error-active    ;}
-  :is(.btn)[class*="-warning"]:hover           {@apply text-warning-active   fill-warning-active   border-warning-active   bg-warning-active  ;}
-  :is(.btn)[class*="-success"]:hover           {@apply text-success-active   fill-success-active   border-success-active   bg-success-active  ;}
-  :is(.btn)[class*="-info"]:hover              {@apply text-info-active      fill-info-active      border-info-active      bg-info-active     ;}
-  :is(.btn)[class*="-grey"]:hover              {@apply text-grey-active      fill-grey-active      border-grey-active      bg-grey-active     ;}
-  :is(.btn)[class*="-slate"]:hover             {@apply text-slate-active     fill-slate-active     border-slate-active     bg-slate-active    ;}
+  :is(.btn, .badge)[class*="-primary"]   {@apply text-primary          fill-primary          border-primary          bg-primary         ;}
+  :is(.btn, .badge)[class*="-secondary"] {@apply text-secondary        fill-secondary        border-secondary        bg-secondary       ;}
+  :is(.btn, .badge)[class*="-tertiary"]  {@apply text-tertiary         fill-tertiary         border-tertiary         bg-tertiary        ;}
+  :is(.btn, .badge)[class*="-error"]     {@apply text-error            fill-error            border-error            bg-error           ;}
+  :is(.btn, .badge)[class*="-warning"]   {@apply text-warning          fill-warning          border-warning          bg-warning         ;}
+  :is(.btn, .badge)[class*="-success"]   {@apply text-success          fill-success          border-success          bg-success         ;}
+  :is(.btn, .badge)[class*="-info"]      {@apply text-info             fill-info             border-info             bg-info            ;}
+  :is(.btn, .badge)[class*="-grey"]      {@apply text-grey             fill-grey             border-grey             bg-grey            ;}
+  :is(.btn, .badge)[class*="-slate"]     {@apply text-slate            fill-slate            border-slate            bg-slate           ;}
+  :is(.btn)[class*="-primary"]:hover     {@apply text-primary-active   fill-primary-active   border-primary-active   bg-primary-active  ;}
+  :is(.btn)[class*="-secondary"]:hover   {@apply text-secondary-active fill-secondary-active border-secondary-active bg-secondary-active;}
+  :is(.btn)[class*="-tertiary"]:hover    {@apply text-tertiary-active  fill-tertiary-active  border-tertiary-active  bg-tertiary-active ;}
+  :is(.btn)[class*="-error"]:hover       {@apply text-error-active     fill-error-active     border-error-active     bg-error-active    ;}
+  :is(.btn)[class*="-warning"]:hover     {@apply text-warning-active   fill-warning-active   border-warning-active   bg-warning-active  ;}
+  :is(.btn)[class*="-success"]:hover     {@apply text-success-active   fill-success-active   border-success-active   bg-success-active  ;}
+  :is(.btn)[class*="-info"]:hover        {@apply text-info-active      fill-info-active      border-info-active      bg-info-active     ;}
+  :is(.btn)[class*="-grey"]:hover        {@apply text-grey-active      fill-grey-active      border-grey-active      bg-grey-active     ;}
+  :is(.btn)[class*="-slate"]:hover       {@apply text-slate-active     fill-slate-active     border-slate-active     bg-slate-active    ;}
   /**/
-  [class*="bg-"][class*="-gradient"] {@apply text-white bg-gradient-to-br;}
-  .bg-primary-gradient   {@apply from-primary-700   to-primary  ;}
-  .bg-secondary-gradient {@apply from-secondary-600 to-secondary;}
-  .bg-tertiary-gradient  {@apply from-tertiary-600  to-tertiary ;}
-  .bg-error-gradient     {@apply from-error-800     to-error    ;}
-  .bg-warning-gradient   {@apply from-warning-700   to-warning  ;}
-  .bg-success-gradient   {@apply from-success-800   to-success  ;}
-  .bg-info-gradient      {@apply from-info-950      to-info     ;}
-  .bg-grey-gradient      {@apply from-grey-800      to-grey     ;}
-  .bg-slate-gradient     {@apply from-slate-900     to-slate    ;}
+  [class*="bg-"][class*="-gradient"]     {@apply text-white bg-gradient-to-br;}
+  .bg-primary-gradient                   {@apply from-primary-700   to-primary  ;}
+  .bg-secondary-gradient                 {@apply from-secondary-600 to-secondary;}
+  .bg-tertiary-gradient                  {@apply from-tertiary-600  to-tertiary ;}
+  .bg-error-gradient                     {@apply from-error-800     to-error    ;}
+  .bg-warning-gradient                   {@apply from-warning-700   to-warning  ;}
+  .bg-success-gradient                   {@apply from-success-800   to-success  ;}
+  .bg-info-gradient                      {@apply from-info-950      to-info     ;}
+  .bg-grey-gradient                      {@apply from-grey-800      to-grey     ;}
+  .bg-slate-gradient                     {@apply from-slate-900     to-slate    ;}
 
   /* Button */
   .btn {@apply flex justify-center items-center w-full xs:w-fit gap-2 border;}
@@ -177,20 +177,13 @@
     .btn.btn-lg  {@apply min-w-11 h-11 text-lg             px-5   rounded-lg;}
     .btn.btn-xl  {@apply min-w-12 h-12 text-xl             px-6   rounded-lg;}
     .btn.btn-2xl {@apply min-w-14 h-14 text-2xl            px-7   rounded-lg;}
-    .btn.btn-2xs svg , svg.icon-2xs  {@apply size-4;}
-    .btn.btn-xs  svg , svg.icon-xs   {@apply size-5;}
-    .btn.btn-sm  svg , svg.icon-sm   {@apply size-5;}
-    .btn         svg , svg.icon-base {@apply size-6;}
-    .btn.btn-lg  svg , svg.icon-lg   {@apply size-7;}
-    .btn.btn-xl  svg , svg.icon-xl   {@apply size-8;}
-    .btn.btn-2xl svg , svg.icon-2xl  {@apply size-9;}
-    .btn.btn-2xs .material-symbols-outlined , .material-symbols-outlined.icon-2xs  {@apply size-4 [font-size:theme('gap.4')];}
-    .btn.btn-xs  .material-symbols-outlined , .material-symbols-outlined.icon-xs   {@apply size-5 [font-size:theme('gap.5')];}
-    .btn.btn-sm  .material-symbols-outlined , .material-symbols-outlined.icon-sm   {@apply size-5 [font-size:theme('gap.5')];}
-    .btn         .material-symbols-outlined , .material-symbols-outlined.icon-base {@apply size-6 [font-size:theme('gap.6')];}
-    .btn.btn-lg  .material-symbols-outlined , .material-symbols-outlined.icon-lg   {@apply size-7 [font-size:theme('gap.7')];}
-    .btn.btn-xl  .material-symbols-outlined , .material-symbols-outlined.icon-xl   {@apply size-8 [font-size:theme('gap.8')];}
-    .btn.btn-2xl .material-symbols-outlined , .material-symbols-outlined.icon-2xl  {@apply size-9 [font-size:theme('gap.9')];}
+    .btn.btn-2xs :is(svg, .icon, .material-symbols-outlined) , .icon-2xs  {@apply size-4 [font-size:theme('gap.4')];}
+    .btn.btn-xs  :is(svg, .icon, .material-symbols-outlined) , .icon-xs   {@apply size-5 [font-size:theme('gap.5')];}
+    .btn.btn-sm  :is(svg, .icon, .material-symbols-outlined) , .icon-sm   {@apply size-5 [font-size:theme('gap.5')];}
+    .btn         :is(svg, .icon, .material-symbols-outlined) , .icon-base {@apply size-6 [font-size:theme('gap.6')];}
+    .btn.btn-lg  :is(svg, .icon, .material-symbols-outlined) , .icon-lg   {@apply size-7 [font-size:theme('gap.7')];}
+    .btn.btn-xl  :is(svg, .icon, .material-symbols-outlined) , .icon-xl   {@apply size-8 [font-size:theme('gap.8')];}
+    .btn.btn-2xl :is(svg, .icon, .material-symbols-outlined) , .icon-2xl  {@apply size-9 [font-size:theme('gap.9')];}
   .btn-icon {@apply !p-0;}
     .btn-icon.btn-2xs {@apply size-6;}
     .btn-icon.btn-xs  {@apply size-8;}
@@ -234,8 +227,8 @@
   .btn[class*="btn-mix"]:hover {@apply border-white bg-white;}
 
   /* Badge */
-  .badge {@apply flex justify-center items-center w-fit whitespace-nowrap gap-0.5 rounded-md;}
-  .badge-pill {@apply rounded-full;}
+  .badge            {@apply flex justify-center items-center w-fit whitespace-nowrap gap-0.5 rounded-md;}
+  .badge-pill       {@apply rounded-full;}
     .badge.badge-xs {@apply min-w-5 h-5 text-2xs font-medium px-1.5 rounded;}
     .badge.badge-sm {@apply min-w-6 h-6 text-xs font-medium px-2 rounded;}
     .badge          {@apply min-w-7 h-7 text-sm px-2.5;}
@@ -244,80 +237,81 @@
     .badge.badge-sm :is(svg, .icon, .material-symbols-outlined) {@apply size-4 [font-size:theme('gap.4')];}
     .badge          :is(svg, .icon, .material-symbols-outlined) {@apply size-5 [font-size:theme('gap.5')];}
     .badge.badge-lg :is(svg, .icon, .material-symbols-outlined) {@apply size-6 [font-size:theme('gap.6')];}
-  .badge-icon {@apply !p-0;}
+  .badge-icon            {@apply !p-0;}
     .badge-icon.badge-xs {@apply size-5;}
     .badge-icon.badge-sm {@apply size-6;}
     .badge-icon          {@apply size-7;}
     .badge-icon.badge-lg {@apply size-8;}
-  .badge {@apply text-slate-400 fill-slate-400 border-slate-100 bg-slate-100;}
-  .badge[class*="badge-color"] {@apply text-white fill-white;}
+  /**/
+  .badge                         {@apply text-slate-400 fill-slate-400 border-slate-100 bg-slate-100;}
+  .badge[class*="badge-color"]   {@apply text-white fill-white;}
   .badge[class*="badge-reverse"] ,
-  .badge-mix {@apply border-white bg-white;}
-  .badge-outline ,
-  .badge-mix {@apply text-slate-400 fill-slate-400 border border-slate-400;}
+  .badge-mix                     {@apply border-white bg-white;}
+  .badge-outline                 ,
+  .badge-mix                     {@apply text-slate-400 fill-slate-400 border border-slate-400;}
   .badge[class*="badge-outline"] {@apply border bg-transparent;}
-  .badge .text + .text:before {@apply [content:','] inline-block pr-0.5;}
-  .badge .text:has(.hidden) {@apply [display:none;];}
+  .badge .text + .text:before    {@apply [content:','] inline-block pr-0.5;}
+  .badge .text:has(.hidden)      {@apply [display:none;];}
 
   /* Layout */
   .frame {@apply padding rounded-lg bg-white shadow-lg;}
 
-  .tooltip {@apply relative whitespace-nowrap inline-block w-fit;}
-  .tooltip:before {@apply content-[attr(data-tip)] min-w-10 text-xs text-center text-white px-2 py-1 rounded mb-1 bg-slate-600;}
-  .tooltip:after  {@apply content-[''] w-0 h-0 border-t-4 border-x-4 border-transparent border-t-slate-600;}
-  .tooltip:before ,
-  .tooltip:after  {@apply delay-700 pointer-events-none invisible opacity-0 absolute z-10 left-1/2 bottom-full -translate-x-1/2 -translate-y-0;}
-  .tooltip:hover:before ,
-  .tooltip:hover:after  {@apply -translate-y-1;}
+  .tooltip                     {@apply relative whitespace-nowrap inline-block w-fit;}
+  .tooltip:before              {@apply content-[attr(data-tip)] min-w-10 text-xs text-center text-white px-2 py-1 rounded mb-1 bg-slate-600;}
+  .tooltip:after               {@apply content-[''] w-0 h-0 border-t-4 border-x-4 border-transparent border-t-slate-600;}
+  .tooltip:before              ,
+  .tooltip:after               {@apply delay-700 pointer-events-none invisible opacity-0 absolute z-10 left-1/2 bottom-full -translate-x-1/2 -translate-y-0;}
+  .tooltip:hover:before        ,
+  .tooltip:hover:after         {@apply -translate-y-1;}
   /**/
-  .tooltip-left:before {@apply mb-0 mr-1;}
-  .tooltip-left:after  {@apply border-y-4 border-r-0 border-transparent border-l-slate-600;}
-  .tooltip-left:before ,
-  .tooltip-left:after  {@apply top-auto left-auto right-full bottom-1/2 -translate-x-0 translate-y-1/2;}
-  .tooltip-left:hover:before ,
-  .tooltip-left:hover:after  {@apply -translate-x-1 translate-y-1/2;}
+  .tooltip-left:before         {@apply mb-0 mr-1;}
+  .tooltip-left:after          {@apply border-y-4 border-r-0 border-transparent border-l-slate-600;}
+  .tooltip-left:before         ,
+  .tooltip-left:after          {@apply top-auto left-auto right-full bottom-1/2 -translate-x-0 translate-y-1/2;}
+  .tooltip-left:hover:before   ,
+  .tooltip-left:hover:after    {@apply -translate-x-1 translate-y-1/2;}
   /**/
-  .tooltip-right:before {@apply mb-0 ml-1;}
-  .tooltip-right:after  {@apply border-y-4 border-l-0 border-transparent border-r-slate-600;}
-  .tooltip-right:before ,
-  .tooltip-right:after  {@apply top-auto left-full right-auto bottom-1/2 translate-x-0 translate-y-1/2;}
-  .tooltip-right:hover:before ,
-  .tooltip-right:hover:after  {@apply translate-x-1 translate-y-1/2;}
+  .tooltip-right:before        {@apply mb-0 ml-1;}
+  .tooltip-right:after         {@apply border-y-4 border-l-0 border-transparent border-r-slate-600;}
+  .tooltip-right:before        ,
+  .tooltip-right:after         {@apply top-auto left-full right-auto bottom-1/2 translate-x-0 translate-y-1/2;}
+  .tooltip-right:hover:before  ,
+  .tooltip-right:hover:after   {@apply translate-x-1 translate-y-1/2;}
   /**/
-  .tooltip-bottom:before {@apply mb-0 mt-1;}
-  .tooltip-bottom:after  {@apply border-t-0 border-x-4 border-b-4 border-transparent border-b-slate-600;}
-  .tooltip-bottom:before ,
-  .tooltip-bottom:after {@apply left-1/2 top-full bottom-auto -translate-x-1/2 -translate-y-0;}
+  .tooltip-bottom:before       {@apply mb-0 mt-1;}
+  .tooltip-bottom:after        {@apply border-t-0 border-x-4 border-b-4 border-transparent border-b-slate-600;}
+  .tooltip-bottom:before       ,
+  .tooltip-bottom:after        {@apply left-1/2 top-full bottom-auto -translate-x-1/2 -translate-y-0;}
   .tooltip-bottom:hover:before ,
   .tooltip-bottom:hover:after  {@apply translate-y-1;}
   /**/
-  .tooltip:has(> .btn:hover):hover:before ,
-  .tooltip:has(> .btn:hover):hover:after  {@apply visible opacity-100;}
-  .tooltip-none:hover:before ,
-  .tooltip-none:hover:after  ,
+  .tooltip:has(> .btn:hover):hover:before      ,
+  .tooltip:has(> .btn:hover):hover:after       {@apply visible opacity-100;}
+  .tooltip-none:hover:before                   ,
+  .tooltip-none:hover:after                    ,
   .tooltip-none:has(> .btn:hover):hover:before ,
   .tooltip-none:has(> .btn:hover):hover:after  {@apply invisible opacity-0;}
 
-  .modal {@apply relative z-20 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
-  .modal .modal-content {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding bg-white;}
+  .modal                           {@apply relative z-20 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
+  .modal .modal-content            {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding bg-white;}
   .modal .modal-content.fullscreen {@apply !w-full max-w-screen-xl !h-full max-h-none;}
-  .modal-content > .tooltip {@apply absolute z-0 top-0 right-0;}
-  .modal-content .fieldset-button {@apply gap-2 2xs:gap-4 pt-4;}
-  .modal[class*="modal-"] .modal-content > .tooltip ,
-  .modal[class*="modal-"] .modal-close {@apply hidden;}
-  .modal-state {@apply overflow-hidden border rounded-lg shadow-none;}
-  .modal-tooltip {@apply visible opacity-100 absolute left-auto right-0 bottom-full -translate-y-2;}
-  .modal-tooltip .modal-content {@apply frame w-fit text-sm gap-0 padding-sm;}
-  .modal-tooltip .modal-content .fieldset-button {@apply flex-nowrap gap-2 padding-t-xs;}
+  .modal-content > .tooltip        {@apply absolute z-0 top-0 right-0;}
+  .modal-content .fieldset-button  {@apply gap-2 2xs:gap-4 pt-4;}
+  .modal[class*="modal-"] .modal-content > .tooltip    ,
+  .modal[class*="modal-"] .modal-close                 {@apply hidden;}
+  .modal-state                     {@apply overflow-hidden border rounded-lg shadow-none;}
+  .modal-tooltip                   {@apply visible opacity-100 absolute left-auto right-0 bottom-full -translate-y-2;}
+  .modal-tooltip .modal-content                        {@apply frame w-fit text-sm gap-0 padding-sm;}
+  .modal-tooltip .modal-content .fieldset-button       {@apply flex-nowrap gap-2 padding-t-xs;}
   .modal-tooltip-right .modal-content .fieldset-button {@apply justify-end;}
   .modal-tooltip-left:after  ,
   .modal-tooltip-right:after {@apply content-[''] absolute -bottom-1 w-0 h-0 border-t-4 border-x-4 border-transparent border-t-white;}
   .modal-tooltip-left:after  {@apply left-[16px];}
   .modal-tooltip-right:after {@apply right-[16px];}
   /**/
-  .modal:not([class*="modal-"]) {@apply fixed top-0 left-0 w-full h-full padding;}
-  .modal:not([class*="modal-"]) .modal-content {@apply frame;}
-  .modal:not([class*="modal-"]) .modal-close {@apply transition-opacity opacity-95 fixed -z-10 top-0 left-0 w-[100vw] h-[100vh] bg-slate-600;}
+  .modal:not([class*="modal-"])                    {@apply fixed top-0 left-0 w-full h-full padding;}
+  .modal:not([class*="modal-"]) .modal-content     {@apply frame;}
+  .modal:not([class*="modal-"]) .modal-close       {@apply transition-opacity opacity-95 fixed -z-10 top-0 left-0 w-[100vw] h-[100vh] bg-slate-600;}
   .modal:not([class*="modal-"]) .modal-close:hover {@apply opacity-90;}
   /**/
   .modal .container {@apply p-0 m-0 bg-transparent shadow-none;}
