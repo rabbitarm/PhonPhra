@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function LayerButton() {
+
+  /* Color - Select */
+  const [colorSelect, setColorSelect] = useState('primary')
+  const handleColorSelect = (color) => {
+    setColorSelect(color)
+  }
+  const colorOptions = ['primary', 'secondary', 'tertiary', 'error', 'warning', 'success', 'info', 'grey', 'slate']
 
   return (
     <section id="layerButton" className="layer">
@@ -189,21 +196,20 @@ function LayerButton() {
           <span className="material-symbols-outlined">arrow_left_alt</span>
           <span className="text">default</span>
         </button>
-        <button className="btn btn-icon btn-alternate-primary">
+        <button className={`btn btn-icon btn-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-alternate-primary">
+        <button className={`btn btn-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-alternate-primary</span>
+          <span className="text">btn-alternate-{colorSelect}</span>
         </button>
-        <button className="btn btn-icon btn-color-primary">
+        <button className={`btn btn-icon btn-color-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-color-primary">
+        <button className={`btn btn-color-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-color-primary</span>
+          <span className="text">btn-color-{colorSelect}</span>
         </button>
-        <hr />
         <button className="btn btn-icon btn-reverse">
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
@@ -211,21 +217,20 @@ function LayerButton() {
           <span className="material-symbols-outlined">arrow_left_alt</span>
           <span className="text">btn-reverse</span>
         </button>
-        <button className="btn btn-icon btn-reverse-alternate-primary">
+        <button className={`btn btn-icon btn-reverse-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-reverse-alternate-primary">
+        <button className={`btn btn-reverse-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-reverse-alternate-primary</span>
+          <span className="text">btn-reverse-alternate-{colorSelect}</span>
         </button>
-        <button className="btn btn-icon btn-reverse-primary">
+        <button className={`btn btn-icon btn-reverse-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-reverse-primary">
+        <button className={`btn btn-reverse-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-reverse-primary</span>
+          <span className="text">btn-reverse-{colorSelect}</span>
         </button>
-        <hr />
         <button className="btn btn-icon btn-outline">
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
@@ -233,21 +238,20 @@ function LayerButton() {
           <span className="material-symbols-outlined">arrow_left_alt</span>
           <span className="text">btn-outline</span>
         </button>
-        <button className="btn btn-icon btn-outline-alternate-primary">
+        <button className={`btn btn-icon btn-outline-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-outline-alternate-primary">
+        <button className={`btn btn-outline-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-outline-alternate-primary</span>
+          <span className="text">btn-outline-alternate-{colorSelect}</span>
         </button>
-        <button className="btn btn-icon btn-outline-primary">
+        <button className={`btn btn-icon btn-outline-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-outline-primary">
+        <button className={`btn btn-outline-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-outline-primary</span>
+          <span className="text">btn-outline-{colorSelect}</span>
         </button>
-        <hr />
         <button className="btn btn-icon btn-ghost">
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
@@ -255,21 +259,20 @@ function LayerButton() {
           <span className="material-symbols-outlined">arrow_left_alt</span>
           <span className="text">btn-ghost</span>
         </button>
-        <button className="btn btn-icon btn-ghost-alternate-primary">
+        <button className={`btn btn-icon btn-ghost-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-ghost-alternate-primary">
+        <button className={`btn btn-ghost-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-ghost-alternate-primary</span>
+          <span className="text">btn-ghost-alternate-{colorSelect}</span>
         </button>
-        <button className="btn btn-icon btn-ghost-primary">
+        <button className={`btn btn-icon btn-ghost-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-ghost-primary">
+        <button className={`btn btn-ghost-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-ghost-primary</span>
+          <span className="text">btn-ghost-{colorSelect}</span>
         </button>
-        <hr />
         <button className="btn btn-icon btn-mix">
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
@@ -277,21 +280,20 @@ function LayerButton() {
           <span className="material-symbols-outlined">arrow_left_alt</span>
           <span className="text">btn-mix</span>
         </button>
-        <button className="btn btn-icon btn-mix-alternate-primary">
+        <button className={`btn btn-icon btn-mix-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-mix-alternate-primary">
+        <button className={`btn btn-mix-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-mix-alternate-primary</span>
+          <span className="text">btn-mix-alternate-{colorSelect}</span>
         </button>
-        <button className="btn btn-icon btn-mix-primary">
+        <button className={`btn btn-icon btn-mix-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-mix-primary">
+        <button className={`btn btn-mix-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-mix-primary</span>
+          <span className="text">btn-mix-{colorSelect}</span>
         </button>
-        <hr />
         <button className="btn btn-icon btn-text">
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
@@ -299,20 +301,31 @@ function LayerButton() {
           <span className="material-symbols-outlined">arrow_left_alt</span>
           <span className="text">btn-text</span>
         </button>
-        <button className="btn btn-icon btn-text-alternate-primary">
+        <button className={`btn btn-icon btn-text-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-text-alternate-primary">
+        <button className={`btn btn-text-alternate-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-text-alternate-primary</span>
+          <span className="text">btn-text-alternate-{colorSelect}</span>
         </button>
-        <button className="btn btn-icon btn-text-primary">
+        <button className={`btn btn-icon btn-text-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
         </button>
-        <button className="btn btn-text-primary">
+        <button className={`btn btn-text-${colorSelect}`}>
           <span className="material-symbols-outlined">arrow_left_alt</span>
-          <span className="text">btn-text-primary</span>
+          <span className="text">btn-text-{colorSelect}</span>
         </button>
+        <hr />
+        <section className="form mx-auto">
+          <fieldset className="fieldset-inline border bg-white">
+            <label className="label-border">เลือกสีที่ต้องการแสดง</label>
+            <div className="field gap-2">
+              {colorOptions.map((color) => (
+                <button key={color} className={`btn btn-xs btn-color-${color}`} onClick={() => handleColorSelect(color)}>{color}</button>
+              ))}
+            </div>
+          </fieldset>
+        </section>
       </div>
     </section>
   )
