@@ -591,9 +591,11 @@ hr                 {@apply clear-both;}
 #donate form                             {@apply sm:w-1/2;}
 
 /* Layer - Example page */
-section.layer           {@apply container rounded-xl hover:bg-slate-50;}
-section.layer > div     {@apply flex flex-wrap gap-2;}
-section.layer hr        {@apply w-full my-4;}
-#layerButton .form .btn {@apply capitalize;}
-#layerColor span        ,
-#layerBank i.bank       {@apply w-10 sm:w-20 h-10 sm:h-20 rounded sm:rounded-lg;}
+section.layer             {@apply container rounded-xl hover:bg-slate-50;}
+section.layer > div       {@apply flex flex-wrap gap-2;}
+section.layer hr          {@apply my-0;}
+#layerButton .form .field {@apply flex-wrap;}
+#layerButton > div > .btn {@apply w-fit;}
+#layerButton .form .btn   {@apply w-fit capitalize;}
+#layerColor span          ,
+#layerBank i.bank         {@apply w-10 sm:w-20 h-10 sm:h-20 rounded sm:rounded-lg;}

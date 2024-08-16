@@ -315,18 +315,17 @@ function LayerButton() {
           <span className="material-symbols-outlined">arrow_left_alt</span>
           <span className="text">btn-text-{colorSelect}</span>
         </button>
-        <hr />
-        <section className="form mx-auto">
-          <fieldset className="fieldset-inline border bg-white">
-            <label className="label-border">เลือกสีที่ต้องการแสดง</label>
-            <div className="field gap-2">
-              {colorOptions.map((color) => (
-                <button key={color} className={`btn btn-xs btn-color-${color}`} onClick={() => handleColorSelect(color)}>{color}</button>
-              ))}
-            </div>
-          </fieldset>
-        </section>
       </div>
+      <section className="form mx-auto">
+        <fieldset className="fieldset-inline border bg-white">
+          <label className="label-border">เลือกสีที่ต้องการแสดง</label>
+          <div className="field gap-2">
+            {colorOptions.map((color) => (
+              <button key={color} className={`btn btn-xs btn-color-${color}`} onClick={() => handleColorSelect(color)}>{color}</button>
+            ))}
+          </div>
+        </fieldset>
+      </section>
     </section>
   )
 
