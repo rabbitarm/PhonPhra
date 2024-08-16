@@ -114,7 +114,7 @@ function LayerButton() {
           <span className="text">2XL</span>
         </button>
       </div>
-      <h5>Button - Color</h5>
+      <h5 className="heading">Button - Color</h5>
       <div>
         <button className="btn btn-icon">
           <span className="material-symbols-outlined">arrow_left_alt</span>
@@ -187,7 +187,7 @@ function LayerButton() {
           <span className="text">Slate</span>
         </button>
       </div>
-      <h5>Button - Style</h5>
+      <h5 className="heading">Button - Style</h5>
       <div>
         <button className="btn btn-icon">
           <span className="material-symbols-outlined">arrow_left_alt</span>

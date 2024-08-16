@@ -4,7 +4,7 @@ function LayerForm() {
 
   return (
     <section id="layerForm" className="layer">
-      <h5>Form</h5>
+      <h5 className="heading">Form</h5>
       <section className="flex flex-wrap gap-4">
         <form>
           <fieldset>
@@ -49,6 +49,18 @@ function LayerForm() {
               <label className="label-field-end">เพิ่มเติม</label>
             </div>
           </fieldset>
+          <fieldset className="fieldset-border">
+            <div className="field">
+              <label className="label-border">วัน</label>
+              <input type="date" />
+            </div>
+          </fieldset>
+          <fieldset className="fieldset-border">
+            <div className="field">
+              <label className="label-border">วัน และเวลา</label>
+              <input type="datetime-local" />
+            </div>
+          </fieldset>
           <fieldset className="fieldset-inline">
             <label>เบอร์ติดต่อ</label>
             <div className="field">
@@ -59,6 +71,22 @@ function LayerForm() {
               <input type="radio" id="radio" />
               <label htmlFor="radio">Radio</label>
             </div>
+          </fieldset>
+          <fieldset className="fieldset-inline border">
+            <label className="label-border">เพศ</label>
+            <div className="field">
+              <input type="radio" value="male" id="male" />
+              <label htmlFor="male">ชาย</label>
+            </div>
+            <div className="field">
+              <input type="radio" value="female" id="female" />
+              <label htmlFor="female">หญิง</label>
+            </div>
+            <div className="field">
+              <input type="radio" value="notspecified" id="notspecified" />
+              <label htmlFor="notspecified">ไม่ระบุ</label>
+            </div>
+            <label className="label-field-end">เพิ่มเติม</label>
           </fieldset>
           <fieldset className="fieldset-button">
             <button className="btn btn-color-primary w-full 2xs:w-fit">

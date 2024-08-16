@@ -7,7 +7,7 @@ function LayerModal() {
 
   return (
     <section id="layerModal" className="layer">
-      <h5>Modal</h5>
+      <h5 className="heading">Modal</h5>
       <section className="flex flex-wrap gap-4">
         <dialog className="modal modal-state">
           <div className="modal-content">

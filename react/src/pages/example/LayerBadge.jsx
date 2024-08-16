@@ -4,7 +4,7 @@ function LayerBadge() {
 
   return (
       <section id="layerBadge" className="layer">
-        <h5>Badge - Size</h5>
+        <h5 className="heading">Badge - Size</h5>
         <div>
           <span className="badge badge-icon badge-xs">
             <span className="material-symbols-outlined">arrow_left_alt</span>
@@ -47,7 +47,7 @@ function LayerBadge() {
             <span className="text">LG</span>
           </span>
         </div>
-        <h5>Badge - Color</h5>
+        <h5 className="heading">Badge - Color</h5>
         <div>
           <span className="badge badge-icon">
             <span className="material-symbols-outlined">arrow_left_alt</span>
@@ -120,7 +120,7 @@ function LayerBadge() {
             <span className="text">Slate</span>
           </span>
         </div>
-        <h5>Badge - Style</h5>
+        <h5 className="heading">Badge - Style</h5>
         <div>
           <span className="badge badge-icon">
             <span className="material-symbols-outlined">arrow_left_alt</span>

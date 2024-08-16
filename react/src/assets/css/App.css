@@ -316,7 +316,7 @@
   /**/
   .modal .container {@apply p-0 m-0 bg-transparent shadow-none;}
   /* Preview */
-  .modal.onState {@apply !relative;}
+  .modal.onState {@apply !relative transform-none;}
 };
 
 @layer utilities {
