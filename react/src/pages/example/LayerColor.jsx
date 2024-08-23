@@ -15,7 +15,7 @@ function LayerColor() {
         <span className="bg-info     "></span>
         <span className="bg-grey     "></span>
         <span className="bg-slate    "></span>
-        <span className="bg-white    "></span>
+        <span className="bg-white border"></span>
         <span className="bg-primary-gradient  "></span>
         <span className="bg-secondary-gradient"></span>
         <span className="bg-tertiary-gradient "></span>

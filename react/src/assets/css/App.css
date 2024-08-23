@@ -177,13 +177,13 @@
     .btn.btn-lg  {@apply min-w-11 h-11 text-lg             px-5   rounded-lg;}
     .btn.btn-xl  {@apply min-w-12 h-12 text-xl             px-6   rounded-lg;}
     .btn.btn-2xl {@apply min-w-14 h-14 text-2xl            px-7   rounded-lg;}
-    .btn.btn-2xs :is(svg, .icon, .material-symbols-outlined) , .icon-2xs  {@apply size-4 [font-size:theme('gap.4')];}
-    .btn.btn-xs  :is(svg, .icon, .material-symbols-outlined) , .icon-xs   {@apply size-5 [font-size:theme('gap.5')];}
-    .btn.btn-sm  :is(svg, .icon, .material-symbols-outlined) , .icon-sm   {@apply size-5 [font-size:theme('gap.5')];}
-    .btn         :is(svg, .icon, .material-symbols-outlined) , .icon-base {@apply size-6 [font-size:theme('gap.6')];}
-    .btn.btn-lg  :is(svg, .icon, .material-symbols-outlined) , .icon-lg   {@apply size-7 [font-size:theme('gap.7')];}
-    .btn.btn-xl  :is(svg, .icon, .material-symbols-outlined) , .icon-xl   {@apply size-8 [font-size:theme('gap.8')];}
-    .btn.btn-2xl :is(svg, .icon, .material-symbols-outlined) , .icon-2xl  {@apply size-9 [font-size:theme('gap.9')];}
+    .btn.btn-2xs :is(svg, .icon:not([class*=icon-]), .material-symbols-outlined:not([class*=icon-])) , .icon-2xs  {@apply size-4 [font-size:theme('gap.4')];}
+    .btn.btn-xs  :is(svg, .icon:not([class*=icon-]), .material-symbols-outlined:not([class*=icon-])) , .icon-xs   {@apply size-5 [font-size:theme('gap.5')];}
+    .btn.btn-sm  :is(svg, .icon:not([class*=icon-]), .material-symbols-outlined:not([class*=icon-])) , .icon-sm   {@apply size-5 [font-size:theme('gap.5')];}
+    .btn         :is(svg, .icon:not([class*=icon-]), .material-symbols-outlined:not([class*=icon-])) , .icon-base {@apply size-6 [font-size:theme('gap.6')];}
+    .btn.btn-lg  :is(svg, .icon:not([class*=icon-]), .material-symbols-outlined:not([class*=icon-])) , .icon-lg   {@apply size-7 [font-size:theme('gap.7')];}
+    .btn.btn-xl  :is(svg, .icon:not([class*=icon-]), .material-symbols-outlined:not([class*=icon-])) , .icon-xl   {@apply size-8 [font-size:theme('gap.8')];}
+    .btn.btn-2xl :is(svg, .icon:not([class*=icon-]), .material-symbols-outlined:not([class*=icon-])) , .icon-2xl  {@apply size-9 [font-size:theme('gap.9')];}
   .btn-icon {@apply !p-0;}
     .btn-icon.btn-2xs {@apply size-6;}
     .btn-icon.btn-xs  {@apply size-8;}
@@ -292,15 +292,15 @@
   .tooltip-none:has(> .btn:hover):hover:before ,
   .tooltip-none:has(> .btn:hover):hover:after  {@apply invisible opacity-0;}
 
-  .modal                           {@apply relative z-20 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
-  .modal .modal-content            {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding bg-white;}
-  .modal .modal-content.fullscreen {@apply !w-full max-w-screen-xl !h-full max-h-none;}
-  .modal-content > .tooltip        {@apply absolute z-0 top-0 right-0;}
-  .modal-content .fieldset-button  {@apply gap-2 2xs:gap-4 pt-4;}
+  .modal                                               {@apply relative z-20 flex flex-col justify-center items-center text-left m-0 bg-transparent;}
+  .modal .modal-content                                {@apply relative flex flex-col w-full sm:w-[calc(623px-64px)] max-h-[88%] gap-sm padding bg-white;}
+  .modal-fullscreen .modal-content                     {@apply !w-full max-w-screen-xl !h-full max-h-none;}
+  .modal-content > :is(.tooltip, .btn-close)           {@apply absolute z-0 top-0 right-0;}
+  .modal-content .fieldset-button                      {@apply gap-2 2xs:gap-4 pt-4;}
   .modal[class*="modal-"] .modal-content > .tooltip    ,
   .modal[class*="modal-"] .modal-close                 {@apply hidden;}
-  .modal-state                     {@apply overflow-hidden border rounded-lg shadow-none;}
-  .modal-tooltip                   {@apply visible opacity-100 absolute left-auto right-0 bottom-full -translate-y-2;}
+  .modal-state                                         {@apply overflow-hidden border rounded-lg shadow-none;}
+  .modal-tooltip                                       {@apply visible opacity-100 absolute left-auto right-0 bottom-full -translate-y-2;}
   .modal-tooltip .modal-content                        {@apply frame w-fit text-sm gap-0 padding-sm;}
   .modal-tooltip .modal-content .fieldset-button       {@apply flex-nowrap gap-2 padding-t-xs;}
   .modal-tooltip-right .modal-content .fieldset-button {@apply justify-end;}
@@ -316,7 +316,7 @@
   /**/
   .modal .container {@apply p-0 m-0 bg-transparent shadow-none;}
   /* Preview */
-  .modal.onState {@apply !relative transform-none;}
+  .modal-onstate {@apply !relative transform-none;}
 };
 
 @layer utilities {
@@ -544,10 +544,12 @@ hr                 {@apply clear-both;}
 .itemcontent-nav-pagination .btn-next  {@apply order-2 xs:order-3 flex-1 xs:max-w-40;}
 .itemcontent-nav-pagination .form-jump {@apply order-3 xs:order-2 xs:flex-1 xs:max-w-80;}
 /**/
-.status-code                            {@apply flex flex-1 flex-col xs:flex-row justify-center items-center text-center xs:text-left;}
+.status-code                            {@apply flex flex-1 flex-col xs:flex-row justify-center items-center;}
 .status-code .material-symbols-outlined {@apply size-32 [font-size:theme('gap.32')] sm:size-40 sm:[font-size:theme('gap.40')] text-slate-100;
                                          font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;
 }
+.status-code h6 ,
+.status-code h3 {@apply justify-center xs:justify-start;}
 .status-code h6 {@apply text-7xl sm:text-8xl !leading-[0.75] font-light text-slate-100;}
 .status-code h3 {@apply text-2xl sm:text-4xl !leading-[1.5] text-slate-300;}
 
@@ -568,11 +570,13 @@ hr                 {@apply clear-both;}
 /**/
 #widgetCalendar                          {@apply flex-row;}
 #widgetCalendar.widget:not(.nav)         {@apply fixed z-10 bottom-4 left-4;}
-#widgetCalendar.widget.nav               {@apply -mb-5 md:-mb-9 mr-2 sm:mr-4;}
-#widgetCalendar .icon-moon               {@apply hidden xs:block p-2 rounded-lg;}
-#widgetCalendar .date                    {@apply text-nowrap text-center md:text-left px-3 py-2;}
-#widgetCalendar p                        {@apply text-3xl md:text-sm font-light md:font-normal !leading-6 md:!leading-5 text-slate;}
-#widgetCalendar p span:not(.date-number) {@apply hidden md:inline;}
+#widgetCalendar.widget.nav               {@apply -mb-5 lg:-mb-9 mr-2 sm:mr-4;}
+#widgetCalendar .icon-moon               {@apply hidden 2xs:block p-2 rounded-lg;}
+#widgetCalendar .date-display            {@apply flex flex-col justify-center items-center md:items-start px-3 py-2;}
+#widgetCalendar p                        {@apply text-sm font-normal !leading-5 text-slate;}
+#widgetCalendar .date-number             {@apply md:hidden text-3xl font-light !leading-6;}
+#widgetCalendar .date-full               {@apply hidden md:inline;}
+#widgetCalendar .desc                    {@apply hidden lg:inline text-xs;}
 /**/
 .draggable {@apply fixed z-10 top-[calc(100%-108px)] left-[calc(100%-184px)];}
 .btn-drag  {@apply cursor-move absolute top-0 right-0 !w-auto !min-w-0 !px-1 hover:text-white;}

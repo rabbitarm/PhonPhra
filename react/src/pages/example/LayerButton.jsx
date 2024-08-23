@@ -4,9 +4,7 @@ function LayerButton() {
 
   /* Color - Select */
   const [colorSelect, setColorSelect] = useState('primary')
-  const handleColorSelect = (color) => {
-    setColorSelect(color)
-  }
+  const handleColorSelect = (color) => setColorSelect(color)
   const colorOptions = ['primary', 'secondary', 'tertiary', 'error', 'warning', 'success', 'info', 'grey', 'slate']
 
   return (

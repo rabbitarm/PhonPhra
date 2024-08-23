@@ -1,23 +1,21 @@
-import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { countNumberIncrease, countNumberDecrease, countNumberReset, countNumberChange } from '../store/countNumberSlice';
-import { useDrag } from "../utilities/UseDrag";
+import React, { useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { countNumberIncrease, countNumberDecrease, countNumberReset, countNumberChange } from '../store/countNumberSlice'
+import { useDrag } from "../utilities/UseDrag"
 
 function WidgetCountNumber({ countNumberActive }) {
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const { countNumberInitial, countNumberMaximum, countNumberIndex } = useSelector((state) => state.countNumber);
-  const handleCountNumberIncrease = () => dispatch(countNumberIncrease());
-  const handleCountNumberDecrease = () => dispatch(countNumberDecrease());
-  const handleCountNumberReset    = () => dispatch(countNumberReset());
-  const handleCountNumberChange = (event) => dispatch(countNumberChange(parseInt(event.target.value) || 0));
-  const handleCountNumberSubmit = (event) => {event.preventDefault();}
+  const { countNumberInitial, countNumberMaximum, countNumberIndex } = useSelector((state) => state.countNumber)
+  const handleCountNumberIncrease = () => dispatch(countNumberIncrease())
+  const handleCountNumberDecrease = () => dispatch(countNumberDecrease())
+  const handleCountNumberReset    = () => dispatch(countNumberReset())
+  const handleCountNumberChange = (event) => dispatch(countNumberChange(parseInt(event.target.value) || 0))
+  const handleCountNumberSubmit = (event) => event.preventDefault()
 
-  const draggableRef = useRef(null);
-  const { position, handleDragMouseDown } = useDrag({
-    ref: draggableRef
-  });
+  const draggableRef = useRef(null)
+  const { position, handleDragMouseDown } = useDrag({ ref: draggableRef })
 
   return (
     <>
@@ -53,8 +51,8 @@ function WidgetCountNumber({ countNumberActive }) {
         </section>
       }
     </>
-  );
+  )
 
-};
+}
 
-export default WidgetCountNumber;
+export default WidgetCountNumber

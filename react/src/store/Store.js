@@ -5,6 +5,7 @@ import itemCategorySlice from './itemCategorySlice';
 import bookmarkListSlice from './bookmarkListSlice';
 import fontSizeSlice from './fontSizeSlice';
 import countNumberSlice from './countNumberSlice';
+import calendarBuddhismSlice from './calendarBuddhismSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,8 +14,9 @@ const store = configureStore({
     itemCategory: itemCategorySlice,
     bookmarkList: bookmarkListSlice,
     fontSize: fontSizeSlice,
-    countNumber: countNumberSlice
-  }
+    countNumber: countNumberSlice,
+    calendarBuddhism: calendarBuddhismSlice,
+  },
 });
 
 export default store;

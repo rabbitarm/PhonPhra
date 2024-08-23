@@ -7,7 +7,7 @@ import { IconLoading, IconItemNotFound } from '../utilities/StatusCode';
 /* import StatusItem from '../utilities/StatusItem';
 import StatusItemCategory from '../utilities/StatusItemCategory';
 import FormatDate from '../utilities/FormatDate'; */
-import Share from '../lib/Share';
+import Share from '../lib/Share'
 import ItemContentFontSize from '../features/ItemContentFontSize';
 import WidgetCountNumber from '../features/WidgetCountNumber';
 import ItemEdit from '../components/ItemEdit';
@@ -74,20 +74,19 @@ function ItemContent() {
       setItemEditSelect([]);
     }
   }, [itemList?.find(item => item?.item_id === itemEditSelect?.item_id)]);
- 
+
+/*** Nav Action ***/
   /* Share */
-  const [contentShare, setContentShare] = useState(false);
-  const handleContentShare = () => {navActionLeave(); setContentShare(!contentShare);};
-  /*const contentShareLeave = () => {setContentShare(false);}*/
+  const [contentShare, setContentShare] = useState(false)
+  const handleContentShare = () => {navActionLeave(); setContentShare(!contentShare);}
   /* Customize Tool */
-  const [contentCustomize, setContentCustomize] = useState(false);
-  const handleContentCustomize = () => {navActionLeave(); setContentCustomize(!contentCustomize);};
-  /*const contentCustomizeLeave = () => {setContentCustomize(false);}*/
-    /* Font Size */
-    const { fontSizes, fontSizeIndex } = useSelector((state) => state.fontSize);
-    /* Count Number */
-    const [countNumberActive, setCountNumberActive] = useState(false);
-    const handleCountNumberToggle = () => setCountNumberActive(!countNumberActive);
+  const [contentCustomize, setContentCustomize] = useState(false)
+  const handleContentCustomize = () => {navActionLeave(); setContentCustomize(!contentCustomize);}
+  /* Font Size */
+  const { fontSizes, fontSizeIndex } = useSelector((state) => state.fontSize)
+  /* Count Number */
+  const [countNumberActive, setCountNumberActive] = useState(false)
+  const handleCountNumberToggle = () => setCountNumberActive(!countNumberActive)
   /**/
   const navActionLeave = () => {setContentShare(false); setContentCustomize(false);}
 
@@ -104,7 +103,8 @@ function ItemContent() {
                     <div className="itemcontent-info">
                       <div className="itemcontent-meta">
                         <span className="badge badge-color-info">เลขที่: {itemContent?.item_number}</span>
-                        {/*
+                        {console.log('itemContent?.item_time_created', itemContent?.item_time_created)
+                        /*
                         <span className="badge badge-sm badge-reverse !p-0">
                           <FormatDate itemDateCreated={itemContent?.item_time_created} addClassNameIcon={''} addClassNameText={''} />
                         </span>
@@ -160,7 +160,7 @@ function ItemContent() {
                         <hr />
                         <div className="tooltip" data-tip="แบ่งปัน">
                           <button className={`btn btn-icon ${contentShare ? '' : 'btn-ghost'}`} onClick={handleContentShare}>
-                            <span className={`material-symbols-outlined ${contentShare ? 'fill' : ''}`}>share</span>
+                            <span className="material-symbols-outlined">ios_share</span>
                             <span className="text hidden">แบ่งปัน</span>
                           </button>
                           {contentShare &&

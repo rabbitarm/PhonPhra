@@ -11,7 +11,7 @@ function FormatDate({ itemDateCreated, addClassNameIcon, addClassNameText }) {
   );
 
   const classNameIcon = `material-symbols-outlined ${addClassNameIcon}`;
-  const classNameText = `text' ${addClassNameText}`;
+  const classNameText = `text ${addClassNameText}`;
 
   return (
     <>

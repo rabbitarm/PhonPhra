@@ -60,26 +60,28 @@ function ItemList() {
           {itemList?.length === 0
           ? <>
               <IconItemNotFound />
-              <div className="flex justify-center">
-                <button className="btn btn-alternate-primary" onClick={handleItemCreate}>
-                  <span className="material-symbols-outlined">add</span>
-                  <span className="text">สร้างบทสวดมนต์</span>
-                </button>
-                {itemCreateToggle &&
-                  <dialog className="modal">
-                    <div className="modal-content fullscreen">
-                      <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                        <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
-                          <span className="material-symbols-outlined">close</span>
-                          <span className="hidden">ยกเลิก</span>
-                        </button>
+              {userProfile?.user_role === 'admin' &&
+                <div className="flex justify-center">
+                  <button className="btn btn-alternate-primary" onClick={handleItemCreate}>
+                    <span className="material-symbols-outlined">add</span>
+                    <span className="text">สร้างบทสวดมนต์</span>
+                  </button>
+                  {itemCreateToggle &&
+                    <dialog className="modal">
+                      <div className="modal-content fullscreen">
+                        <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                          <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
+                            <span className="material-symbols-outlined">close</span>
+                            <span className="hidden">ยกเลิก</span>
+                          </button>
+                        </div>
+                        <ItemCreate itemNumberHighest={itemNumberHighest} />
                       </div>
-                      <ItemCreate itemNumberHighest={itemNumberHighest} />
-                    </div>
-                    <button className="modal-close" onClick={handleItemCancel}></button>
-                  </dialog>
-                }
-              </div>
+                      <button className="modal-close" onClick={handleItemCancel}></button>
+                    </dialog>
+                  }
+                </div>
+              }
             </>
           : <>
               <table className="table-action">
@@ -88,26 +90,30 @@ function ItemList() {
                     <th>เลขที่</th>
                     <th>ชื่อบทสวดมนต์</th>
                     <th>
-                      <div className="tooltip sm:tooltip-none sm:w-full" data-tip="สร้าง">
-                        <button className="btn btn-alternate-primary w-10 sm:w-full px-0 sm:px-4" onClick={handleItemCreate}>
-                          <span className="material-symbols-outlined">add</span>
-                          <span className="text hidden sm:inline-block">สร้าง</span>
-                        </button>
-                      </div>
-                      {itemCreateToggle &&
-                        <dialog className="modal">
-                          <div className="modal-content fullscreen">
-                            <div className="tooltip tooltip-left" data-tip="ยกเลิก">
-                              <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
-                                <span className="material-symbols-outlined">close</span>
-                                <span className="hidden">ยกเลิก</span>
-                              </button>
+                    {userProfile?.user_role === 'admin' &&
+                      <>
+                        <div className="tooltip sm:tooltip-none sm:w-full" data-tip="สร้าง">
+                          <button className="btn btn-alternate-primary w-10 sm:w-full px-0 sm:px-4" onClick={handleItemCreate}>
+                            <span className="material-symbols-outlined">add</span>
+                            <span className="text hidden sm:inline-block">สร้าง</span>
+                          </button>
+                        </div>
+                        {itemCreateToggle &&
+                          <dialog className="modal">
+                            <div className="modal-content fullscreen">
+                              <div className="tooltip tooltip-left" data-tip="ยกเลิก">
+                                <button className="btn btn-icon btn-ghost" onClick={handleItemCancel}>
+                                  <span className="material-symbols-outlined">close</span>
+                                  <span className="hidden">ยกเลิก</span>
+                                </button>
+                              </div>
+                              <ItemCreate itemNumberHighest={itemNumberHighest} />
                             </div>
-                            <ItemCreate itemNumberHighest={itemNumberHighest} />
-                          </div>
-                          <button className="modal-close" onClick={handleItemCancel}></button>
-                        </dialog>
-                      }
+                            <button className="modal-close" onClick={handleItemCancel}></button>
+                          </dialog>
+                        }
+                      </>
+                    }
                     </th>
                   </tr>
                 </thead>
@@ -117,17 +123,7 @@ function ItemList() {
                       <td>
                         {itemItemList?.item_number}
                       </td>
-                      <td className={userProfile?.user_role === 'admin' ? 'relative' : ''}>
-                        {userProfile?.user_role === 'admin' &&
-                          <>
-                            <span className="badge badge-sm badge-reverse absolute top-1 right-0">
-                              <StatusItem statusItem={itemItemList?.item_status} addClassNameIcon={''} addClassNameText={'hidden'} />
-                            </span>
-                            <span className="badge badge-sm badge-reverse absolute bottom-1 right-0">
-                              <StatusItemCategory statusItemCategory={itemItemList?.item_category_list} addClassNameIcon={''} addClassNameText={'hidden'} />
-                            </span>
-                          </>
-                        }
+                      <td>
                         <Link to={`/บทสวดมนต์/${itemItemList?.item_number}/${itemItemList?.item_name}`}>{itemItemList?.item_name}</Link>
                       </td>
                       <td>

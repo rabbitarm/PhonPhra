@@ -3,6 +3,7 @@ api/node_modules
 api/key
 react/node_modules
 react/src/api
+react/assets/json
 react/src/_*
 react/src/*_
 

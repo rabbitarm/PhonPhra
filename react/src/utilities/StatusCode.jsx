@@ -66,6 +66,18 @@ export function IconPageNotFound() {
   );
 }
 
+export function IconError() {
+  return (
+    <div className="status-code">
+      <span className="material-symbols-outlined">error</span>
+      <div>
+        <h6>404</h6>
+        <h3>เกิดข้อผิดพลาด</h3>
+      </div>
+    </div>
+  );
+}
+
 function StatusCode() {
 
   return (
@@ -76,6 +88,7 @@ function StatusCode() {
         <IconItemCategoryNotFound />
         <IconBookmarkNotFound />
         <IconPageNotFound />
+        <IconError />
       </section>
     </>
   )
