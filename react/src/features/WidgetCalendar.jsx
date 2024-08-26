@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { calendarBuddhismFetch } from '../store/calendarBuddhismSlice';
 
 import { IconLoading, IconItemNotFound } from '../utilities/StatusCode';
+import StatusHttp from '../utilities/StatusHttp';
 import FormatDate from '../utilities/FormatDate';
 
 function WidgetCalendar({ calendarActive,  addClassNameMode }) {
@@ -25,25 +26,25 @@ function WidgetCalendar({ calendarActive,  addClassNameMode }) {
   return (
     <>
       {calendarActive &&
-        <section id="widgetCalendar" className={`widget ${addClassNameMode}`}>
-          <span className="icon-moon bg-info-gradient">
-            <span className="material-symbols-outlined fill">{dateWaxingCrescent(calendarBuddhismDateNext?.desc)}</span>
-          </span>
-          <div className="date-display">
-            {calendarBuddhismDateNext
-            ? <>
-                <h6>{calendarBuddhismDateNext?.title}</h6>
-                <p className="date-number">{getDateNumber(calendarBuddhismDateNext?.date)}</p>
-                <p className="date-full"><FormatDate itemDateCreated={calendarBuddhismDateNext?.date} addClassNameIcon={'hidden'} addClassNameText={''} /></p>
-                <p className="desc">{calendarBuddhismDateNext?.desc}</p>
-              </>
-            : <span className="badge badge-sm badge-reverse-error">
-                <span className="material-symbols-outlined">error</span>
-                <span className="text">เกิดข้อผิดพลาด</span>
-              </span>
-            }
-          </div>
-        </section>
+        <>
+          {calendarBuddhismLoading
+          ? <span className="badge badge-sm badge-reverse"><StatusHttp statusHttp={'loading'} /></span>
+          : calendarBuddhismError
+            ? <span className="badge badge-sm badge-reverse-color-warning"><StatusHttp statusHttp={''} /></span>
+            : calendarBuddhismDateNext &&
+              <section id="widgetCalendar" className={`widget ${addClassNameMode}`}>
+                <span className="icon-moon bg-info-gradient">
+                  <span className="material-symbols-outlined fill">{dateWaxingCrescent(calendarBuddhismDateNext?.desc)}</span>
+                </span>
+                <div className="date-display">
+                  <h6>{calendarBuddhismDateNext?.title}</h6>
+                  <p className="date-number">{getDateNumber(calendarBuddhismDateNext?.date)}</p>
+                  <p className="date-full"><FormatDate itemDateCreated={calendarBuddhismDateNext?.date} addClassNameIcon={'hidden'} /></p>
+                  <p className="desc">{calendarBuddhismDateNext?.desc}</p>
+                </div>
+              </section>
+          }
+        </>
       }
     </>
   );

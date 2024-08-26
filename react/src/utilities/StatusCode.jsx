@@ -5,7 +5,7 @@ import React from 'react';
 export function IconLoading() {
   return (
     <div className="status-code">
-      <span className="material-symbols-outlined">hourglass_top</span>
+      <span className="material-symbols-outlined animate-[spin_3s_linear_infinite]">progress_activity</span>
       <div>
         <h6>102</h6>
         <h3>กำลังดาวน์โหลด</h3>

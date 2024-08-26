@@ -476,7 +476,7 @@
 #header.navmain-active #navMain ul      {@apply absolute z-80 top-full left-0 block w-full padding border-t bg-slate-50 shadow-lg;}
 #header.navmain-active #navMain ul .btn {@apply w-full justify-start;}
 /**/
-#header #navUser               {@apply relative flex;}
+#header #navUser               {@apply relative flex items-center gap-sm;}
 .nav-dropdown                  {@apply absolute z-20 hover:z-30 top-full right-0 rounded-lg bg-white shadow-lg;}
 .container:hover .nav-dropdown {@apply z-40;}
 .nav-dropdown hr               {@apply my-2;}
@@ -546,12 +546,16 @@ hr                 {@apply clear-both;}
 /**/
 .status-code                            {@apply flex flex-1 flex-col xs:flex-row justify-center items-center;}
 .status-code .material-symbols-outlined {@apply size-32 [font-size:theme('gap.32')] sm:size-40 sm:[font-size:theme('gap.40')] text-slate-100;
-                                         font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;
-}
+                                         font-variation-settings:'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
 .status-code h6 ,
 .status-code h3 {@apply justify-center xs:justify-start;}
 .status-code h6 {@apply text-7xl sm:text-8xl !leading-[0.75] font-light text-slate-100;}
 .status-code h3 {@apply text-2xl sm:text-4xl !leading-[1.5] text-slate-300;}
+.statue-http         {@apply flex flex-1 flex-col xs:flex-row justify-center items-center gap-0 xs:gap-2;}
+.statue-http > .icon {@apply size-20 [font-size:theme('gap.20')] sm:size-24 sm:[font-size:theme('gap.24')] text-slate-100;
+                      font-variation-settings:'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;}
+.statue-http > .text {@apply justify-center xs:justify-start text-xl xs:text-3xl font-normal xs:font-light whitespace-nowrap text-slate-300;}
+
 
 /* Widget */
 .widget                               {@apply frame flex flex-col w-max p-0;}
@@ -570,7 +574,7 @@ hr                 {@apply clear-both;}
 /**/
 #widgetCalendar                          {@apply flex-row;}
 #widgetCalendar.widget:not(.nav)         {@apply fixed z-10 bottom-4 left-4;}
-#widgetCalendar.widget.nav               {@apply -mb-5 lg:-mb-9 mr-2 sm:mr-4;}
+#widgetCalendar.widget.nav               {@apply -mb-5 lg:-mb-9;}
 #widgetCalendar .icon-moon               {@apply hidden 2xs:block p-2 rounded-lg;}
 #widgetCalendar .date-display            {@apply flex flex-col justify-center items-center md:items-start px-3 py-2;}
 #widgetCalendar p                        {@apply text-sm font-normal !leading-5 text-slate;}
