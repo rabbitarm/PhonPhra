@@ -15,10 +15,21 @@ export const calendarBuddhismFetch = createAsyncThunk('calendarBuddhism/calendar
 
   // Find the next Buddhism day
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   const dateNext = dateAll.find(event => {
     const eventDate = new Date(event.date);
-    return eventDate >= today;
+    eventDate.setHours(0, 0, 0, 0);
+    return eventDate.getTime() === today.getTime();
   });
+
+  if (!dateNext) {
+    dateNext = dateAll.find(event => {
+      const eventDate = new Date(event.date);
+      eventDate.setHours(0, 0, 0, 0);
+      return eventDate > today;
+    });
+  };
 
   return { dateAll, dateNext };
 });

@@ -70,7 +70,7 @@
 - `npm install`
 - Can change port to other number in /bin/www file `var port = normalizePort(process.env.PORT || '3001');`
 
-## Cors
+### Cors
 - [Installation](https://expressjs.com/en/resources/middleware/cors.html)
 - `npm install cors`
 

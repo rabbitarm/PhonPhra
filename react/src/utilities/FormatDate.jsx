@@ -3,7 +3,7 @@ import React from 'react';
 function FormatDate({ itemDateCreated, addClassNameIcon, addClassNameText }) {
 
   const dateCreated = new Date(itemDateCreated);
-  const dateThai = dateCreated.toLocaleDateString('th-TH', {year: 'numeric', month: 'long', day: '2-digit'});
+  const dateThai = dateCreated.toLocaleDateString('th-TH', {year: 'numeric', month: 'long', day: 'numeric' /*'2-digit'*/});
   const monthThaiNames = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
   const thaiDateWithThaiMonth = dateThai.replace(
     /\b(\w+) (\d{1,2}) (\d{4})\b/,
